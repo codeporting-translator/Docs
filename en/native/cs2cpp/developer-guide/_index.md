@@ -7,9 +7,7 @@ categories:
 - "fundamentals"
 title: "Developer Guide"
 linktitle: "Developer Guide"
-Summary: "{{< highlight xml >}}
-"This section describes some basic and advanced use cases of CodePorting.Native Cs2Cpp Please refer to GitHub repository for more examples and samples. "
-{{< /highlight >}} "
+Summary: "This section describes some basic and advanced use cases of CodePorting.Native Cs2Cpp Please refer to GitHub repository for more examples and samples."
 menu:
   docs:
     parent: "CodePorting.Native Cs2Cpp"
