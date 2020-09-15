@@ -7,7 +7,7 @@ categories:
 - "fundamentals"
 title: "Getting Started"
 linktitle: "Getting Started"
-Summary: "This section has all basic information regarding Product overview, Installation, subscription and pricing plans, etc.. to get started with the CodePorting.Native Cs2Cpp application  "
+Summary: "This section has all basic information regarding Product overview, Installation, subscription and pricing plans, etc.. This will help users to get started with the CodePorting.Native Cs2Cpp application  "
 menu:
   docs:
     Post: "getting-started"
