@@ -7,7 +7,7 @@ categories:
 - "fundamentals"
 title: "Release Notes"
 linktitle: "Release Notes"
-Summary: "this is a summary "
+Summary: "In this section you can information about all previous and new releases of CodePorting.Native cs2cpp "
 menu:
   docs:
     Post: "release-notes"
