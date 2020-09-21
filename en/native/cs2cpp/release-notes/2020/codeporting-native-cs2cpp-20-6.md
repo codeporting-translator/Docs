@@ -11,7 +11,7 @@ menu:
     parent: "2020"
     weight: "6"
 lastmod: "2020-06-11"
-weight: "6"
+weight: "4"
 ---
 
 ## Major Features ##
