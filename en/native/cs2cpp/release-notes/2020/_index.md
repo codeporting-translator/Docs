@@ -5,7 +5,7 @@ author:
 draft: "false"
 title: "Release Notes - 2020"
 linktitle: "2020"
-Summary: "this is a summary of release notes 2020."
+Summary: "All Release Notes published in 2020 are listed here."
 menu:
   docs:
     identifier: "2020"
