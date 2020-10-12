@@ -4,13 +4,13 @@ author:
   display_name: "Muhammad Rizwan"
 draft: "false"
 toc: true
-title: "CodePorting.Native Cs2Cpp 20.9"
+title: "CodePorting.Native Cs2Cpp 20.10"
 linktitle: "CodePorting.Native Cs2Cpp 20.10"
 menu:
   docs:
     parent: "2020"
     weight: "1"
-lastmod: "2020-08-16"
+lastmod: "2020-10-12"
 weight: "1"
 ---
 
@@ -42,14 +42,14 @@ Please consult respective sections of our wiki for more information.
 
 # Full List of Issues Covering all Changes in this Release
 
-|   *Key * |   *Summary * |   *Category * |
+|   Key |   Summary |   Category |
 | --- | --- | --- |
 | CSPORTCPP-3557 | Issues with &#39;override&#39; subsystem | Bug |
 | CSPORTCPP-3579 | Make porter generate wrappers for methods which have Stream arguments | New feature |
 | CSPORTCPP-3678 | Fix doxygen warnings | Bug |
 | SLIDESCPP-2538 | Fix RegressionTests\_v19\_10.SLIDESNET\_33555 test (Linux) | Bug |
 | SLIDESCPP-2581 | Fix a queue constructor which receive capacity | Bug |
-| SLIDESCPP-2563 | Fix &quot;System::NotImplementedException&quot; when invoking ICollection<T>::Contains() method | Bug 
+| SLIDESCPP-2563 | Fix &quot;System::NotImplementedException&quot; when invoking ICollection<T>::Contains() method | Bug
 | PDFCPP-1411 | System::IO optimization | Enhancement |
 | CSPORTCPP-1833 | Add macros to use using wrapper in C++ code. | Enhancement |
 | SLIDESCPP-2536 | Investigate solutions to improve performance of &quot;is&quot; operator | Enhancement |
