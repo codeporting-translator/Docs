@@ -14,12 +14,12 @@ lastmod: "2020-10-12"
 weight: "1"
 ---
 
-# Major Features
+## Major Features
 1. Porter is now capable of overloading methods that accept System.IO.Stream with auto-generated ones which accept STL stream instead. CppIOStreamWrapper attribute and force\_wrap\_iostream option are introduced to enable this.
 2. use\_stream\_based\_io option was supported to translate System.Console invocations into std::cout operations.
 3. DNS support was added into System::Net namespace.
 
-# Minor fixes
+## Minor fixes
 1. False positive both CppConstMethod and CppConstWrapper attributes apply to same method warnings were fixed. The closest attribute is now tracked down properly.
 2. Incorrect CsToCppPorter::Details::MemoryManagement::BindLifetime() overload selection was fixed. Comments were added to CsToCppPorter::Details::MemoryManagement methods for better understanding of how they work and which methods should be used.
 3. Incorrect documentation for STDIOStreamWrapperBase and PropertyInfo classes was fixed.
@@ -40,7 +40,7 @@ weight: "1"
 
 Please consult respective sections of our wiki for more information.
 
-# Full List of Issues Covering all Changes in this Release
+## Full List of Issues Covering all Changes in this Release
 
 |   Key |   Summary |   Category |
 | --- | --- | --- |
@@ -62,6 +62,6 @@ Please consult respective sections of our wiki for more information.
 | WORDSCPP-1006 | Manually implement OdtParagraphReader.ParagraphProcessor | New feature |
 | EMAILCPP-247 | Porting DNS support, implement DNS feature in Asposecpplib | New feature |
 
-# Public API and Backward Incompatible Changes
+## Public API and Backward Incompatible Changes
 1. Namespace for version information-related symbols was actualized.
 2. Some redundant static and inline qualifiers were removed from public headers.
