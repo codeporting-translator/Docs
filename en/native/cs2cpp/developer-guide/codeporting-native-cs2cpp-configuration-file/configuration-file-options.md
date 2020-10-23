@@ -1873,8 +1873,8 @@ Makes porter generate auto types for local variables instead of full type name s
 
 | **Allowed value** | **Meaning** | **Example** |
 | --- | --- | --- |
-| true | Generate &#39;auto&#39; type names. | auto rs = System::MakeObject <Rs> |
-| false | Generate full type names. | System::SharedPtr <Rs>; rs = System::MakeObject <Rs> |
+| true | Generate &#39;auto&#39; type names. | auto rs = System::MakeObject <Rs> ()) |
+| false | Generate full type names. | System::SharedPtr <Rs>; rs = System::MakeObject <Rs> () |
 
 **Default value:** false
 **Since version:** 20.8
