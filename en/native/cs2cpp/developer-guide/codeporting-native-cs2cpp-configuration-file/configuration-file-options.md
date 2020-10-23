@@ -1797,6 +1797,112 @@ Creates a subdirectory under 'include' directory to avoid header name clashes w
 ---| ---| ---| ---| ---|
 |directory|Explicit name of the subdirectory under 'include' folder.|String value|false|C# project name
 
+## make\_cpp\_file\_name\_uniq
+
+Controls porter behavior in whether file names should be unicalized by extending with trailing underscores.
+
+| **Allowed value** | **Meaning** |
+| --- | --- |
+| true | All file names are unicalized. |
+| false | File names may repeat. |
+
+**Default value:** true
+**Since version:** 20.8
+
+# Code readability
+
+These options improve generated code&#39;s readability. However, the code generated now doesn&#39;t handle some corner cases properly or in the same way C# code does, so using these options on big codebases is error-prone. Instead, use them to port e. g. code samples for your projects being ported, to make them easy to read.
+
+## foreach\_as\_range\_based\_for\_loop
+
+Translate C# foreach loops as C++ [range-based for loops](https://en.cppreference.com/w/cpp/language/range-for)
+
+| foreach (HeaderFooter hf in doc.GetChildNodes(NodeType.HeaderFooter, true)){    // ...} |
+| --- |
+
+| **Allowed value** | **Meaning** | **Example** |
+| --- | --- | --- |
+| **false** | Translate foreach loop as while loop |
+
+| auto hf\_enumerator = doc-\&gt;GetChildNodes(NodeType::HeaderFooter, true)-\&gt;GetEnumerator();SharedPtr\&lt;HeaderFooter\&gt; hf;while (hf\_enumerator-\&gt;MoveNext() &amp;&amp; (hf = DynamicCast\&lt;HeaderFooter\&gt;(hf\_enumerator-\&gt;get\_Current()), true)){    // ...} |
+| --- |
+
+ |
+| **true** | Translate foreach loop as range-based for loop |
+
+| for (auto hf : IterateOver\&lt;HeaderFooter\&gt;(doc-\&gt;GetChildNodes(NodeType::HeaderFooter, true)) ){    // ...} |
+| --- |
+
+ |
+
+**Default value** : false
+
+## simplify\_using\_statements
+
+Makes porter generate more compact code for &#39;using&#39; statements that relies on used object destructors rather then on correct Dispose calls.
+
+| **Allowed value** | **Meaning** | **Example** |
+| --- | --- | --- |
+| true | Do not generate compilcated code to call into Dispose(). | {
+     System::SharedPtr\&lt;Rs\&gt; \_\_using\_resource\_0 = System::MakeObject\&lt;Rs\&gt;();
+     System::Console::WriteLine(u&quot;Statement&quot;);
+ } |
+| false | Generate correct Dispose calls anyway. | {
+     System::SharedPtr\&lt;Rs\&gt; \_\_using\_resource\_0 = System::MakeObject\&lt;Rs\&gt;();
+
+     // Clearing resources under &#39;using&#39; statement
+     System::Details::DisposeGuard\&lt;1\&gt; \_\_dispose\_guard\_1({ \_\_using\_resource\_0});
+     // ------------------------------------------
+
+     try
+     {
+         System::Console::WriteLine(u&quot;Statement&quot;);
+     }
+     catch(...)
+     {
+         \_\_dispose\_guard\_1.SetCurrentException(std::current\_exception());
+     }
+ } |
+
+**Default value:** false
+**Since version:** 20.8
+
+## force\_auto\_in\_variable\_declaration
+
+Makes porter generate &#39;auto&#39; types for local variables instead of full type name so that code is more compact.
+
+| **Allowed value** | **Meaning** | **Example** |
+| --- | --- | --- |
+| true | Generate &#39;auto&#39; type names. | auto rs = System::MakeObject\&lt;Rs\&gt;(); |
+| false | Generate full type names. | System::SharedPtr\&lt;Rs\&gt; rs = System::MakeObject\&lt;Rs\&gt;(); |
+
+**Default value:** false
+**Since version:** 20.8
+
+## prefer\_short\_type\_names
+
+Makes porter prefer short type names where possible instead of fully qualified names in some contexts.
+
+| **Allowed value** | **Meaning** | **Example** |
+| --- | --- | --- |
+| true | Use short names. | System::StaticCast\&lt;A\&gt;(o) |
+| false | Use fully qualified names. | System::StaticCast\&lt;Full::Namespace::Path::A\&gt;(o) |
+
+**Default value:** false
+**Since version:** 20.9
+
+## use\_stream\_based\_io
+
+Replaces System::Console calls with cout invocations.
+
+| **Allowed value** | **Meaning** | **Example** |
+| --- | --- | --- |
+| true | Switch to cout usage. | std::cout \&lt;\&lt; &quot;Hello&quot; \&lt;\&lt; std::endl; |
+| false | Use fully qualified names. | System::Console::WriteLn(u&quot;Hello&quot;); |
+
+**Default value:** false
+**Since version:** 20.10
+
 ### Legacy options ###
 
 Options no longer supported but still recognized (and ignored) by porting application for compatibility reasons are:
