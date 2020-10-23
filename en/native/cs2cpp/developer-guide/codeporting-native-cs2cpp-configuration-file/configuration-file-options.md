@@ -1811,7 +1811,7 @@ Controls porter behavior in whether file names should be unicalized by extending
 
 # Code readability
 
-These options improve generated code&#39;s readability. However, the code generated now doesn&#39;t handle some corner cases properly or in the same way C# code does, so using these options on big codebases is error-prone. Instead, use them to port e. g. code samples for your projects being ported, to make them easy to read.
+These options improve generated code's readability. However, the code generated now doesn't handle some corner cases properly or in the same way C# code does, so using these options on big codebases is error-prone. Instead, use them to port e. g. code samples for your projects being ported, to make them easy to read.
 
 ## foreach\_as\_range\_based\_for\_loop
 
@@ -1839,24 +1839,24 @@ Translate C# foreach loops as C++ [range-based for loops](https://en.cppreferenc
 
 ## simplify\_using\_statements
 
-Makes porter generate more compact code for &#39;using&#39; statements that relies on used object destructors rather then on correct Dispose calls.
+Makes porter generate more compact code for using statements that relies on used object destructors rather then on correct Dispose calls.
 
 | **Allowed value** | **Meaning** | **Example** |
 | --- | --- | --- |
 | true | Do not generate compilcated code to call into Dispose(). | {
-     System::SharedPtr\&lt;Rs\&gt; \_\_using\_resource\_0 = System::MakeObject\&lt;Rs\&gt;();
-     System::Console::WriteLine(u&quot;Statement&quot;);
+     System::SharedPtr <Rs>; \_\_using\_resource\_0 = System::MakeObject <Rs> ();
+     System::Console::WriteLine("Statement");
  } |
 | false | Generate correct Dispose calls anyway. | {
-     System::SharedPtr\&lt;Rs\&gt; \_\_using\_resource\_0 = System::MakeObject\&lt;Rs\&gt;();
+     System::SharedPtr <Rs> \_\_using\_resource\_0 = System::MakeObject <Rs>
 
-     // Clearing resources under &#39;using&#39; statement
-     System::Details::DisposeGuard\&lt;1\&gt; \_\_dispose\_guard\_1({ \_\_using\_resource\_0});
+     // Clearing resources under using statement
+     System::Details::DisposeGuard <1> \_\_dispose\_guard\_1({ \_\_using\_resource\_0});
      // ------------------------------------------
 
      try
      {
-         System::Console::WriteLine(u&quot;Statement&quot;);
+         System::Console::WriteLine("Statement");
      }
      catch(...)
      {
@@ -1869,12 +1869,12 @@ Makes porter generate more compact code for &#39;using&#39; statements that reli
 
 ## force\_auto\_in\_variable\_declaration
 
-Makes porter generate &#39;auto&#39; types for local variables instead of full type name so that code is more compact.
+Makes porter generate auto types for local variables instead of full type name so that code is more compact.
 
 | **Allowed value** | **Meaning** | **Example** |
 | --- | --- | --- |
-| true | Generate &#39;auto&#39; type names. | auto rs = System::MakeObject\&lt;Rs\&gt;(); |
-| false | Generate full type names. | System::SharedPtr\&lt;Rs\&gt; rs = System::MakeObject\&lt;Rs\&gt;(); |
+| true | Generate &#39;auto&#39; type names. | auto rs = System::MakeObject <Rs> |
+| false | Generate full type names. | System::SharedPtr <Rs>; rs = System::MakeObject <Rs> |
 
 **Default value:** false
 **Since version:** 20.8
@@ -1885,8 +1885,8 @@ Makes porter prefer short type names where possible instead of fully qualified n
 
 | **Allowed value** | **Meaning** | **Example** |
 | --- | --- | --- |
-| true | Use short names. | System::StaticCast\&lt;A\&gt;(o) |
-| false | Use fully qualified names. | System::StaticCast\&lt;Full::Namespace::Path::A\&gt;(o) |
+| true | Use short names. | System::StaticCast;<A>;(o) |
+| false | Use fully qualified names. | System::StaticCast;Full::Namespace::Path::<A>;(o) |
 
 **Default value:** false
 **Since version:** 20.9
@@ -1897,8 +1897,8 @@ Replaces System::Console calls with cout invocations.
 
 | **Allowed value** | **Meaning** | **Example** |
 | --- | --- | --- |
-| true | Switch to cout usage. | std::cout \&lt;\&lt; &quot;Hello&quot; \&lt;\&lt; std::endl; |
-| false | Use fully qualified names. | System::Console::WriteLn(u&quot;Hello&quot;); |
+| true | Switch to cout usage. | std::cout; Hello; std::endl; |
+| false | Use fully qualified names. | System::Console::WriteLn("Hello"); |
 
 **Default value:** false
 **Since version:** 20.10
