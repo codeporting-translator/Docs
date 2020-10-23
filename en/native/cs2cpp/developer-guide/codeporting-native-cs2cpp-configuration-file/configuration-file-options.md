@@ -1885,8 +1885,8 @@ Makes porter prefer short type names where possible instead of fully qualified n
 
 | **Allowed value** | **Meaning** | **Example** |
 | --- | --- | --- |
-| true | Use short names. | System::StaticCast;<A>;(o) |
-| false | Use fully qualified names. | System::StaticCast;Full::Namespace::Path::<A>;(o) |
+| true | Use short names. | System::StaticCast <A>;o) |
+| false | Use fully qualified names. | System::StaticCast;Full::Namespace::Path:: <A>(o) |
 
 **Default value:** false
 **Since version:** 20.9
