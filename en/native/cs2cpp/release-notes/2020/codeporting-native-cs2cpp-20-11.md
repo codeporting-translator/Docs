@@ -44,7 +44,7 @@ Please consult respective sections of our wiki for more information.
 
 ## Full List of Issues Covering all Changes in this Release ##
 
-|   **Key ** |   **Summary ** |   **Category** |
+|   Key  |   Summary |   Category |
 | --- | --- | --- |
 | WORDSCPP-1016 | Fix formatting issues | Bug |
 | CSPORTCPP-3641 | Porting tests for the System.XML namespace | Task |
@@ -70,7 +70,7 @@ Please consult respective sections of our wiki for more information.
 | CSPORTCPP-3853 | Fix defaulting SmartPtr mode on container resize | Bug |
 | SLIDESCPP-2637 | Incorrect text cropping on the EMF image | Bug |
 
-# ## Public API and Backward Incompatible Changes ##
+## Public API and Backward Incompatible Changes ##
 
 1. When instantiating ported classes using non-public constructors, member function MakeObject with corresponding parameters should be used instead of System::MakeObject().
 2. A stub for System::Security::Cryptography::RandomNumberGenerator::Create() was added.
