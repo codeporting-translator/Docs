@@ -452,6 +452,14 @@ Discards the effect of the 'CppConstMethod' attribute. Useful, if some methods a
 
 Makes porter mark method with 'override' qualifier.
 
+### CppOverrideAccessModifiers ###
+**Used on**: Type or entity
+**Arguments**: Mandatory value of AccessModifiers enum.
+
+Switches element's access modifier to specified one in ported one.
+
+Since version: 20.11
+
 ### CppOverrideTestFixtureSetUp ###
 
 **Used on**: Method
