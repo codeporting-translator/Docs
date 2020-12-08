@@ -6,6 +6,7 @@ draft: "false"
 toc: true
 title: "Porter Limitations and Bugs"
 linktitle: "Porter Limitations and Bugs"
+description: "Limitations of Porter and Bugs"
 menu:
   docs:
     parent: "Limitations and Bugs"

@@ -6,6 +6,7 @@ draft: "false"
 toc: true
 title: "Using aliasing constructor to create a smart pointer"
 linktitle: "Using aliasing constructor to create a smart pointer"
+description: "Smart Pointer Creation Using Aliasing Constructors "
 menu:
   docs:
     parent: "Memory Management Model"

@@ -6,6 +6,7 @@ draft: "false"
 toc: true
 title: "CodePorting.Native Cs2Cpp Configuration File Structure"
 linktitle: "CodePorting.Native Cs2Cpp Configuration File Structure"
+description: "Basic Structure of Configuration File"
 menu:
   docs:
     parent: "CodePorting.Native Cs2Cpp Configuration File"

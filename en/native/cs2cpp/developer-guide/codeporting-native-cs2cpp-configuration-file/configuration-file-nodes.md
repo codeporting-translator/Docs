@@ -6,6 +6,7 @@ draft: "false"
 toc: true
 title: "Configuration file Nodes"
 linktitle: "Configuration file Nodes"
+description: "List of all Tags Allowed in Configuration File"
 menu:
   docs:
     parent: "CodePorting.Native Cs2Cpp Configuration File"

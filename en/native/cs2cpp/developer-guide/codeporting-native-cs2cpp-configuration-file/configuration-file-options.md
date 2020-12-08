@@ -6,6 +6,7 @@ draft: "false"
 toc: true
 title: "Configuration file Options"
 linktitle: "Configuration file Options"
+description: "List of all Options available in Configuration File"
 menu:
   docs:
     parent: "CodePorting.Native Cs2Cpp Configuration File"

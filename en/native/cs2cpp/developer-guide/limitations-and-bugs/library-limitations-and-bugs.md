@@ -6,6 +6,7 @@ draft: "false"
 toc: true
 title: "Library Limitations and Bugs"
 linktitle: "Library Limitations and Bugs"
+description: "Limitations of Library and Bugs"
 menu:
   docs:
     parent: "Limitations and Bugs"

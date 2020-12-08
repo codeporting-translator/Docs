@@ -6,6 +6,7 @@ draft: "false"
 toc: true
 title: "Attributes in Configuration file"
 linktitle: "Attributes in Configuration file"
+description: "Attributes Specified Configuration file"
 menu:
   docs:
     parent: "CodePorting.Native Cs2Cpp Configuration File"

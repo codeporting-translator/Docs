@@ -6,6 +6,7 @@ draft: "false"
 toc: true
 title: "Cpp Code Injection"
 linktitle: "Cpp Code Injection"
+description: "Limitations for Injecting some C++ Code into your Ported C# Code"
 menu:
   docs:
     parent: "Limitations and Bugs"
