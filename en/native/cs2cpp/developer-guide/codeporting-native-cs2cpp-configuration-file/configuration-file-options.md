@@ -596,6 +596,17 @@ class Bar : public Foo, public IFoo
 
 **Default value**: false
 
+#### enable_fast_rtti ####
+
+Enables porter generate code which makes casting faster with the price of bigger image size.
+
+|Allowed value|Meaning
+|true|Perform fast (virtual functions-based) casting.
+|false|Perform usual (dynamic_cast-based) casting.
+
+**Default value**: false
+**Since version**: 20.12
+
 ### C# code analysis options ###
 
 These options impact how the original C# code gets analyzed
@@ -613,11 +624,33 @@ Example:
 </opt>
 {{< /highlight >}}
 
+#### unexpected_override_as_warning ####
+
+Makes porter produce warning rather than en error if there is a method that overrides one in C++ but not in C#. They may trigger from e. g. the following code:
+
+{{< highlight cpp >}}
+class Base
+{
+    public virtual void Foo() {}
+}
+class Child : Base
+{
+    public new virtual void Foo() {} ~/~/ Overrides in C++, but not in C#
+}
+{{< /highlight >}}
+
+|=Allowed value|=Meaning|=Example
+|true|Produce warnings if unexpected overrides occur.|[Warning] System.String SampleCsProject.Derived.AnotherVirtual() (derived.cs:22): Method does not override one in C#, however, it will override System.String SampleCsProject.Base.AnotherVirtual() in C++. Consider renaming one branch via using CppRenameEntity attribute
+|false|Produce errors if unexpected overrides occur.|[Error] System.String SampleCsProject.Derived.AnotherVirtual() (derived.cs:22): Method does not override one in C#, however, it will override System.String SampleCsProject.Base.AnotherVirtual() in C++. Consider renaming one branch via using CppRenameEntity attribute
+
+**Default value:** false
+**Since version:** 20.12
+
 ### C++ code generation parameters ###
 
 These options define how porter uses specific C++ code features.
 
-### detect_const_methods ####
+#### detect_const_methods #####
 
 Whether to generate 'const' specifier on methods that do not modify their object. These can be either marked with CppConstMethod attribute or found const by porter check. Therefore, if this option is false, CppConstMethod attribute has no effect.
 
@@ -1370,6 +1403,75 @@ Enables porter transforming self-closing documentation comment tags into pairs o
 **Default value**: true
 **Since version**: 20.1
 
+#### allow_using_directives_in_headers ####
+
+Makes porter simplify header files by utilizing header directives.
+
+{{< highlight cs >}}
+using Namespace1;
+using System;
+namespace Namespace2
+{
+ public class Class2
+ {
+ public void Foo(Class1 c1) { ... }
+ }
+}
+{{< /highlight >}}
+
+|=Allowed value|=Meaning|=Example
+---| ---| ---|
+|true|Simplify the code.|{{< highlight cpp >}}
+using namespace Namespace1;
+using namespace System;
+namespace Namespace2
+{
+ class Class2
+ {
+ public:
+ void Foo(SharedPtr<Class1> c1);
+ };
+}
+{{< /highlight >}}
+|false|Use full type qualifiers.|(((
+| {{< highlight cpp >}}
+namespace Namespace2
+{
+ class Class2
+ {
+ public:
+ void Foo(System::SharedPtr<Namespace1::Class1> c1);
+ };
+}
+{{< /highlight >}}
+
+
+**Since version:** 20.10
+**Default value**: false
+
+#### extensions_as_method ####
+
+{{< highlight xml >}}
+<opt name="extensions_as_method" value="true">
+ <extension class="Aspose.BarClassExtensions"/>
+{{< /highlight >}}|
+
+Specifies the classes for which extension method calls should be translated as member function calls instead of a static method from extension class. Value is ignored.
+
+{{< highlight cs >}}
+obj.CallExtensionMethod(arg);
+{{< /highlight >}}
+
+|=Allowed value|=Meaning|=Example
+|Extension type is meitioned in 'extension' node under 'opt' config node.|Generate method call instead of static function call.| {{< highlight cs >}}
+obj->CallExtensionMethod(arg);
+{{< /highlight >}}
+|Extension type is not meitioned in 'extension' node under 'opt' config node.|Generate static function call rather than method call.| {{< highlight cs >}}
+ExtensionClass::CallExtensionMethod(obj, arg);
+{{< /highlight >}}
+
+**Since version:** 20.11
+
 ### Debug and developer version code options ###
 
 These options controls debug and developer version code in generated C++ files.
@@ -1394,7 +1496,26 @@ Enables adding for_each_member subsystem-related code to each class and generati
 | true | Generate for_each_member-related code |
 | false | Don't generate for_each_member-related code |
 
+**Default value**: false
 
+#### for_each_member_cycles_only ####
+
+Enables cycles search using for_each_member.
+
+|=Allowed value|=Meaning|=Example
+|true|Generate parameter passing that enables loop search|
+|false|Don't generate parameter passing that enables loop search|
+
+**Default value**: false
+**Since version:** 20.11
+
+#### for_each_member_cleanup_before_each_test ####
+
+Enables cleaning up the for_each_member model before running each test.
+
+|=Allowed value|=Meaning|=Example
+|true|Generate a method call that clears the for_each_member model inside the SetUp method|
+|false|Don't generate a method call that clears the for_each_member model inside the SetUp method|
 
 **Default value**: false
 
@@ -1903,6 +2024,28 @@ Replaces System::Console calls with cout invocations.
 
 **Default value:** false
 **Since version:** 20.10
+
+#### generate_get_shared_members ####
+
+Enables or disables generating GetSharedMembers() method for ported classes.
+
+|=Allowed value|=Meaning
+|true|GetSharedMembers() method is generated.
+|false|GetSharedMembers() method is not generated.
+
+**Default value:** true
+**Since version:** 20.11
+
+#### generate_rtti_info ####
+
+Enables or disables generating RTTI macros for ported classes.
+
+|=Allowed value|=Meaning
+|true|RTTI macros are generated.
+|false|RTTI macros are not generated.
+
+**Default value:** true
+**Since version:** 20.11
 
 ### Legacy options ###
 

@@ -236,6 +236,13 @@ class Foo
 
 Forces all static variables in attributed class as singletons and static constructor to be called from static functions (including singleton accessors) and instance constructors rather than from C++ static variable initializer. Overrides effect of deferred_init option.
 
+### CppDisableAutoReordering ###
+
+**Used on**: Class or structure
+**Arguments**: None
+
+Makes porter put type members into C++ code in the same order they are in C# code, istead of grouping them by access modifier.
+
 ### CppEnumEnableMetadata ###
 
 **Used on**: Enum types
@@ -358,7 +365,7 @@ Foo::Bar(System::String(u"abc")); //If translated as 'Foo::Bar(u"abc")', this wo
 **Used on**: Type
 **Argument**: Optional string type name to ignore inheritance from; defaults to System.Object
 
-Omit inheritance from a specific type during translation. One usecase is creating a lightweight class not related to Object tree.
+Omit inheritance from a specific type during translation. One usecase is creating a lightweight class not related to Object tree. If the type another than System.Object is ignored and there's no other references to System.Object, the ported class is still inherited from System::Object.
 
 {{< highlight cs >}}
 [CsToCppPorter.CppIgnoreBaseType("System.Object")]
@@ -366,6 +373,8 @@ interface Interface1 { }
 interface Interface2 { }
 [CsToCppPorter.CppIgnoreBaseType("Interface1")]
 class Class1 : Interface1, Interface2 { }
+[CsToCppPorter.CppIgnoreBaseType("Interface1")]
+class class2 : Interface1 { }
 {{< /highlight >}}
 
 {{< highlight cpp >}}
@@ -377,7 +386,11 @@ class Interface2 : public virtual System::Object
 {
     ...
 };
-class Class4 : public Interface2 //No interface1 inheritance
+class Class1 : public Interface2 //No interface1 inheritance
+{
+    ...
+};
+class Class2 : public System::Object
 {
     ...
 };
@@ -389,6 +402,15 @@ class Class4 : public Interface2 //No interface1 inheritance
 **Argument**: Optional string comment which is always ignored
 
 Disables translating 'where' clauses to C++.
+
+### CppInline ###
+
+**Used on**: Member or type
+**Argument**: None
+
+Moves an implementation of a member or of all members of a specific type to header file, even if not a template.
+
+**Since version:** 20.11
 
 ### CppLambdaPassByValue ###
 
@@ -473,6 +495,130 @@ Forces translate this method as TestFixtureSetUp, overriding the existing one (i
 **Arguments**: None
 
 Forces translate this method as TestFixtureTearDown, overriding the existing one (if any). Also, the forces method to be static.
+
+### CppPlaceAfter ###
+
+**Used on**: Type or member
+**Arguments**: Mandatory string name of type or member to place attributed one after.
+
+Moves attributed type or member to after the one named by the attribute parameter in output code.
+
+{{< highlight cs >}}
+[CsToCppPorter.CppPlaceAfter("Base")]
+public class ClassWithInlineMethods
+{
+    public void SayHello()
+    {
+        Base.SayHello();
+    }
+}
+public class Base
+{
+
+        [CsToCppPorter.CppPlaceAfter("Property")]
+        public static void SayHello()
+        {
+            System.Console.WriteLine("Hello");
+        }
+        public int Property { get; set; }
+        [CsToCppPorter.CppPlaceAfter("Field")]
+        public Base() { }
+        private int Field;
+}
+{{< /highlight >}}
+
+Ports onto:
+
+{{< highlight cpp >}}
+class Base : public System::Object
+{
+private:
+    int32_t pr_Property;
+public:
+    int32_t get_Property()
+    {
+        return pr_Property;
+    }
+    void set_Property(int32_t value)
+    {
+        pr_Property = value;
+    }
+    static void SayHello()
+    {
+        System::Console::WriteLine(u"Hello");
+    }
+private:
+    int32_t Field;
+public:
+    Base() : pr_Property(0), Field(0)
+    {
+    }
+};
+class ClassWithInlineMethods : public System::Object
+{
+public:
+    void SayHello()
+    {
+        Base::SayHello();
+    }
+};
+{{< /highlight >}}
+
+**Since version**: 20.11
+
+### CppPlaceBefore ###
+
+**Used on**: Type or member
+**Arguments**: Mandatory string name of type or member to place attributed one before.
+
+Moves attributed type or member to before the one named by the attribute parameter in output code.
+
+{{< highlight cs >}}
+public class A
+{ }
+[CsToCppPorter.CppPlaceBefore("A")]
+public class B
+{ }
+[CsToCppPorter.CppDisableAutoReordering]
+public class ClassWithEnum
+{
+    public void Method(Enum e)
+    {}
+    public void Method()
+    {}
+    [CsToCppPorter.CppPlaceBefore("Method")]
+    public enum Enum
+    {
+        A, B
+    }
+    [CsToCppPorter.CppPlaceBefore("Method")]
+    public int Field;
+}
+{{< /highlight >}}
+
+Ports onto:
+
+{{< highlight cpp >}}
+class B : public System::Object
+{};
+class A : public System::Object
+{};
+class ClassWithEnum : public System::Object
+{
+public:
+    enum class Enum
+    {
+        A,
+        B
+    };
+    int32_t Field;
+    void Method(ClassWithEnum::Enum e);
+    void Method();
+    ClassWithEnum();
+};
+{{< /highlight >}}
+
+**Since version**: 20.11
 
 ### CppPortAsEnum ###
 

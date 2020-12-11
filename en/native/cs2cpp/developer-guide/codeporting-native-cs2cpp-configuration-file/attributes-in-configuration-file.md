@@ -19,6 +19,14 @@ weight: "2"
 
 Some attributes are allowed to be specified in configuration files to save editing the source code.
 
+Any 'attribute' definition can now be assigned 'error_if_unused' XML attribute so the porter will produce an error message if the attribute is unused when porting a project, as follows:
+
+{{< highlight xml >}}
+<attribute error_if_unused="true" name="CppConstMethod" class="PorterAttributes.UnusedConfigAttributes" method="System.Void Foo()"/>
+{{< /highlight >}}
+
+The below lists the attributes that are available from configuration files.
+
 ### CppSkipEntity ###
 
 {{< gist codeporting-com-gists 4e51b0d4f03e1acaf3b4156ae7ba05f6 "Codeporting-Cs2Cpp-code -CppSkipEntity.cs">}}
