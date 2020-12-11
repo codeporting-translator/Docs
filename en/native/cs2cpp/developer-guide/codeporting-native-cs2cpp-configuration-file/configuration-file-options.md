@@ -119,8 +119,8 @@ States whether to create include map file which then can be used to manage inclu
 
 | Additional attribute | Meaning | Allowed values | Mandatory | Default value
 ---| ---| ---| ---| ---|
-| public_only | Whether to exclude non-public types from the map | * **true** - dump public types only * **false** # dump all files | No | true
-| with_dir_prefix | Whether to use full (with directory prefix) includes or project-local ones | * **true** - write full includes * **false** - write local includes | No | true
+| public_only | Whether to exclude non-public types from the map | true - dump public types only, false - dump all files | No | true
+| with_dir_prefix | Whether to use full (with directory prefix) includes or project-local ones | true - write full includes, false - write local includes | No | true
 
 #### tab ####
 
@@ -445,12 +445,7 @@ public:
     void HandleException(Exception &e);
 };
 {{< /highlight >}}
-|
-false
-|
-Pass exceptions by value.
-|
-{{< highlight cpp >}}
+| false | Pass exceptions by value. | {{< highlight cpp >}}
 class MyClass
 {
 public:
@@ -479,12 +474,7 @@ class MyClass
     ...
 };
 {{< /highlight >}}
-|
-false
-|
-Inherit static classes from Object.
-|
-{{< highlight cpp >}}
+| false | Inherit static classes from Object. | {{< highlight cpp >}}
 class MyClass : public System::Object
 {
     ...
@@ -635,7 +625,7 @@ class Base
 }
 class Child : Base
 {
-    public new virtual void Foo() {} ~/~/ Overrides in C++, but not in C#
+    public new virtual void Foo() {} // Overrides in C++, but not in C#
 }
 {{< /highlight >}}
 
@@ -1080,7 +1070,7 @@ void Foo::Do(int32_t i, System::String s)
     FooImpl::Do(i, s);
 }
 {{< /highlight >}}
-| false | Doesn't generate required calls. |
+| false | Doesn't generate required calls. | -
 
 
 
@@ -1261,7 +1251,7 @@ foreach (HeaderFooter hf in doc.GetChildNodes(NodeType.HeaderFooter, true))
 | false| Translate foreach loop as while loop | {{< highlight cpp >}}
 auto hf_enumerator = doc->GetChildNodes(NodeType::HeaderFooter, true)->GetEnumerator();
 SharedPtr<HeaderFooter> hf;
-while (hf_enumerator->MoveNext() && (hf # DynamicCast<HeaderFooter>(hf_enumerator->get_Current()), true))
+while (hf_enumerator->MoveNext() && (hf = DynamicCast<HeaderFooter>(hf_enumerator->get_Current()), true))
 {
     // ...
 }
@@ -1289,10 +1279,10 @@ class Fixture : FixtureBase
 | Allowed value | Meaning | Example
 ---| ---| ---|
 | true | Move tests to child class | {{< highlight cpp >}}
-{{{TEST_F(Fixture, MyTest) { ... }}}}
+TEST_F(Fixture, MyTest) { ... }
 {{< /highlight >}}
 | false | Generate tests to base class | {{< highlight cpp >}}
-{{{TEST_F(FixtureBase, MyTest) { ... }}}}
+TEST_F(FixtureBase, MyTest) { ... }
 {{< /highlight >}}
 
 **Default value**: true
@@ -1301,7 +1291,6 @@ class Fixture : FixtureBase
 
 Calls to methods of NUnit.Framework.Assert class are translated into gtest-compatible macros. If you use your own test class with similarly named methods, use this option to enable special treatment of these. Enlist classes wrapped inside 'alias' subnode as shown below. Also, you might want to exclude such classes from porting.
 
-|
 {{< highlight xml >}}
 <opt name="nunit_assert_class_aliases" value="true">
 
