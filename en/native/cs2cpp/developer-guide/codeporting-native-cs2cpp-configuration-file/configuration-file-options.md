@@ -438,13 +438,13 @@ Whether to pass exceptions to functions by reference rather than by creating a l
 
 | Allowed value | Meaning | Example
 ---| ---| ---|
-| true | Pass exceptions as references. | class MyClass {{< highlight cpp >}}
+| true | Pass exceptions as references. | {{< highlight cpp >}}
+class MyClass
 {
 public:
     void HandleException(Exception &e);
 };
 {{< /highlight >}}
-
 |
 false
 |
@@ -479,7 +479,6 @@ class MyClass
     ...
 };
 {{< /highlight >}}
-
 |
 false
 |
@@ -601,6 +600,7 @@ class Bar : public Foo, public IFoo
 Enables porter generate code which makes casting faster with the price of bigger image size.
 
 | Allowed value | Meaning
+---| ---|
 | true | Perform fast (virtual functions-based) casting.
 | false | Perform usual (dynamic_cast-based) casting.
 
@@ -1259,10 +1259,15 @@ foreach (HeaderFooter hf in doc.GetChildNodes(NodeType.HeaderFooter, true))
 | Allowed value | Meaning | Example
 ---| ---| ---|
 | false| Translate foreach loop as while loop | {{< highlight cpp >}}
-{{{auto hf_enumerator = doc->GetChildNodes(NodeType::HeaderFooter, true)->GetEnumerator(); SharedPtr<HeaderFooter> hf; while (hf_enumerator->MoveNext() && (hf # DynamicCast<HeaderFooter>(hf_enumerator->get_Current()), true)) { // ... }}}}
+auto hf_enumerator = doc->GetChildNodes(NodeType::HeaderFooter, true)->GetEnumerator();
+SharedPtr<HeaderFooter> hf;
+while (hf_enumerator->MoveNext() && (hf # DynamicCast<HeaderFooter>(hf_enumerator->get_Current()), true))
+{
+    // ...
+}
 {{< /highlight >}}
 | true | Translate foreach loop as range-based for loop | {{< highlight cpp >}}
-{{{for (auto hf : IterateOver<HeaderFooter>(doc->GetChildNodes(NodeType::HeaderFooter, true)) ) { // ... }}}}
+for (auto hf : IterateOver<HeaderFooter>(doc->GetChildNodes(NodeType::HeaderFooter, true)) ) { // ... }
 {{< /highlight >}}
 
 **Default value**: false
@@ -1455,7 +1460,7 @@ namespace Namespace2
 <opt name="extensions_as_method" value="true">
     <extension class="Aspose.BarClassExtensions"/>
 </opt>
-{{< /highlight >}}|
+{{< /highlight >}}
 
 Specifies the classes for which extension method calls should be translated as member function calls instead of a static method from extension class. Value is ignored.
 
@@ -1464,6 +1469,7 @@ obj.CallExtensionMethod(arg);
 {{< /highlight >}}
 
 | Allowed value | Meaning | Example
+---| ---| ---|
 | Extension type is meitioned in 'extension' node under 'opt' config node. | Generate method call instead of static function call. | {{< highlight cs >}}
 obj->CallExtensionMethod(arg);
 {{< /highlight >}}
@@ -1920,7 +1926,7 @@ Creates a subdirectory under 'include' directory to avoid header name clashes w
 
 | Additional attribute |  Meaning |  Allowed values | Mandatory |  Default value  
 ---| ---| ---| ---| ---|
-|directory|Explicit name of the subdirectory under 'include' folder.|String value|false|C# project name
+| directory | Explicit name of the subdirectory under 'include' folder.|String value|false|C# project name
 
 #### make\_cpp\_file\_name\_uniq ####
 
@@ -1942,23 +1948,30 @@ These options improve generated code's readability. However, the code generated 
 
 Translate C# foreach loops as C++ [range-based for loops](https://en.cppreference.com/w/cpp/language/range-for)
 
-| foreach (HeaderFooter hf in doc.GetChildNodes(NodeType.HeaderFooter, true)){    // ...} |
-| --- |
+{{< highlight cs >}}
+foreach (HeaderFooter hf in doc.GetChildNodes(NodeType.HeaderFooter, true))
+{
+    // ...
+}
+{{< /highlight >}}
 
-| **Allowed value** | **Meaning** | **Example** |
+
+| Allowed value | Meaning | Example |
 | --- | --- | --- |
-| **false** | Translate foreach loop as while loop |
-
-| auto hf\_enumerator = doc-\&gt;GetChildNodes(NodeType::HeaderFooter, true)-\&gt;GetEnumerator();SharedPtr\&lt;HeaderFooter\&gt; hf;while (hf\_enumerator-\&gt;MoveNext() &amp;&amp; (hf = DynamicCast\&lt;HeaderFooter\&gt;(hf\_enumerator-\&gt;get\_Current()), true)){    // ...} |
-| --- |
-
- |
-| **true** | Translate foreach loop as range-based for loop |
-
-| for (auto hf : IterateOver\&lt;HeaderFooter\&gt;(doc-\&gt;GetChildNodes(NodeType::HeaderFooter, true)) ){    // ...} |
-| --- |
-
- |
+| false | Translate foreach loop as while loop | {{< highlight cpp >}}
+auto hf_enumerator = doc->GetChildNodes(NodeType::HeaderFooter, true)->GetEnumerator();
+SharedPtr<HeaderFooter> hf;
+while (hf_enumerator->MoveNext() && (hf = DynamicCast<HeaderFooter>(hf_enumerator->get_Current()), true))
+{
+    // ...
+}
+{{< /highlight >}}
+| true | Translate foreach loop as range-based for loop | {{< highlight cpp >}}
+for (auto hf : IterateOver<HeaderFooter>(doc->GetChildNodes(NodeType::HeaderFooter, true)))
+{
+    // ...
+}
+{{< /highlight >}}
 
 **Default value** : false
 
@@ -1966,28 +1979,32 @@ Translate C# foreach loops as C++ [range-based for loops](https://en.cppreferenc
 
 Makes porter generate more compact code for using statements that relies on used object destructors rather then on correct Dispose calls.
 
-| **Allowed value** | **Meaning** | **Example** |
+| Allowed value | Meaning | Example |
 | --- | --- | --- |
-| true | Do not generate compilcated code to call into Dispose(). | {
-     System::SharedPtr <Rs>; \_\_using\_resource\_0 = System::MakeObject <Rs> ();
-     System::Console::WriteLine("Statement");
- } |
-| false | Generate correct Dispose calls anyway. | {
-     System::SharedPtr <Rs> \_\_using\_resource\_0 = System::MakeObject <Rs>
+| true | Do not generate compilcated code to call into Dispose(). | {{< highlight cpp >}}
+{
+    System::SharedPtr <Rs>; __using_resource_0 = System::MakeObject <Rs> ();
+    System::Console::WriteLine("Statement");
+}
+{{< /highlight >}}
+| false | Generate correct Dispose calls anyway. |  {{< highlight cpp >}}
+{
+    System::SharedPtr <Rs> __using_resource_0 = System::MakeObject <Rs>
 
-     // Clearing resources under using statement
-     System::Details::DisposeGuard <1> \_\_dispose\_guard\_1({ \_\_using\_resource\_0});
-     // ------------------------------------------
+    // Clearing resources under using statement
+    System::Details::DisposeGuard <1> __dispose_guard_1({ __using_resource_0});
+    // ------------------------------------------
 
-     try
-     {
-         System::Console::WriteLine("Statement");
-     }
-     catch(...)
-     {
-         \_\_dispose\_guard\_1.SetCurrentException(std::current\_exception());
-     }
- } |
+    try
+    {
+        System::Console::WriteLine("Statement");
+    }
+    catch(...)
+    {
+        __dispose_guard_1.SetCurrentException(std::current_exception());
+    }
+}
+{{< /highlight >}}
 
 **Default value:** false
 **Since version:** 20.8
@@ -2033,6 +2050,7 @@ Replaces System::Console calls with cout invocations.
 Enables or disables generating GetSharedMembers() method for ported classes.
 
 | Allowed value | Meaning
+--- | --- |
 | true | GetSharedMembers() method is generated.
 | false | GetSharedMembers() method is not generated.
 
@@ -2043,9 +2061,10 @@ Enables or disables generating GetSharedMembers() method for ported classes.
 
 Enables or disables generating RTTI macros for ported classes.
 
-|=Allowed value|=Meaning
-|true|RTTI macros are generated.
-|false|RTTI macros are not generated.
+| Allowed value | Meaning
+--- | --- |
+| true | RTTI macros are generated.
+| false | RTTI macros are not generated.
 
 **Default value:** true
 **Since version:** 20.11
