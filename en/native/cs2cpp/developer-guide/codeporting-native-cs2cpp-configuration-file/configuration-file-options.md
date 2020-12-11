@@ -600,9 +600,9 @@ class Bar : public Foo, public IFoo
 
 Enables porter generate code which makes casting faster with the price of bigger image size.
 
-|Allowed value|Meaning
-|true|Perform fast (virtual functions-based) casting.
-|false|Perform usual (dynamic_cast-based) casting.
+| Allowed value | Meaning
+| true | Perform fast (virtual functions-based) casting.
+| false | Perform usual (dynamic_cast-based) casting.
 
 **Default value**: false
 **Since version**: 20.12
@@ -639,9 +639,10 @@ class Child : Base
 }
 {{< /highlight >}}
 
-|=Allowed value|=Meaning|=Example
-|true|Produce warnings if unexpected overrides occur.|[Warning] System.String SampleCsProject.Derived.AnotherVirtual() (derived.cs:22): Method does not override one in C#, however, it will override System.String SampleCsProject.Base.AnotherVirtual() in C++. Consider renaming one branch via using CppRenameEntity attribute
-|false|Produce errors if unexpected overrides occur.|[Error] System.String SampleCsProject.Derived.AnotherVirtual() (derived.cs:22): Method does not override one in C#, however, it will override System.String SampleCsProject.Base.AnotherVirtual() in C++. Consider renaming one branch via using CppRenameEntity attribute
+| Allowed value | Meaning | Example
+---| ---| ---|
+| true | Produce warnings if unexpected overrides occur. | \[Warning\] System.String SampleCsProject.Derived.AnotherVirtual() (derived.cs:22): Method does not override one in C#, however, it will override System.String SampleCsProject.Base.AnotherVirtual() in C++. Consider renaming one branch via using CppRenameEntity attribute
+| false | Produce errors if unexpected overrides occur. | \[Error\] System.String SampleCsProject.Derived.AnotherVirtual() (derived.cs:22): Method does not override one in C#, however, it will override System.String SampleCsProject.Base.AnotherVirtual() in C++. Consider renaming one branch via using CppRenameEntity attribute
 
 **Default value:** false
 **Since version:** 20.12
@@ -1412,36 +1413,35 @@ using Namespace1;
 using System;
 namespace Namespace2
 {
- public class Class2
- {
- public void Foo(Class1 c1) { ... }
- }
+    public class Class2
+    {
+        public void Foo(Class1 c1) { ... }
+    }
 }
 {{< /highlight >}}
 
-|=Allowed value|=Meaning|=Example
+| Allowed value | Meaning | Example
 ---| ---| ---|
-|true|Simplify the code.|{{< highlight cpp >}}
+| true | Simplify the code. | {{< highlight cpp >}}
 using namespace Namespace1;
 using namespace System;
 namespace Namespace2
 {
- class Class2
- {
- public:
- void Foo(SharedPtr<Class1> c1);
- };
+    class Class2
+    {
+    public:
+       void Foo(SharedPtr<Class1> c1);
+    };
 }
 {{< /highlight >}}
-|false|Use full type qualifiers.|(((
-| {{< highlight cpp >}}
+| false | Use full type qualifiers. | {{< highlight cpp >}}
 namespace Namespace2
 {
- class Class2
- {
- public:
- void Foo(System::SharedPtr<Namespace1::Class1> c1);
- };
+    class Class2
+    {
+    public:
+        void Foo(System::SharedPtr<Namespace1::Class1> c1);
+    };
 }
 {{< /highlight >}}
 
@@ -1453,7 +1453,8 @@ namespace Namespace2
 
 {{< highlight xml >}}
 <opt name="extensions_as_method" value="true">
- <extension class="Aspose.BarClassExtensions"/>
+    <extension class="Aspose.BarClassExtensions"/>
+</opt>
 {{< /highlight >}}|
 
 Specifies the classes for which extension method calls should be translated as member function calls instead of a static method from extension class. Value is ignored.
@@ -1462,11 +1463,11 @@ Specifies the classes for which extension method calls should be translated as m
 obj.CallExtensionMethod(arg);
 {{< /highlight >}}
 
-|=Allowed value|=Meaning|=Example
-|Extension type is meitioned in 'extension' node under 'opt' config node.|Generate method call instead of static function call.| {{< highlight cs >}}
+| Allowed value | Meaning | Example
+| Extension type is meitioned in 'extension' node under 'opt' config node. | Generate method call instead of static function call. | {{< highlight cs >}}
 obj->CallExtensionMethod(arg);
 {{< /highlight >}}
-|Extension type is not meitioned in 'extension' node under 'opt' config node.|Generate static function call rather than method call.| {{< highlight cs >}}
+| Extension type is not meitioned in 'extension' node under 'opt' config node. | Generate static function call rather than method call. | {{< highlight cs >}}
 ExtensionClass::CallExtensionMethod(obj, arg);
 {{< /highlight >}}
 
@@ -1502,9 +1503,10 @@ Enables adding for_each_member subsystem-related code to each class and generati
 
 Enables cycles search using for_each_member.
 
-|=Allowed value|=Meaning|=Example
-|true|Generate parameter passing that enables loop search|
-|false|Don't generate parameter passing that enables loop search|
+| Allowed value | Meaning
+---| ---|
+| true | Generate parameter passing that enables loop search
+| false | Don't generate parameter passing that enables loop search
 
 **Default value**: false
 **Since version:** 20.11
@@ -1513,9 +1515,10 @@ Enables cycles search using for_each_member.
 
 Enables cleaning up the for_each_member model before running each test.
 
-|=Allowed value|=Meaning|=Example
-|true|Generate a method call that clears the for_each_member model inside the SetUp method|
-|false|Don't generate a method call that clears the for_each_member model inside the SetUp method|
+| Allowed value | Meaning
+---| ---|
+| true | Generate a method call that clears the for_each_member model inside the SetUp method
+| false | Don't generate a method call that clears the for_each_member model inside the SetUp method
 
 **Default value**: false
 
@@ -1919,7 +1922,7 @@ Creates a subdirectory under 'include' directory to avoid header name clashes w
 ---| ---| ---| ---| ---|
 |directory|Explicit name of the subdirectory under 'include' folder.|String value|false|C# project name
 
-## make\_cpp\_file\_name\_uniq
+#### make\_cpp\_file\_name\_uniq ####
 
 Controls porter behavior in whether file names should be unicalized by extending with trailing underscores.
 
@@ -1931,11 +1934,11 @@ Controls porter behavior in whether file names should be unicalized by extending
 **Default value:** true
 **Since version:** 20.8
 
-# Code readability
+### Code readability
 
 These options improve generated code's readability. However, the code generated now doesn't handle some corner cases properly or in the same way C# code does, so using these options on big codebases is error-prone. Instead, use them to port e. g. code samples for your projects being ported, to make them easy to read.
 
-## foreach\_as\_range\_based\_for\_loop
+#### foreach\_as\_range\_based\_for\_loop
 
 Translate C# foreach loops as C++ [range-based for loops](https://en.cppreference.com/w/cpp/language/range-for)
 
@@ -1959,7 +1962,7 @@ Translate C# foreach loops as C++ [range-based for loops](https://en.cppreferenc
 
 **Default value** : false
 
-## simplify\_using\_statements
+#### simplify\_using\_statements
 
 Makes porter generate more compact code for using statements that relies on used object destructors rather then on correct Dispose calls.
 
@@ -1989,7 +1992,7 @@ Makes porter generate more compact code for using statements that relies on used
 **Default value:** false
 **Since version:** 20.8
 
-## force\_auto\_in\_variable\_declaration
+#### force\_auto\_in\_variable\_declaration
 
 Makes porter generate auto types for local variables instead of full type name so that code is more compact.
 
@@ -2001,7 +2004,7 @@ Makes porter generate auto types for local variables instead of full type name s
 **Default value:** false
 **Since version:** 20.8
 
-## prefer\_short\_type\_names
+#### prefer\_short\_type\_names
 
 Makes porter prefer short type names where possible instead of fully qualified names in some contexts.
 
@@ -2013,7 +2016,7 @@ Makes porter prefer short type names where possible instead of fully qualified n
 **Default value:** false
 **Since version:** 20.9
 
-## use\_stream\_based\_io
+#### use\_stream\_based\_io
 
 Replaces System::Console calls with cout invocations.
 
@@ -2029,9 +2032,9 @@ Replaces System::Console calls with cout invocations.
 
 Enables or disables generating GetSharedMembers() method for ported classes.
 
-|=Allowed value|=Meaning
-|true|GetSharedMembers() method is generated.
-|false|GetSharedMembers() method is not generated.
+| Allowed value | Meaning
+| true | GetSharedMembers() method is generated.
+| false | GetSharedMembers() method is not generated.
 
 **Default value:** true
 **Since version:** 20.11

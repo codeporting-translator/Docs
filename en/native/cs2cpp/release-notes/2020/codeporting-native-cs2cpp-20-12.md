@@ -20,11 +20,11 @@ weight: "1"
 1. Porter can now report an error if an in-config attribute does not apply to any item during the project porting. To make it do so, use 'error_if_unused' syntax as described [at 'Attributes in configuration file' page](https://docs.codeporting.com/native/cs2cpp/developer-guide/codeporting-native-cs2cpp-configuration-file/attributes-in-configuration-file/).
 1. UDP sockets now handle timeouts properly. The implementation now uses async calls.
 1. The porter is now capable of porting 'Assert.That(expr, Throws.TypeOf<exc>)' and 'Assert.That(expr, Is.Empty)' Nunit checks.
-1. [A new 'enable_fast_rtti' porter option](https://docs.codeporting.com/native/cs2cpp/developer-guide/codeporting-native-cs2cpp-configuration-file/configuration-file-options/#Henable_fast_rtti) was added making it possible to speed up casting operations (translations of c-style cast, 'as' and 'is' operators).
+1. A new 'enable_fast_rtti' [porter option](https://docs.codeporting.com/native/cs2cpp/developer-guide/codeporting-native-cs2cpp-configuration-file/configuration-file-options/#Henable_fast_rtti) was added making it possible to speed up casting operations (translations of c-style cast, 'as' and 'is' operators).
 
 ## Minor fixes ##
 
-1. [A new 'unexpected_override_as_warning' porter option](https://docs.codeporting.com/native/cs2cpp/developer-guide/codeporting-native-cs2cpp-configuration-file/configuration-file-options/#Hunexpected_override_as_warning) was added making it possible to switch 'override is unexpected' message from error to warning.
+1. A new 'unexpected_override_as_warning' [porter option](https://docs.codeporting.com/native/cs2cpp/developer-guide/codeporting-native-cs2cpp-configuration-file/configuration-file-options/#Hunexpected_override_as_warning) was added making it possible to switch 'override is unexpected' message from error to warning.
 1. LinkedList container was completely rewritten. It no longer leaks the memory.
 1. RefCount class doesn't produce assertion fault if the counter goes beyond zero.
 1. Some previously missing types were added into porter's typemap.
@@ -57,4 +57,4 @@ Please consult respective sections of our wiki for more information.
 
 ## Public API and Backward Incompatible Changes ##
 
-1. [CppIgnoreBaseType attribute](https://docs.codeporting.com/native/cs2cpp/developer-guide/codeporting-native-cs2cpp-attributes/#HCppIgnoreBaseType) no longer can ignore System.Object inheritance implicitly. Explicit ignore still works.
+1. CppIgnoreBaseType [attribute](https://docs.codeporting.com/native/cs2cpp/developer-guide/codeporting-native-cs2cpp-attributes/#HCppIgnoreBaseType) no longer can ignore System.Object inheritance implicitly. Explicit ignore still works.
