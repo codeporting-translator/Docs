@@ -2039,8 +2039,12 @@ Replaces System::Console calls with cout invocations.
 
 | **Allowed value** | **Meaning** | **Example** |
 | --- | --- | --- |
-| true | Switch to cout usage. | std::cout; Hello; std::endl; |
-| false | Use fully qualified names. | System::Console::WriteLn("Hello"); |
+| true | Switch to cout usage. | {{< highlight cpp >}}
+std::cout << "Hello" << std::endl;
+{{< /highlight >}}
+| false | Use fully qualified names. | {{< highlight cpp >}}
+System::Console::WriteLn("Hello");
+{{< /highlight >}}
 
 **Default value:** false
 **Since version:** 20.10
