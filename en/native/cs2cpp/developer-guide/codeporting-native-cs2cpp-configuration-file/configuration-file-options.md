@@ -1459,14 +1459,44 @@ obj.CallExtensionMethod(arg);
 
 | Allowed value | Meaning | Example
 ---| ---| ---|
-| Extension type is meitioned in 'extension' node under 'opt' config node. | Generate method call instead of static function call. | {{< highlight cs >}}
+| Extension type is meitioned in 'extension' node under 'opt' config node. | Generate method call instead of static function call. | {{< highlight cpp >}}
 obj->CallExtensionMethod(arg);
 {{< /highlight >}}
-| Extension type is not meitioned in 'extension' node under 'opt' config node. | Generate static function call rather than method call. | {{< highlight cs >}}
+| Extension type is not meitioned in 'extension' node under 'opt' config node. | Generate static function call rather than method call. | {{< highlight cpp >}}
 ExtensionClass::CallExtensionMethod(obj, arg);
 {{< /highlight >}}
 
 **Since version:** 20.11
+
+#### generate_begin_end_methods ####
+
+Allows porter generate begin(), end() and other STL-like iterators access methods for those classes implementing IEnumerable<T>.
+
+| Allowed value | Meaning
+---| ---| ---|
+| true | Generate iterator methods.
+| false | Do not generate iterator methods.
+
+**Since version:** 21.1
+**Default value:** true
+
+#### hide_friend_declarations ####
+
+Makes porter generate '@cond...@endcond' wrappers around friend declarations to avoid these making it into Doxygen documentation.
+
+| Allowed value | Meaning | Example
+---| ---| ---|
+| true | Generate wrappers. | {{< highlight cpp >}}
+/// @cond
+friend class MyClass;
+/// @endcond
+{{< /highlight >}}
+| false | Do not generate wrappers. | {{< highlight cpp >}}
+friend class MyClass;
+{{< /highlight >}}
+
+**Since version:** 21.1
+**Default value:** false
 
 ### Debug and developer version code options ###
 

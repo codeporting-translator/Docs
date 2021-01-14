@@ -419,6 +419,13 @@ Moves an implementation of a member or of all members of a specific type to head
 
 Mark method's local variable to pass to lambda-function by value. Used to keep passed value, even in case, when local variable is out of scope (i.e. loop iterators, and so on)
 
+### CppMakeMembersPublic ###
+
+**Used on**: Class or structure
+**Arguments**: none
+
+Makes all entities of atteributed type public in ported code, regardless of their original scope.
+
 ### CppMutable ###
 
 **Used on**: Field
