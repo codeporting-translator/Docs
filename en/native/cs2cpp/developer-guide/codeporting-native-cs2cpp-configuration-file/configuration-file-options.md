@@ -1470,7 +1470,7 @@ ExtensionClass::CallExtensionMethod(obj, arg);
 
 #### generate_begin_end_methods ####
 
-Allows the porter to generate begin(), end() and other STL-like iterators access methods for those classes implementing IEnumerable.
+Allows the porter to generate begin(), end() and other STL-like iterators access methods for those classes implementing the generic IEnumerable interface.
 
 | Allowed value | Meaning
 ---| ---| ---|
