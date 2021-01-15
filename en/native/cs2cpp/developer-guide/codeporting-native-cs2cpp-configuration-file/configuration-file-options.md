@@ -1470,7 +1470,7 @@ ExtensionClass::CallExtensionMethod(obj, arg);
 
 #### generate_begin_end_methods ####
 
-Allows porter generate begin(), end() and other STL-like iterators access methods for those classes implementing IEnumerable<T>.
+Allows the porter to generate begin(), end() and other STL-like iterators access methods for those classes implementing IEnumerable.
 
 | Allowed value | Meaning
 ---| ---| ---|
@@ -1482,7 +1482,7 @@ Allows porter generate begin(), end() and other STL-like iterators access method
 
 #### hide_friend_declarations ####
 
-Makes porter generate '@cond...@endcond' wrappers around friend declarations to avoid these making it into Doxygen documentation.
+Makes the porter to generate the '@cond...@endcond' wrappers around friend declarations to exclude them from the Doxygen documentation.
 
 | Allowed value | Meaning | Example
 ---| ---| ---|

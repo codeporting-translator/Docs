@@ -424,7 +424,7 @@ Mark method's local variable to pass to lambda-function by value. Used to kee
 **Used on**: Class or structure
 **Arguments**: none
 
-Makes all entities of atteributed type public in ported code, regardless of their original scope.
+Makes all entities of the attributed type public in the ported code, regardless of their original scope.
 
 ### CppMutable ###
 
