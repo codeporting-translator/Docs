@@ -13,7 +13,6 @@ menu:
     weight: "1"
 lastmod: "2019-05-28"
 weight: "1"
-layout: base-home
 ---
 
 
