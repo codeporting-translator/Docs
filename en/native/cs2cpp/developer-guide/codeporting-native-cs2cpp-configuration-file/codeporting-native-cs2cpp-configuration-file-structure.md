@@ -16,7 +16,7 @@ weight: "1"
 ---
 
 
-### CodePorting.Native Cs2Cpp Configuration File Structure ###
+## CodePorting.Native Cs2Cpp Configuration File Structure ##
 
 This page describes the basic structure of CodePorting.Native Cs2Cpp Configuration File. There is a default porter.config file supplied alongside with the porter one can refer to.
 
