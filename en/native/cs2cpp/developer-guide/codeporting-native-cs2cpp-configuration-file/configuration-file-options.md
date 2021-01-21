@@ -9,7 +9,7 @@ linktitle: "Configuration file Options"
 description: "List of all Options available in Configuration File"
 menu:
   docs:
-    parent: "CodePorting.Native Cs2Cpp Configuration File"
+    parent: "CodePorting Native Cs2Cpp Configuration File"
     weight: "4"
 lastmod: "2020-01-23"
 weight: "4"

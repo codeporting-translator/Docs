@@ -9,7 +9,7 @@ linktitle: "CodePorting.Native Cs2Cpp Configuration File Structure"
 description: "Basic Structure of Configuration File"
 menu:
   docs:
-    parent: "CodePorting.Native Cs2Cpp Configuration File"
+    parent: "CodePorting Native Cs2Cpp Configuration File"
     weight: "1"
 lastmod: "2019-05-28"
 weight: "1"

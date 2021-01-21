@@ -9,7 +9,7 @@ linktitle: "Configuration file Nodes"
 description: "List of all Tags Allowed in Configuration File"
 menu:
   docs:
-    parent: "CodePorting.Native Cs2Cpp Configuration File"
+    parent: "CodePorting Native Cs2Cpp Configuration File"
     weight: "3"
 lastmod: "2020-05-06"
 weight: "3"

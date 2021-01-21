@@ -5,7 +5,7 @@ author:
 draft: "false"
 toc: true
 title: "CodePorting.Native Cs2Cpp Attributes"
-linktitle: "CodePorting.Native Cs2Cpp Attributes"
+linktitle: "CodePorting Native Cs2Cpp Attributes"
 menu:
   docs:
     parent: "Developer Guide"
