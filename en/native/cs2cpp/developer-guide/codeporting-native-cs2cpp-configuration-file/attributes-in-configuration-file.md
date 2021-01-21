@@ -15,7 +15,7 @@ lastmod: "2019-05-28"
 weight: "2"
 ---
 
-## Attributes in Configuration file ##
+### Attributes in Configuration file ###
 
 Some attributes are allowed to be specified in configuration files to save editing the source code.
 
