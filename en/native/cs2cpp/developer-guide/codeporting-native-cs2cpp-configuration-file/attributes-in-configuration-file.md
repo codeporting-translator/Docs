@@ -13,7 +13,6 @@ menu:
     weight: "2"
 lastmod: "2019-05-28"
 weight: "2"
-layout: base-home
 ---
 
 ## Attributes in Configuration file ##
