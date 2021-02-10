@@ -57,7 +57,6 @@ Please consult respective sections of our wiki for more information.
 | CSPORTCPP-4058 | Support CodePorting.Native Cs2Cpp | Task |
 | SLIDESCPP-1977 | Fix text width when using bold font style where a font has only regular style | Bug |
 | WORDSCPP-1057 | Write QtCreator debugging helpers for the most common used System:: types | New feature |
-| CSPORTCPP-4084 | High memory usage when creating delegates | Bug |
 | WORDSCPP-1036 | Fix tests trown NullReferenceException. | Bug |
 | CSPORTCPP-4040 | Add more targets scripts | Task |
 | CSPORTCPP-4074 | Some CppForceInclude attributes get ignored | Bug |
