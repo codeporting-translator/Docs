@@ -15,12 +15,12 @@ lastmod: "2020-05-06"
 weight: "3"
 ---
 
-## Configuration file Nodes ##
+# Configuration file Nodes #
 
 This section lists all tags allowed in configuration file.
 
 
-### csproj ###
+## csproj ##
 
 {{< highlight xml >}}
  <csproj path="Path/ProjectName.csproj" cfg="Configuration" platform="Platform"/>
@@ -39,7 +39,7 @@ Attributes:
 
 This attribute overrides path to the project given to a porter application via command line.
 
-### outdir ###
+## outdir ##
 
 {{< highlight xml >}}
  <outdir path="Path"/>
@@ -52,7 +52,7 @@ Reference to output directory.
 | path | Path to output directory | Yes |
 
 
-### embedded_proj ###
+## embedded_proj ##
 
 {{< highlight xml >}}
 <embedded_proj path="path/to/project"/>
@@ -64,7 +64,7 @@ Defines Paths to embedded projects used in project being ported.
 ---| ---|  ---|  ---|
 | path | Full or relative path to embedded project | Yes |
 
-### cppproj ###
+## cppproj ##
 
 {{< highlight xml >}}
  <cppproj name="ProjectName"/>
@@ -77,7 +77,7 @@ Allows it to specify output project name.
 | name | Output project name | Yes |
 
 
-### opt ###
+## opt ##
 
 {{< highlight xml >}}
  <opt name="Name" value="Value"/>
@@ -92,7 +92,7 @@ Porter option. See [[doc:native.cs2cpp.developer-guide.codeporting-native-cs2cpp
 | Option-specific attributes | Some options can require additional attributes to be specified | Defined by option | Defined by option
 
 
-### additional_source ###
+## additional_source ##
 
 {{< highlight xml >}}
  <additional_source>
@@ -108,7 +108,7 @@ Directories to copy additional C++ sources from.
 
 Only 'copy' subnodes are allowed inside 'additional_source' one.
 
-#### copy ####
+### copy ###
 
 {{< highlight xml >}}
  <copy dir="dir1"/>
@@ -121,7 +121,7 @@ Single directory to copy additional C++ source files from.
 | dir | Path to directory (absolute or relative to configuration file; can also be relative to porter directory if 'use_porter_home_directory_while_resolving_path' option is enabled) | Yes |
 
 
-### import ###
+## import ##
 
 {{< highlight xml >}}
  <import config="details.config"/>
@@ -135,7 +135,7 @@ Imports configuration file as if all its contents were added into the current on
 
 
 
-### libs, style ###
+## libs, style ##
 
 {{< highlight xml >}}
  <libs>
@@ -156,7 +156,7 @@ Logical grouping. 'libs' element defines configuration file section which contai
 
 Only 'opt' and 'lib' nodes are allowed inside both tags. Using 'opt' and 'lib' outside of 'libs' or 'style' is also allowed.
 
-### lib ###
+## lib ##
 
 {{< highlight xml >}}
  <lib name="LibProject.Cpp">
@@ -186,7 +186,7 @@ Imports library to use against current project.
 
 The meaning of allowed subnodes is explained below.
 
-#### tag ####
+### tag ###
 
 {{< highlight xml >}}
  <tag path="path/to/ns2/headers">Namespace::Namespace2:: </tag>
@@ -214,7 +214,7 @@ For example, the above example implements such rule that references to class cal
 
 Tag syntax is useful when implementing library manually. When using ported library, use typemap configuration file inclusion instead.
 
-#### cmake_part_template ####
+### cmake_part_template ###
 
 {{< highlight xml >}}
  <cmake_part_template>
@@ -229,7 +229,7 @@ Cmake rules to allow for includes and other neccessary setups like 3rd party lib
 | Element contents | Bare cmake code to be used both for libraries and executables | No |
 
 
-#### cmake_link_template ####
+### cmake_link_template ###
 
 {{< highlight xml >}}
  <cmake_link_template>
@@ -243,7 +243,7 @@ Cmake rules to allow for linkable units (DLLs, EXEs)
 ---| ---|  ---|  ---|
 | Element contents | Bare cmake code to be used for linkable items (executables, shared libraries) | |
 
-#### defines ####
+### defines ###
 
 {{< highlight xml >}}
  <defines>DEFINE1 DEFINE2;DEFINE3#VALUE </defines>
@@ -257,7 +257,7 @@ Defines to be added to the project. Put library-related defines here rather than
 
 
 
-#### includes ####
+### includes ###
 
 {{< highlight xml >}}
  <includes>path/to/dir1 path/to/dir2;path/to/dir3 </includes>
@@ -269,7 +269,7 @@ Paths to include directories, related to the library. Again, allows keeping ever
 ---| ---|  ---|  ---|
 | Element contents | Space- and a semicolon-separated list of Paths for cmake to use | |
 
-#### libdirs ####
+### libdirs ###
 
 {{< highlight xml >}}
  <libdirs>path/to/dir1 path/to/dir2;path/to/dir3 </libdirs>
@@ -281,7 +281,7 @@ Paths to library directories, related to the library.
 ---| ---|  ---|  ---|
 | Element contents | Space- and semicolon-separated list of Paths |  |
 
-#### class ####
+### class ###
 
 {{< highlight xml >}}
  <class name="LibProject::Class1" path="libproject/class1.h" shortptr="true"/>
@@ -296,7 +296,7 @@ Sets class-specific header path, useful for classes not covered by any tag rules
 | shortptr | Whether class provides ClassNamePtr-formed alias for SharedPtr<ClassName>, must be 'true' or 'false' | No | false
 
 
-#### enum ####
+### enum ###
 
 {{< highlight xml >}}
  <enum name="LibProject::Enum1" path="libproject/enum1.h"/>
@@ -309,7 +309,7 @@ Sets enum-specific header path, useful for enums not covered by any tag rules.
 | name | Enum name with namespace | Yes |
 | path | Full header path to be inserted into 'include' directive | Yes |
 
-#### namespace ####
+### namespace ###
 
 {{< highlight xml >}}
  <namespace name="LibProject::Namespace1" path="libproject/namespace1.h" shortptr="true"/>
@@ -322,7 +322,7 @@ Sets namespace-specific header path, useful for enums not covered by any tag rul
 | name | Full namespace | Yes |
 | path | Full header path to be inserted into 'include' directive | Yes |
 
-#### replace_user_types ####
+### replace_user_types ###
 
 {{< highlight xml >}}
  <replace_user_types>false </replace_user_types>
@@ -334,7 +334,7 @@ Forces the types in current project that are covered by any of the library tags 
 ---| ---|  ---|  ---|
 | Element contents | 'true' to exclude types or 'false' to let them be | false | false
 
-### files ###
+## files ##
 
 {{< highlight xml >}}
  <files>
@@ -357,7 +357,7 @@ Adds file include and exclude masks. When these filters apply, priorities are as
 
 Allowed subnodes are listed below.
 
-#### exclude ####
+### exclude ###
 
 {{< highlight xml >}}
  <exclude file="foo_*.cs"/>
@@ -371,7 +371,7 @@ Makes porter ignore all files in project that match the specified mask.
 
 
 
-#### include ####
+### include ###
 
 {{< highlight xml >}}
  <include file="foo_bar_*.cs"/>
@@ -383,7 +383,7 @@ Stops porter from ignoring files that match the specified mask even if ignored o
 ---| ---|  ---|  ---|
 | file | Filename mask with '*' and '?' substitutions allowed. | Yes |
 
-#### only ####
+### only ###
 
 {{< highlight xml >}}
  <only file="bar_foo_*.cs"/>
@@ -395,7 +395,7 @@ Makes porter ignore all files that do not match the specified mask (or any of th
 ---| ---|  ---|  ---|
 | file | Filename mask with '*' and '?' substitutions allowed. | Yes |
 
-### cut_namespaces ###
+## cut_namespaces ##
 
 {{< highlight xml >}}
  <cut_namespaces>
@@ -412,7 +412,7 @@ Enable/disable namespaces cutting for all types, defined in specific files. The 
 
 So, if the file 'foo.cs' containing type Bar.Foo is included using cut_namespace element, this type will be referred to as 'Foo' in translated code. Otherwise, it will be referred to as 'Bar::Foo'.
 
-### typemap ###
+## typemap ##
 
 {{< highlight xml >}}
  <typemap>
@@ -429,7 +429,7 @@ Maps C# type names into C++ ones. Useful if the default mapping fails.
 
 The only allowed subnode is 'class'.
 
-#### class ####
+### class ###
 
 {{< highlight xml >}}
  <class csname="Namespace1.Class1" cppname="Namespace2.Class2" box="false"/>
@@ -444,7 +444,7 @@ Denotes a single mapping rule of how C# typename should be translated to C++.
 | box | Boolean flag that shows whether the type requires boxing | No | false
 
 
-### includes ###
+## includes ##
 
 {{< highlight xml >}}
  <includes>
@@ -461,7 +461,7 @@ Specifies includes for specific types. Include rules, same as in "lib" section.
 ---| ---|  ---|  ---|
 
 
-### force_value_types ###
+## force_value_types ##
 
 {{< highlight xml >}}
  <force_value_types>
@@ -477,7 +477,7 @@ Lists the types to be treated as value types. Only 'class' subnodes are allowed.
 ---| ---|  ---|  ---|
 
 
-#### class ####
+### class ###
 
 {{< highlight xml >}}
  <class name="Namespace1::Class1" box="false"/>
@@ -491,7 +491,7 @@ Class to be treated as value type.
 | box  | A boolean value which defines whether the type is subject for boxing | No | false
 
 
-### references ###
+## references ##
 
 {{< highlight xml >}}
  <references>
@@ -507,7 +507,7 @@ Specifies the references to external assemblies to import symbols from.
 
 Only 'assembly' nodes are allowed here.
 
-#### assembly ####
+### assembly ###
 
 {{< highlight xml >}}
  <assembly name="Assembly.Name" path="path\to\assembly.dll"/>
@@ -520,7 +520,7 @@ Single assembly to import symbols from.
 | name | C# assembly name. | Yes |
 | path | Path to assembly. | Yes |
 
-### dont_wrap_params ###
+## dont_wrap_params ##
 
 {{< highlight xml >}}
  <dont_wrap_params>
@@ -538,7 +538,7 @@ Disables parameters wrapping (matching actual parameters against format ones wit
 
 Only 'class' and 'method' subnodes are allowed here.
 
-#### class ####
+### class ###
 
 {{< highlight xml >}}
  <class name="Namespace::Class1"/>
@@ -550,7 +550,7 @@ Single class, all methods of which will not be wrapping parameters for.
 ---| ---|  ---|  ---|
 | name | Name of the class in C++ with namespace. | Yes |
 
-#### method ####
+### method ###
 
 {{< highlight xml >}}
  <method name="Namespace::Class2::Method1"/>
@@ -562,7 +562,7 @@ The single method to not wrap parameters for. All methods with this name will be
 ---| ---|  ---|  ---|
 | name | Name of the method in C++ with namespace and class name. | Yes |
 
-### disable_boxing ###
+## disable_boxing ##
 
 {{< highlight xml >}}
  <disable_boxing>
@@ -578,7 +578,7 @@ Disables parameters boxing when type conversions occur (usually when native C++ 
 ---| ---|  ---|  ---|
 
 
-### restricted_tokens ###
+## restricted_tokens ##
 
 {{< highlight xml >}}
  <restricted_tokens mask="*">
@@ -593,7 +593,7 @@ Replaces all identifiers specified globally in selected files.
 ---| ---|  ---|  ---|
 | mask | Filename or path mask - only selected files will be affected. | No |
 
-#### token ####
+### token ###
 
 {{< highlight xml >}}
  <token from="OldName" to="NewName"/>
@@ -607,7 +607,7 @@ Single rule for identifier replacement.
 | to | Replacement for identifier specified in 'from' attribute | Yes |
 
 
-### assembly_with_restricted_tokens ###
+## assembly_with_restricted_tokens ##
 
 {{< highlight xml >}}
  <assembly_with_restricted_tokens>AssemblyName </assembly_with_restricted_tokens>
@@ -619,7 +619,7 @@ Forces the names in the referenced assembly to be replaced as per all restricted
 ---| ---|  ---|  ---|
 | Element contents | Name of the dependence assembly in C# | Yes |
 
-### skip_definitions ###
+## skip_definitions ##
 
 {{< highlight xml >}}
  <skip_definitions stub="false" only_public_api="true"/>
@@ -632,7 +632,7 @@ Global version of 'CppSkipDefinition' attribute. If enabled, no class member def
 | stub | Whether to generate stubs for dropped definitions, 'true' or 'false' | false | true
 | only_public_api | Whether porting application should leave public API only ('true') or process private and internal classes as well ('false') | false | false
 
-### implementation ###
+## implementation ##
 
 ```
 <implementation type="MyNamespace.MyClass" entity="MyMethod" includes="*someglobalheader;*otherglobalheader.h;path1/path2/header1.h;path1/path2/header2.h">
@@ -658,7 +658,7 @@ Alternatively, you can simply include the .cpp file into your C# project. It wil
 
 Please note that all methods you want to replace implementations must be marked with CppSkipDefinition attribute.
 
-### nunit_categories ###
+## nunit_categories ##
 
 {{< highlight xml >}}
  <nunit_categories>
@@ -675,7 +675,7 @@ Allows it to filter tests by the category specified in NUnit.Framework.Category 
 
 Only 'include' and 'exclude' elements are allowed inside 'nunit_categories' one.
 
-#### include ####
+### include ###
 
 {{< highlight xml >}}
  <include name="Category1"/>
@@ -688,7 +688,7 @@ Category for inclusion.
 | name | NUnit test category name | Yes |
 
 
-#### exclude ####
+### exclude ###
 
 {{< highlight xml >}}
  <exclude name="Category1"/>
@@ -702,7 +702,7 @@ Category for exclusion.
 
 
 
-### cmake_commands ###
+## cmake_commands ##
 
 {{< highlight xml >}}
  <cmake_commands>
@@ -722,7 +722,7 @@ Allows it to push custom commands to resulting CMakeLists.txt file.
 
 
 
-### cmake_files ###
+## cmake_files ##
 
 {{< highlight xml >}}
  <cmake_files>
@@ -739,7 +739,7 @@ Lists cmake files to be copied from 'cmake' directory of porting application ins
 
 Only 'file' nodes are allowed inside.
 
-#### file ####
+### file ###
 
 {{< highlight xml >}}
  <file name="file1.cmake" />
@@ -753,7 +753,7 @@ Single file to be copied.
 
 
 
-### enum_underlying_types ###
+## enum_underlying_types ##
 
 {{< highlight xml >}}
  <enum_underlying_types>
@@ -770,7 +770,7 @@ Maps enums underlying types. Mostly used by porter typemap when processing depen
 
 Only 'type' nodes are allowed inside.
 
-#### type ####
+### type ###
 
 {{< highlight xml >}}
  <type name="Enum1" value="int" />
@@ -785,7 +785,7 @@ Individual underlying type mapping rule.
 
 
 
-### attribute ###
+## attribute ##
 
 ```
  <attribute name="CppAttributeName" ... />
@@ -799,7 +799,7 @@ Single attribute record. See [[doc:native.cs2cpp.developer-guide.codeporting-nat
 | Other attributes | Individual per attribute. Some of them set attribute parameters, some other ones specify the scope. | Depends on attribute | Depends on attribute
 
 
-### forced_include ###
+## forced_include ##
 
 {{< highlight xml >}}
  <forced_include>
@@ -816,7 +816,7 @@ Include header instead of forward declaration for an argument type, same as CppF
 
 Only 'class' nodes are allowed inside.
 
-#### class ####
+### class ###
 
 {{< highlight xml >}}
  <class name="Namespace::ClassName" />
@@ -830,20 +830,31 @@ Individual class to force includes for.
 
 
 
-### documentation_comments_translation ###
+## documentation_comments_translation ##
 
 {{< highlight xml >}}
- <documentation_comments_translation>
-     <cref_typemap>
-         <cref cstext="sbyte" cpptext="int8_t" />
-     </cref_typemap>
-     <summary_text_map>
-         <property cstext="Gets or sets" getter_text="Gets" setter_text="Sets" />
-     </summary_text_map>
-     <options>
-         <opt name="fix_setter_return_tag" value="true" />
-     </options>
- </documentation_comments_translation>
+<documentation_comments_translation>
+    <cref_typemap>
+        <cref cstext="sbyte" cpptext="int8_t" />
+    </cref_typemap>
+    <summary_text_map>
+        <property cstext="Gets or sets" getter_text="Gets" setter_text="Sets" />
+    </summary_text_map>
+    <options>
+        <opt name="fix_setter_return_tag" value="true" />
+    </options>
+    <replacements>
+        <comment  type="SomeNS.Enum1" member="" tag="code">
+            <![CDATA[
+C++ code Enum1
+]]>
+        </comment>
+    </replacements>
+    <translate_code_from_comments value="true"/>
+    <translate_code_from_comments_system_dlls>
+        <system_dll name="System.Something.dll"/>
+    </translate_code_from_comments_system_dlls>
+</documentation_comments_translation>
 {{< /highlight >}}
 
 Parameters for code documentation.
@@ -863,13 +874,13 @@ The following subsections are allowed:
 
 For the mentioned subtags attributes, see below.
 
-#### cref_typemap ####
+### cref_typemap ###
 
 |Attribute|Meaning|Mandatory|Default Value
 ---| ---|  ---|  ---|
 
 
-### cref ###
+#### cref ####
 
 |Attribute|Meaning|Mandatory|Default Value
 ---| ---|  ---|  ---|
@@ -878,13 +889,13 @@ For the mentioned subtags attributes, see below.
 
 
 
-#### summary_text_map ####
+### summary_text_map ###
 
 |Attribute|Meaning|Mandatory|Default Value
 ---| ---|  ---|  ---|
 
 
-#### property ####
+### property ###
 
 |Attribute|Meaning|Mandatory|Default Value
 ---| ---|  ---|  ---|
@@ -894,17 +905,44 @@ For the mentioned subtags attributes, see below.
 
 
 
-#### options ####
+### options ###
 
 |Attribute|Meaning|Mandatory|Default Value
 ---| ---|  ---|  ---|
 
 
-#### replacements ####
+### replacements ###
 
 Defines exact replacement for contents of specific tag in the documentation for type or type member.
 
-### if ###
+
+### translate_code_from_comments ###
+
+Enables the porter replacing references to C# types and members with C++ analogs.
+
+| Attribute | Meaning | Mandatory | Default Value |
+| --- | --- |  --- |  --- |
+| value | Boolean flag that enables or disables this behavior. | Yes | false |
+
+*Since version*: 21.2
+
+
+### translate_code_from_comments_system_dlls ###
+
+Adds specified DLLs to symbol lookup when replacing references in documentation comments.
+
+#### system_dll ####
+
+Specifies a single DLL to add to this list.
+
+| Attribute | Meaning | Mandatory | Default Value |
+| --- | --- |  --- |  --- |
+| name | Name of the DLL to use symbols from when performing code comments changes. | Yes |  |
+
+*Since version*: 21.2
+
+
+## if ##
 
 ```
  <if defined="my_var">
@@ -923,7 +961,7 @@ Allows to switch on or off some part of the config conditionally, based on comma
 
 
 
-### else ###
+## else ##
 
 ```
  <else>
@@ -937,7 +975,7 @@ Part of the config which should be executed if 'if' element evaluation fails.
 ---| ---|  ---|  ---|
 
 
-### msbuild_global_properties ###
+## msbuild_global_properties ##
 
 ```
  <msbuild_global_properties>
@@ -952,7 +990,7 @@ Allows to define MSBuild properties directly to satisfy conditions in csproj fil
 
 Allowed sub-items:
 
-#### property ####
+### property ###
 
 |Attribute|Meaning|Mandatory|Default Value
 ---| ---|  ---|  ---|
@@ -960,7 +998,7 @@ Allowed sub-items:
 | value | MSBUild property value | Yes | -
 
 
-### rename_files ###
+## rename_files ##
 
 {{< highlight xml >}}
 <rename_files>
@@ -975,14 +1013,14 @@ Allows to rename files generated by porter. Impacts both '.h' and '.cpp' file (i
 
 Allowed sub-items:
 
-##### file #####
+#### file ####
 
 |Attribute|Meaning|Mandatory|Default Value
 ---| ---|  ---|  ---|
 |name_without_extension|Name of file generated by porter by default.|Yes|-
 |to|File name the file to be renamed to.|Yes|-
 
-#### allowed_heap_only_types ####
+### allowed_heap_only_types ###
 
 {{< highlight xml >}}
 <allowed_heap_only_types>
@@ -1001,7 +1039,7 @@ Since version: 20.1.
 Allowed sub-items:
 
 
-##### class #####
+#### class ####
 
 |Attribute|Meaning|Mandatory|Default Value
 ---| ---|  ---|  ---|

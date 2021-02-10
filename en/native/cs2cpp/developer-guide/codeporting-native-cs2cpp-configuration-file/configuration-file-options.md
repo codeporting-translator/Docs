@@ -15,12 +15,11 @@ lastmod: "2020-01-23"
 weight: "4"
 ---
 
-## Configuration file Options ##
+# Configuration file Options #
 
 There is a number of options that can be used with porter config. The general syntax to add an option is as follows:
 
 {{< highlight xml >}}
-
 <porter>
     <opt name="option_name_1" value="option_value_1"/>
     <opt name="option_name_2" value="option_value_2" attribute1="attribute1_value"/>
@@ -35,11 +34,11 @@ The options can be split into several categories. This page presents full list o
 Code examples used on this page are for illustration purposes only. Actual porting application output may differ.
 {{</note>}}
 
-### General workflow options ###
+## General workflow options ##
 
 These options define general porter behavior: logging, errors handling, etc.
 
-#### log_level ####
+### log_level ###
 
 Defines cut level of logs being written by porting application. Logs of specified level and more severe ones are emitted, the logs with lower severity are suppressed.
 
@@ -53,7 +52,7 @@ Defines cut level of logs being written by porting application. Logs of specifie
 
 **Default value**: debug
 
-#### abort_on_error ####
+### abort_on_error ###
 
 States whether the porting application should abort execution if any error is encountered. Normally, some errors are not fatal.
 
@@ -65,7 +64,7 @@ States whether the porting application should abort execution if any error is en
 
 **Default value**: false
 
-#### write_progress ####
+### write_progress ###
 
 Whether to display line with completion percentage during the work.
 
@@ -77,11 +76,11 @@ Whether to display line with completion percentage during the work.
 
 **Default value**: true
 
-### Output files control options ###
+## Output files control options ##
 
 These options control how output files are generated.
 
-#### compare_cpp_hash ####
+### compare_cpp_hash ###
 
 Allows it to skip overwriting the ported cpp and h files if the hash of their contents already matches such of the ported code to be saved here. Useful if you're frequently changing and porting C# code without cleaning the output directory and want to avoid recompiling all C++ files (overwriting the same contents updates file timestamp so that the build system will mark it as changed even if the contents is same).
 
@@ -93,7 +92,7 @@ Allows it to skip overwriting the ported cpp and h files if the hash of their co
 
 **Default value**: true
 
-#### write_bom ####
+### write_bom ###
 
 Whether to add BOM record at the beginning of each output C++ file.
 
@@ -105,7 +104,7 @@ Whether to add BOM record at the beginning of each output C++ file.
 
 **Default value**: false
 
-#### write_include_map ####
+### write_include_map ###
 
 States whether to create include map file which then can be used to manage includes from the dependent project. If you plan to port another project which depends on the current one, creating typemap is the safest way to share type information between them.
 
@@ -122,7 +121,7 @@ States whether to create include map file which then can be used to manage inclu
 | public_only | Whether to exclude non-public types from the map | true - dump public types only, false - dump all files | No | true
 | with_dir_prefix | Whether to use full (with directory prefix) includes or project-local ones | true - write full includes, false - write local includes | No | true
 
-#### tab ####
+### tab ###
 
 Indent substitution. You can use '\n' and '\t' references there as well as other in-line characters.
 
@@ -133,7 +132,7 @@ Indent substitution. You can use '\n' and '\t' references there as well as other
 
 **Default value**: Four space characters
 
-#### endl ####
+### endl ###
 
 Line end substitution. You can use '\n', '\r' and '\t' references there.
 
@@ -144,7 +143,7 @@ Line end substitution. You can use '\n', '\r' and '\t' references there.
 
 **Default value**: '\n' aka line break
 
-#### start_block_newline ####
+### start_block_newline ###
 
 Whether the opening curl bracket beholds on a dedicated line.
 
@@ -167,7 +166,7 @@ if (++a == 10) {
 
 **Default value**: true
 
-#### low_case_file_names ####
+### low_case_file_names ###
 
 Whether output file names are all lowercase. In this mode, word borders in Camel case class names become underscores.
 
@@ -179,7 +178,7 @@ Whether output file names are all lowercase. In this mode, word borders in Camel
 
 **Default value**: false
 
-#### use_pragma_once ####
+### use_pragma_once ###
 
 Whether to use '#pragma once' instead of scope ifndef.
 
@@ -224,7 +223,7 @@ enum class Enum: uint8_t
 
 **Default value**: true
 
-#### replace_wchar_with_hex_literal ####
+### replace_wchar_with_hex_literal ###
 
 Whether to replace multibyte symbols in string literals with the hex literals.
 
@@ -239,7 +238,7 @@ string a = u"абв";
 
 **Default value**: false
 
-#### force_public_headers ####
+### force_public_headers ###
 
 Enables integrity support for public header files.
 
@@ -250,11 +249,11 @@ Enables integrity support for public header files.
 
 **Default value**: false
 
-### Type subsystem options ###
+## Type subsystem options ##
 
 These options define how porter behaves regarding the translation of the type.
 
-#### forwarding_if_possible ####
+### forwarding_if_possible ###
 
 Use forward declarations in header files instead of includes if possible. This affects function parameters and returns values declarations as well as pointers. This does not impact inheritance or value type field cases.
 
@@ -284,7 +283,7 @@ public:
 
 **Default value**: false
 
-#### force_include_enum ####
+### force_include_enum ###
 
 Use includes instead of forward declarations in header files for enums. Changing the **forwarding_if_possible** option does not affect this behavior.
 
@@ -327,7 +326,7 @@ public:
 
 **Default value**: false
 
-#### use_full_base_name ####
+### use_full_base_name ###
 
 When referring base class, use the full class name (with all namespaces) instead of the short name.
 
@@ -360,7 +359,7 @@ class B : public A
 
 **Default value**: false
 
-#### external_object_methods ####
+### external_object_methods ###
 
 Use static implementations of 'ToString', 'GetType', 'GetHashCode', 'Equals' methods and 'is' operator located in ObjectExt class instead of the ones provided by Object class itself. Try this option if you experience problems with these methods being called for primitive types or generic type parameters or alike.
 
@@ -395,7 +394,7 @@ private:
 
 **Default value**: false
 
-#### cast_delegate ####
+### cast_delegate ###
 
 When is a method parameter, cast delegate function to the actual type of expected parameter. Helps to resolve ambiguity in some cases (in C++, lambdas are not of corresponding MulticastDelegate type which can result in ambiguity if more than one signature exists).
 
@@ -410,7 +409,7 @@ ApplyDelegate([](String s) { return s; });
 
 **Default value**: true
 
-### deprecate_system_base_type ####
+## deprecate_system_base_type ###
 
 Whether to omit baseclass references for the classes from 'System' or 'Microsoft' namespaces. Use with care as it affects the whole project. If in doubt, consider using CppIgnoreBaseType attribute instead.
 
@@ -432,7 +431,7 @@ class MyStream : public System::IO::Stream
 
 **Default value**: false
 
-#### exception_as_reference ####
+### exception_as_reference ###
 
 Whether to pass exceptions to functions by reference rather than by creating a local copy of an exception object.
 
@@ -455,7 +454,7 @@ public:
 
 **Default value**: false
 
-#### ignore_base_for_static_class ####
+### ignore_base_for_static_class ###
 
 Whether to omit 'Object' baseclass for the classes declared as static.
 
@@ -484,7 +483,7 @@ class MyClass : public System::Object
 
 **Default value**: true
 
-#### replace_enumerable_type ####
+### replace_enumerable_type ###
 
 {{< highlight xml >}}
 <opt name="replace_enumerable_type" enumerable="System.Xml.XmlNodeList" type="System.Xml.XmlNode"/>
@@ -501,7 +500,7 @@ Adds a enumerable type that needs downcasting when in loop operations. Use this 
 | type | Type to cast to | Target type full name | Yes |
 
 
-#### force_dynamic_cast ####
+### force_dynamic_cast ###
 
 {{< highlight xml >}}
 <opt name="force_dynamic_cast" from_type="A.B.ClassA" to_type="A.B.ClassB" />
@@ -518,7 +517,7 @@ For two given types, forces dynamic_cast to be used instead of default static_ca
 | to_type | Target type | Full type name | Yes |
 
 
-#### remove_redundant_base_interfaces ####
+### remove_redundant_base_interfaces ###
 
 If enabled, removes redundant inheritance from interface types, i. e. interfaces inherited more than once.
 
@@ -585,7 +584,7 @@ class Bar : public Foo, public IFoo
 
 **Default value**: false
 
-#### enable_fast_rtti ####
+### enable_fast_rtti ###
 
 Enables porter generate code which makes casting faster with the price of bigger image size.
 
@@ -597,11 +596,11 @@ Enables porter generate code which makes casting faster with the price of bigger
 **Default value**: false
 **Since version**: 20.12
 
-### C# code analysis options ###
+## C# code analysis options ##
 
 These options impact how the original C# code gets analyzed
 
-#### exclude_by_description ####
+### exclude_by_description ###
 
 Allows it to exclude the entities from porting based on description comment. Individual description comment values can be provided as text inside 'text' subnodes.
 
@@ -614,7 +613,7 @@ Example:
 </opt>
 {{< /highlight >}}
 
-#### unexpected_override_as_warning ####
+### unexpected_override_as_warning ###
 
 Makes porter produce warning rather than en error if there is a method that overrides one in C++ but not in C#. They may trigger from e. g. the following code:
 
@@ -637,11 +636,11 @@ class Child : Base
 **Default value:** false
 **Since version:** 20.12
 
-### C++ code generation parameters ###
+## C++ code generation parameters ##
 
 These options define how porter uses specific C++ code features.
 
-#### detect_const_methods #####
+### detect_const_methods ####
 
 Whether to generate 'const' specifier on methods that do not modify their object. These can be either marked with CppConstMethod attribute or found const by porter check. Therefore, if this option is false, CppConstMethod attribute has no effect.
 
@@ -672,7 +671,7 @@ class Foo
 
 **Default value**: false
 
-#### exclude_volatile ####
+### exclude_volatile ###
 
 Whether to pass 'volatile' flag from C# to C++.
 
@@ -703,7 +702,7 @@ class Foo
 
 **Default value**: false
 
-#### put_enum_on_top ####
+### put_enum_on_top ###
 
 Whether enum declarations preceed class and struct ones in output header files.
 
@@ -726,7 +725,7 @@ enum class B { C, D };
 
 **Default value**: false
 
-#### alternative_string_switch ####
+### alternative_string_switch ###
 
 Define whether to use if-else or do-while form of string switch translation.
 
@@ -773,7 +772,7 @@ else if (s == u"123")
 
 **Default value**: false
 
-#### alternative_null_coalescing ####
+### alternative_null_coalescing ###
 
 Use an alternative form of '??' operator translation which avoids it calculating right-hand operand unless it is used.
 
@@ -793,7 +792,7 @@ System::SharedPtr<System::Object> obj = obj1 != nullptr ? obj1 : System::MakeObj
 
 **Default value**: false
 
-#### remove_unused_namespaces ####
+### remove_unused_namespaces ###
 
 Remove unused 'using namespace' directives (the references to namespaces no classes from which ones are used). Such constructs can result in compilation errors: if the classes from the namespace are not used, it is possible that no includes introducing this namespace exist, so the name does not get recognized by the compiler.
 
@@ -836,7 +835,7 @@ void MyClass::Foo()
 
 **Default value**: false
 
-#### indexer_as_method ####
+### indexer_as_method ###
 
 Defines whether to translate indexer invocation as method instead of operator [] even if the later form is possible.
 
@@ -859,7 +858,7 @@ int i = mylist[0];
 
 **Default value**: true
 
-#### create_unit_test_preprocessor_directive ####
+### create_unit_test_preprocessor_directive ###
 
 Whether to pass '#ifdef UNIT_TEST' directives from C# to C++.
 
@@ -889,7 +888,7 @@ class MyTests : public System::Object, public ::testing::Test
 
 **Default value**: false
 
-#### generate_abstract_keyword ####
+### generate_abstract_keyword ###
 
 Whether to add an 'abstract' attribute to abstract classes. (Currently it is being inserted as 'ABSTRACT' define rather than as native C++11 keyword.)
 
@@ -918,7 +917,7 @@ class Abstract : public System::Object
 
 **Default value**: true
 
-#### use_weak_ptr_std_bind ####
+### use_weak_ptr_std_bind ###
 
 When generating std::bind() expressions for delegates porting, use WeakPtr instead of raw C++ pointers to pass object reference.
 
@@ -950,7 +949,7 @@ ModifyString myDelegate = std::bind(&WithDelegate::AddPrefix, this, std::placeho
 
 **Default value**: false
 
-#### deferred_init ####
+### deferred_init ###
 
 If enabled, replaces all static fields with singletons and calls static constructors from instance constructors and singleton access functions instead of C++ static objects initializers. Use this option to resolve the static objects initialization races. Slows down static fields access and constructors as there are additional checks.
 
@@ -964,7 +963,7 @@ Static constructors of non-TestFixture classes are ported as constructors of glo
 
 **Default value**: None
 
-#### auto_ctor_self_reference ####
+### auto_ctor_self_reference ###
 
 If enabled, puts constructor self-reference guards where required, allowing it for constructor to refer to 'this' without deleting the object. Saves the developer from putting CppCtroSelfReference attributes manually but creates more guards than actually required.
 
@@ -998,7 +997,7 @@ MyClass::MyClass()
 
 **Default value**: false
 
-#### force_add_shared_api_macros ####
+### force_add_shared_api_macros ###
 
 If enabled, forces production of shared_api_defs.h file and inserts corresponding macros into the ported code. This helps to switch between shared and static library project using the make_shared_lib option but without re-porting the whole project.
 
@@ -1011,7 +1010,7 @@ If enabled, forces production of shared_api_defs.h file and inserts correspondin
 
 **Default value**: false
 
-#### finally_statement_as_lambda ####
+### finally_statement_as_lambda ###
 
 Allows porting the try-finally statement as a lambda expression instead of guard object placement.
 
@@ -1024,7 +1023,7 @@ Allows porting the try-finally statement as a lambda expression instead of guard
 
 **Default value**: false
 
-#### setter_wrap_with_lambda ####
+### setter_wrap_with_lambda ###
 
 Forces translating complex property assignment operators using lambdas.
 
@@ -1037,7 +1036,7 @@ Forces translating complex property assignment operators using lambdas.
 
 **Default value**: false
 
-#### allow_interface_members_base_class_impl ####
+### allow_interface_members_base_class_impl ###
 
 In C#, members of interface can be implemented in the base class. In C#, there's no way doing so. This option generates required calls in child class; however, this can overcomplicate output code in some cases.
 
@@ -1076,7 +1075,7 @@ void Foo::Do(int32_t i, System::String s)
 
 **Default value**: false
 
-#### polymorphic_memberwiseclone ####
+### polymorphic_memberwiseclone ###
 
 {{< highlight xml >}}
 <opt name="polymorphic_memberwiseclone" value="true">
@@ -1096,7 +1095,7 @@ By default, MemberwiseClone() method in ported code slices output object to the 
 
 **Default value**: false
 
-#### version_compatibility_check_mode ####
+### version_compatibility_check_mode ###
 
 Allows porting application to generate code which compares headers version used to compile project and supplied library version on startup.
 
@@ -1112,7 +1111,7 @@ Allows porting application to generate code which compares headers version used 
 
 **Default value**: stderr
 
-#### force_const_auto_property_getter ####
+### force_const_auto_property_getter ###
 
 Marks auto-generated property getters as const methods.
 
@@ -1124,7 +1123,7 @@ Marks auto-generated property getters as const methods.
 
 **Default value**: false
 
-#### force_const_simple_property_getter ####
+### force_const_simple_property_getter ###
 
 Marks simple property getters consisting of single 'return field_name' statement as const.
 
@@ -1137,20 +1136,7 @@ Marks simple property getters consisting of single 'return field_name' statement
 
 **Default value**: false
 
-#### keep_documentation_comments ####
-
-Allows passing C# code documentation comments to C++ code.
-
-| Allowed value | Meaning | Example
----| ---| ---|
-| true | Pass Doxygen-style comments to C++. |
-|  false | Skip Doxygen-style comments. |
-
-
-
-**Default value**: false
-
-#### process_base_overloading ####
+### process_base_overloading ###
 
 Puts 'using' statement to re-declare hidden baseclass methods in subclasses.
 
@@ -1181,7 +1167,7 @@ class Foo : public Bar {
 
 **Default value**: false
 
-#### thread_static_generation ####
+### thread_static_generation ###
 
 Determines how to translate ThreadStatic attribute.
 
@@ -1197,7 +1183,7 @@ static thread_local System::String m_value;
 
 **Default value**: native
 
-#### remove_inactive_code ####
+### remove_inactive_code ###
 
 Drops comments with inactive code.
 
@@ -1209,7 +1195,7 @@ Drops comments with inactive code.
 
 **Default value**: false
 
-#### emit_preprocessor_directives ####
+### emit_preprocessor_directives ###
 
 Propagates preprocessor directives to C++.
 
@@ -1222,7 +1208,7 @@ Propagates preprocessor directives to C++.
 
 **Default value**: true
 
-#### emplace_assembly_details ####
+### emplace_assembly_details ###
 
 Enables passing assembly details (assembly name, etc.) to ported code.
 
@@ -1235,7 +1221,7 @@ Enables passing assembly details (assembly name, etc.) to ported code.
 
 **Default value**: false
 
-#### foreach_as_range_based_for_loop ####
+### foreach_as_range_based_for_loop ###
 
 Translate C# foreach loops as C++ [range-based for loops](https://en.cppreference.com/w/cpp/language/range-for)
 
@@ -1262,7 +1248,7 @@ for (auto hf : IterateOver<HeaderFooter>(doc->GetChildNodes(NodeType::HeaderFoot
 
 **Default value**: false
 
-#### add_baseclasses_tests ####
+### add_baseclasses_tests ###
 
 If the class not marked with NUnit.Framework.TestFixture attribute contains methods maked with NUnit.Framework.Test attribute and is inherited by a class marked with NUnit.Framework.TestFixture attribute, the gtest tests are generated for child class instead of parent class.
 
@@ -1287,7 +1273,7 @@ TEST_F(FixtureBase, MyTest) { ... }
 
 **Default value**: true
 
-#### nunit_assert_class_aliases ####
+### nunit_assert_class_aliases ###
 
 Calls to methods of NUnit.Framework.Assert class are translated into gtest-compatible macros. If you use your own test class with similarly named methods, use this option to enable special treatment of these. Enlist classes wrapped inside 'alias' subnode as shown below. Also, you might want to exclude such classes from porting.
 
@@ -1307,7 +1293,7 @@ Calls to methods of NUnit.Framework.Assert class are translated into gtest-compa
 
 **Default value**: false
 
-#### original_tests_names ####
+### original_tests_names ###
 
 Toggles prefixing test name with category name to simplify tests group run after porting. Alternatively, if you prefer having original tests names, you might want to disable this option.
 
@@ -1346,7 +1332,7 @@ TEST_F(OriginalTestName, Original_Test1) { s_instance->Test1(); }
 
 **Default value**: false
 
-#### cpp_enum_enable_metadata ####
+### cpp_enum_enable_metadata ###
 
 Enables metadata globally, same as [CppEnumEnableMetadata](https://wiki.csporter.com/cpp/Developer%20Guide/csPorter%20for%20Cpp%20Attributes/#HCppEnumEnableMetadata) attribute does for individual enums.
 
@@ -1363,7 +1349,7 @@ Enables metadata globally, same as [CppEnumEnableMetadata](https://wiki.csporter
 **Default value**: false
 
 
-#### generate_enum_descriptions ####
+### generate_enum_descriptions ###
 
 Enables passing System.ComponentModel.Description attribute value to C++ code.
 
@@ -1386,19 +1372,7 @@ Here **T** is enum type and **value** is enum value.
 
 **Default value**: false
 
-#### fix_self_closing_tags ####
-
-Enables porter transforming self-closing documentation comment tags into pairs of opening and closing ones.
-
-| Allowed value | Meaning | Example
----| ---| ---|
-|true|Transform self-closing tags.|'<tag/>' transforms into '<tag></tag>'
-|false|Keep self-closing tags as they are.|'<tag/>' remains as it is.
-
-**Default value**: true
-**Since version**: 20.1
-
-#### allow_using_directives_in_headers ####
+### allow_using_directives_in_headers ###
 
 Makes porter simplify header files by utilizing header directives.
 
@@ -1443,7 +1417,7 @@ namespace Namespace2
 **Since version:** 20.10
 **Default value**: false
 
-#### extensions_as_method ####
+### extensions_as_method ###
 
 {{< highlight xml >}}
 <opt name="extensions_as_method" value="true">
@@ -1468,7 +1442,7 @@ ExtensionClass::CallExtensionMethod(obj, arg);
 
 **Since version:** 20.11
 
-#### generate_begin_end_methods ####
+### generate_begin_end_methods ###
 
 Allows the porter to generate begin(), end() and other STL-like iterators access methods for those classes implementing the generic IEnumerable interface.
 
@@ -1480,29 +1454,58 @@ Allows the porter to generate begin(), end() and other STL-like iterators access
 **Since version:** 21.1
 **Default value:** true
 
-#### hide_friend_declarations ####
+### default_lambda_capture_mechanism ###
 
-Makes the porter to generate the '@cond...@endcond' wrappers around friend declarations to exclude them from the Doxygen documentation.
+Specifies the lambda capturing mechanism.
 
 | Allowed value | Meaning | Example
 ---| ---| ---|
-| true | Generate wrappers. | {{< highlight cpp >}}
-/// @cond
-friend class MyClass;
-/// @endcond
+| pass_by_reference | All lambda expressions will capture variables, parameters, etc. by reference. | {{< highlight cpp >}}
+void foo() {
+  int32_t value = 10;
+  LambdaCaptureTest::VoidVoidDelegate lambda = LambdaCaptureTest::VoidVoidDelegate(static_cast<std::function<void()>>([&value]() -> void {
+    ASSERT_EQ(10, value);
+  }));
+}
 {{< /highlight >}}
-| false | Do not generate wrappers. | {{< highlight cpp >}}
-friend class MyClass;
+| pass_by_value | All lambda expressions will capture variables, parameters, etc. by value. | {{< highlight cpp >}}
+void foo() {
+  int32_t value = 10;
+  LambdaCaptureTest::VoidVoidDelegate lambda = LambdaCaptureTest::VoidVoidDelegate(static_cast<std::function<void()>>([value]() -> void {
+    ASSERT_EQ(10, value);
+  })).template AddHeldVariable<LambdaCaptureTest::VoidVoidDelegate>("value", value);
+}
+{{< /highlight >}}
+| use_holders | All lambda expressions will capture variables, parameters, etc. wrapped into the `LambdaCaptureHolder` class instances. | {{< highlight cpp >}}
+void foo() {
+  System::Details::LambdaCaptureHolder<int32_t> _lch_value = 10;
+  int32_t &value = _lch_value.GetCapture();
+  LambdaCaptureTest::VoidVoidDelegate lambda = LambdaCaptureTest::VoidVoidDelegate(static_cast<std::function<void()>>([_lch_value, &value]() -> void {
+    ASSERT_EQ(10, value);
+  })).template AddHeldVariable<LambdaCaptureTest::VoidVoidDelegate>("value", value);
+}
 {{< /highlight >}}
 
-**Since version:** 21.1
-**Default value:** false
+**Since version:** 21.2
+**Default value:** use_holders
 
-### Debug and developer version code options ###
+### avoid_lambda_holders_if_possible ###
+
+Specifies the lambda capturing mechanism.
+
+| Allowed value | Meaning
+---| ---|
+| true | The porter will analyze if `LambdaCaptureHolder` must be used for wrapping. Variables and `this` will be passed to lambda expressions by reference when it is possible.
+| false | The analysis is disabled. Variables will be captured using the algotithm specified in the `default_lambda_capture_mechanism` option value.
+
+**Since version:** 21.2
+**Default value:** true
+
+## Debug and developer version code options ##
 
 These options controls debug and developer version code in generated C++ files.
 
-#### collect_test_methods ####
+### collect_test_methods ###
 
 Whether to collect information on ported code test methods in C++ runtime by calling "System::TestToolsExt::RegisterTest()" for each test method on initialization stage.
 
@@ -1513,7 +1516,7 @@ Whether to collect information on ported code test methods in C++ runtime by cal
 
 **Default value**: false
 
-#### generate_for_each_member ####
+### generate_for_each_member ###
 
 Enables adding for_each_member subsystem-related code to each class and generating gv (graphviz) dumps of in-memory objects after each test.
 
@@ -1524,7 +1527,7 @@ Enables adding for_each_member subsystem-related code to each class and generati
 
 **Default value**: false
 
-#### for_each_member_cycles_only ####
+### for_each_member_cycles_only ###
 
 Enables cycles search using for_each_member.
 
@@ -1536,7 +1539,7 @@ Enables cycles search using for_each_member.
 **Default value**: false
 **Since version:** 20.11
 
-#### for_each_member_cleanup_before_each_test ####
+### for_each_member_cleanup_before_each_test ###
 
 Enables cleaning up the for_each_member model before running each test.
 
@@ -1547,7 +1550,7 @@ Enables cleaning up the for_each_member model before running each test.
 
 **Default value**: false
 
-#### stable_gv_file ####
+### stable_gv_file ###
 
 Enables renumbering objects in for_each_member-based gv dumps so that the indexes in output files do not depend on any temporary objects being created and then destroyed during the execution. Required if you want to compare the gv file against a template and want it to remain stable in all builds (release and debug builds and Visual Studio and non-Visual Studio builds currently create different amounts of temporary objects, therefore, affecting object indexes in non-stabilized builds).
 
@@ -1559,7 +1562,7 @@ Enables renumbering objects in for_each_member-based gv dumps so that the indexe
 
 **Default value**: false
 
-#### test_run_stub_file ####
+### test_run_stub_file ###
 
 Creates a file to dump all tests names into during porting
 
@@ -1572,7 +1575,7 @@ Creates a file to dump all tests names into during porting
 
 **Default value**: <Empty>
 
-#### insert_leakage_detectors ####
+### insert_leakage_detectors ###
 
 Insert the helper code to detect the constructors leaking in references. This usually means that the nested objects created by this constructor refer to the object itself using shared pointers instead of weak ones which promise some big problems (memory leaks, double deletion issues on constructor exceptions, etc.). If enabling this feature, check output in debugging to track potential problems.
 
@@ -1587,7 +1590,7 @@ Shared pointer leakage: constructor MyClass::MyClass(int, int) leaked 7 referenc
 
 **Default value**: false
 
-#### tests_garbage_collection ####
+### tests_garbage_collection ###
 
 Calls ~_~_DBG_GARBAGE_COLLECTION mechanism after each test.
 
@@ -1612,7 +1615,7 @@ As one can see, class names, memory addresses, member names and addresses of obj
 
 **Default value**: none
 
-#### tests_garbage_collection_generation ####
+### tests_garbage_collection_generation ###
 
 GC generation to collect by ~_~_DBG_GARBAGE_COLLECTION wrappers after tests. For optimization purposes.
 
@@ -1623,17 +1626,17 @@ GC generation to collect by ~_~_DBG_GARBAGE_COLLECTION wrappers after tests. For
 
 **Default value**: 0
 
-#### add_category_name_to_timeout_tests ####
+### add_category_name_to_timeout_tests ###
 
 If defined, value is used as a category name for all tests with timeouts.
 
 **Default value**: <Not defined>
 
-### Path resolving behavior ###
+## Path resolving behavior ##
 
 This option regulate how porter check path that located in the config file.
 
-#### use_porter_home_directory_while_resolving_path ####
+### use_porter_home_directory_while_resolving_path ###
 
 Enables porter using porter home directory and porter executable location when resolving paths mentioned in configuration file. Only affects declarations that go after it in configuration file. Can't be disabled if it is enabled somewhere else in configuration file.
 
@@ -1644,11 +1647,11 @@ Enables porter using porter home directory and porter executable location when r
 
 **Default value**: false
 
-#### Project settings ####
+### Project settings ###
 
 These options specify the settings of output project.
 
-#### cmake_targets ####
+### cmake_targets ###
 
 Whether to build ported project, tests or both.
 
@@ -1661,7 +1664,7 @@ Whether to build ported project, tests or both.
 
 **Default value**: Both
 
-#### make_shared_lib ####
+### make_shared_lib ###
 
 Whether to generate a shared library project or static library project. Only makes effect if building a ported project is allowed (see cmake_targets option) and source project ls a library rather than executable.
 
@@ -1680,7 +1683,7 @@ Whether to generate a shared library project or static library project. Only mak
 | export_internals | Whether to add *SHARED_API macro to internal class members, not only to public class members. | true false | No | false
 | shared_id | Overrides default (generated) *SHARED_API macro. | Prefix to *_SHARED macro. | No | Assembly name with dots replaced with underscores
 
-#### cpp_lib_path ####
+### cpp_lib_path ###
 
 Path to system library folder (the one containing 'include/' and 'lib/' directories).
 
@@ -1691,7 +1694,7 @@ Path to system library folder (the one containing 'include/' and 'lib/' director
 
 **Default value**: ../../../../asposecpplib
 
-#### cmake_temaplates or makefile_templates ####
+### cmake_temaplates or makefile_templates ###
 
 Path to the directory with CMakeLists.txt file to be used as a template.
 
@@ -1702,7 +1705,7 @@ Path to the directory with CMakeLists.txt file to be used as a template.
 
 **Default value**: CMake
 
-#### generatedlist_template ####
+### generatedlist_template ###
 
 Path to a file which will be used as a template for outputting list of all generated sources (header and cpp files)
 
@@ -1750,7 +1753,7 @@ source/prviate_source4.cpp
 
 Now you can include this file from CMakeLists.txt and use generatedcpp and generatedhpp variables instead of file(GLOB) cmake command.
 
-#### include_templates ####
+### include_templates ###
 
 Path to the directory with shared_api_defs.h template file used to generate shared library API.
 
@@ -1761,7 +1764,7 @@ Path to the directory with shared_api_defs.h template file used to generate shar
 
 **Default value**: Include
 
-#### source_templates ###
+### source_templates ##
 
 Path to the directory with embedded_resources.cpp template to support Assembly class and C# project's resources access.
 
@@ -1772,7 +1775,7 @@ Path to the directory with embedded_resources.cpp template to support Assembly c
 
 **Default value**: Source
 
-#### add_assembly_details ####
+### add_assembly_details ###
 
 Indicates for which returned assembly current project will be used. I.e for executing_assembly Assembly.GetExecutingAssembly() will be used to access assembly name resources etc.
 
@@ -1787,7 +1790,7 @@ Indicates for which returned assembly current project will be used. I.e for exec
 
 **Default value**: <None>
 
-#### additional_defines ####
+### additional_defines ###
 
 Additional defines for either C# code (used during code parsing) or C++ project (passed to cmake).
 
@@ -1804,7 +1807,7 @@ Additional defines for either C# code (used during code parsing) or C++ project 
 | csonly | whether the define goes to only to C# project and not to C++ project | true false | No | false
 
 
-#### exclude_conditional_symbols ####
+### exclude_conditional_symbols ###
 
 Exclude defines from being passed from C# project to cmake. Normally, porting applications passes all definitions mentioned in project file to cmake.
 
@@ -1815,7 +1818,7 @@ Exclude defines from being passed from C# project to cmake. Normally, porting ap
 
 **Default value**: <None>
 
-#### additional_includes ####
+### additional_includes ###
 
 Additional includes to pass to ported project via cmake.
 
@@ -1831,7 +1834,7 @@ Additional includes to pass to ported project via cmake.
 |  local| If this path is mentioned in porter-generated include, whether to cut generated include to relative path | true false |  No | false
 
 
-#### custom_gtest_main ####
+### custom_gtest_main ###
 
 Path to the custom file with gtest main() function to use instead of the default one.
 
@@ -1841,7 +1844,7 @@ Path to the custom file with gtest main() function to use instead of the default
 
 **Default value**: gtest_main.cc
 
-#### cpp_files_to ####
+### cpp_files_to ###
 
 Directory to copy cpp files contained in the current project too.
 
@@ -1852,7 +1855,7 @@ Directory to copy cpp files contained in the current project too.
 
 **Default value**: source
 
-#### interface_as_public ####
+### interface_as_public ###
 
 Unconditionally move all interfaces to public headers, including non-public ones.
 
@@ -1865,7 +1868,7 @@ Unconditionally move all interfaces to public headers, including non-public ones
 
 **Default value**: false
 
-#### internal_as_public ####
+### internal_as_public ###
 
 Whether to translate internal members and types as public. Useful when preparing the library to be linked with tests project.
 
@@ -1878,7 +1881,7 @@ Whether to translate internal members and types as public. Useful when preparing
 
 **Default value**: false
 
-#### do_not_hardcode_aspose_cpp_path ####
+### do_not_hardcode_aspose_cpp_path ###
 
 Disables writing exact path to asposecpplib at CMakeLists.txt. Useful if converted project is compiled from directory different from the one it was ported into.
 
@@ -1891,7 +1894,7 @@ Disables writing exact path to asposecpplib at CMakeLists.txt. Useful if convert
 
 **Default value**: false
 
-#### tools_version ####
+### tools_version ###
 
 Specific the version of tool that should be used on porting stage. Useful if project converted on machine with higher version of .NET Framework.
 
@@ -1902,7 +1905,7 @@ Specific the version of tool that should be used on porting stage. Useful if pro
 
 **Default value**: a version of tool specified in the project file or any available one if the project file doesn't specify any.
 
-#### target_framework_version ####
+### target_framework_version ###
 
 The specific version of .NET Framework to use when parsing C# project.
 
@@ -1913,7 +1916,7 @@ The specific version of .NET Framework to use when parsing C# project.
 
 **Default value**: Version specified in the project file.
 
-#### make_library ####
+### make_library ###
 
 An alternative way to specify output library type in what relates to shared API macros.
 
@@ -1932,7 +1935,7 @@ An alternative way to specify output library type in what relates to shared API 
 |export_internals|If true, export internal members.|true false|false|false
 |shared_id|Export macro prefix|Identifier|false|Generated based on assembly name
 
-#### generate_includes_subdirectory ####
+### generate_includes_subdirectory ###
 
 Creates a subdirectory under 'include' directory to avoid header name clashes when using several ported projects from a single project.
 
@@ -1947,7 +1950,7 @@ Creates a subdirectory under 'include' directory to avoid header name clashes w
 ---| ---| ---| ---| ---|
 | directory | Explicit name of the subdirectory under 'include' folder.|String value|false|C# project name
 
-#### make\_cpp\_file\_name\_uniq ####
+### make\_cpp\_file\_name\_uniq ###
 
 Controls porter behavior in whether file names should be unicalized by extending with trailing underscores.
 
@@ -1959,11 +1962,11 @@ Controls porter behavior in whether file names should be unicalized by extending
 **Default value:** true
 **Since version:** 20.8
 
-### Code readability
+## Code readability
 
 These options improve generated code's readability. However, the code generated now doesn't handle some corner cases properly or in the same way C# code does, so using these options on big codebases is error-prone. Instead, use them to port e. g. code samples for your projects being ported, to make them easy to read.
 
-#### foreach\_as\_range\_based\_for\_loop
+### foreach\_as\_range\_based\_for\_loop
 
 Translate C# foreach loops as C++ [range-based for loops](https://en.cppreference.com/w/cpp/language/range-for)
 
@@ -1994,7 +1997,7 @@ for (auto hf : IterateOver<HeaderFooter>(doc->GetChildNodes(NodeType::HeaderFoot
 
 **Default value** : false
 
-#### simplify\_using\_statements
+### simplify\_using\_statements
 
 Makes porter generate more compact code for using statements that relies on used object destructors rather then on correct Dispose calls.
 
@@ -2028,7 +2031,7 @@ Makes porter generate more compact code for using statements that relies on used
 **Default value:** false
 **Since version:** 20.8
 
-#### force\_auto\_in\_variable\_declaration
+### force\_auto\_in\_variable\_declaration
 
 Makes porter generate auto types for local variables instead of full type name so that code is more compact.
 
@@ -2040,7 +2043,7 @@ Makes porter generate auto types for local variables instead of full type name s
 **Default value:** false
 **Since version:** 20.8
 
-#### prefer\_short\_type\_names
+### prefer\_short\_type\_names
 
 Makes porter prefer short type names where possible instead of fully qualified names in some contexts.
 
@@ -2052,7 +2055,7 @@ Makes porter prefer short type names where possible instead of fully qualified n
 **Default value:** false
 **Since version:** 20.9
 
-#### use\_stream\_based\_io
+### use\_stream\_based\_io
 
 Replaces System::Console calls with cout invocations.
 
@@ -2068,7 +2071,7 @@ System::Console::WriteLn("Hello");
 **Default value:** false
 **Since version:** 20.10
 
-#### generate_get_shared_members ####
+### generate_get_shared_members ###
 
 Enables or disables generating GetSharedMembers() method for ported classes.
 
@@ -2080,7 +2083,7 @@ Enables or disables generating GetSharedMembers() method for ported classes.
 **Default value:** true
 **Since version:** 20.11
 
-#### generate_rtti_info ####
+### generate_rtti_info ###
 
 Enables or disables generating RTTI macros for ported classes.
 
@@ -2092,7 +2095,104 @@ Enables or disables generating RTTI macros for ported classes.
 **Default value:** true
 **Since version:** 20.11
 
-### Legacy options ###
+## Code documentation ##
+
+### keep_documentation_comments ###
+
+Allows passing C# code documentation comments to C++ code.
+
+| Allowed value | Meaning | Example
+---| ---| ---|
+| true | Pass Doxygen-style comments to C++. |
+|  false | Skip Doxygen-style comments. |
+
+**Default value**: false
+
+### fix_self_closing_tags ###
+
+Enables porter transforming self-closing documentation comment tags into pairs of opening and closing ones.
+
+| Allowed value | Meaning | Example
+---| ---| ---|
+|true|Transform self-closing tags.|'&lt;tag/&gt;' transforms into '&lt;tag&gt;&lt;/tag&gt;'
+|false|Keep self-closing tags as they are.|'&lt;tag/&gt;' remains as it is.
+
+**Default value**: true
+**Since version**: 20.1
+
+### try_expand_cref_types ###
+
+Enables porter to replace cref types with proper C++ substitutions when translating documentation comments to Doxygen format.
+
+| Allowed value | Meaning | Example
+---| ---| ---|
+|true|Do the expansion of cref items.|{{< highlight xml >}}
+<see cref="Doxygen::GoldTests::Porter::TestClass"></see>
+{{< /highlight >}}
+|false|Do not expand cref items.|{{< highlight xml >}}
+<see cref="TestClass"></see>
+{{< /highlight >}}
+
+**Default value**: false
+**Since version**: 20.7
+
+### hide_internal_declarations ###
+
+Enables porter to replace cref types with proper C++ substitutions when translating documentation comments to Doxygen format.
+
+| Allowed value | Meaning | Example
+---| ---| ---|
+|true|Make Doxygen skip internal entities.|{{< highlight xml >}}
+    /// @cond
+    /// <summary>
+    /// internal constructor
+    /// </summary>
+    /// <param name="value"></param>
+    AbstractTestClass(uint8_t value);
+    /// @endcond
+{{< /highlight >}}
+|false|Make Doxygen generate documentation for internal entities.|{{< highlight xml >}}
+    /// <summary>
+    /// internal constructor
+    /// </summary>
+    /// <param name="value"></param>
+    AbstractTestClass(uint8_t value);
+{{< /highlight >}}
+
+**Default value**: false
+**Since version**: 20.8
+
+### hide_friend_declarations ###
+
+Makes the porter to generate the '@cond...@endcond' wrappers around friend declarations to exclude them from the Doxygen documentation.
+
+| Allowed value | Meaning | Example
+---| ---| ---|
+| true | Generate wrappers. | {{< highlight cpp >}}
+/// @cond
+friend class MyClass;
+/// @endcond
+{{< /highlight >}}
+| false | Do not generate wrappers. | {{< highlight cpp >}}
+friend class MyClass;
+{{< /highlight >}}
+
+**Default value:** false
+**Since version:** 21.1
+
+### remove_private_comments ###
+
+Makes porter remove comments for private entities.
+
+| Allowed value | Meaning
+---| ---|
+| true | Translate comments for non-private entities only.
+| false | Translate comments for all entities.
+
+**Default value:** false
+**Since version:** 20.8
+
+## Legacy options ##
 
 Options no longer supported but still recognized (and ignored) by porting application for compatibility reasons are:
 
