@@ -409,7 +409,7 @@ ApplyDelegate([](String s) { return s; });
 
 **Default value**: true
 
-## deprecate_system_base_type ###
+### deprecate_system_base_type ####
 
 Whether to omit baseclass references for the classes from 'System' or 'Microsoft' namespaces. Use with care as it affects the whole project. If in doubt, consider using CppIgnoreBaseType attribute instead.
 
@@ -594,6 +594,7 @@ Enables porter generate code which makes casting faster with the price of bigger
 | false | Perform usual (dynamic_cast-based) casting.
 
 **Default value**: false
+
 **Since version**: 20.12
 
 ## C# code analysis options ##
@@ -634,6 +635,7 @@ class Child : Base
 | false | Produce errors if unexpected overrides occur. | \[Error\] System.String SampleCsProject.Derived.AnotherVirtual() (derived.cs:22): Method does not override one in C#, however, it will override System.String SampleCsProject.Base.AnotherVirtual() in C++. Consider renaming one branch via using CppRenameEntity attribute
 
 **Default value:** false
+
 **Since version:** 20.12
 
 ### use_buildalyzer ###
@@ -646,6 +648,7 @@ Makes porter use Buildalyzer library to pre-compile SDK-styled csproj files befo
 | false | Use MSBuild to pre-compile the project.
 
 **Default value:** false
+
 **Since version:** 21.3
 
 ## C++ code generation parameters ##
@@ -1427,6 +1430,7 @@ namespace Namespace2
 
 
 **Since version:** 20.10
+
 **Default value**: false
 
 ### extensions_as_method ###
@@ -1464,6 +1468,7 @@ Allows the porter to generate begin(), end() and other STL-like iterators access
 | false | Do not generate iterator methods.
 
 **Since version:** 21.1
+
 **Default value:** true
 
 ### default_lambda_capture_mechanism ###
@@ -1499,6 +1504,7 @@ void foo() {
 {{< /highlight >}}
 
 **Since version:** 21.2
+
 **Default value:** use_holders
 
 ### avoid_lambda_holders_if_possible ###
@@ -1511,6 +1517,7 @@ Specifies the lambda capturing mechanism.
 | false | The analysis is disabled. Variables will be captured using the algotithm specified in the `default_lambda_capture_mechanism` option value.
 
 **Since version:** 21.2
+
 **Default value:** true
 
 ### always_include_delegates ###
@@ -1523,6 +1530,7 @@ Switches between re-declaring delegates and including their original definition.
 | false | Re-declare delegates in the files they are used in.
 
 **Since version:** 21.3
+
 **Default value:** false
 
 ## Debug and developer version code options ##
@@ -1561,6 +1569,7 @@ Enables cycles search using for_each_member.
 | false | Don't generate parameter passing that enables loop search
 
 **Default value**: false
+
 **Since version:** 20.11
 
 ### for_each_member_cleanup_before_each_test ###
@@ -1984,6 +1993,7 @@ Controls porter behavior in whether file names should be unicalized by extending
 | false | File names may repeat. |
 
 **Default value:** true
+
 **Since version:** 20.8
 
 ## Code readability
@@ -2053,6 +2063,7 @@ Makes porter generate more compact code for using statements that relies on used
 {{< /highlight >}}
 
 **Default value:** false
+
 **Since version:** 20.8
 
 ### force\_auto\_in\_variable\_declaration
@@ -2065,6 +2076,7 @@ Makes porter generate auto types for local variables instead of full type name s
 | false | Generate full type names. | System::SharedPtr <Rs>; rs = System::MakeObject <Rs> () |
 
 **Default value:** false
+
 **Since version:** 20.8
 
 ### prefer\_short\_type\_names
@@ -2077,6 +2089,7 @@ Makes porter prefer short type names where possible instead of fully qualified n
 | false | Use fully qualified names. | System::StaticCast;Full::Namespace::Path:: <A>(o) |
 
 **Default value:** false
+
 **Since version:** 20.9
 
 ### use\_stream\_based\_io
@@ -2093,6 +2106,7 @@ System::Console::WriteLn("Hello");
 {{< /highlight >}}
 
 **Default value:** false
+
 **Since version:** 20.10
 
 ### generate_get_shared_members ###
@@ -2105,6 +2119,7 @@ Enables or disables generating GetSharedMembers() method for ported classes.
 | false | GetSharedMembers() method is not generated.
 
 **Default value:** true
+
 **Since version:** 20.11
 
 ### generate_rtti_info ###
@@ -2117,6 +2132,7 @@ Enables or disables generating RTTI macros for ported classes.
 | false | RTTI macros are not generated.
 
 **Default value:** true
+
 **Since version:** 20.11
 
 ## Code documentation ##
@@ -2142,6 +2158,7 @@ Enables porter transforming self-closing documentation comment tags into pairs o
 |false|Keep self-closing tags as they are.|'&lt;tag/&gt;' remains as it is.
 
 **Default value**: true
+
 **Since version**: 20.1
 
 ### try_expand_cref_types ###
@@ -2158,6 +2175,7 @@ Enables porter to replace cref types with proper C++ substitutions when translat
 {{< /highlight >}}
 
 **Default value**: false
+
 **Since version**: 20.7
 
 ### hide_internal_declarations ###
@@ -2184,6 +2202,7 @@ Enables porter to replace cref types with proper C++ substitutions when translat
 {{< /highlight >}}
 
 **Default value**: false
+
 **Since version**: 20.8
 
 ### hide_friend_declarations ###
@@ -2202,6 +2221,7 @@ friend class MyClass;
 {{< /highlight >}}
 
 **Default value:** false
+
 **Since version:** 21.1
 
 ### remove_private_comments ###
@@ -2214,6 +2234,7 @@ Makes porter remove comments for private entities.
 | false | Translate comments for all entities.
 
 **Default value:** false
+
 **Since version:** 20.8
 
 ## Legacy options ##
