@@ -238,6 +238,47 @@ class Foo
 };
 {{< /highlight >}}
 
+### CppDeclareFriendFunction ###
+
+**Used on**: Class
+
+**Arguments**: Mandatory string argument with full C++-styled function declaration.
+
+Forces friend function declaration. Also, forward declares the function to befriend.
+
+{{< highlight cs >}}
+[CsToCppPorter.CppDeclareFriendFunction("void Aspose::Function(int32_t value)")]
+public class Bar
+{
+    public bool BoolBar()
+    {
+        return true;
+    }
+}
+{{< /highlight >}}
+
+{{< highlight cpp >}}
+namespace Aspose {  void Function(int32_t value); }
+
+class Bar : public System::Object
+{
+    typedef Bar ThisType;
+    typedef System::Object BaseType;
+    
+    typedef ::System::BaseTypesInfo<BaseType> ThisTypeBaseTypesInfo;
+    RTTI_INFO_DECL();
+    
+    friend void Aspose::Function(int32_t value);
+    
+public:
+
+    bool BoolBar();
+    
+};
+{{< /highlight >}}
+
+**Since version**: 21.3
+
 ### CppDeferredInit ###
 
 **Used on**: Class

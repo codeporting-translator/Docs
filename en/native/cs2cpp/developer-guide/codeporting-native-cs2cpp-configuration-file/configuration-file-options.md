@@ -636,6 +636,18 @@ class Child : Base
 **Default value:** false
 **Since version:** 20.12
 
+### use_buildalyzer ###
+
+Makes porter use Buildalyzer library to pre-compile SDK-styled csproj files before porting.
+
+| Allowed value | Meaning
+---| ---|
+| true | Use Buildalyzer library to pre-compile the project.
+| false | Use MSBuild to pre-compile the project.
+
+**Default value:** false
+**Since version:** 21.3
+
 ## C++ code generation parameters ##
 
 These options define how porter uses specific C++ code features.
@@ -1500,6 +1512,18 @@ Specifies the lambda capturing mechanism.
 
 **Since version:** 21.2
 **Default value:** true
+
+### always_include_delegates ###
+
+Switches between re-declaring delegates and including their original definition.
+
+| Allowed value | Meaning
+---| ---|
+| true | Include delegates' original declarations.
+| false | Re-declare delegates in the files they are used in.
+
+**Since version:** 21.3
+**Default value:** false
 
 ## Debug and developer version code options ##
 

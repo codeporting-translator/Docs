@@ -929,7 +929,7 @@ Enables the porter replacing references to C# types and members with C++ analogs
 
 ### translate_code_from_comments_system_dlls ###
 
-Adds specified DLLs to symbol lookup when replacing references in documentation comments.
+Adds specified DLLs to symbol lookup when replacing references in documentation comments. No longer required since 21.3 version.
 
 #### system_dll ####
 
