@@ -16,15 +16,9 @@ weight: "1"
 
 ## Major Features ##
 
-1. The following expressions were simplified:
-    * null-conditional operators like `var a = b?.c`.
-    * `is null` pattern expressions.
-    * `default1 literal expressions.
-    * `nameof(...)` expressions.
 1. The `headers_dir_name` and `sources_dir_name` options were added. They are used to rename the include and source directories respectively.
 1. Missing documentation for the exception classes was added.
 1. The `string.Join(dlm, IEnumerable<string>)` method was implemented.
-1. The missing `GC.Collect` and `GC.get_MaxGeneration` methods were added.
 
 
 ## Minor fixes ##
@@ -33,17 +27,22 @@ weight: "1"
 1. The invalid behavior of the `XPathNavigator::GetAttribute(name. nsURI)` method was fixed for the case when the `nsURI` param is empty or blank.
 1. The performance of the `Path::HasInvalidChars` method was improved.
 1. Missing `#include <cstdint>` was added for some cases.
-1. The following code `foreach (T item in this)` was ported to `for (T item: this)` without dereferencing. Fixed.
-1. An access operator was changed for cases when comments were translated.
-1. Now a chain of methods calls in comments can be translated.
+1. The following code `foreach (T item in this)` was ported to `for (T item: this)` without dereferencing for cases when the `foreach` loop is ported to `range-based for`. Fixed.
+1. An access operator was changed for cases when code examples from comments were translated.
+1. Now a chain of methods calls in code examples from comments can be translated.
 1. Now co-variant array conversion at the method call is translated correctly.
-1. When building an SDK-style project that contained the reference to another SDK-style project, product dll was deleted during porting of the first project, and porting of the second project failed because a product assembly was not found. Fixed.
+1. When building an SDK-style project that contained the reference to another SDK-style project using Buildalyzer, product dll was deleted during porting of the first project, and porting of the second project failed because a product assembly was not found. Fixed.
 1. Drawing of dash caps for closed curves was fixed for cases when `LineCap` had the `LineCap::NoAnchor` type.
 1. Content of `codeporting.native.cs2cpp-config.cmake` was improved.
 1. The `PRODUCT_NAME` and `ORIGINAL_FILE_NAME` properties were deleted from `version_defines.h`.
 1. Logs of the comments translator were optimized.
-1. Translation of fields in comments was improved.
+1. Translation of fields in code examples from comments was improved.
 1. The performance of converting of the decimal type to integral types was improved.
+1. The missing `GC.Collect` and `GC.get_MaxGeneration` methods were added.
+1. The support of `Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)` was added.
+1. The support of the Brotli compression algorithm was added.
+1. The `Region::get_Clip` method implementation was fixed.
+1. The performance of the `XmlDocument::idx_get`, `XmlElement::GetAttribute`, `XmlElement::HasAttribute`, `XmlElement::SetAttribute`, and `XmlElement::idx_get` methods was improved.
 
 Please consult respective sections of our wiki for more information.
 

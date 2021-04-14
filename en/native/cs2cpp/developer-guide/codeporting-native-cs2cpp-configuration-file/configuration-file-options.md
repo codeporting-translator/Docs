@@ -1996,6 +1996,20 @@ Controls porter behavior in whether file names should be unicalized by extending
 
 **Since version:** 20.8
 
+### headers_dir_name ###
+Changes the directory where header files of a ported project will be stored. The 'include' directory name is used when this attribute is not present in the config file.
+
+**Default value:** include
+
+**Since version:** 21.4
+
+### sources_dir_name ###
+Changes the directory where source files of a ported project will be stored. The 'source' directory name is used when this attribute is not present in the config file.
+
+**Default value:** source
+
+**Since version:** 21.4
+
 ## Code readability
 
 These options improve generated code's readability. However, the code generated now doesn't handle some corner cases properly or in the same way C# code does, so using these options on big codebases is error-prone. Instead, use them to port e. g. code samples for your projects being ported, to make them easy to read.
