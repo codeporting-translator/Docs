@@ -16,10 +16,13 @@ weight: "1"
 
 ## Major Features ##
 
+1. Code documentation was improved significantly. Some previously undocumented members now have descriptions.
 1. The `headers_dir_name` and `sources_dir_name` options were added. They are used to rename the include and source directories respectively.
 1. Missing documentation for the exception classes was added.
 1. The `string.Join(dlm, IEnumerable<string>)` method was implemented.
-
+1. The `generate_begin_end_methods` option was added. This option is used to generate the `begin` and `end` methods for the classes and structures that implement the `IEnumberable` generic interface.
+1. The `CppGenerateBeginEndMethods` attribute was added. This attribute is applied to fields and auto properties of any classes and structures. It is used to generate the `begin` and `end` methods. The important condition: types of fields and auto properties must contain the `begin` and `end` methods.
+1. The `CppNoBeginEndMethods` was added. This attribute is used to disable generation of the `begin` and `end` methods when the `generate_begin_end_methods` option is enabled.
 
 ## Minor fixes ##
 
@@ -37,12 +40,18 @@ weight: "1"
 1. The `PRODUCT_NAME` and `ORIGINAL_FILE_NAME` properties were deleted from `version_defines.h`.
 1. Logs of the comments translator were optimized.
 1. Translation of fields in code examples from comments was improved.
-1. The performance of converting of the decimal type to integral types was improved.
+1. The performance of converting of the `Decimal` type to integral types was improved.
 1. The missing `GC.Collect` and `GC.get_MaxGeneration` methods were added.
 1. The support of `Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)` was added.
-1. The support of the Brotli compression algorithm was added.
+1. The `BrotliStream` class is marked as final. The type of some class fields was changed from `void *` to `std::unique_ptr<void, std::function<const void(void*)>>`.
 1. The `Region::get_Clip` method implementation was fixed.
+1. The `GraphicsPath::NeedConvertCurves` method implementation was fixed.
 1. The performance of the `XmlDocument::idx_get`, `XmlElement::GetAttribute`, `XmlElement::HasAttribute`, `XmlElement::SetAttribute`, and `XmlElement::idx_get` methods was improved.
+1. Now the `Func` class inherits `MulticastDelegate`.
+1. A wildcard for a return type didn't work in the `CppSkipEntity` attribute when the porter couldn't resolve a return type. Fixed.
+1. Enum underlying types deduction is moved to pre-translate analysis phase for proper includes generation. Race condition is fixed.
+1. The `TimeZone::GetDaylightChanges` method was added.
+1. The `CppForceInclude` attribute loop reference lookup override was fixed.
 
 Please consult respective sections of our wiki for more information.
 
@@ -78,3 +87,9 @@ Please consult respective sections of our wiki for more information.
 | SLIDESCPP-2874 | Optimize logs of comments translator | Task |
 | TASKSCPP-1588 | Investigate asposecpplib's Decimal casting to numeric types. | Task |
 | PDFCPP-1564 | Fix GC - missing methods for porting | Task |
+| CSPORTCPP-4193 | Support CodePorting.Native Cs2Cpp | Task |
+| PDFCPP-1560| Include Pdf2HtmlConverter to porting into C++| Investigation |
+
+## Public API and Backward Incompatible Changes ##
+
+None.
