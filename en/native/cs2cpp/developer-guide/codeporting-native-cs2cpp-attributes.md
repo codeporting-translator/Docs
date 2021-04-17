@@ -422,6 +422,64 @@ class Foo
 Foo::Bar(System::String(u"abc")); //If translated as 'Foo::Bar(u"abc")', this would call Foo::Bar(bool), not Foo::Bar(System::String&)
 {{< /highlight >}}
 
+### CppGenerateBeginEndMethods ###
+
+**Used on**: Field or Auto-property
+
+**Argument**: None.
+
+Forces porter to generate begin/end methods that will delegate begin/end methods of a field or an auto-property.
+
+The attribute triggering conditions is that for the type of a field or an auto-property to which the attribute is applied, the porter should generate begin/end methods, or this type is one of our system collections that have begin/end methods.
+
+This attribute has a lower priority than the CppNoBeginEndMethods attribute and a higher priority than the generate_begin_end_methods option.
+
+{{< highlight cs >}}
+public class Class0
+{
+  [CppGenerateBeginEndMethods]
+  protected List<int> list;
+}
+{{< /highlight >}}
+
+{{< highlight cpp >}}
+class Class0: public System::Object
+{
+    ...
+
+public:
+    /// A collection type whose iterator types is used as iterator types in the current collection.
+    using iterator_holder_type = System::Collections::Generic::List<int32_t>;
+    /// Iterator type.
+    using iterator = typename iterator_holder_type::iterator;
+    /// Const iterator type.
+    using const_iterator = typename iterator_holder_type::const_iterator;
+
+public:
+
+    /// Gets iterator pointing to the first element (if any) of the collection.
+    /// @return An iterator pointing to the first element (if any) of the collection
+    iterator begin() noexcept;
+    /// Gets iterator pointing right after the last element (if any) of the collection.
+    /// @return An iterator pointing right after the last element (if any) of the collection
+    iterator end() noexcept;
+    /// Gets iterator pointing to the first element (if any) of the const-qualified instance of the collection.
+    /// @return An iterator pointing to the first element (if any) of the const-qualified instance of the collection
+    const_iterator begin() const noexcept;
+    /// Gets iterator pointing right after the last element (if any) of the const-qualified instance of the collection.
+    /// @return An iterator pointing right after the last element (if any) of the const-qualified instance of the collection
+    const_iterator end() const noexcept;
+    /// Gets iterator pointing to the first const-qualified element (if any) of the collection.
+    /// @return An iterator pointing to the first const-qualified element (if any) of the collection
+    const_iterator cbegin() const noexcept;
+    /// Gets iterator pointing right after the last const-qualified element (if any) of the collection.
+    /// @return An iterator pointing right after the last const-qualified element (if any) of the collection
+    const_iterator cend() const noexcept;
+ 
+    ...
+};
+{{< /highlight >}}
+
 ### CppIgnoreBaseType ###
 
 **Used on**: Type
@@ -564,6 +622,16 @@ Disables attributed test or all tests from attributed fixture unless ASPOSE_ENAB
 **Arguments**: None
 
 Omit 'abstract' mark when translating the class.
+
+### CppNoBeginEndMethods ###
+
+**Used on**: Class or Struct
+
+**Arguments**: None
+
+Prevents porter from generating begin/end methods.
+
+This attribute has a higher priority than the `CppGenerateBeginEndMethods` attribute and `generate_begin_end_methods` option.
 
 ### CppConstMethod ###
 

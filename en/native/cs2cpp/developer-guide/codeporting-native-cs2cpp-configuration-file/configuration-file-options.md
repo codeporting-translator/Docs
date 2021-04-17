@@ -1460,12 +1460,74 @@ ExtensionClass::CallExtensionMethod(obj, arg);
 
 ### generate_begin_end_methods ###
 
-Allows the porter to generate begin(), end() and other STL-like iterators access methods for those classes implementing the generic IEnumerable interface.
+Allows the porter to generate begin(), end() and other STL-like iterators access methods for those classes implementing the generic `IEnumerable` interface.
 
-| Allowed value | Meaning
+The condition for generating methods is a simple implementation of the GetEnumerator method of the generic IEnumerable interface, which returns a call to the GetEnumerator method of a field or auto-property, for which type the porter also generated begin/end methods, or this type is one of our system collections that have begin/end methods.
+
+This option has a lower priority than the `CppNoBeginEndMethods` and `CppGenerateBeginEndMethods` attributes.
+
+| Allowed value | Meaning | Example
 ---| ---| ---|
-| true | Generate iterator methods.
-| false | Do not generate iterator methods.
+| true | Generate iterator methods. | {{< highlight cpp >}}
+public class Class0 : IEnumerable<int>
+{
+
+    ...
+    protected List<int> list; // List has begin/end methods.
+    public IEnumerator<int> GetEnumerator()
+    {
+        return list.GetEnumerator(); // doing nothing else than return list.GetEnumerator()
+    }
+
+    ...
+}
+{{< /highlight >}}
+| true | Do not generate iterator methods. | {{< highlight cpp >}}
+public class TestNotGenerate0 : IEnumerable<int>
+{
+
+    ...
+
+    protected List<int> list; // List has begin/end methods.
+
+    public IEnumerator<int> GetEnumerator()
+    {
+        int i = 10; // doing somthing else than return list.GetEnumerator()
+        return list.GetEnumerator();
+    }
+
+    ...
+
+}
+{{< /highlight >}}
+| true | Do not generate iterator methods. | {{< highlight cpp >}}
+public class Class0 : IEnumerable<int>
+{
+
+    ...
+    protected CustomType list; // CustomType has no begin/end methods.
+    public IEnumerator<int> GetEnumerator()
+    {
+        return list.GetEnumerator(); // doing nothing else than return list.GetEnumerator()
+    }
+
+    ...
+}
+{{< /highlight >}}
+| false | Do not generate iterator methods. | {{< highlight cpp >}}
+public class Class0 : IEnumerable<int>
+{
+
+    ...
+    protected List<int> list; // List has begin/end methods.
+    public IEnumerator<int> GetEnumerator()
+    {
+        return list.GetEnumerator(); // doing nothing else than return list.GetEnumerator()
+    }
+
+    ...
+}
+{{< /highlight >}}
 
 **Since version:** 21.1
 
