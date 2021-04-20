@@ -16,14 +16,9 @@ weight: "5"
 
 ## Overview ##
 
-There is a number of attributes recognized by CodePorting.Native Cs2Cpp. __These include both widely-known attributes introduced by .NET or third party libraries such as NUnit and special attributes introduced by CodePorting.Native Cs2Cpp__ itself. The former attributes can be used in the same way as they are used normally in C# applications. The later can be placed into source code manually to prepare the code for porting; they are defined in CsToCppPorter namespace. This page summarizes their effects.
+There is a number of attributes recognized by CodePorting.Native Cs2Cpp. These include both widely-known attributes introduced by .NET or third party libraries such as NUnit and special attributes introduced by CodePorting.Native Cs2Cpp itself. The former attributes can be used in the same way as they are used normally in C# applications. The later can be placed into source code manually to prepare the code for porting; they are defined in CsToCppPorter namespace. This page summarizes their effects.
 
-To use an attribute, you must make it visible from your C# code. To do so, you should reference CsToCppPorter.Attributes project from the one you are preparing to port. Please note that the porting application itself doesn't analyze attribute definitions as they are recognized by names; therefore, inheriting attributes to simplify constructor arguments or for some other reasons won't work. Please check more details as following.
-
-{{<note>}}
-Please note code examples used on this page are for illustration purposes only. Efforts were put to keep them as simple as possible. Actual porting application output may differ.
-{{</note>}}
-
+To use an attribute, you must make it visible from your C# code. To do so, you should reference CsToCppPorter.Attributes project from the one you are preparing to port. Please note that the porting application itself doesn't analyze attribute definitions as they are recognized by names; therefore, inheriting attributes to simplify constructor arguments or for some other reasons won't work.
 
 ## CodePorting.Native Cs2Cpp private attributes ##
 
@@ -35,15 +30,23 @@ This section describes attributes available in CsToCppPorter.Attributes project.
 
 **Arguments**: None
 
-Forces generating default ValueType methods: operator##, Equals, ToString and GetHashCode.
+Forces generating default ValueType methods: `operator==`, `Equals`, `ToString` and `GetHashCode`.
 
-### Cpp AllowBoxing ###
+### CppAllowBoxing ###
 
 **Used on**: Structures
 
 **Arguments**: None
 
-Allows boxing for this type. This requires the type to implement operator ## (), ToString() const and GetHashCode() const.
+Allows boxing for this type. This requires the type to implement operator == (), ToString() const and GetHashCode() const.
+
+### CppAllowStackAllocation ###
+
+**Used on**: Classes
+
+**Arguments**: None
+
+Allows ported classes to be allocated on stack by making their destructors public.
 
 ### CppArgumentKind ###
 
@@ -55,38 +58,39 @@ Forces to use a specific way to pass a parameter to function (const reference, p
 
 Please note that C# semantics is followed by default which means that pointer types are passed to functions by reference while value types are passed by value. You don't need to use this attribute to impose this behavior.
 
-| Argument |# Description |# Usage example |# Output code
----| ---|  ---|  ---|
-| Value | Value-type argument translation, same as if no CppArgumentKind attribute was used. | {{<highlight cs >}}
+| Argument | Description | Usage example | Output code
+---| ---| ---| ---|
+| Value | Value-type argument translation, same as if no CppArgumentKind attribute was used. | {{< highlight cs >}}
 void Foo([CsToCppPorter.CppArgumentKind(CsToCppPorter.ArgumentKind.Value)]Object value) { ... }
 {{< /highlight >}} | {{< highlight cpp >}}
 void Foo(System::SharedPtr<System::Object> value) { ... }
-{{< /highlight >}}
+{{< /highlight >}} | 
 | Reference | Reference function argument. | {{< highlight cs >}}
 void Foo([CsToCppPorter.CppArgumentKind(CsToCppPorter.ArgumentKind.Reference)]Object reference) { ... }
 {{< /highlight >}} | {{< highlight cpp >}}
 void Foo(System::SharedPtr<System::Object> &reference) { ... }
-{{< /highlight >}}
+{{< /highlight >}} | 
 | Pointer | Pointer function argument. | {{< highlight cs >}}
 void Foo([CsToCppPorter.CppArgumentKind(CsToCppPorter.ArgumentKind.Pointer)]Object pointer) { ... }
 {{< /highlight >}} | {{< highlight cpp >}}
 void Foo(System::Object *pointer) { ... }
-{{< /highlight >}}
+{{< /highlight >}} | 
 | ConstValue | Const value function argument. | {{< highlight cs >}}
 void Foo([CsToCppPorter.CppArgumentKind(CsToCppPorter.ArgumentKind.ConstValue)]Object constValue) { ... }
 {{< /highlight >}} | {{< highlight cpp >}}
 void Foo(System::SharedPtr<System::Object> const constValue) { ... }
-{{< /highlight >}}
+{{< /highlight >}} | 
 | ConstReference | Const reference function argument. | {{< highlight cs >}}
 void Foo([CsToCppPorter.CppArgumentKind(CsToCppPorter.ArgumentKind.ConstReference)]Object constReference) { ... }
 {{< /highlight >}} | {{< highlight cpp >}}
 void Foo(System::SharedPtr<System::Object> const &constReference) { ... }
-{{< /highlight >}}
+{{< /highlight >}} | 
 | ConstPointer | Const pointer function argument. | {{< highlight cs >}}
 void Foo([CsToCppPorter.CppArgumentKind(CsToCppPorter.ArgumentKind.ConstPointer)]Object constPointer) { ... }
 {{< /highlight >}} | {{< highlight cpp >}}
 void Foo(System::Object const *constPointer) { ... }
-{{< /highlight >}}
+{{< /highlight >}} | 
+
 ### CppConstexpr ###
 
 **Used on**: Field or class
@@ -115,24 +119,24 @@ class CppConstexprTest : public System::Object, public ::testing::Test
 
 **Used on**: Method
 
-**Arguments**: Optional boolean argument to generate 'ASPOSE_CONST' marker instead of 'const' one.
+**Arguments**: None
 
 Adds 'const' modifier to method. Useful in situations where it is not generated by porter.
 
-| Argument |# Description |# Usage example |# Output code
----| ---|  ---|  ---|
+| Argument | Description | Usage example | Output code
+---| ---| ---| ---|
 | No CppConstMethod attribute | Method is translated as non-const. | {{< highlight cs >}}
 class Foo
 {
     public void Bar() { ... }
 }
-{{< /highlight >}} |{{< highlight cpp >}}
+{{< /highlight >}} | {{< highlight cpp >}}
 class Foo
 {
     ...
     void Bar();
 }
-{{< /highlight >}}  
+{{< /highlight >}} | 
 | No argument | Method is translated as const. | {{< highlight cs >}}
 class Foo
 {
@@ -145,33 +149,7 @@ class Foo
     ...
     void Bar() const;
 }
-{{< /highlight >}}
-| false | Method is translated as const, same as without argument. | {{< highlight cs >}}
-class Foo
-{
-    [CsToCppPorter.CppConstMethod(false)]
-    public void Bar() { ... }
-}
-{{< /highlight >}}  | {{< highlight cpp >}}
-class Foo
-{
-    ...
-    void Bar() const;
-}
-{{< /highlight >}}
-| true | Method is translated as ASPOSE_CONST, useful if you're inheriting from ASPOSE_CONST method and use library built with ASPOSE_NO_CONST_METHODS cmake option enabled. | {{< highlight cs >}}
-class Foo
-{
-    [CsToCppPorter.CppConstMethod(true)]
-    public void Bar() { ... }
-}
-{{< /highlight >}} | {{< highlight cpp >}}
-class Foo
-{
-    ...
-    void Bar ASPOSE_CONST();
-}
-{{< /highlight >}}
+{{< /highlight >}} | 
 
 ### CppConstRefParam ###
 
@@ -212,7 +190,7 @@ Applies to non-const methods without parameters which override base class'es one
 
 **Arguments**: None
 
-Generate guard which allows it to create temporary shared pointers during constructor execution without deleting the object. Not required if the auto_ctor_self_reference option is enabled. Otherwise, creating shared pointers in constructor could lead to calling 'delete' on the object being constructed.
+Generate guard which allows it to create temporary shared pointers during constructor execution without deleting the object. Not required if auto_ctor_self_reference option is enabled. Otherwise, creating shared pointers in constructor could lead to calling 'delete' on object being constructed.
 
 ### CppDeclareFriendClass ###
 
@@ -224,6 +202,7 @@ Forces friend class declaration.
 
 {{< highlight cs >}}
 [CsToCppPorter.CppDeclareFriendClass("MyProject.Bar")]
+
 class Foo
 {
     private void Do() { ... }
@@ -264,16 +243,11 @@ class Bar : public System::Object
 {
     typedef Bar ThisType;
     typedef System::Object BaseType;
-    
     typedef ::System::BaseTypesInfo<BaseType> ThisTypeBaseTypesInfo;
     RTTI_INFO_DECL();
-    
     friend void Aspose::Function(int32_t value);
-    
 public:
-
     bool BoolBar();
-    
 };
 {{< /highlight >}}
 
@@ -295,13 +269,21 @@ Forces all static variables in attributed class as singletons and static constru
 
 Makes porter put type members into C++ code in the same order they are in C# code, istead of grouping them by access modifier.
 
+### CppDoNotObfuscate ###
+
+**Used on**: Entity
+
+**Arguments**: None
+
+Disables entity obfuscation if 'obfuscate_cpp_headers' option is enabled.
+
 ### CppEnumEnableMetadata ###
 
 **Used on**: Enum types
 
 **Arguments**: None
 
-Forces metadata generation for enum (string representation of values for parsing and serializing). Use if you need conversions between enum values and strings in ported application. [cpp_enum_enable_metadata option](https://docs.codeporting.com/native/cs2cpp/Developer-Guide/2.6-CodePorting.Native-Cs2Cpp-Configuration-File/Configuration-file-Options/#Hcpp_enum_enable_metadata) enables this behavior globally.
+Forces metadata generation for enum (string representation of values for parsing and serializing). Use if you need conversions between enum values and strings in ported application. cpp_enum_enable_metadata [option](/native/cs2cpp/developer-guide/codeporting-native-cs2cpp-configuration-file/configuration-file-options/) enables this behavior globally.
 
 ### CppEnumWithOperators ###
 
@@ -368,7 +350,7 @@ void ArrayTests::InitializeArrayFromDifferentType()
 
 **Used on**: Classes
 
-**Argument**: Mandatory string full name of type to forward declare
+**Argument**: Mandatory string full name of type to forward declare.
 
 Inside attributed type, always use forward declaration of argument type instead of include. Useful for loop type references management, etc.
 
@@ -379,9 +361,18 @@ Inside attributed type, always use forward declaration of argument type instead 
 **Arguments**:
 
 1. Mandatory string full name of type to include header for.
-1. Optional boolean argument to force include even if no references to argument type exists, defaults to false.
+1. Optional boolean argument to force include even if suppressed by cross-includes lookup.
+1. Boolean flag which will be removed in further versions of this attribute.
 
 Inside attributed type, always include header with argument type definition instead of forward declaration.
+
+### CppForceObfuscate ###
+
+**Used on**: Entities
+
+**Arguments**: None
+
+Forces attributed entity to be obfuscated if 'obfuscate_cpp_headers' option is enabled.
 
 ### CppForceSharedApi ###
 
@@ -397,7 +388,7 @@ Adds SHARED_API macro to entity declaration.
 
 **Arguments**: None
 
-Forces 'String(...)' wrappers around string literals passed to attributed parameter. Useful if there is a problem with overloads (in C++, __the priority converting string literals to boolean value is higher than to String class object.__ In C++, these calls are resolved used different rules from C#.
+Forces 'String(...)' wrappers around string literals passed to attributed parameter. Useful if there is a problem with overloads (in C++, the priority converting string literals to boolean value is higher than to String class object. In C++, these calls are resolved used different rules from C#.
 
 Since version 18.11, most cases like this get auto-resolved, so such attribute should only be used where porter analysis fails.
 
@@ -424,9 +415,9 @@ Foo::Bar(System::String(u"abc")); //If translated as 'Foo::Bar(u"abc")', this wo
 
 ### CppGenerateBeginEndMethods ###
 
-**Used on**: Field or Auto-property
+**Used on**: Field or Auto-property
 
-**Argument**: None.
+**Arguments**: None
 
 Forces porter to generate begin/end methods that will delegate begin/end methods of a field or an auto-property.
 
@@ -437,8 +428,8 @@ This attribute has a lower priority than the CppNoBeginEndMethods attribute and 
 {{< highlight cs >}}
 public class Class0
 {
-  [CppGenerateBeginEndMethods]
-  protected List<int> list;
+    [CppGenerateBeginEndMethods]
+    protected List<int> list;
 }
 {{< /highlight >}}
 
@@ -446,7 +437,6 @@ public class Class0
 class Class0: public System::Object
 {
     ...
-
 public:
     /// A collection type whose iterator types is used as iterator types in the current collection.
     using iterator_holder_type = System::Collections::Generic::List<int32_t>;
@@ -454,7 +444,6 @@ public:
     using iterator = typename iterator_holder_type::iterator;
     /// Const iterator type.
     using const_iterator = typename iterator_holder_type::const_iterator;
-
 public:
 
     /// Gets iterator pointing to the first element (if any) of the collection.
@@ -475,7 +464,6 @@ public:
     /// Gets iterator pointing right after the last const-qualified element (if any) of the collection.
     /// @return An iterator pointing right after the last const-qualified element (if any) of the collection
     const_iterator cend() const noexcept;
- 
     ...
 };
 {{< /highlight >}}
@@ -519,21 +507,50 @@ class Class2 : public System::Object
 
 ### CppIgnoreConstraints ###
 
-**Used on**: Method or type
+**Used on**: Member or type
 
-**Argument**: Optional string comment which is always ignored
+**Argument**: None
 
 Disables translating 'where' clauses to C++.
 
 ### CppInline ###
 
-**Used on**: Member or type
+**Used on**: Method or type
 
-**Argument**: None
+**Argument**: Optional string comment which is always ignored
 
-Moves an implementation of a member or of all members of a specific type to header file, even if not a template.
+Moves an implementation of a member or of all members of a specific type to header file, even if not a template.
 
 **Since version:** 20.11
+
+### CppIOStreamWrapper ###
+
+**Used on**: Method or constructor argument; property or indexer.
+
+**Arguments**:
+
+1. Mandatory: IOStreamType enumeration member which selects STL stream to use in the overload.
+1. Optional: string name of template argument for the character type used by the stream.
+1. Optional: string name of template argument for the character traits used by the stream.
+
+Overloads attributed entity with a version which accepts STL stream instead of SharedPtr<System::IO::Stream>. Overload differs either by attributed argument or by implicit 'value' argument.
+
+{{< highlight cs >}}
+public void IStream([CppIOStreamWrapper(IOStreamType.IStream)] Stream istream)
+{
+    ...
+}
+{{< /highlight >}}
+
+{{< highlight cpp >}}
+void IStream(System::SharedPtr<System::IO::Stream> istream);
+template <typename CharType, typename Traits = std::char_traits<CharType>>
+void IStream(std::basic_istream<CharType, Traits>& istream)
+{
+    auto istreamWrapper = System::IO::WrapSTDIOStream(istream);
+    IStream(istreamWrapper);
+}
+{{< /highlight >}}
 
 ### CppLambdaPassByReference ###
 
@@ -543,7 +560,7 @@ Moves an implementation of a member or of all members of a specific type to head
 
 The specified local variable will be captured by lambda expressions by reference.
 
-**Since version:** 21.2
+**Since version**: 21.2
 
 ### CppLambdaPassByValue ###
 
@@ -561,7 +578,7 @@ Mark method's local variable to pass to lambda-function by value. Used to kee
 
 The specified parameter will be captured by lambda expressions by reference when it is possible.
 
-**Since version:** 21.2
+**Since version**: 21.2
 
 ### CppLambdaUseHolder ###
 
@@ -571,7 +588,7 @@ The specified parameter will be captured by lambda expressions by reference when
 
 The specified local variable will be wrapped into the `LambdaCaptureHolder` class instance. This class is used to synchronize the lifetime of the specified variable and a lambda expression that captures it.
 
-**Since version:** 21.2
+**Since version**: 21.2
 
 ### CppMakeMembersPublic ###
 
@@ -631,15 +648,15 @@ Omit 'abstract' mark when translating the class.
 
 Prevents porter from generating begin/end methods.
 
-This attribute has a higher priority than the `CppGenerateBeginEndMethods` attribute and `generate_begin_end_methods` option.
+This attribute has a higher priority than the CppGenerateBeginEndMethods attribute and generate_begin_end_methods option.
 
-### CppConstMethod ###
+### CppNoConstMethod ###
 
 **Used on**: Method
 
 **Arguments**: None
 
-Discards the effect of the 'CppConstMethod' attribute. Useful, if some methods are marked as const via config, but some overrides mustn't be const in C++.
+Discards effect of 'CppConstMethod' attribute. Useful, if some methods are marked as const via config, but some overrides mustn't be const in C++.
 
 **This attribute is legacy. It is likely to be removed in future versions of CodePorting.Native Cs2Cpp.**
 
@@ -655,11 +672,11 @@ Makes porter mark method with 'override' qualifier.
 
 **Used on**: Type or entity
 
-**Arguments**: Mandatory value of AccessModifiers enum
+**Arguments**: Mandatory value of AccessModifiers enum.
 
 Switches element's access modifier to specified one in ported one.
 
-Since version: 20.11
+**Since version:** 20.11
 
 ### CppOverrideTestFixtureSetUp ###
 
@@ -667,7 +684,7 @@ Since version: 20.11
 
 **Arguments**: None
 
-Forces translate this method as TestFixtureSetUp, overriding the existing one (if any). Also, the forces method to be static.
+Forces translate this method as TestFixtureSetUp, overriding existing one (if any). Also, forces method to be static.
 
 ### CppOverrideTestFixtureTearDowm ###
 
@@ -675,7 +692,7 @@ Forces translate this method as TestFixtureSetUp, overriding the existing one (i
 
 **Arguments**: None
 
-Forces translate this method as TestFixtureTearDown, overriding the existing one (if any). Also, the forces method to be static.
+Forces translate this method as TestFixtureTearDown, overriding existing one (if any). Also, forces method to be static.
 
 ### CppPlaceAfter ###
 
@@ -709,7 +726,7 @@ public class Base
 }
 {{< /highlight >}}
 
-Ports onto:
+Ports into:
 
 {{< highlight cpp >}}
 class Base : public System::Object
@@ -746,7 +763,7 @@ public:
 };
 {{< /highlight >}}
 
-**Since version**: 20.11
+**Since version:** 20.11
 
 ### CppPlaceBefore ###
 
@@ -779,7 +796,7 @@ public class ClassWithEnum
 }
 {{< /highlight >}}
 
-Ports onto:
+Ports into:
 
 {{< highlight cpp >}}
 class B : public System::Object
@@ -801,7 +818,7 @@ public:
 };
 {{< /highlight >}}
 
-**Since version**: 20.11
+**Since version:** 20.11
 
 ### CppPortAsEnum ###
 
@@ -960,9 +977,9 @@ System::String SkipDefinitionTest::Skip2() { throw System::NotImplementedExcepti
 
 **Argument**: Optional comment string. Always ignored.
 
-Skips class, struct, enum, method, field, etc. The output code looks as if the entity was not present in the input at all. Unlike CppSkipDefinition, skips both declarations and definitions of the affected entities. Note that any references to skipped entity in ported code end up in compilation errors as
+Skips class, struct, enum, method, field, etc. The output code looks as if the entity was not present in the input at all. Unlike CppSkipDefinition, skips both declarations and definitions of the affected entities. Note that any references to skipped entity in ported code end up in compilation errors.
 
-#### CppSkipTest ####
+### CppSkipTest ###
 
 **Used on**: Method.
 
@@ -995,7 +1012,7 @@ private string GetFruitColor(string fruit)
 }
 {{< /highlight >}}
 
-## CppUnknownTypeParam ##
+### CppUnknownTypeParam ###
 
 **Used on**: Generic type or method
 
@@ -1003,23 +1020,29 @@ private string GetFruitColor(string fruit)
 
 Force treating type argument as unknown type: calling ObjectExt::UnknownToObject() and ObjectExt::ObjectToUnknown() whenever the conversion is required. Fixes some type conversion issues with type parameters.
 
-## CppUseAlternativeSwitch ##
+### CppUseAlternativeSwitch ###
 
 **Used on**: Method
 
 **Arguments**: None
 
-Forces using the do-while form of switch translation inside this method. Similar to alternative_string_switch option, but only affects a single method.
+Forces using do-while form of switch translation inside this method. Similar to alternative_string_switch option, but only affects single method.
 
-## CppUseReflection ##
+### CppUseReflection ###
 
 **Used on**: Class
 
 **Arguments**: None
 
-Enables porter generating full reflection information for specific class. By default, no reflection info is generated.
+### CppUseWeakPtrToCaptureThis ###
 
-## CppUsing ##
+**Used on**: Class, Constructor, Method, or Property
+
+**Arguments**: None
+
+Used to capture `this` using the `self` variable that stores the `WeakPtr` smart pointer to the current object.
+
+### CppUsing ###
 
 **Used on**: Class, interface
 
@@ -1056,11 +1079,7 @@ public:
 };
 {{< /highlight >}}
 
-
-
-
-
-## CppValueTypeParam ##
+### CppValueTypeParam ###
 
 **Used on**: Generic type or method
 
@@ -1068,7 +1087,7 @@ public:
 
 Force treating type argument as value type: boxing, etc.
 
-## CppVirtualInheritance ##
+### CppVirtualInheritance ###
 
 **Used on**: Class, interface
 
@@ -1076,7 +1095,7 @@ Force treating type argument as value type: boxing, etc.
 
 Forces virtual inheritance instead of direct.
 
-## CppWeakPtr ##
+### CppWeakPtr ###
 
 **Used on**: Field
 
@@ -1124,7 +1143,6 @@ class WeakPtrTest_Cs
     [CsToCppPorter.CppWeakPtr, CsToCppPorter.CppWeakPtr(0), CsToCppPorter.CppWeakPtr(1)]
     public TwoArgs<Object,Object> www;
 }
-
 {{< /highlight >}}
 
 {{< highlight cpp >}}
@@ -1145,20 +1163,20 @@ public:
     System::WeakPtr<System::Object> w;
     System::SharedPtr<System::Collections::Generic::List<System::SharedPtr<System::Object>>> ss;
     System::WeakPtr<System::Collections::Generic::List<System::SharedPtr<System::Object>>> ws;
-    System::SharedPtr<System::Collections::Generic::List<System::WeakPtr<System::Object>>> sw;
-    System::WeakPtr<System::Collections::Generic::List<System::WeakPtr<System::Object>>> ww;
-    System::SharedPtr<WeakPtrTest_Cs::TwoArgs<System::SharedPtr<System::Object>, System::SharedPtr<System::Object>>> sss;
-    System::WeakPtr<WeakPtrTest_Cs::TwoArgs<System::SharedPtr<System::Object>, System::SharedPtr<System::Object>>> wss;
-    System::SharedPtr<WeakPtrTest_Cs::TwoArgs<System::WeakPtr<System::Object>, System::SharedPtr<System::Object>>> sws;
-    System::SharedPtr<WeakPtrTest_Cs::TwoArgs<System::SharedPtr<System::Object>, System::WeakPtr<System::Object>>> ssw;
-    System::SharedPtr<WeakPtrTest_Cs::TwoArgs<System::WeakPtr<System::Object>, System::WeakPtr<System::Object>>> sww;
-    System::WeakPtr<WeakPtrTest_Cs::TwoArgs<System::WeakPtr<System::Object>, System::SharedPtr<System::Object>>> wws;
-    System::WeakPtr<WeakPtrTest_Cs::TwoArgs<System::SharedPtr<System::Object>, System::WeakPtr<System::Object>>> wsw;
-    System::WeakPtr<WeakPtrTest_Cs::TwoArgs<System::WeakPtr<System::Object>, System::WeakPtr<System::Object>>> www;
+    System::DynamicWeakPtr<System::Collections::Generic::List<System::SharedPtr<System::Object>>, System::SmartPtrMode::Shared, 0> sw;
+    System::DynamicWeakPtr<System::Collections::Generic::List<System::SharedPtr<System::Object>>, System::SmartPtrMode::Weak, 0> ww;
+    System::SharedPtr<System::Collections::Generic::Dictionary<System::SharedPtr<System::Object>, System::SharedPtr<System::Object>>> sss;
+    System::WeakPtr<System::Collections::Generic::Dictionary<System::SharedPtr<System::Object>, System::SharedPtr<System::Object>>> wss;
+    System::DynamicWeakPtr<System::Collections::Generic::Dictionary<System::SharedPtr<System::Object>, System::SharedPtr<System::Object>>, System::SmartPtrMode::Shared, 0> sws;
+    System::DynamicWeakPtr<System::Collections::Generic::Dictionary<System::SharedPtr<System::Object>, System::SharedPtr<System::Object>>, System::SmartPtrMode::Shared, 1> ssw;
+    System::DynamicWeakPtr<System::Collections::Generic::Dictionary<System::SharedPtr<System::Object>, System::SharedPtr<System::Object>>, System::SmartPtrMode::Shared, 0, 1> sww;
+    System::DynamicWeakPtr<System::Collections::Generic::Dictionary<System::SharedPtr<System::Object>, System::SharedPtr<System::Object>>, System::SmartPtrMode::Weak, 0> wws;
+    System::DynamicWeakPtr<System::Collections::Generic::Dictionary<System::SharedPtr<System::Object>, System::SharedPtr<System::Object>>, System::SmartPtrMode::Weak, 1> wsw;
+    System::DynamicWeakPtr<System::Collections::Generic::Dictionary<System::SharedPtr<System::Object>, System::SharedPtr<System::Object>>, System::SmartPtrMode::Weak, 0, 1> www;
 };
 {{< /highlight >}}
 
-## CppWrapInMacro ##
+### CppWrapInMacro ###
 
 **Used on**: Method
 
@@ -1175,14 +1193,13 @@ private class FooContainer
 }
 {{< /highlight >}}
 
-{{< highlight cs >}}
-
+{{< highlight cpp >}}
 class FooContainer
 {
-
-    if defined(FOO_FUNCTION_EXISTS)
+    ...
+    #if defined(FOO_FUNCTION_EXISTS)
         static void Foo();
-    endif
+    #endif
 }
 {{< /highlight >}}
 
@@ -1190,7 +1207,7 @@ class FooContainer
 
 This section enlists .NET attributes recognized by porting applicaton.
 
-##= System.Diagnostics.Conditional ###
+### System.Diagnostics.Conditional ###
 
 **Used on**: Methods
 
@@ -1226,7 +1243,7 @@ void ClassName::func2(int32_t val)
 }
 {{< /highlight >}}
 
-##= System.ThreadStatic ###
+### System.ThreadStatic ###
 
 **Used on**: static fields
 
@@ -1259,11 +1276,21 @@ thread_local int32_t MyThread::value1 = 0;
 int32_t MyThread::value3 = 0;
 {{< /highlight >}}
 
-### NUnit attributes ###
+### System.Obsolete ###
+
+**Used on**: classes and members
+
+**Arguments**: None
+
+**Supported since version**: 19.11
+
+Translates to '@deprecated' Doxygen annotation.
+
+## NUnit attributes ##
 
 This section enlists supported attributes from NUnit framework. For more information on how to use these methods, please refer to NUnit manual.
 
-The below example shows usage of some NUnit attributes supported by CodePorting.Native Cs2Cpp.
+The below example shows usage of some NUnit attributes supported by CodePorting.Native from C# to C++.
 
 {{< highlight cs >}}
 using System;
@@ -1279,87 +1306,87 @@ class TestWithArguments
 }
 {{< /highlight >}}
 
-For more information, please refer to NUnit site at [http:~~/~~/nunit.org/](http://nunit.org/||shape#"rect").
+For more information, please refer to NUnit site at [https://nunit.org/](https://nunit.org/).
 
-## NUnit.Framework.Category ##
+### NUnit.Framework.Category ###
 
 **Used on**: TestFixture class methods
 
 Maps test methods into categories allowing porting application excluding them based on category name.
 
-## NUnit.Framework.ExpectedException ##
+### NUnit.Framework.ExpectedException ###
 
 **Used on**: TestFixture class methods
 
 Marks test method with expected exception information.
 
-## NUnit.Framework.Explicit ##
+### NUnit.Framework.Explicit ###
 
 **Used on**: TestFixture class methods
 
 Marks method as explicit test.
 
-## NUnit.Framework.Ignore ##
+### NUnit.Framework.Ignore ###
 
 **Used on**: TestFixture class methods
 
 Ignores test (by adding 'DISABLED_' prefix to C++ test name).
 
-## NUnit.Framework.OneTimeSetUp ##
+### NUnit.Framework.OneTimeSetUp ###
 
 **Used on**: TestFixture class methods
 
 Marks method as a test fixture setupper.
 
-## NUnit.Framework.OneTimeTearDown ##
+### NUnit.Framework.OneTimeTearDown ###
 
 **Used on**: TestFixture class methods
 
 Marks method as a test fixtuer teardowner.
 
-## NUnit.Framework.SetCulture ##
+### NUnit.Framework.SetCulture ###
 
 **Used on**: TestFixture class methods
 
 Forces using specific culture when running test method.
 
-## NUnit.Framework.SetUp ##
+### NUnit.Framework.SetUp ###
 
 **Used on**: TestFixture class methods
 
 Marks method as a test setupper.
 
-## NUnit.Framework.Sequential ##
+### NUnit.Framework.Sequential ###
 
 **Used on**: TestFixture class methods
 
 Marks test as sequential.
 
-## NUnit.Framework.TearDown ##
+### NUnit.Framework.TearDown ###
 
 **Used on**: TestFixture class methods
 
 Marks method as a test teardowner.
 
-## NUnit.Framework.Test ##
+### NUnit.Framework.Test ###
 
 **Used on**: TestFixture class methods
 
 Marks method as a test,
 
-## NUnit.Framework.TestCase ##
+### NUnit.Framework.TestCase ###
 
 **Used on**: TestFixture class methods
 
 Adds test case based on attributed method.
 
-## NUnit.Framework.TestCaseSource ##
+### NUnit.Framework.TestCaseSource ###
 
 **Used on**: TestFixture class methods
 
 Specifies test case.
 
-## NUnit.Framework.TestFixture ##
+### NUnit.Framework.TestFixture ###
 
 **Used on**: Classes
 
@@ -1367,48 +1394,52 @@ Specifies test case.
 
 Marks class as test fixture.
 
-## NUnit.Framework.TestFixtureSetUp ##
+### NUnit.Framework.TestFixtureSetUp ###
 
 **Used on**: TestFixture class methods
 
 Marks method as a test fixture setupper.
 
-## NUnit.Framework.TestFixtureTearDown ##
+### NUnit.Framework.TestFixtureTearDown ###
 
 **Used on**: TestFixture class methods
 
 Marks method as a test fixture teardowner.
 
-## NUnit.Framework.Timeout ##
+### NUnit.Framework.Timeout ###
 
 **Used on**: TestFixture class methods
 
 Sets up timeout for test (e. g. for performance testing).
 
-## NUnit.Framewor.Values ##
+### NUnit.Framewor.Values ###
 
 **Used on**: Test method arguments
 
 Specifies values to run test with.
 
-# xUnit framework attributes #
+## xUnit framework attributes ##
 
-This section enlists supported xUnit framework attributes. For more information please refer to xUnit site at [https:~~/~~/github.com/xunit/xunit](https://github.com/xunit/xunit||shape#"rect").
+This section enlists supported xUnit framework attributes. For more information please refer to xUnit site at <https://github.com/xunit/xunit>.
 
-## Xunit.Fact ##
+### Xunit.Fact ###
 
 **Used on**: Methods
 
 Marks method as fact.
 
-## Xunit.InlineData ##
+### Xunit.InlineData ###
 
 **Used on**: Methods
 
 Specifies theory inline data.
 
-## Xunit.Theory ##
+### Xunit.Theory ###
 
 **Used on**: Methods
 
 Marks method as theory.
+
+## Notes ##
+
+Code examples used on this page are for illustration purposes only. Efforts were put to keep them as simple as possible. Actual porting application output may differ.

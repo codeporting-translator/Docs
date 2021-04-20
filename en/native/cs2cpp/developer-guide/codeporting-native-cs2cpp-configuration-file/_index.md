@@ -15,4 +15,3 @@ layout: base-home
 weight: "6"
 ---
 
-### CodePorting.Native Cs2Cpp Configuration File ###

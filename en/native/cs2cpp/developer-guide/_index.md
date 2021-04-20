@@ -17,4 +17,3 @@ layout: base-home
 weight: "2"
 ---
 
-### Developer Guide ###

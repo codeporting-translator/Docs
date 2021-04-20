@@ -15,12 +15,11 @@ lastmod: "2019-05-28"
 weight: "1"
 ---
 
+CodePorting.Native Cs2Cpp porting application configuration files are of plain XML format. This section describes the meaning of allowed elements and attributes.
 
-## CodePorting.Native Cs2Cpp Configuration File Structure ##
+There is a default porter.config file supplied alongside with the porter one can refer to.
 
-This page describes the basic structure of CodePorting.Native Cs2Cpp Configuration File. There is a default porter.config file supplied alongside with the porter one can refer to.
-
-### General structure ###
+## General structure ##
 
 The root node of the configuration file must be 'porter'. It has no attributes:
 
@@ -30,26 +29,25 @@ The root node of the configuration file must be 'porter'. It has no attributes:
 </porter>
 {{< /highlight >}}
 
-### On paths ###
+## On paths ##
 
-All paths in the configuration file are written related to current .config file, **except**:
+All paths in the configuration file are written related to current .config file. However, there are some exceptions.
 
-* those related to .csproj project dir: \
+1. Pathes of project files are related to .csproj project dir:
 
 {{< highlight xml >}}
 <exclude file="src\foo*.cs"/>
 <only file="src\bar?.cs"/>
 {{< /highlight >}}
 
-* those related to nothing, these paths used to generate #include directive: \
+2. Include pathes are related to nothing, they are just put to ported code as they are and then get resolved by compiler itself.
 
 {{< highlight xml >}}
 <class name="ClassA" file="path/to/include.h"/>
 <enum name="EnumB" file="path/to/include.h"/>
 {{< /highlight >}}
 
-
-### Configuration files inclusion ###
+## Configuration files inclusion ##
 
 Use 'import' element with 'config' attribute to include the file which resides in the same location as your current directory:
 
@@ -65,7 +63,7 @@ To include default configuration file or other files from porter default configu
 <import config="%PorterHome%/porter.config"/>
 {{< /highlight >}}
 
-### Configuration file splitting ###
+## Configuration file splitting ##
 
 It is recommended to move everything related to library support to a separate file and import this file in the configuration file you use to port your project:
 
@@ -78,6 +76,5 @@ This such approach allows easily switch to different lib implementation:
 {{< highlight xml >}}
 <import config="porter.lib_aspose_drawing_cario.config"/>
 {{< /highlight >}}
-
 
 Also, one can reuse library configuration file when porting several projects.
