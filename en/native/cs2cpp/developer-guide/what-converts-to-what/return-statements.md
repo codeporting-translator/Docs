@@ -1,33 +1,113 @@
 ---
-date: "2019-10-11"
+date: "2021-26-23"
 author:
-  display_name: "xwiki:XWiki.farooqsheikh"
+  display_name: "Wiki code generator"
 draft: "false"
-toc: true
-title: "Return Statements"
-linktitle: "Return Statements"
+toc: false
+title: "ReturnStatements"
+linktitle: "ReturnStatements"
 menu:
   docs:
     parent: "What Converts to What"
-    weight: "27"
-lastmod: "2019-05-28"
-weight: "27"
+    weight: "1"
+lastmod: "2021-26-23"
+weight: "1"
 ---
 
 This example demonstrates how return statement is ported to C++.
 
 Additional command-line options passed to CsToCppPorter: none.
 
-## Source Code ##
+## Source C# code ##
 
-{{< gist csportertotal 2835382f1599d4367c1fb19f46dd15ae "csPortercpp_Csharp_ReturnStatements.cs">}}
+{{< highlight cs >}}
+using System;
 
-## Ported Code ##
+namespace StatementsPorting
+{
+    public class ReturnStatements
+    {
+        public void ReturnVoid(int value)
+        {
+            if (value < 10)
+                return;
+            Console.WriteLine(value);
+        }
+
+        public int ReturnValue(int value)
+        {
+            if (value < 10)
+                return 666;
+            Console.WriteLine(value);
+            return 13;
+        }
+    }
+}
+{{< /highlight >}}
+
+## Ported code ##
 
 ### C++ Header ###
 
-{{< gist csportertotal 828e6770a3d27de2e78022affa71bfbf "csPortercpp_Cpp_ReturnStatements_Header.cpp">}}
+{{< highlight cpp >}}
+#pragma once
+
+#include <system/object.h>
+#include <cstdint>
+
+namespace StatementsPorting {
+
+class ReturnStatements : public System::Object
+{
+    typedef ReturnStatements ThisType;
+    typedef System::Object BaseType;
+    
+    typedef ::System::BaseTypesInfo<BaseType> ThisTypeBaseTypesInfo;
+    RTTI_INFO_DECL();
+    
+public:
+
+    void ReturnVoid(int32_t value);
+    int32_t ReturnValue(int32_t value);
+    
+};
+
+} // namespace StatementsPorting
+
+
+
+{{< /highlight >}}
 
 ### C++ Source Code ###
 
-{{< gist csportertotal 828e6770a3d27de2e78022affa71bfbf "csPortercpp_Cpp_ReturnStatements.cpp">}}
+{{< highlight cpp >}}
+#include "ReturnStatements.h"
+
+#include <system/console.h>
+
+namespace StatementsPorting {
+
+RTTI_INFO_IMPL_HASH(2520855697u, ::StatementsPorting::ReturnStatements, ThisTypeBaseTypesInfo);
+
+void ReturnStatements::ReturnVoid(int32_t value)
+{
+    if (value < 10)
+    {
+        return;
+    }
+    System::Console::WriteLine(value);
+}
+
+int32_t ReturnStatements::ReturnValue(int32_t value)
+{
+    if (value < 10)
+    {
+        return 666;
+    }
+    System::Console::WriteLine(value);
+    return 13;
+}
+
+} // namespace StatementsPorting
+
+{{< /highlight >}}

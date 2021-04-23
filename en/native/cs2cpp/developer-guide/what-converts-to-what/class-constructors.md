@@ -1,33 +1,137 @@
 ---
-date: "2019-10-11"
+date: "2021-26-23"
 author:
-  display_name: "xwiki:XWiki.farooqsheikh"
+  display_name: "Wiki code generator"
 draft: "false"
-toc: true
-title: "Class Constructors"
-linktitle: "Class Constructors"
+toc: false
+title: "ClassConstructors"
+linktitle: "ClassConstructors"
 menu:
   docs:
     parent: "What Converts to What"
-    weight: "4"
-lastmod: "2019-05-28"
-weight: "4"
+    weight: "1"
+lastmod: "2021-26-23"
+weight: "1"
 ---
 
-This example demonstrates how C# class constructors are ported to C++. Public, protected and private constructors preserve their accessibility level. Internal constructors become protected.
+This example demonstrates how class constructors are ported to C++. Public, protected and private constructors preserve their accessibility level. Internal constructors become protected.
 
 Additional command-line options passed to CsToCppPorter: none.
 
-## Source Code ##
+## Source C# code ##
 
-{{< gist codeporting-com-gists 3bd44df83922c0ca4e4e8948cee8099b "Codeportingcpp_Csharp_ClassConstructors.cs">}}
+{{< highlight cs >}}
+namespace MembersPorting
+{
+    public class ClassConstructors
+    {
+        public ClassConstructors()
+        {
+        }
 
-## Ported Code ##
+        public ClassConstructors(string value)
+        {
+        }
+
+        internal ClassConstructors(int value)
+        {
+        }
+
+        protected ClassConstructors(bool value)
+        {
+        }
+
+        private ClassConstructors(double value)
+        {
+        }
+    }
+}
+{{< /highlight >}}
+
+## Ported code ##
 
 ### C++ Header ###
 
-{{< gist codeporting-com-gists 21b1d9f813c2545e2d860fbc26365563 "Codeportingcpp_Cpp_ClassConstructors_Header.cpp">}}
+{{< highlight cpp >}}
+#pragma once
+
+#include <system/string.h>
+#include <cstdint>
+
+namespace MembersPorting {
+
+class ClassConstructors : public System::Object
+{
+    typedef ClassConstructors ThisType;
+    typedef System::Object BaseType;
+    
+    typedef ::System::BaseTypesInfo<BaseType> ThisTypeBaseTypesInfo;
+    RTTI_INFO_DECL();
+    
+public:
+
+    ClassConstructors();
+    ClassConstructors(System::String value);
+    
+protected:
+
+    ClassConstructors(int32_t value);
+    
+    MEMBER_FUNCTION_MAKE_OBJECT_DECLARATION(ClassConstructors, CODEPORTING_ARGS(int32_t value));
+    
+    ClassConstructors(bool value);
+    
+    MEMBER_FUNCTION_MAKE_OBJECT_DECLARATION(ClassConstructors, CODEPORTING_ARGS(bool value));
+    
+private:
+
+    ClassConstructors(double value);
+    
+    MEMBER_FUNCTION_MAKE_OBJECT_DECLARATION(ClassConstructors, CODEPORTING_ARGS(double value));
+    
+};
+
+} // namespace MembersPorting
+
+
+
+{{< /highlight >}}
 
 ### C++ Source Code ###
 
-{{< gist codeporting-com-gists 21b1d9f813c2545e2d860fbc26365563 "Codeportingcpp_Cpp_ClassConstructors.cpp">}}
+{{< highlight cpp >}}
+#include "ClassConstructors.h"
+
+namespace MembersPorting {
+
+RTTI_INFO_IMPL_HASH(2935908457u, ::MembersPorting::ClassConstructors, ThisTypeBaseTypesInfo);
+
+ClassConstructors::ClassConstructors()
+{
+}
+
+ClassConstructors::ClassConstructors(System::String value)
+{
+}
+
+ClassConstructors::ClassConstructors(int32_t value)
+{
+}
+
+MEMBER_FUNCTION_MAKE_OBJECT_DEFINITION(ClassConstructors, CODEPORTING_ARGS(int32_t value), CODEPORTING_ARGS(value));
+
+ClassConstructors::ClassConstructors(bool value)
+{
+}
+
+MEMBER_FUNCTION_MAKE_OBJECT_DEFINITION(ClassConstructors, CODEPORTING_ARGS(bool value), CODEPORTING_ARGS(value));
+
+ClassConstructors::ClassConstructors(double value)
+{
+}
+
+MEMBER_FUNCTION_MAKE_OBJECT_DEFINITION(ClassConstructors, CODEPORTING_ARGS(double value), CODEPORTING_ARGS(value));
+
+} // namespace MembersPorting
+
+{{< /highlight >}}

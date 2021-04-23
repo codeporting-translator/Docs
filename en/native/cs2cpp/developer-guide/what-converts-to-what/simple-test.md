@@ -1,33 +1,120 @@
 ---
-date: "2019-10-11"
+date: "2021-26-23"
 author:
-  display_name: "xwiki:XWiki.farooqsheikh"
+  display_name: "Wiki code generator"
 draft: "false"
-toc: true
-title: "Simple Test"
-linktitle: "Simple Test"
+toc: false
+title: "SimpleTest"
+linktitle: "SimpleTest"
 menu:
   docs:
     parent: "What Converts to What"
-    weight: "31"
-lastmod: "2019-05-28"
-weight: "31"
+    weight: "1"
+lastmod: "2021-26-23"
+weight: "1"
 ---
 
 This example demonstrates how simple NUnit test is ported to C++. Googletest C++ library is used to translate NUnit tests to C++.
 
 Additional command-line options passed to CsToCppPorter: none.
 
-## Source Code ##
+## Source C# code ##
 
-{{< gist csportertotal 2835382f1599d4367c1fb19f46dd15ae "csPortercpp_Csharp_SimpleTest.cs">}}
+{{< highlight cs >}}
+using NUnit.Framework;
 
-## Ported Code ##
+namespace NUnitTestsPorting
+{
+    [TestFixture]
+    public class SimpleTest
+    {
+        [Test]
+        public void T1()
+        {
+        }
+    }
+}
+{{< /highlight >}}
+
+## Ported code ##
 
 ### C++ Header ###
 
-{{< gist csportertotal 828e6770a3d27de2e78022affa71bfbf "csPortercpp_Cpp_SimpleTest_Header.cpp">}}
+{{< highlight cpp >}}
+#pragma once
+
+#include <system/object.h>
+#include <gtest/gtest.h>
+
+namespace NUnitTestsPorting {
+
+class SimpleTest : public System::Object
+{
+    typedef SimpleTest ThisType;
+    typedef System::Object BaseType;
+    
+    typedef ::System::BaseTypesInfo<BaseType> ThisTypeBaseTypesInfo;
+    RTTI_INFO_DECL();
+    
+public:
+
+    void T1();
+    
+};
+
+} // namespace NUnitTestsPorting
+
+
+
+{{< /highlight >}}
 
 ### C++ Source Code ###
 
-{{< gist csportertotal 828e6770a3d27de2e78022affa71bfbf "csPortercpp_Cpp_SimpleTest.cpp">}}
+{{< highlight cpp >}}
+#include "SimpleTest.h"
+
+namespace NUnitTestsPorting {
+
+RTTI_INFO_IMPL_HASH(1656418294u, ::NUnitTestsPorting::SimpleTest, ThisTypeBaseTypesInfo);
+
+namespace gtest_test
+{
+
+class SimpleTest : public ::testing::Test
+{
+protected:
+    static System::SharedPtr<::NUnitTestsPorting::SimpleTest> s_instance;
+    
+    static void SetUpTestCase()
+    {
+        s_instance = System::MakeObject<::NUnitTestsPorting::SimpleTest>();
+    };
+    
+    static void TearDownTestCase()
+    {
+        s_instance = nullptr;
+    };
+    
+};
+
+System::SharedPtr<::NUnitTestsPorting::SimpleTest> SimpleTest::s_instance;
+
+} // namespace gtest_test
+
+void SimpleTest::T1()
+{
+}
+
+namespace gtest_test
+{
+
+TEST_F(SimpleTest, T1)
+{
+    s_instance->T1();
+}
+
+} // namespace gtest_test
+
+} // namespace NUnitTestsPorting
+
+{{< /highlight >}}

@@ -1,29 +1,129 @@
 ---
-date: "2019-10-11"
+date: "2021-27-23"
 author:
-  display_name: "xwiki:XWiki.farooqsheikh"
+  display_name: "Wiki code generator"
 draft: "false"
-toc: true
+toc: false
 title: "Enums"
 linktitle: "Enums"
 menu:
   docs:
     parent: "What Converts to What"
-    weight: "9"
-lastmod: "2019-05-28"
-weight: "9"
+    weight: "1"
+lastmod: "2021-27-23"
+weight: "1"
 ---
 
 This example demonstrates how C# enums are ported to C++. Flags enums have additional declarations for supporting logical operations.
 
 Additional command-line options passed to CsToCppPorter: none.
 
-## Source Code ##
+## Source C# code ##
 
-{{< gist codeporting-com-gists 3bd44df83922c0ca4e4e8948cee8099b "Codeportingcpp_Csharp_Enums.cs">}}
+{{< highlight cs >}}
+using System;
 
-## Ported Code ##
+namespace TypesPorting
+{
+    public enum SimpleEnum
+    {
+        Value1 = 1,
+        Value2,
+        Value3 = 100,
+        Value4 = -1,
+        Value5 = -Value3,
+        Value6 = -5,
+        Value7 = 7
+    }
+
+    public enum EnumWithType : uint
+    {
+        Value1 = 1,
+        Value2,
+        Value3 = 100,
+        Value4 = SimpleEnum.Value7 
+    }
+
+    [Flags]
+    public enum SimpleFlags
+    {
+        Value1 = 1,
+        Value2 = 2,
+        Value3 = 4,
+        Value4 = 8
+    }
+
+    [Flags]
+    public enum FlagsWithType : uint
+    {
+        Value1 = 1,
+        Value2 = 2,
+        Value3 = 4,
+        Value4 = 8
+    }
+
+}
+
+{{< /highlight >}}
+
+## Ported code ##
 
 ### C++ Header ###
 
-{{< gist codeporting-com-gists 21b1d9f813c2545e2d860fbc26365563 "Codeportingcpp_Cpp_Enums_Header.cpp">}}
+{{< highlight cpp >}}
+#pragma once
+
+#include <system/enum_helpers.h>
+#include <cstdint>
+
+namespace TypesPorting {
+
+enum class SimpleEnum
+{
+    Value1 = 1,
+    Value2,
+    Value3 = 100,
+    Value4 = -1,
+    Value5 = static_cast<int32_t>(-Value3),
+    Value6 = -5,
+    Value7 = 7
+};
+
+enum class EnumWithType : uint32_t
+{
+    Value1 = 1,
+    Value2,
+    Value3 = 100,
+    Value4 = static_cast<uint32_t>(TypesPorting::SimpleEnum::Value7)
+};
+
+enum class SimpleFlags
+{
+    Value1 = 1,
+    Value2 = 2,
+    Value3 = 4,
+    Value4 = 8
+};
+
+DECLARE_ENUM_OPERATORS(TypesPorting::SimpleFlags);
+DECLARE_USING_GLOBAL_OPERATORS
+
+enum class FlagsWithType : uint32_t
+{
+    Value1 = 1,
+    Value2 = 2,
+    Value3 = 4,
+    Value4 = 8
+};
+
+DECLARE_ENUM_OPERATORS(TypesPorting::FlagsWithType);
+DECLARE_USING_GLOBAL_OPERATORS
+
+} // namespace TypesPorting
+
+DECLARE_USING_ENUM_OPERATORS(TypesPorting);
+
+
+
+
+{{< /highlight >}}

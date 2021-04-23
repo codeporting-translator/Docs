@@ -1,33 +1,73 @@
 ---
-date: "2019-10-11"
+date: "2021-27-23"
 author:
-  display_name: "xwiki:XWiki.farooqsheikh"
+  display_name: "Wiki code generator"
 draft: "false"
-toc: true
-title: "Static Class"
-linktitle: "Static Class"
+toc: false
+title: "StaticClass"
+linktitle: "StaticClass"
 menu:
   docs:
     parent: "What Converts to What"
-    weight: "33"
-lastmod: "2019-05-28"
-weight: "33"
+    weight: "1"
+lastmod: "2021-27-23"
+weight: "1"
 ---
 
-This example demonstrates how static C# classes are ported to C++. They are not inherited from System::Object unlike others and have no RTTI declared.
+This example demonstrates how static classes are ported to C++. They are not inherited from System::Object unlike others and have no RTTI declared.
 
 Additional command-line options passed to CsToCppPorter: none.
 
-## Source Code ##
+## Source C# code ##
 
-{{< gist csportertotal 2835382f1599d4367c1fb19f46dd15ae "csPortercpp_Csharp_StaticClass.cs">}}
+{{< highlight cs >}}
+namespace TypesPorting
+{
+    public static class StaticClass
+    {
+        public static void StaticMethod()
+        {
+        }
+    }
+}
+{{< /highlight >}}
 
-## Ported Code ##
+## Ported code ##
 
 ### C++ Header ###
 
-{{< gist csportertotal 828e6770a3d27de2e78022affa71bfbf "csPortercpp_Cpp_StaticClass_Header.cpp">}}
+{{< highlight cpp >}}
+#pragma once
+
+namespace TypesPorting {
+
+class StaticClass
+{
+    typedef StaticClass ThisType;
+    
+public:
+
+    static void StaticMethod();
+    
+};
+
+} // namespace TypesPorting
+
+
+
+{{< /highlight >}}
 
 ### C++ Source Code ###
 
-{{< gist csportertotal 828e6770a3d27de2e78022affa71bfbf "csPortercpp_Cpp_StaticClass.cpp">}}
+{{< highlight cpp >}}
+#include "StaticClass.h"
+
+namespace TypesPorting {
+
+void StaticClass::StaticMethod()
+{
+}
+
+} // namespace TypesPorting
+
+{{< /highlight >}}

@@ -4,8 +4,8 @@ author:
   display_name: "Wiki code generator"
 draft: "false"
 toc: false
-title: "WhileStatements"
-linktitle: "WhileStatements"
+title: "DoWhileStatements"
+linktitle: "DoWhileStatements"
 menu:
   docs:
     parent: "What Converts to What"
@@ -14,7 +14,7 @@ lastmod: "2021-26-23"
 weight: "1"
 ---
 
-This example demonstrates how while statement is ported to C++.
+This example demonstrates how do-while statement is ported to C++.
 
 Additional command-line options passed to CsToCppPorter: none.
 
@@ -25,39 +25,39 @@ using System;
 
 namespace StatementsPorting
 {
-    public class WhileStatements
+    public class DoWhileStatements
     {
-        public void While(int max)
+        public void DoWhile(int max)
         {
             int number = 0;
-            while (number < max)
+            do
             {
                 Console.WriteLine(number);
                 ++number;
-            }
+            } while (number < max);
         }
 
-        public void EnclosedWhile(int max1, int max2)
+        public void EnclosedDoWhile(int max1, int max2)
         {
             int number1 = 0;
-            while (number1 < max1)
+            do
             {
                 int number2 = 0;
-                while (number2 < max2)
+                do
                 {
                     Console.WriteLine(number1 + number2);
-                    ++ number2;
-                }
+                    ++number2;
+                } while (number2 < max2);
                 ++number1;
-            }
+            } while (number1 < max1);
         }
 
-        public void InfiniteWhile()
+        public void InfiniteDoWhile()
         {
-            while (true)
+            do
             {
                 Console.WriteLine("iteration");
-            }
+            } while (true);
         }
     }
 }
@@ -75,9 +75,9 @@ namespace StatementsPorting
 
 namespace StatementsPorting {
 
-class WhileStatements : public System::Object
+class DoWhileStatements : public System::Object
 {
-    typedef WhileStatements ThisType;
+    typedef DoWhileStatements ThisType;
     typedef System::Object BaseType;
     
     typedef ::System::BaseTypesInfo<BaseType> ThisTypeBaseTypesInfo;
@@ -85,9 +85,9 @@ class WhileStatements : public System::Object
     
 public:
 
-    void While(int32_t max);
-    void EnclosedWhile(int32_t max1, int32_t max2);
-    void InfiniteWhile();
+    void DoWhile(int32_t max);
+    void EnclosedDoWhile(int32_t max1, int32_t max2);
+    void InfiniteDoWhile();
     
 };
 
@@ -100,46 +100,46 @@ public:
 ### C++ Source Code ###
 
 {{< highlight cpp >}}
-#include "WhileStatements.h"
+#include "DoWhileStatements.h"
 
 #include <system/string.h>
 #include <system/console.h>
 
 namespace StatementsPorting {
 
-RTTI_INFO_IMPL_HASH(2591991192u, ::StatementsPorting::WhileStatements, ThisTypeBaseTypesInfo);
+RTTI_INFO_IMPL_HASH(1608234029u, ::StatementsPorting::DoWhileStatements, ThisTypeBaseTypesInfo);
 
-void WhileStatements::While(int32_t max)
+void DoWhileStatements::DoWhile(int32_t max)
 {
     int32_t number = 0;
-    while (number < max)
+    do
     {
         System::Console::WriteLine(number);
         ++number;
-    }
+    } while (number < max);
 }
 
-void WhileStatements::EnclosedWhile(int32_t max1, int32_t max2)
+void DoWhileStatements::EnclosedDoWhile(int32_t max1, int32_t max2)
 {
     int32_t number1 = 0;
-    while (number1 < max1)
+    do
     {
         int32_t number2 = 0;
-        while (number2 < max2)
+        do
         {
             System::Console::WriteLine(number1 + number2);
             ++number2;
-        }
+        } while (number2 < max2);
         ++number1;
-    }
+    } while (number1 < max1);
 }
 
-void WhileStatements::InfiniteWhile()
+void DoWhileStatements::InfiniteDoWhile()
 {
-    while (true)
+    do
     {
         System::Console::WriteLine(u"iteration");
-    }
+    } while (true);
 }
 
 } // namespace StatementsPorting

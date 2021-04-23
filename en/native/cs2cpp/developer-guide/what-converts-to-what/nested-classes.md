@@ -1,33 +1,143 @@
 ---
-date: "2019-10-11"
+date: "2021-27-23"
 author:
-  display_name: "xwiki:XWiki.farooqsheikh"
+  display_name: "Wiki code generator"
 draft: "false"
-toc: true
-title: "Nested Classes"
-linktitle: "Nested Classes"
+toc: false
+title: "NestedClasses"
+linktitle: "NestedClasses"
 menu:
   docs:
     parent: "What Converts to What"
-    weight: "25"
-lastmod: "2019-05-28"
-weight: "25"
+    weight: "1"
+lastmod: "2021-27-23"
+weight: "1"
 ---
 
-This example demonstrates how C# nested classes are ported to C++. Public, protected and private classes preserve their accessibility level. Internal classes become protected.
+This example demonstrates how nested classes are ported to C++. Public, protected and private classes preserve their accessibility level. Internal classes become protected.
 
 Additional command-line options passed to CsToCppPorter: none.
 
-## Source Code ##
+## Source C# code ##
 
-{{< gist csportertotal 2835382f1599d4367c1fb19f46dd15ae "csPortercpp_Csharp_NestClasses.cs">}}
+{{< highlight cs >}}
+namespace TypesPorting
+{
+    public class OuterClass
+    {
+        public class PublicNestedClass
+        {
+        }
 
-## Ported Code ##
+        internal class InternalNestedClass
+        {
+        }
+
+        protected class ProtectedNestedClass
+        {
+        }
+
+        private class PrivateNestedClass
+        {
+        }
+    }
+}
+{{< /highlight >}}
+
+## Ported code ##
 
 ### C++ Header ###
 
-{{< gist csportertotal 828e6770a3d27de2e78022affa71bfbf "csPortercpp_Cpp_NestedClasses_Header.cpp">}}
+{{< highlight cpp >}}
+#pragma once
+
+#include <system/object.h>
+
+namespace TypesPorting {
+
+class OuterClass : public System::Object
+{
+    typedef OuterClass ThisType;
+    typedef System::Object BaseType;
+    
+    typedef ::System::BaseTypesInfo<BaseType> ThisTypeBaseTypesInfo;
+    RTTI_INFO_DECL();
+    
+public:
+
+    class PublicNestedClass : public System::Object
+    {
+        typedef PublicNestedClass ThisType;
+        typedef System::Object BaseType;
+        
+        typedef ::System::BaseTypesInfo<BaseType> ThisTypeBaseTypesInfo;
+        RTTI_INFO_DECL();
+        
+    };
+    
+    
+protected:
+
+    class InternalNestedClass : public System::Object
+    {
+        typedef InternalNestedClass ThisType;
+        typedef System::Object BaseType;
+        
+        typedef ::System::BaseTypesInfo<BaseType> ThisTypeBaseTypesInfo;
+        RTTI_INFO_DECL();
+        
+    };
+    
+    class ProtectedNestedClass : public System::Object
+    {
+        typedef ProtectedNestedClass ThisType;
+        typedef System::Object BaseType;
+        
+        typedef ::System::BaseTypesInfo<BaseType> ThisTypeBaseTypesInfo;
+        RTTI_INFO_DECL();
+        
+    };
+    
+    
+private:
+
+    class PrivateNestedClass : public System::Object
+    {
+        typedef PrivateNestedClass ThisType;
+        typedef System::Object BaseType;
+        
+        typedef ::System::BaseTypesInfo<BaseType> ThisTypeBaseTypesInfo;
+        RTTI_INFO_DECL();
+        
+    };
+    
+    
+};
+
+} // namespace TypesPorting
+
+
+
+{{< /highlight >}}
 
 ### C++ Source Code ###
 
-{{< gist csportertotal 828e6770a3d27de2e78022affa71bfbf "csPortercpp_Cpp_NestedClasses.cpp">}}
+{{< highlight cpp >}}
+#include "NestedClasses.h"
+
+namespace TypesPorting {
+
+RTTI_INFO_IMPL_HASH(490849539u, ::TypesPorting::OuterClass::PrivateNestedClass, ThisTypeBaseTypesInfo);
+
+RTTI_INFO_IMPL_HASH(3027911832u, ::TypesPorting::OuterClass::ProtectedNestedClass, ThisTypeBaseTypesInfo);
+
+RTTI_INFO_IMPL_HASH(1087067711u, ::TypesPorting::OuterClass::InternalNestedClass, ThisTypeBaseTypesInfo);
+
+RTTI_INFO_IMPL_HASH(918013299u, ::TypesPorting::OuterClass::PublicNestedClass, ThisTypeBaseTypesInfo);
+
+
+RTTI_INFO_IMPL_HASH(615668933u, ::TypesPorting::OuterClass, ThisTypeBaseTypesInfo);
+
+} // namespace TypesPorting
+
+{{< /highlight >}}

@@ -1,33 +1,194 @@
 ---
-date: "2019-10-11"
+date: "2021-26-23"
 author:
-  display_name: "xwiki:XWiki.farooqsheikh"
+  display_name: "Wiki code generator"
 draft: "false"
-toc: true
-title: "Test with Setup Methods"
-linktitle: "Test with Setup Methods"
+toc: false
+title: "TestWithSetupMethods"
+linktitle: "TestWithSetupMethods"
 menu:
   docs:
     parent: "What Converts to What"
-    weight: "38"
-lastmod: "2019-05-28"
-weight: "38"
+    weight: "1"
+lastmod: "2021-26-23"
+weight: "1"
 ---
 
 This example demonstrates how NUnit test fixture with SetUp method is ported to C++. Googletest C++ library is used to translate NUnit tests to C++. SetUp, TearDown, TestFixtureSetUp, and TestFixtureTearDown methods are supported and translated to corresponding methods of googletest.
 
 Additional command-line options passed to CsToCppPorter: none.
 
-## Source Code ##
+## Source C# code ##
 
-{{< gist csportertotal 2835382f1599d4367c1fb19f46dd15ae "csPortercpp_Csharp_TestSetupMethods.cs">}}
+{{< highlight cs >}}
+using NUnit.Framework;
 
-## Ported Code ##
+namespace NUnitTestsPorting
+{
+    [TestFixture]
+    public class TestWithSetupMethods
+    {
+        [SetUp]
+        public void Setup()
+        {
+            mValue += 1;
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            mValue -= 1;
+        }
+
+        [TestFixtureSetUp]
+        public void GlobalSetup()
+        {
+            mValue += 10;
+        }
+
+        [TestFixtureTearDown]
+        public void GlobalTearDown()
+        {
+            mValue -= 10;
+        }
+
+        [Test]
+        public void TestMethod()
+        {
+        }
+
+        private int mValue = 0;
+    }
+}
+{{< /highlight >}}
+
+## Ported code ##
 
 ### C++ Header ###
 
-{{< gist csportertotal 828e6770a3d27de2e78022affa71bfbf "csPortercpp_Cpp_TestSetupMethods_Header.cpp">}}
+{{< highlight cpp >}}
+#pragma once
+
+#include <system/object.h>
+#include <gtest/gtest.h>
+#include <cstdint>
+
+namespace NUnitTestsPorting {
+
+class TestWithSetupMethods : public System::Object
+{
+    typedef TestWithSetupMethods ThisType;
+    typedef System::Object BaseType;
+    
+    typedef ::System::BaseTypesInfo<BaseType> ThisTypeBaseTypesInfo;
+    RTTI_INFO_DECL();
+    
+public:
+
+    void Setup();
+    void TearDown();
+    void GlobalSetup();
+    void GlobalTearDown();
+    void TestMethod();
+    
+    TestWithSetupMethods();
+    
+protected:
+
+    int32_t mValue;
+    
+};
+
+} // namespace NUnitTestsPorting
+
+
+
+{{< /highlight >}}
 
 ### C++ Source Code ###
 
-{{< gist csportertotal 828e6770a3d27de2e78022affa71bfbf "csPortercpp_Cpp_TestSetupMethods.cpp">}}
+{{< highlight cpp >}}
+#include "TestWithSetupMethods.h"
+
+namespace NUnitTestsPorting {
+
+RTTI_INFO_IMPL_HASH(1963724351u, ::NUnitTestsPorting::TestWithSetupMethods, ThisTypeBaseTypesInfo);
+
+void TestWithSetupMethods::Setup()
+{
+    mValue += 1;
+}
+
+void TestWithSetupMethods::TearDown()
+{
+    mValue -= 1;
+}
+
+void TestWithSetupMethods::GlobalSetup()
+{
+    mValue += 10;
+}
+
+void TestWithSetupMethods::GlobalTearDown()
+{
+    mValue -= 10;
+}
+
+TestWithSetupMethods::TestWithSetupMethods() : mValue(0)
+{
+}
+
+
+namespace gtest_test
+{
+
+class TestWithSetupMethods : public ::testing::Test
+{
+protected:
+    static System::SharedPtr<::NUnitTestsPorting::TestWithSetupMethods> s_instance;
+    
+    void SetUp() override
+    {
+        s_instance->Setup();
+    };
+    
+    void TearDown() override
+    {
+        s_instance->TearDown();
+    };
+    
+    static void SetUpTestCase()
+    {
+        s_instance = System::MakeObject<::NUnitTestsPorting::TestWithSetupMethods>();
+        s_instance->GlobalSetup();
+    };
+    
+    static void TearDownTestCase()
+    {
+        s_instance->GlobalTearDown();
+        s_instance = nullptr;
+    };
+    
+};
+
+System::SharedPtr<::NUnitTestsPorting::TestWithSetupMethods> TestWithSetupMethods::s_instance;
+
+} // namespace gtest_test
+
+void TestWithSetupMethods::TestMethod()
+{
+}
+
+namespace gtest_test
+{
+
+TEST_F(TestWithSetupMethods, TestMethod)
+{
+    s_instance->TestMethod();
+}
+
+} // namespace gtest_test
+
+} // namespace NUnitTestsPorting
+
+{{< /highlight >}}

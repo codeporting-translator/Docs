@@ -1,33 +1,78 @@
 ---
-date: "2019-10-11"
+date: "2021-27-23"
 author:
-  display_name: "xwiki:XWiki.farooqsheikh"
+  display_name: "Wiki code generator"
 draft: "false"
-toc: true
-title: "Simple Struct"
-linktitle: "Simple Struct"
+toc: false
+title: "SimpleStruct"
+linktitle: "SimpleStruct"
 menu:
   docs:
     parent: "What Converts to What"
-    weight: "30"
-lastmod: "2019-05-28"
-weight: "30"
+    weight: "1"
+lastmod: "2021-27-23"
+weight: "1"
 ---
 
-This example demonstrates how simple C# struct is ported to C++. A result C++ class inherits System::Object class and contains definitions for RTTI.
+This example demonstrates how simple C# struct is ported to C++. A result C++ class inherits System::Object class and contains definitions for RTTI. 
 
 Additional command-line options passed to CsToCppPorter: none.
 
-## Source Code ##
+## Source C# code ##
 
-{{< gist csportertotal 2835382f1599d4367c1fb19f46dd15ae "csPortercpp_Csharp_SimpleStructs.cs">}}
+{{< highlight cs >}}
+namespace TypesPorting
+{
+    public struct SimpleStruct
+    {
+    }
+}
+{{< /highlight >}}
 
-## Ported Code ##
+## Ported code ##
 
 ### C++ Header ###
 
-{{< gist csportertotal 828e6770a3d27de2e78022affa71bfbf "csPortercpp_Cpp_SimpleStructs_Header.cpp">}}
+{{< highlight cpp >}}
+#pragma once
+
+#include <system/object.h>
+
+namespace TypesPorting {
+
+class SimpleStruct : public System::Object
+{
+    typedef SimpleStruct ThisType;
+    typedef System::Object BaseType;
+    
+    typedef ::System::BaseTypesInfo<BaseType> ThisTypeBaseTypesInfo;
+    RTTI_INFO_DECL();
+    
+public:
+
+    SimpleStruct();
+    
+};
+
+} // namespace TypesPorting
+
+
+
+{{< /highlight >}}
 
 ### C++ Source Code ###
 
-{{< gist csportertotal 828e6770a3d27de2e78022affa71bfbf "csPortercpp_Cpp_SimpleStructs.cpp">}}
+{{< highlight cpp >}}
+#include "SimpleStruct.h"
+
+namespace TypesPorting {
+
+RTTI_INFO_IMPL_HASH(2325628207u, ::TypesPorting::SimpleStruct, ThisTypeBaseTypesInfo);
+
+SimpleStruct::SimpleStruct()
+{
+}
+
+} // namespace TypesPorting
+
+{{< /highlight >}}

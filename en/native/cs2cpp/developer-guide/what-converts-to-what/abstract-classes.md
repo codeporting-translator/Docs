@@ -1,34 +1,107 @@
 ---
-date: "2019-10-11"
+date: "2021-27-23"
 author:
-  display_name: "xwiki:XWiki.farooqsheikh"
+  display_name: "Wiki code generator"
 draft: "false"
-toc: true
-title: "Abstract Classes"
-linktitle: "Abstract Classes"
+toc: false
+title: "AbstractClasses"
+linktitle: "AbstractClasses"
 menu:
   docs:
     parent: "What Converts to What"
     weight: "1"
-lastmod: "2019-05-28"
+lastmod: "2021-27-23"
 weight: "1"
 ---
 
-This example demonstrates how C# abstract classes are ported to C++. They are declared using macro ABSTRACT which expands into _declspec(novtable) for Microsoft VC++.
+This example demonstrates how abstract classes are ported to C++. They are declared using macro ABSTRACT which expands into __declspec(novtable) for Microsoft VC++.
 
 Additional command-line options passed to CsToCppPorter: none.
 
-## Source Code ##
+## Source C# code ##
 
-{{< gist codeporting-com-gists 3bd44df83922c0ca4e4e8948cee8099b "Codeportingcpp_Csharp_AbstractClass.cs">}}
+{{< highlight cs >}}
+namespace TypesPorting
+{
+    public abstract class AbstractClassWithoutMethods
+    {
+    }
 
-## Ported Code ##
+    public abstract class AbstractClassWithMethods
+    {
+        public abstract void SomeAbstractMethod();
+        public virtual void SomeVirtualMethod()
+        {
+        }
+        public void SomeMethod()
+        {
+        }
+    }
+}
+{{< /highlight >}}
+
+## Ported code ##
 
 ### C++ Header ###
 
-{{< gist codeporting-com-gists 21b1d9f813c2545e2d860fbc26365563 "Codeportingcpp_Cpp_AbstractClass_Header.cpp">}}
+{{< highlight cpp >}}
+#pragma once
 
+#include <system/object.h>
+
+namespace TypesPorting {
+
+class AbstractClassWithoutMethods : public System::Object
+{
+    typedef AbstractClassWithoutMethods ThisType;
+    typedef System::Object BaseType;
+    
+    typedef ::System::BaseTypesInfo<BaseType> ThisTypeBaseTypesInfo;
+    RTTI_INFO_DECL();
+    
+};
+
+class AbstractClassWithMethods : public System::Object
+{
+    typedef AbstractClassWithMethods ThisType;
+    typedef System::Object BaseType;
+    
+    typedef ::System::BaseTypesInfo<BaseType> ThisTypeBaseTypesInfo;
+    RTTI_INFO_DECL();
+    
+public:
+
+    virtual void SomeAbstractMethod() = 0;
+    virtual void SomeVirtualMethod();
+    void SomeMethod();
+    
+};
+
+} // namespace TypesPorting
+
+
+
+{{< /highlight >}}
 
 ### C++ Source Code ###
 
-{{< gist codeporting-com-gists 21b1d9f813c2545e2d860fbc26365563 "Codeportingcpp_Cpp_AbstractClass.cpp">}}
+{{< highlight cpp >}}
+#include "AbstractClasses.h"
+
+namespace TypesPorting {
+
+RTTI_INFO_IMPL_HASH(1064729720u, ::TypesPorting::AbstractClassWithoutMethods, ThisTypeBaseTypesInfo);
+
+RTTI_INFO_IMPL_HASH(2860880958u, ::TypesPorting::AbstractClassWithMethods, ThisTypeBaseTypesInfo);
+
+void AbstractClassWithMethods::SomeVirtualMethod()
+{
+}
+
+void AbstractClassWithMethods::SomeMethod()
+{
+}
+
+} // namespace TypesPorting
+
+{{< /highlight >}}

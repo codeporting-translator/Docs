@@ -1,29 +1,72 @@
 ---
-date: "2019-10-11"
+date: "2021-27-23"
 author:
-  display_name: "xwiki:XWiki.farooqsheikh"
+  display_name: "Wiki code generator"
 draft: "false"
-toc: true
-title: "Generic Delegates"
-linktitle: "Generic Delegates"
+toc: false
+title: "GenericDelegates"
+linktitle: "GenericDelegates"
 menu:
   docs:
     parent: "What Converts to What"
-    weight: "17"
-lastmod: "2019-05-28"
-weight: "17"
+    weight: "1"
+lastmod: "2021-27-23"
+weight: "1"
 ---
 
-This example demonstrates how C# generic delegates are ported to C++. They are declared using special type System::MulticastDelegate<T> from asposecpplib.
+This example demonstrates how generic delegates are ported to C++. They are declared using special type System::MulticastDelegate<T> from asposecpplib.
 
 Additional command-line options passed to CsToCppPorter: none.
 
-## Source Code ##
+## Source C# code ##
 
-{{< gist csportertotal 2835382f1599d4367c1fb19f46dd15ae "csPortercpp_Csharp_GenericDelegates.cs">}}
+{{< highlight cs >}}
+using System;
 
-## Ported Code ##
+namespace TypesPorting
+{
+    public delegate TOut GenericDelegate<TIn, TOut>(TIn value);
+
+    public delegate TOut GenericDelegateWithTypeConstraint<TIn, TOut>(TIn value) where TIn : ICloneable where TOut : IConvertible;
+
+    public delegate TOut GenericDelegateWithClassConstraint<TIn, TOut>(TIn value) where TIn : class where TOut : class;
+
+    public delegate TOut GenericDelegateWithStructConstraint<TIn, TOut>(TIn value) where TIn : struct where TOut : struct;
+
+    public delegate TOut GenericDelegateWithNewConstraint<TIn, TOut>(TIn value) where TIn : new() where TOut : new();
+
+    public delegate TOut GenericDelegateWithSeveralConstraints<TIn, TOut>(TIn value) where TIn : class, ICloneable, new() where TOut : struct, IConvertible;
+}
+{{< /highlight >}}
+
+## Ported code ##
 
 ### C++ Header ###
 
-{{< gist csportertotal 828e6770a3d27de2e78022affa71bfbf "csPortercpp_Cpp_GenericDelegates_Header.cpp">}}
+{{< highlight cpp >}}
+#pragma once
+
+#include <system/object.h>
+#include <system/multicast_delegate.h>
+
+namespace System { class ICloneable; }
+namespace System { class IConvertible; }
+
+namespace TypesPorting {
+
+template <typename TIn, typename TOut> using GenericDelegate = System::MulticastDelegate<TOut(TIn)>;
+
+template <typename TIn, typename TOut> using GenericDelegateWithTypeConstraint = System::MulticastDelegate<TOut(TIn)>;
+
+template <typename TIn, typename TOut> using GenericDelegateWithClassConstraint = System::MulticastDelegate<TOut(TIn)>;
+
+template <typename TIn, typename TOut> using GenericDelegateWithStructConstraint = System::MulticastDelegate<TOut(TIn)>;
+
+template <typename TIn, typename TOut> using GenericDelegateWithNewConstraint = System::MulticastDelegate<TOut(TIn)>;
+
+template <typename TIn, typename TOut> using GenericDelegateWithSeveralConstraints = System::MulticastDelegate<TOut(TIn)>;
+} // namespace TypesPorting
+
+
+
+{{< /highlight >}}

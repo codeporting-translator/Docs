@@ -1,29 +1,56 @@
 ---
-date: "2019-10-11"
+date: "2021-27-23"
 author:
-  display_name: "xwiki:XWiki.farooqsheikh"
+  display_name: "Wiki code generator"
 draft: "false"
-toc: true
+toc: false
 title: "Delegates"
 linktitle: "Delegates"
 menu:
   docs:
     parent: "What Converts to What"
-    weight: "6"
-lastmod: "2019-05-28"
-weight: "6"
+    weight: "1"
+lastmod: "2021-27-23"
+weight: "1"
 ---
 
-This example demonstrates how C# delegates are ported to C++. They are declared using special type System::MulticastDelegate<T> from asposecpplib.
+This example demonstrates how delegates are ported to C++. They are declared using special type System::MulticastDelegate<T> from asposecpplib.
 
 Additional command-line options passed to CsToCppPorter: none.
 
-## Source Code ##
+## Source C# code ##
 
-{{< gist codeporting-com-gists 3bd44df83922c0ca4e4e8948cee8099b "Codeportingcpp_Csharp_Delegate.cs">}}
+{{< highlight cs >}}
+namespace TypesPorting
+{
+    public delegate void Delegate1();
+    public delegate int Delegate2();
+    public delegate void Delegate3(string arg1, int arg2);
+    public delegate int Delegate4(string arg1, int arg2);
+    public delegate int Delegate5(out string arg1, ref int arg2);
+}
+{{< /highlight >}}
 
-## Ported Code ##
+## Ported code ##
 
 ### C++ Header ###
 
-{{< gist codeporting-com-gists 21b1d9f813c2545e2d860fbc26365563 "Codeportingcpp_Cpp_Delegate_Header.cpp">}}
+{{< highlight cpp >}}
+#pragma once
+
+#include <system/string.h>
+#include <system/multicast_delegate.h>
+#include <cstdint>
+
+namespace TypesPorting {
+
+using Delegate1 = System::MulticastDelegate<void()>;
+using Delegate2 = System::MulticastDelegate<int32_t()>;
+using Delegate3 = System::MulticastDelegate<void(System::String, int32_t)>;
+using Delegate4 = System::MulticastDelegate<int32_t(System::String, int32_t)>;
+using Delegate5 = System::MulticastDelegate<int32_t(System::String&, int32_t&)>;
+} // namespace TypesPorting
+
+
+
+{{< /highlight >}}

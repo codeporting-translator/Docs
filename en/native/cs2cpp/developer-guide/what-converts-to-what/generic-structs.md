@@ -1,33 +1,261 @@
 ---
-date: "2019-10-11"
+date: "2021-27-23"
 author:
-  display_name: "xwiki:XWiki.farooqsheikh"
+  display_name: "Wiki code generator"
 draft: "false"
-toc: true
-title: "Generic Structs"
-linktitle: "Generic Structs"
+toc: false
+title: "GenericStructs"
+linktitle: "GenericStructs"
 menu:
   docs:
     parent: "What Converts to What"
-    weight: "20"
-lastmod: "2019-05-28"
-weight: "20"
+    weight: "1"
+lastmod: "2021-27-23"
+weight: "1"
 ---
 
 This example demonstrates how C# generic structs are ported to C++. They become C++ template classes which are inherited from System::Object and have RTTI declared.
 
 Additional command-line options passed to CsToCppPorter: none.
 
-## Source Code ##
+## Source C# code ##
 
-{{< gist csportertotal 2835382f1599d4367c1fb19f46dd15ae "csPortercpp_Csharp_GenericStructs.cs">}}
+{{< highlight cs >}}
+using System;
 
-## Ported Code ##
+namespace TypesPorting
+{
+    public struct GenericStruct<TInner>
+    {
+    }
+
+    public struct GenericStructWithTypeConstraint<TInner> where TInner : ICloneable
+    {
+    }
+
+    public struct GenericStructWithClassConstraint<TInner> where TInner : class
+    {
+    }
+
+    public struct GenericStructWithStructConstraint<TInner> where TInner : struct
+    {
+    }
+
+    public struct GenericStructWithNewConstraint<TInner> where TInner : new()
+    {
+    }
+
+    public struct GenericStructWithSeveralConstraints<TInner> where TInner : class, ICloneable, new()
+    {
+    }
+}
+{{< /highlight >}}
+
+## Ported code ##
 
 ### C++ Header ###
 
-{{< gist csportertotal 828e6770a3d27de2e78022affa71bfbf "csPortercpp_Cpp_GenericStructs_Header.cpp">}}
+{{< highlight cpp >}}
+#pragma once
 
-### C++ Source Code ###
+#include <system/object.h>
+#include <system/icloneable.h>
+#include <system/details/pointer_collection_helpers.h>
+#include <system/constraints.h>
+#include <cstdint>
 
-{{< gist csportertotal 828e6770a3d27de2e78022affa71bfbf "csPortercpp_Cpp_GenericStructs.cpp">}}
+namespace TypesPorting {
+
+template<typename TInner>
+class GenericStruct : public System::Object
+{
+    typedef GenericStruct<TInner> ThisType;
+    typedef System::Object BaseType;
+    
+    typedef ::System::BaseTypesInfo<BaseType> ThisTypeBaseTypesInfo;
+    RTTI_INFO_TEMPLATE_CLASS(ThisType, ThisTypeBaseTypesInfo);
+    
+    template<typename FT0> friend class GenericStruct;
+    
+public:
+
+    GenericStruct()
+    {
+    }
+    
+    void SetTemplateWeakPtr(uint32_t argument) override
+    {
+        switch (argument)
+        {
+            case 0:
+                break;
+                
+        }
+    }
+    
+};
+
+template<typename TInner>
+class GenericStructWithTypeConstraint : public System::Object
+{
+    typedef System::ICloneable BaseT_ICloneable;
+    assert_is_base_of(BaseT_ICloneable, TInner);
+    
+    typedef GenericStructWithTypeConstraint<TInner> ThisType;
+    typedef System::Object BaseType;
+    
+    typedef ::System::BaseTypesInfo<BaseType> ThisTypeBaseTypesInfo;
+    RTTI_INFO_TEMPLATE_CLASS(ThisType, ThisTypeBaseTypesInfo);
+    
+    template<typename FT0> friend class GenericStructWithTypeConstraint;
+    
+public:
+
+    GenericStructWithTypeConstraint()
+    {
+    }
+    
+    void SetTemplateWeakPtr(uint32_t argument) override
+    {
+        switch (argument)
+        {
+            case 0:
+                break;
+                
+        }
+    }
+    
+};
+
+template<typename TInner>
+class GenericStructWithClassConstraint : public System::Object
+{
+    assert_is_cs_class(TInner);
+    
+    typedef GenericStructWithClassConstraint<TInner> ThisType;
+    typedef System::Object BaseType;
+    
+    typedef ::System::BaseTypesInfo<BaseType> ThisTypeBaseTypesInfo;
+    RTTI_INFO_TEMPLATE_CLASS(ThisType, ThisTypeBaseTypesInfo);
+    
+    template<typename FT0> friend class GenericStructWithClassConstraint;
+    
+public:
+
+    GenericStructWithClassConstraint()
+    {
+    }
+    
+    void SetTemplateWeakPtr(uint32_t argument) override
+    {
+        switch (argument)
+        {
+            case 0:
+                break;
+                
+        }
+    }
+    
+};
+
+template<typename TInner>
+class GenericStructWithStructConstraint : public System::Object
+{
+    assert_is_cs_struct(TInner);
+    
+    typedef GenericStructWithStructConstraint<TInner> ThisType;
+    typedef System::Object BaseType;
+    
+    typedef ::System::BaseTypesInfo<BaseType> ThisTypeBaseTypesInfo;
+    RTTI_INFO_TEMPLATE_CLASS(ThisType, ThisTypeBaseTypesInfo);
+    
+    template<typename FT0> friend class GenericStructWithStructConstraint;
+    
+public:
+
+    GenericStructWithStructConstraint()
+    {
+    }
+    
+    void SetTemplateWeakPtr(uint32_t argument) override
+    {
+        switch (argument)
+        {
+            case 0:
+                break;
+                
+        }
+    }
+    
+};
+
+template<typename TInner>
+class GenericStructWithNewConstraint : public System::Object
+{
+    assert_is_constructable(TInner);
+    
+    typedef GenericStructWithNewConstraint<TInner> ThisType;
+    typedef System::Object BaseType;
+    
+    typedef ::System::BaseTypesInfo<BaseType> ThisTypeBaseTypesInfo;
+    RTTI_INFO_TEMPLATE_CLASS(ThisType, ThisTypeBaseTypesInfo);
+    
+    template<typename FT0> friend class GenericStructWithNewConstraint;
+    
+public:
+
+    GenericStructWithNewConstraint()
+    {
+    }
+    
+    void SetTemplateWeakPtr(uint32_t argument) override
+    {
+        switch (argument)
+        {
+            case 0:
+                break;
+                
+        }
+    }
+    
+};
+
+template<typename TInner>
+class GenericStructWithSeveralConstraints : public System::Object
+{
+    assert_is_cs_class(TInner);
+    typedef System::ICloneable BaseT_ICloneable;
+    assert_is_base_of(BaseT_ICloneable, TInner);
+    assert_is_constructable(TInner);
+    
+    typedef GenericStructWithSeveralConstraints<TInner> ThisType;
+    typedef System::Object BaseType;
+    
+    typedef ::System::BaseTypesInfo<BaseType> ThisTypeBaseTypesInfo;
+    RTTI_INFO_TEMPLATE_CLASS(ThisType, ThisTypeBaseTypesInfo);
+    
+    template<typename FT0> friend class GenericStructWithSeveralConstraints;
+    
+public:
+
+    GenericStructWithSeveralConstraints()
+    {
+    }
+    
+    void SetTemplateWeakPtr(uint32_t argument) override
+    {
+        switch (argument)
+        {
+            case 0:
+                break;
+                
+        }
+    }
+    
+};
+
+} // namespace TypesPorting
+
+
+
+{{< /highlight >}}
