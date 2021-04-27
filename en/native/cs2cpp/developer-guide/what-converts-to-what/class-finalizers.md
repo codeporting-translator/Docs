@@ -1,5 +1,5 @@
 ---
-date: "2021-26-23"
+date: "2021-04-27"
 author:
   display_name: "Wiki code generator"
 draft: "false"
@@ -10,7 +10,7 @@ menu:
   docs:
     parent: "What Converts to What"
     weight: "1"
-lastmod: "2021-26-23"
+lastmod: "2021-04-27"
 weight: "1"
 ---
 
@@ -18,7 +18,7 @@ This example demonstrates how class finalizer is ported to C++. In C++ it become
 
 Additional command-line options passed to CsToCppPorter: none.
 
-## Source C# code ##
+## Source C# Code ##
 
 {{< highlight cs >}}
 namespace MembersPorting
@@ -33,7 +33,7 @@ namespace MembersPorting
 }
 {{< /highlight >}}
 
-## Ported code ##
+## Ported Code ##
 
 ### C++ Header ###
 

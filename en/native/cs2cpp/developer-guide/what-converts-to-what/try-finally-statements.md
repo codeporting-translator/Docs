@@ -1,5 +1,5 @@
 ---
-date: "2021-27-23"
+date: "2021-04-27"
 author:
   display_name: "Wiki code generator"
 draft: "false"
@@ -10,7 +10,7 @@ menu:
   docs:
     parent: "What Converts to What"
     weight: "1"
-lastmod: "2021-27-23"
+lastmod: "2021-04-27"
 weight: "1"
 ---
 
@@ -18,7 +18,7 @@ This example demonstrates how try-finally statement is ported to C++. They are t
 
 Additional command-line options passed to CsToCppPorter: -o finally_statement_as_lambda=true.
 
-## Source C# code ##
+## Source C# Code ##
 
 {{< highlight cs >}}
 using System;
@@ -137,7 +137,7 @@ namespace StatementsPorting
 }
 {{< /highlight >}}
 
-## Ported code ##
+## Ported Code ##
 
 ### C++ Header ###
 
