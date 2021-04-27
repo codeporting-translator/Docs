@@ -10,9 +10,9 @@ description: "Smart Pointer Creation Using Aliasing Constructors "
 menu:
   docs:
     parent: "Memory Management Model"
-    weight: "1"
+    weight: "2"
 lastmod: "2019-06-27"
-weight: "1"
+weight: "2"
 ---
 
 ## Key agreement ##
