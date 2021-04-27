@@ -3,7 +3,7 @@ date: "2021-04-27"
 author:
   display_name: "Wiki code generator"
 draft: "false"
-toc: false
+toc: true
 title: "SimpleTest"
 linktitle: "SimpleTest"
 menu:
