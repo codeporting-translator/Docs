@@ -1,5 +1,5 @@
 ---
-date: "2021-04-27"
+date: "2021-05-09"
 author:
   display_name: "Wiki code generator"
 draft: "false"
@@ -10,7 +10,7 @@ menu:
   docs:
     parent: "What Converts to What"
     weight: "1"
-lastmod: "2021-04-27"
+lastmod: "2021-05-09"
 weight: "1"
 ---
 
@@ -23,7 +23,6 @@ Additional command-line options passed to CsToCppPorter: none.
 {{< highlight cs >}}
 using System;
 using System.Collections.Generic;
-using NUnit.Framework;
 
 namespace StatementsPorting
 {
@@ -135,23 +134,23 @@ namespace StatementsPorting
                 case "choice":
                     while (true)
                     {
-                        if (name == "iddqd")
+                        if (value == "iddqd")
                         {
                             break;
                         }
                         break;
                     }
-                    if (name == "iddqd")
+                    if (value == "iddqd")
                     {
                         break;
                     }
                     break;
                 case "choice2":
                     Console.WriteLine("choice2 branch");
-                    if (name == "iddqd")
+                    if (value == "iddqd")
                     {
                         break;
-                        if (name == "iddqd")
+                        if (value == "iddqd")
                         {
                             break;
                         }
@@ -385,13 +384,13 @@ void SwitchStatements::StringSwitchAdvanced()
     {
         while (true)
         {
-            if (name == u"iddqd")
+            if (value == u"iddqd")
             {
                 break;
             }
             break;
         }
-        if (name == u"iddqd")
+        if (value == u"iddqd")
         {
             
         }
@@ -399,10 +398,10 @@ void SwitchStatements::StringSwitchAdvanced()
     else if (switch_value_0 == u"choice2")
     {
         System::Console::WriteLine(u"choice2 branch");
-        if (name == u"iddqd")
+        if (value == u"iddqd")
         {
             goto switch_break_0;
-            if (name == u"iddqd")
+            if (value == u"iddqd")
             {
                 goto switch_break_0;
             }

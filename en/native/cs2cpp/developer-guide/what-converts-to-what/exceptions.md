@@ -1,5 +1,5 @@
 ---
-date: "2021-04-27"
+date: "2021-05-09"
 author:
   display_name: "Wiki code generator"
 draft: "false"
@@ -10,7 +10,7 @@ menu:
   docs:
     parent: "What Converts to What"
     weight: "1"
-lastmod: "2021-04-27"
+lastmod: "2021-05-09"
 weight: "1"
 ---
 
@@ -220,10 +220,6 @@ protected:
     
     MEMBER_FUNCTION_MAKE_OBJECT_DECLARATION(Details_BadArgumentException, CODEPORTING_ARGS(System::SharedPtr<System::Runtime::Serialization::SerializationInfo> info, System::Runtime::Serialization::StreamingContext context));
     
-    Details_BadArgumentException();
-    
-    MEMBER_FUNCTION_MAKE_OBJECT_DECLARATION(Details_BadArgumentException, CODEPORTING_ARGS());
-    
 };
 
 } // namespace TypesPorting
@@ -334,12 +330,6 @@ Details_BadArgumentException::Details_BadArgumentException(System::SharedPtr<Sys
 }
 
 MEMBER_FUNCTION_MAKE_OBJECT_DEFINITION(Details_BadArgumentException, CODEPORTING_ARGS(System::SharedPtr<System::Runtime::Serialization::SerializationInfo> info, System::Runtime::Serialization::StreamingContext context), CODEPORTING_ARGS(info,context));
-
-Details_BadArgumentException::Details_BadArgumentException() : Details_BaseException()
-{
-}
-
-MEMBER_FUNCTION_MAKE_OBJECT_DEFINITION(Details_BadArgumentException, CODEPORTING_ARGS(), CODEPORTING_ARGS());
 
 } // namespace TypesPorting
 
