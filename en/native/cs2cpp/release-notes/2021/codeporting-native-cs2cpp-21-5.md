@@ -16,17 +16,17 @@ weight: "1"
 
 ## Major Features ##
 
-1. Project documentation on docs.codeporting.com was actualized and improved.
-1. `OrderByDescending()` LINQ call was supported.
+1. Project documentation on docs.codeporting.com was updated and improved.
+1. The `OrderByDescending()` LINQ call was supported.
 
 ## Minor fixes ##
 
 1. The code generated for the 'switch' statement was simplified.
-1. The structure of target cmake files included into release packages was optimized.
-1. `Path::GetRandomFileName()` method returning same names on consequent calls was fixed.
-1. `StreamWriter` class incorrectly disposing inner stream in the destructor was fixed.
-1. Porter no longer generates unneeded default constructors for exception classes.
-1. Performance of BinaryReader class was improved.
+1. The structure of the target cmake files included into release packages was optimized.
+1. The `Path::GetRandomFileName()` method returning the same name on consequent calls was fixed.
+1. The `StreamWriter` class incorrectly disposing the inner stream in the destructor was fixed.
+1. The porter no longer generates unneeded default constructors for exception classes.
+1. Performance of the `BinaryReader` class was improved.
 
 Please consult respective sections of our wiki for more information.
 
