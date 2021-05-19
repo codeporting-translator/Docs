@@ -1,3 +1,19 @@
+---
+date: "2021-05-19"
+author:
+  display_name: "Dmitry Baskakov"
+draft: "false"
+toc: true
+title: "Qt support"
+linktitle: "Qt support"
+menu:
+  docs:
+    parent: "Developer Guide"
+    weight: "3"
+lastmod: "2021-05-19"
+weight: "3"
+---
+
 [Qt](https://www.qt.io/) is a widely used C++ framework. It provides the libraries for many usecases. There is also an IDE available which is called Qt Creator. This page contains information on how these can be used with CodePorting.Native Cs2Cpp.
 
 ## Qt data types conversion ##
