@@ -1021,10 +1021,46 @@ If enabled, forces production of shared_api_defs.h file and inserts correspond
 
 Allows porting the try-finally statement as a lambda expression instead of guard object placement.
 
+{{< highlight cs >}}
+try
+{
+    InnerMethod();
+}
+finally
+{
+    Console.WriteLine("Finally");
+    throw new Exception();
+}
+{{< /highlight >}}
+
 | Allowed value | Meaning | Example
 ---| ---| ---|
-| true | try-finally statement is translated through lambdas. |
-| false | try-finally statement is translated using sentry object. |
+| true | try-finally statement is translated through lambdas. | {{< highlight cpp >}}
+System::DoTryFinally([&] /* try-catch block */ 
+{
+    InnerMethod();
+}
+, [&] /* finally block */ 
+{
+    System::Console::WriteLine(u"Finally");
+});
+{{< /highlight >}} | 
+| false | try-finally statement is translated using sentry object. | {{< highlight cpp >}}
+auto __finally_guard_0 = ::System::MakeScopeGuard([]()
+{
+    System::Console::WriteLine(u"Finally");
+    throw System::Exception();
+});
+
+try
+{
+    InnerMethod();
+}
+catch (...)
+{
+    throw;
+}
+{{< /highlight >}} | 
 
 **Default value**: false
 
@@ -1032,10 +1068,18 @@ Allows porting the try-finally statement as a lambda expression instead of guard
 
 Forces translating complex property assignment operators using lambdas.
 
+{{< highlight cs >}}
+obj.PublicProperty += "abc";
+{{< /highlight >}}
+
 | Allowed value | Meaning | Example
 ---| ---| ---|
-| true | Complex property assignments use lambdas. |
-| false | Complex property assignments are translated using default approach. |
+| true | Complex property assignments use lambdas. | {{< highlight cpp >}}
+System::WithLambda::setter_add_wrap(GETTER_SETTER_LAMBDA_ARGS(obj, PublicProperty), u"abc")
+{{< /highlight >}} | 
+| false | Complex property assignments are translated using default approach. | {{< highlight cpp >}}
+System::setter_add_wrap(static_cast<ConcreteBase*>(obj.GetPointer()), &ConcreteBase::get_PublicProperty, &ConcreteBase::set_PublicProperty, u"abc");
+{{< /highlight >}} | 
 
 **Default value**: false
 
@@ -1601,60 +1645,92 @@ ExtensionClass::CallExtensionMethod(obj, arg);
 
 Allows the porter to generate begin(), end() and other STL-like iterators access methods for those classes implementing the generic IEnumerable interface.
 
-The condition for generating methods is a simple implementation of the GetEnumerator method of the generic IEnumerable interface, which returns a call to the GetEnumerator method of a field or auto-property, for which type the porter also generated begin/end methods, or this type is one of our system collections that have begin/end methods.
+If the class impelements the generic IEnumerable interface via returning GetEnumerator() call of its field or auto-property, and the type of this field or auto-property provides begin() and end() methods, these methods will be proxied at the class level. For example, the following code will go:
 
-This option has a lower priority than the CppNoBeginEndMethods and CppGenerateBeginEndMethods attributes.
-
-| Allowed value | Meaning | Example
----| ---| ---|
-| true | Generate iterator methods. | {{< highlight cs >}}
+{{< highlight cs >}}
 public class Class0 : IEnumerable<int>
 {
     ...
     protected List<int> list; // List has begin/end methods.
     public IEnumerator<int> GetEnumerator()
     {
-        return list.GetEnumerator(); // doing nothing else than return list.GetEnumerator()
+        return list.GetEnumerator(); // doing nothing but return list.GetEnumerator()
     }
     ...
 }
-{{< /highlight >}} | 
-| true | Do not generate iterator methods. | {{< highlight cs >}}
-public class TestNotGenerate0 : IEnumerable<int>
+{{< /highlight >}}
+
+If the implementation of GetEnumerator() is more complex, or the type of the property or field it operates doesn't provide begin() and end() methods, these won't be generated at class level, too. The following classes are not eligable for begin() and end() methods generation:
+
+{{< highlight cs >}}
+public class Class1 : IEnumerable<int>
 {
     ...
     protected List<int> list; // List has begin/end methods.
     public IEnumerator<int> GetEnumerator()
     {
-        int i = 10; // doing somthing else than return list.GetEnumerator()
+        list = new List<int>() { 1, 2, 3 }; // Modifying member before calling GetEnumerator()
         return list.GetEnumerator();
     }
     ...
 }
-{{< /highlight >}} | 
-| true | Do not generate iterator methods. | {{< highlight cs >}}
-public class Class0 : IEnumerable<int>
+public class Class2 : IEnumerable<int>
 {
     ...
-    protected CustomType list; // CustomType has no begin/end methods.
+    protected Class1 list; // Class1 has no begin/end methods.
     public IEnumerator<int> GetEnumerator()
     {
         return list.GetEnumerator(); // doing nothing else than return list.GetEnumerator()
     }
     ...
 }
-{{< /highlight >}} | 
-| false | Do not generate iterator methods. | {{< highlight cs >}}
-public class Class0 : IEnumerable<int>
+{{< /highlight >}}
+
+This behavior can be overwritten by using CppNoBeginEndMethods or CppGenerateBeginEndMethods attributes regardless of the option's value.
+
+| Allowed value | Meaning | Example
+---| ---| ---|
+| true | Generate iterator methods. | {{< highlight cpp >}}
+class Class0 : public System::Collections::Generic::IEnumerable<int32_t>
 {
     ...
-    protected List<int> list; // List has begin/end methods.
-    public IEnumerator<int> GetEnumerator()
-    {
-        return list.GetEnumerator(); // doing nothing else than return list.GetEnumerator()
-    }
+public:
+    /// A collection type whose iterator types is used as iterator types in the current collection.
+    using iterator_holder_type = System::Collections::Generic::List<int32_t>;
+    /// Iterator type.
+    using iterator = typename iterator_holder_type::iterator;
+    /// Const iterator type.
+    using const_iterator = typename iterator_holder_type::const_iterator;
+    System::SharedPtr<System::Collections::Generic::IEnumerator<int32_t>> GetEnumerator() override;
+    /// Gets iterator pointing to the first element (if any) of the collection.
+    /// @return An iterator pointing to the first element (if any) of the collection
+    iterator begin() noexcept;
+    /// Gets iterator pointing right after the last element (if any) of the collection.
+    /// @return An iterator pointing right after the last element (if any) of the collection
+    iterator end() noexcept;
+    /// Gets iterator pointing to the first element (if any) of the const-qualified instance of the collection.
+    /// @return An iterator pointing to the first element (if any) of the const-qualified instance of the collection
+    const_iterator begin() const noexcept;
+    /// Gets iterator pointing right after the last element (if any) of the const-qualified instance of the collection.
+    /// @return An iterator pointing right after the last element (if any) of the const-qualified instance of the collection
+    const_iterator end() const noexcept;
+    /// Gets iterator pointing to the first const-qualified element (if any) of the collection.
+    /// @return An iterator pointing to the first const-qualified element (if any) of the collection
+    const_iterator cbegin() const noexcept;
+    /// Gets iterator pointing right after the last const-qualified element (if any) of the collection.
+    /// @return An iterator pointing right after the last const-qualified element (if any) of the collection
+    const_iterator cend() const noexcept;
     ...
-}
+};
+{{< /highlight >}} | 
+| false | Do not generate iterator methods. | {{< highlight cpp >}}
+class Class0 : public System::Collections::Generic::IEnumerable<int32_t>
+{
+    ...
+public:
+    System::SharedPtr<System::Collections::Generic::IEnumerator<int32_t>> GetEnumerator() override;
+    ...
+};
 {{< /highlight >}} | 
 
 **Since version:** 21.1
