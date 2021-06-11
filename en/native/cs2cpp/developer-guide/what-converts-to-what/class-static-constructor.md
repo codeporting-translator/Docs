@@ -1,5 +1,5 @@
 ---
-date: "2021-05-09"
+date: "2021-06-10"
 author:
   display_name: "Wiki code generator"
 draft: "false"
@@ -10,7 +10,7 @@ menu:
   docs:
     parent: "What Converts to What"
     weight: "1"
-lastmod: "2021-05-09"
+lastmod: "2021-06-10"
 weight: "1"
 ---
 
@@ -21,6 +21,9 @@ Additional command-line options passed to CsToCppPorter: none.
 ## Source C# Code ##
 
 {{< highlight cs >}}
+using NUnit.Framework;
+
+
 namespace MembersPorting
 {
     public class ClassStaticConstructor
@@ -29,7 +32,34 @@ namespace MembersPorting
         {
         }
     }
+
+    public static class DeletedConstructor
+    {
+        static void Foo() { }
+    }
+
+    public static class StaticConstructorExists
+    {
+        static readonly bool Foo;
+
+        static void Bar() { }
+
+        static StaticConstructorExists()
+        {
+            Foo = false;
+        }
+    }
+
+    [TestFixture]
+    public static class NonDeletedConstructor { }
+
+    [CsToCppPorter.CppDeferredInit]
+    internal static class SlidesIssue
+    {
+        static SlidesIssue() {}
+    }
 }
+
 {{< /highlight >}}
 
 ## Ported Code ##
@@ -40,6 +70,9 @@ namespace MembersPorting
 #pragma once
 
 #include <system/object.h>
+#include <mutex>
+#include <memory>
+#include <gtest/gtest.h>
 
 namespace MembersPorting {
 
@@ -54,6 +87,54 @@ class ClassStaticConstructor : public System::Object
 private:
 
     static struct __StaticConstructor__ { __StaticConstructor__(); } s_constructor__;
+    
+};
+
+class DeletedConstructor
+{
+    typedef DeletedConstructor ThisType;
+    
+private:
+
+    static void Foo();
+    
+public:
+    DeletedConstructor() = delete;
+};
+
+class StaticConstructorExists
+{
+    typedef StaticConstructorExists ThisType;
+    
+private:
+
+    static bool Foo;
+    
+    static void Bar();
+    
+    static struct __StaticConstructor__ { __StaticConstructor__(); } s_constructor__;
+    
+public:
+    StaticConstructorExists() = delete;
+};
+
+class NonDeletedConstructor
+{
+    typedef NonDeletedConstructor ThisType;
+    
+};
+
+class SlidesIssue
+{
+    typedef SlidesIssue ThisType;
+    
+public:
+
+    SlidesIssue();
+    
+private:
+
+    static void __StaticConstructor__();
     
 };
 
@@ -76,6 +157,61 @@ ClassStaticConstructor::__StaticConstructor__ ClassStaticConstructor::s_construc
 
 ClassStaticConstructor::__StaticConstructor__::__StaticConstructor__()
 {
+}
+
+void DeletedConstructor::Foo()
+{
+}
+
+bool StaticConstructorExists::Foo = false;
+
+StaticConstructorExists::__StaticConstructor__ StaticConstructorExists::s_constructor__;
+
+void StaticConstructorExists::Bar()
+{
+}
+
+StaticConstructorExists::__StaticConstructor__::__StaticConstructor__()
+{
+    StaticConstructorExists::Foo = false;
+}
+
+namespace gtest_test
+{
+
+class NonDeletedConstructor : public ::testing::Test
+{
+protected:
+    static void SetUpTestCase()
+    {
+    };
+    
+    static void TearDownTestCase()
+    {
+    };
+    
+};
+
+} // namespace gtest_test
+
+void SlidesIssue::__StaticConstructor__()
+{
+    thread_local static bool inProgress = false;
+    if (inProgress) return;
+    static const auto markFinished = [](bool *inProgress) { *inProgress = false; };
+    inProgress = true;
+    const std::unique_ptr<bool, decltype(markFinished)> finish(&inProgress, markFinished);
+    
+    static std::once_flag once;
+    std::call_once(once, []
+    {
+    });
+}
+
+SlidesIssue::SlidesIssue()
+{
+    __StaticConstructor__();
+    
 }
 
 } // namespace MembersPorting

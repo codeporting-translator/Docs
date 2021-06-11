@@ -1,5 +1,5 @@
 ---
-date: "2021-05-09"
+date: "2021-06-10"
 author:
   display_name: "Wiki code generator"
 draft: "false"
@@ -10,7 +10,7 @@ menu:
   docs:
     parent: "What Converts to What"
     weight: "1"
-lastmod: "2021-05-09"
+lastmod: "2021-06-10"
 weight: "1"
 ---
 
@@ -88,6 +88,29 @@ namespace StatementsPorting
             }
         }
     }
+    
+    public class Record
+    {
+        public int Value1 { get; set; }
+        public int Value2 { get; set; }
+    }
+
+    public class Map : Dictionary<uint, Dictionary<uint, Record>>
+    {
+        public void Add(uint key, Record record)
+        {
+        }
+
+        public void Add(Map map)
+        {
+            foreach (var pair in map)
+            {
+                foreach (var fir in pair.Value)
+                    Add(pair.Key, fir.Value);
+            }
+        }
+    }
+    
 }
 
 {{< /highlight >}}
@@ -99,9 +122,12 @@ namespace StatementsPorting
 {{< highlight cpp >}}
 #pragma once
 
+#include <system/details/pointer_collection_helpers.h>
 #include <system/collections/list.h>
 #include <system/collections/ienumerable.h>
+#include <system/collections/dictionary.h>
 #include <system/array.h>
+#include <cstdint>
 
 namespace System { namespace Collections { namespace Generic { template <typename> class IEnumerator; } } }
 
@@ -165,6 +191,50 @@ private:
     
 };
 
+class Record : public System::Object
+{
+    typedef Record ThisType;
+    typedef System::Object BaseType;
+    
+    typedef ::System::BaseTypesInfo<BaseType> ThisTypeBaseTypesInfo;
+    RTTI_INFO_DECL();
+    
+public:
+
+    int32_t get_Value1();
+    void set_Value1(int32_t value);
+    int32_t get_Value2();
+    void set_Value2(int32_t value);
+    
+    Record();
+    
+private:
+
+    int32_t pr_Value1;
+    int32_t pr_Value2;
+    
+};
+
+class Map : public System::Collections::Generic::Dictionary<uint32_t, System::SharedPtr<System::Collections::Generic::Dictionary<uint32_t, System::SharedPtr<StatementsPorting::Record>>>>
+{
+    typedef Map ThisType;
+    typedef System::Collections::Generic::Dictionary<uint32_t, System::SharedPtr<System::Collections::Generic::Dictionary<uint32_t, System::SharedPtr<StatementsPorting::Record>>>> BaseType;
+    
+    typedef ::System::BaseTypesInfo<BaseType> ThisTypeBaseTypesInfo;
+    RTTI_INFO_DECL();
+    
+public:
+
+    void Add(uint32_t const &key, System::SharedPtr<Record> const &record);
+    void Add(System::SharedPtr<Map> const &map);
+    void SetTemplateWeakPtr(uint32_t argument) override;
+    
+protected:
+
+    virtual ~Map();
+    
+};
+
 } // namespace StatementsPorting
 
 
@@ -178,7 +248,9 @@ private:
 
 #include <system/enumerator_adapter.h>
 #include <system/console.h>
+#include <system/collections/keyvalue_pair.h>
 #include <system/collections/ilist.h>
+#include <system/collections/ienumerator.h>
 
 namespace StatementsPorting {
 
@@ -214,7 +286,7 @@ void ForeachStatements::EnclosedForeach(System::ArrayPtr<System::ArrayPtr<System
 void ForeachStatements::ForeachOverList()
 {
     auto list = System::MakeObject<System::Collections::Generic::List<System::String>>(System::MakeArray<System::String>({u"1", u"2", u"3"}));
-    for (auto i : list)
+    for (const auto& i : list)
     {
         System::Console::WriteLine(i);
     }
@@ -223,7 +295,7 @@ void ForeachStatements::ForeachOverList()
 void ForeachStatements::ForeachOverIList()
 {
     System::SharedPtr<System::Collections::Generic::IList<System::String>> list = System::MakeObject<System::Collections::Generic::List<System::String>>(System::MakeArray<System::String>({u"1", u"2", u"3"}));
-    for (auto i : System::IterateOver(list))
+    for (const auto& i : System::IterateOver(list))
     {
         System::Console::WriteLine(i);
     }
@@ -232,7 +304,7 @@ void ForeachStatements::ForeachOverIList()
 void ForeachStatements::ForeachOverThis()
 {
     m_collection = System::MakeObject<System::Collections::Generic::List<System::String>>(System::MakeArray<System::String>({u"1", u"2", u"3"}));
-    for (auto i : *this)
+    for (const auto& i : *this)
     {
         System::Console::WriteLine(i);
     }
@@ -282,6 +354,57 @@ System::Object::shared_members_type StatementsPorting::ForeachStatements::GetSha
     return result;
 }
 #endif
+
+RTTI_INFO_IMPL_HASH(3718855054u, ::StatementsPorting::Record, ThisTypeBaseTypesInfo);
+
+int32_t Record::get_Value1()
+{
+    return pr_Value1;
+}
+
+void Record::set_Value1(int32_t value)
+{
+    pr_Value1 = value;
+}
+
+int32_t Record::get_Value2()
+{
+    return pr_Value2;
+}
+
+void Record::set_Value2(int32_t value)
+{
+    pr_Value2 = value;
+}
+
+Record::Record() : pr_Value1(0), pr_Value2(0)
+{
+}
+
+RTTI_INFO_IMPL_HASH(1762413471u, ::StatementsPorting::Map, ThisTypeBaseTypesInfo);
+
+void Map::Add(uint32_t const &key, System::SharedPtr<Record> const &record)
+{
+}
+
+void Map::Add(System::SharedPtr<Map> const &map)
+{
+    for (auto pair : map)
+    {
+        for (auto fir : pair.get_Value())
+        {
+            Add(pair.get_Key(), fir.get_Value());
+        }
+    }
+}
+
+Map::~Map()
+{
+}
+
+void ::StatementsPorting::Map::SetTemplateWeakPtr(uint32_t argument)
+{
+}
 
 } // namespace StatementsPorting
 

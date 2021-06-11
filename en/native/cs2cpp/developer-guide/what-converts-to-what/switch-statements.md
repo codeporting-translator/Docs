@@ -1,5 +1,5 @@
 ---
-date: "2021-05-09"
+date: "2021-06-10"
 author:
   display_name: "Wiki code generator"
 draft: "false"
@@ -10,7 +10,7 @@ menu:
   docs:
     parent: "What Converts to What"
     weight: "1"
-lastmod: "2021-05-09"
+lastmod: "2021-06-10"
 weight: "1"
 ---
 
@@ -155,6 +155,12 @@ namespace StatementsPorting
                             break;
                         }
                     }
+                    break;
+                case "choice3":
+                    if (value == "aaa")
+                        break;
+
+                    Console.WriteLine("choice3 branch");
                     break;
             }
         }
@@ -406,6 +412,14 @@ void SwitchStatements::StringSwitchAdvanced()
                 goto switch_break_0;
             }
         }
+    }
+    else if (switch_value_0 == u"choice3")
+    {
+        if (value == u"aaa")
+        {
+            goto switch_break_0;
+        }
+        System::Console::WriteLine(u"choice3 branch");
     }
     else 
     {

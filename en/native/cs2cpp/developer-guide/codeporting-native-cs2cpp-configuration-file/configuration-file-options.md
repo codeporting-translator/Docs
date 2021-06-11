@@ -2290,6 +2290,8 @@ if (NOT DEFINED ENV{DISABLE_ASPOSECPPLIB_UNITY_BUILD})
 endif()
 {{< /highlight >}}
 
+**Since version:** 21.6
+
 ## Code readability ##
 
 These options improve generated code's readability. However, the code generated now doesn't handle some corner cases properly or in the same way C# code does, so using these options on big codebases is error-prone. Instead, use them to port e. g. code samples for your projects being ported, to make them easy to read.
@@ -2536,7 +2538,7 @@ Makes porter remove comments for private entities.
 
 **Since version:** 20.8
 
-### Legacy options ###
+## Legacy options ##
 
 Options no longer supported but still recognized (and ignored) by porting application for compatibility reasons are:
 
