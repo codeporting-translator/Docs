@@ -1,3 +1,19 @@
+---
+date: "2021-05-19"
+author:
+  display_name: "xwiki:XWiki.denisdetochka"
+draft: "false"
+toc: true
+title: "C++ user-defined exception classes"
+linktitle: "C++ user-defined exception classes"
+menu:
+  docs:
+    parent: "Developer Guide"
+    weight: "10"
+lastmod: "2021-05-20"
+weight: "10"
+---
+
 ## Introduction ##
 
 Due to the fact that C++ allows to allocate an exception on stack, when in C# language exception is a reference type,  it was necessary to design a solution which allows to extend exception instance lifetime and preserve its type without losing an opportunity to use exception in the common for C++ way.
