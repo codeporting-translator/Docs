@@ -226,6 +226,10 @@ System::String a = u"абв";
 
 ### obfuscate_cpp_headers ###
 
+{{< highlight xml >}}
+<opt name="obfuscate_cpp_headers" value="true" keep_field_names="false" />
+{{< /highlight >}}
+
 If enabled, makes porter generate 'obfuscated' headers put into obfuscated_include/ directory alongside with standard include/ one. 'Obfuscated' headers get some information on implementation details excluded. For example, types of pointers held by private class memebers are excluded.
 
 One still needs 'usual' headers from include/ directory to build the ported project itself. However, for external delivery the headers from obfuscated_include/ must be used. When building your package, make sure to put obfuscated_include/ directory content in place of usual include/ files.
@@ -236,6 +240,10 @@ One still needs 'usual' headers from include/ directory to build the ported proj
 | false | Generate non-obfuscated includes only. |
 
 **Default value**: false
+
+| Additional attribute | Meaning | Allowed values | Mandatory | Default value
+---| ---| ---| ---| ---|
+| keep_field_names | Whether to keep original fields name while generating obfuscated code. | true, false | No | false
 
 ### force_public_headers ###
 
