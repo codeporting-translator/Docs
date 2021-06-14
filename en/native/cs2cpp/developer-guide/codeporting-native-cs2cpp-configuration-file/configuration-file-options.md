@@ -2276,30 +2276,6 @@ Changes the directory where source files of a ported project will be stored. The
 
 **Since version:** 21.4
 
-### unity_build ###
-
-When this option is used, the porter enables the building process using UNITY_BUILD for the ported project. E.g. the following part of the project configuration file:
-
-{{< highlight xml >}}
-<unity_build batch_size="16">
-  <excluded_files>
-    <file name="main.cpp" />
-  </excluded_files>
-</unity_build>
-{{< /highlight >}}
-
-will look like this in CMakeLists.txt:
-
-{{< highlight cmake >}}
-if (NOT DEFINED ENV{DISABLE_ASPOSECPPLIB_UNITY_BUILD})
-  set(CMAKE_UNITY_BUILD ON)
-  set(CMAKE_UNITY_BUILD_BATCH_SIZE 16)
-  set_property(SOURCE main.cpp PROPERTY SKIP_UNITY_BUILD_INCLUSION TRUE)
-endif()
-{{< /highlight >}}
-
-**Since version:** 21.6
-
 ## Code readability ##
 
 These options improve generated code's readability. However, the code generated now doesn't handle some corner cases properly or in the same way C# code does, so using these options on big codebases is error-prone. Instead, use them to port e. g. code samples for your projects being ported, to make them easy to read.

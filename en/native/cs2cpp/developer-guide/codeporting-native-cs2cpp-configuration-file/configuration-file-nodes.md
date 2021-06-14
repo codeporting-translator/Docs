@@ -1062,3 +1062,35 @@ Allowed sub-items:
 | Attribute | Meaning | Mandatory | Default Value
 ---| ---| ---| ---|
 | name | Fully qualified name of C# class. | Yes | -
+
+## unity_build ##
+
+{{< highlight xml >}}
+<unity_build batch_size="16">
+  <excluded_files>
+    <file name="main.cpp" />
+  </excluded_files>
+</unity_build>
+{{< /highlight >}}
+
+Enables the building process using UNITY_BUILD for the ported project.
+
+| Attribute | Meaning | Mandatory | Default Value
+---| ---| ---| ---|
+| batch_size | Sets the batch size of UNITY_BUILD. The value must be greater that 0. Otherwise, UNITY_BUILD will be disabled. | Yes | -
+
+Since version: 21.6.
+
+Allowed sub-items:
+
+### excluded_files ###
+
+Contains a list of files that must be excluded from UNITY_BUILD.
+
+Allowed sub-items:
+
+#### file ####
+
+| Attribute | Meaning | Mandatory | Default Value
+---| ---| ---| ---|
+| name | A path to a file that must be excluded from UNITY_BUILD. | Yes | -
