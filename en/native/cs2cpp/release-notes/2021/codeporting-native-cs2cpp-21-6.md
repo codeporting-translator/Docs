@@ -19,27 +19,24 @@ weight: "1"
 1. Multiple new classes from the `System::Xml::Schema` namespace are implemented.
 1. The Boost C++ Libraries are updated to version 1.76.
 1. The obfuscation mechanism is improved. Now members that cannot be accessed beyond the current class are deleted from the public headers if possible. If deleting such members may lead to malfunction, stubs are generated.
+1. Usage examples are added for the collections.
 
 ## Minor fixes ##
 
 1. The `ASPOSECPP_SHARED_API` macro is removed from documentation.
 1. The default constructor is marked as deleted for the ported static classes.
-1. The foreach-based loop performance in ported code is improved.
-1. Now the non-virtual methods/constructors/setters arguments are translated as `const T&` instead of `T`.
-1. Parent types are considered when the foreach statement is ported.
-1. The metafile functionality under the `ASPOSE_DUMMY_META_FILE` define is improved.
+1. The foreach-based loop performance in a ported code is improved when the `foreach_as_range_based_for_loop` option is enabled. This optimization affects all containers that contains elements with the `SmartPtr<>` or `String` type except for arrays.
+1. The `force_const_ref_parameters` option is added. When this option is enabled, the non-virtual methods/constructors/setters/operators parameters with `String` or `SmartPtr<>` types are translated as `const T&` instead of `T`.
+1. The porter didn't translate 'foreach' statements properly if the container in question didn't define begin()/end() methods directly, but inherited them instead. This bug was fixed.
 1. Now the `XmlTextReader` class contains the `InitLibXml2EntitySubstitution` method used to initialize `libxml2` before use.
 1. The begin-end methods generation is improved.
 1. The static initialization order is fixed in the `HttpWebRequest` class.
 1. Sometimes the porter skips the `break` statement in the switch-case statement. Fixed.
-1. Fixed translation of arguments marked by the `CppArgumentKind` attribute when the `force_const_ref_parameters` option is enabled.
 1. A missing include is fixed when return means casting.
 1. Operators for the `System::Xml::Schema` namespace enums are fixed.
 1. Implementation of the `SslStream` class stalls in handshake process. It is rewritten using `Boost::beast` and `Botan::TLS::Stream`.
 1. Now decimals are passed by reference when possible.
-1. The asposecpplib projects and most of test projects are built using `UNITY_BUILD`.
-1. The Qt-related files are added to the examples repository.
-1. Usage examples are added for the collections.
+1. The conversion functions to make CodePorting.Native Cs2Cpp types work with Qt environment and examples to them were added to [examples repository](https://github.com/codeporting-native/codeporting-native-cs2cpp). Qt Creator debugger helper files allowing the user to inspect contents of CodePorting.Native Cs2Cpp types were added to [examples repository](https://github.com/codeporting-native/codeporting-native-cs2cpp/tree/master/qtcreator_debugging_helpers). [Documentation on how to use these](https://github.com/codeporting-native/codeporting-native-cs2cpp/blob/master/qtcreator_debugging_helpers/README.md) was added.
 
 Please consult respective sections of our wiki for more information.
 
@@ -69,6 +66,7 @@ Please consult respective sections of our wiki for more information.
 | EMAILCPP-303 | Refactor SslStream using Boost::beast and Botan::TLS::Stream | Task |
 | CSPORTCPP-3867 | Add usage examples for system classes | Task |
 | TASKSCPP-1628 | Optimize Decimal class API - pass Decimals by reference when possible. | Task |
+| WORDSCPP-815 | Implement XmlReader.CanResolveEntity property | Task |
 
 ## Public API and Backward Incompatible Changes ##
 
