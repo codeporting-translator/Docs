@@ -1803,6 +1803,17 @@ void foo() {
 
 **Default value:** false
 
+### force_const_ref_parameters ###
+
+| Allowed value | Meaning | Example
+---| ---| ---|
+| true | The non-virtual methods/constructors/setters/operators parameters with String or SmartPtr<> types are passed by const reference in a ported code. |
+| false | The non-virtual methods/constructors/setters/operators parameters with String or SmartPtr<> types are passed by value in a ported code. |
+
+**Since version:** 21.6
+
+**Default value:** false
+
 ## Debug and developer version code options ##
 
 These options control debug and developer version code in generated C++ files.
