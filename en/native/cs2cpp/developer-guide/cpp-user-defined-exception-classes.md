@@ -1,15 +1,15 @@
 ---
 date: "2021-05-19"
 author:
-display_name: "xwiki:XWiki.denisdetochka"
+  display_name: "xwiki:XWiki.denisdetochka"
 draft: "false"
 toc: true
 title: "C++ user-defined exception classes"
 linktitle: "C++ user-defined exception classes"
 menu:
-docs:
-parent: "Developer Guide"
-weight: "10"
+  docs:
+    parent: "Developer Guide"
+    weight: "10"
 lastmod: "2021-05-20"
 weight: "10"
 ---
@@ -27,19 +27,19 @@ Due to the fact that C# exceptions are represented as object type it can be stor
 Exception e = null;
 try
 {
-throw new ArgumentException("abc");
+    throw new ArgumentException("abc");
 }
 catch (Exception caught)
 {
-e = caught; // (1)
+    e = caught; // (1)
 }
 try
 {
-throw e; // (2)
+    throw e; // (2)
 }
 catch (ArgumentException arg)
 {
-Console.WriteLine("Caught!");
+    Console.WriteLine("Caught!");
 }
 {{< /highlight >}}
 
@@ -87,7 +87,7 @@ Let us have an instance of ExceptionWrapper&lt;System::Details_Exception&gt; cla
 // C# code sample
 public class SomeException : Exception
 {
-public SomeException() { }
+    public SomeException() { }
 
     public SomeException(object message) : base(message == null ? null : message.ToString()) { }
 }
@@ -100,15 +100,15 @@ using SomeOtherException = System::ExceptionWrapper<Details_SomeOtherException>;
 
 class Details_SomeOtherException : public System::Details_DivideByZeroException
 {
-typedef Details_SomeOtherException ThisType;
-typedef System::Details_DivideByZeroException BaseType;
-
+    typedef Details_SomeOtherException ThisType;
+    typedef System::Details_DivideByZeroException BaseType;
+    
     typedef ::System::BaseTypesInfo<BaseType> ThisTypeBaseTypesInfo;
     RTTI_INFO_DECL();
     
     friend class System::ExceptionWrapperHelper;
     template <typename T> friend class System::ExceptionWrapper;
-
+    
 protected:
 
     [[noreturn]] void DoThrow(const System::ExceptionPtr& self) const override;
@@ -120,7 +120,7 @@ protected:
     Details_SomeOtherException(System::SharedPtr<System::Object> message);
     
     MEMBER_FUNCTION_MAKE_OBJECT_DECLARATION(Details_SomeOtherException, CODEPORTING_ARGS(System::SharedPtr<System::Object> message));
-
+    
 };
 {{< /highlight >}}
 
@@ -130,11 +130,11 @@ RTTI_INFO_IMPL_HASH_NAMED(927407390u, ::Details_SomeException, "SomeException", 
 
 [[noreturn]] void Details_SomeException::DoThrow(const System::ExceptionPtr& self) const
 {
-throw System::ExceptionWrapper<Details_SomeException>(self);
+    throw System::ExceptionWrapper<Details_SomeException>(self);
 }
 
 Details_SomeException::Details_SomeException(System::SharedPtr<System::Object> message)
-: System::Details_Exception(message == nullptr ? nullptr : System::ObjectExt::ToString(message))
+     : System::Details_Exception(message == nullptr ? nullptr : System::ObjectExt::ToString(message))
 {    
 }
 
@@ -151,27 +151,27 @@ MEMBER_FUNCTION_MAKE_OBJECT_DEFINITION(Details_SomeException, CODEPORTING_ARGS()
 // C++ exception throwing
 try
 {
-// Exception is an alias to ExceptionWrapper<Details_Exception>
-Exception exception = nullptr;
-try
-{
-// ExceptionWrapper<Details_SomeException> allocated on stack, Details_SomeException allocated on heap by ExceptionWrapper<Details_SomeException>
-// Fresh instance of ExceptionWrapper<Details_SomeException> is thrown
-throw SomeException();
+    // Exception is an alias to ExceptionWrapper<Details_Exception>
+    Exception exception = nullptr;
+    try
+    {
+        // ExceptionWrapper<Details_SomeException> allocated on stack, Details_SomeException allocated on heap by ExceptionWrapper<Details_SomeException>
+        // Fresh instance of ExceptionWrapper<Details_SomeException> is thrown
+        throw SomeException();
+    }
+    catch (SomeException& e)
+    {
+        // It is caught in catch block and reassigned to `exception` variable with exception type trimming.
+        // But this trimming is applied to ExceptionWrapper<Details_SomeException> only, which still stores shared pointer to Details_SomeException.
+        exception = e;
+        // ExceptionWrapper<Details_Exception>::Throw() method is called.
+        // It calls Details_SomeException::DoThrow() method.
+        // Fresh ExceptionWrapper<Details_SomeException> instance created inside Details_SomeException::DoThrow() is thrown
+        exception.Throw();
+    }
 }
 catch (SomeException& e)
 {
-// It is caught in catch block and reassigned to `exception` variable with exception type trimming.
-// But this trimming is applied to ExceptionWrapper<Details_SomeException> only, which still stores shared pointer to Details_SomeException.
-exception = e;
-// ExceptionWrapper<Details_Exception>::Throw() method is called.
-// It calls Details_SomeException::DoThrow() method.
-// Fresh ExceptionWrapper<Details_SomeException> instance created inside Details_SomeException::DoThrow() is thrown
-exception.Throw();
-}
-}
-catch (SomeException& e)
-{
-// ExceptionWrapper<Details_SomeException> instance is caught without exception type trimming
+    // ExceptionWrapper<Details_SomeException> instance is caught without exception type trimming
 }
 {{< /highlight >}}
