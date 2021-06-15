@@ -36,7 +36,7 @@ weight: "1"
 1. Operators for the `System::Xml::Schema` namespace enums are fixed.
 1. Implementation of the `SslStream` class stalls in handshake process. It is rewritten using `Boost::beast` and `Botan::TLS::Stream`.
 1. Now decimals are passed by reference when possible.
-1. The conversion functions to make CodePorting.Native Cs2Cpp types work with Qt environment and examples to them were added to [examples repository](https://github.com/codeporting-native/codeporting-native-cs2cpp). Qt Creator debugger helper files allowing the user to inspect contents of CodePorting.Native Cs2Cpp types were added to [examples repository](https://github.com/codeporting-native/codeporting-native-cs2cpp/tree/master/qtcreator_debugging_helpers). [Documentation on how to use these](https://github.com/codeporting-native/codeporting-native-cs2cpp/blob/master/qtcreator_debugging_helpers/README.md) was added.
+1. The conversion functions to make CodePorting.Native Cs2Cpp types work with Qt environment and examples to them were added to [examples repository](https://github.com/codeporting-native/codeporting-native-cs2cpp). Qt Creator debugger helper files allowing the user to inspect contents of CodePorting.Native Cs2Cpp types were added to [examples repository](https://github.com/codeporting-native/codeporting-native-cs2cpp/tree/master/qtcreator_debugging_helpers). [Documentation on how to use these](https://docs.codeporting.com/native/cs2cpp/developer-guide/qt-support/) was added.
 
 Please consult respective sections of our wiki for more information.
 
