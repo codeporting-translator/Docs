@@ -391,7 +391,8 @@ public class StringOrdinalComparer : IComparer<string>
 #### porter.config ####
 
 {{< highlight xml >}}
-<attribute name="CppSkipEntity" interface="System.Collections.Generic.IEnumerator" get="System.Object Current()"/> <!-- mandatory for success compile on C+\+ side, see explanation of this attribute on this page -->
+<!-- mandatory for compilation on C++ side, as non-generic collections are not supported -->
+<attribute name="CppSkipEntity" interface="System.Collections.Generic.IEnumerator" get="System.Object Current()"/>
 <attribute name="CppConstMethod" interface="System.Collections.Generic.IEnumerator" get="System.Int32 Current()"/>
 <attribute name="CppConstMethod" interface="System.Collections.Generic.IEnumerator" get="System.String Current()"/>
 <attribute name="CppConstMethod" interface="System.Collections.Generic.IComparer" method="System.Int32 Compare(System.Int32, System.Int32)"/>
