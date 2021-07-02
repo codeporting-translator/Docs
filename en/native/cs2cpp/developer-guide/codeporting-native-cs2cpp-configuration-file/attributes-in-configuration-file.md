@@ -171,7 +171,7 @@ To specify a single argument, one may use 'argument' XML attribute. To specify s
 
 {{< highlight xml >}}
 <attribute name="CppConstMethod" get="bool CanRead()"  class="System.IO.Stream" argument="true"/>
-<attribute name="CppIOStreamWrapper" method="void MyMethod(*)"  class="MyClass" argument0="CharType" argument0="TraitsType"/>
+<attribute name="CppIOStreamWrapper" method="void MyMethod(*)"  class="MyClass" argument0="CharType" argument1="TraitsType"/>
 {{< /highlight >}}
 
 Some C# attributes allow using named arguments as well. Currently, only 'parameterkind' argument for CppArgumentKind attribute is allowed.
