@@ -91,7 +91,7 @@ The following XML attributes are mandatory for this condition:
     1. 'property' for a property, with name being property name and argument list being empty,
     1. 'operator' for an operator.
 
-In argument list, it is possible to use '?' as a substitution which means 'one parameter of any type', which is useful for generic parameters. It is also possible to use '*' as a substituion in argument list ('any number of parameters of any types'), return type ('any type') or method name ('any name'). Examples are below.
+In argument list, it is possible to use '?' as a substitution which means 'one parameter of any type', which is useful for generic parameters. It is also possible to use '*' as a substituion in argument list ('any number of parameters of any types'), return type ('any type') or method name ('any name'). Finally, one can use 0-based indexes of generic arguments to refer to them (names of generic arguments are not supported). Examples are below.
 
 {{< highlight xml >}}
 <!-- Method of specific class (and overrides) -->
