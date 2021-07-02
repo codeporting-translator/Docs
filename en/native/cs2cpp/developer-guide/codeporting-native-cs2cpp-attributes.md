@@ -533,7 +533,7 @@ Moves an implementation of a member or of all members of a specific type to hea
 1. Optional: string name of template argument for the character type used by the stream.
 1. Optional: string name of template argument for the character traits used by the stream.
 
-Overloads attributed entity with a version which accepts STL stream instead of SharedPtr<System::IO::Stream>. Overload differs either by attributed argument or by implicit 'value' argument.
+Overloads attributed entity with a version which accepts STL stream instead of SharedPtr&lt;System::IO::Stream&gt;. Overload differs either by attributed argument or by implicit 'value' argument.
 
 {{< highlight cs >}}
 public void IStream([CppIOStreamWrapper(IOStreamType.IStream)] Stream istream)
@@ -1420,7 +1420,7 @@ Specifies values to run test with.
 
 ## xUnit framework attributes ##
 
-This section enlists supported xUnit framework attributes. For more information please refer to xUnit site at <https://github.com/xunit/xunit>.
+This section enlists supported xUnit framework attributes. For more information please refer to xUnit site at &lt;https://github.com/xunit/xunit&gt;.
 
 ### Xunit.Fact ###
 

@@ -1419,7 +1419,7 @@ Allows casts to System.Collections.IList to be ported into compilable code.
 
 ### fix_setter_return_tag ###
 
-Replaces <retruns> tag with <param name="value"> for property setters.
+Replaces &lt;retruns&gt; tag with &lt;param name="value"&gt; for property setters.
 
 {{< highlight cs >}}
 class A
@@ -1440,7 +1440,7 @@ class A
 
 | Allowed value | Meaning | Example
 ---| ---| ---|
-| true | Replaces <returns> tag for setter with <param> tag | {{< highlight cpp >}}
+| true | Replaces &lt;returns&gt; tag for setter with &lt;param&gt; tag | {{< highlight cpp >}}
 class A : public System::Object
 {
 public:
@@ -1807,8 +1807,8 @@ void foo() {
 
 | Allowed value | Meaning | Example
 ---| ---| ---|
-| true | The non-virtual methods/constructors/setters/operators parameters with String or SmartPtr<> types are passed by const reference in a ported code. |
-| false | The non-virtual methods/constructors/setters/operators parameters with String or SmartPtr<> types are passed by value in a ported code. |
+| true | The non-virtual methods/constructors/setters/operators parameters with String or SmartPtr&lt;&gt; types are passed by const reference in a ported code. |
+| false | The non-virtual methods/constructors/setters/operators parameters with String or SmartPtr&lt;&gt; types are passed by value in a ported code. |
 
 **Since version:** 21.6
 
@@ -1881,10 +1881,10 @@ Creates a file to dump all tests names into during porting
 
 | Allowed value | Meaning | Example
 ---| ---| ---|
-| <Path to stub file> | Path to the file to enlist all tests. | MyTests.txt
-| <Empty> | Disables tests enlisting. |
+| &lt;Path to stub file&gt; | Path to the file to enlist all tests. | MyTests.txt
+| &lt;Empty&gt; | Disables tests enlisting. |
 
-**Default value**: <Empty>
+**Default value**: &lt;Empty&gt;
 
 ### insert_leakage_detectors ###
 
@@ -1938,7 +1938,7 @@ GC generation to collect by __DBG_GARBAGE_COLLECTION wrappers after tests. For o
 
 If defined, value is used as a category name for all tests with timeouts.
 
-**Default value**: <Not defined>
+**Default value**: &lt;Not defined&gt;
 
 ### for_each_member_short_names ###
 
@@ -2106,7 +2106,7 @@ Indicates for which returned assembly current project will be used. I.e for exec
 | entry_assembly | Use assembly used as an entry point |
 | calling_assembly | Use assembly calling into current one |
 
-**Default value**: <None>
+**Default value**: &lt;None&gt;
 
 ### additional_defines ###
 
@@ -2131,7 +2131,7 @@ Exclude defines from being passed from C# project to cmake. Normally, porting ap
 ---| ---| ---|
 | List of defines | Defines in C# project that won't be passed to C++ project. Separators are space (' ') and semicolon (';') | MY_DEFINE MY_DEFINE_2;MY_DEFINE_3
 
-**Default value**: <None>
+**Default value**: &lt;None&gt;
 
 ### additional_includes ###
 
@@ -2141,7 +2141,7 @@ Additional includes to pass to ported project via cmake.
 ---| ---| ---|
 | List of directories | List of additional include directories passed to cmake. Separators are space (' ') and semicolon (';') | C:\Cpp\my_lib;C:\Cpp\my_lib_2 C:\Cpp\third_party_lib
 
-**Default value**: <Not defined>
+**Default value**: &lt;Not defined&gt;
 
 | Additional attribute | Meaning | Allowed values | Mandatory | Default value
 ---| ---| ---| ---| ---|
@@ -2450,8 +2450,8 @@ Enables porter transforming self-closing documentation comment tags into pairs o
 
 | Allowed value | Meaning | Example
 ---| ---| ---|
-| true | Transform self-closing tags. | '<tag/>' transforms into '<tag></tag>'
-| false | Keep self-closing tags as they are. | '<tag/>' remains as it is.
+| true | Transform self-closing tags. | '&lt;tag/&gt;' transforms into '&lt;tag&gt;&lt;/tag&gt;'
+| false | Keep self-closing tags as they are. | '&lt;tag/&gt;' remains as it is.
 
 **Default value**: true
 

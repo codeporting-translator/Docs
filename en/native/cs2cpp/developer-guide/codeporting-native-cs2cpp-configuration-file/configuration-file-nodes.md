@@ -283,7 +283,7 @@ Sets class-specific header path, useful for classes not covered by any tag rules
 ---| ---| ---| ---|
 | name | Class name with namespace | Yes |
 | path | Full header path to be inserted into 'include' directive | Yes |
-| shortptr | Whether class provides ClassNamePtr-formed alias for SharedPtr<ClassName>, must be 'true' or 'false' | No | false
+| shortptr | Whether class provides ClassNamePtr-formed alias for SharedPtr&lt;ClassName&gt;, must be 'true' or 'false' | No | false
 
 ### enum ###
 
@@ -393,7 +393,7 @@ Makes porter ignore all files that do not match the specified mask (or any of th
 </cut_namespaces>
 {{< /highlight >}}
 
-Enable/disable namespaces cutting for all types, defined in specific files. The subnodes rules are identical with <files> option.
+Enable/disable namespaces cutting for all types, defined in specific files. The subnodes rules are identical with &lt;files&gt; option.
 
 | Attribute | Meaning | Mandatory | Default value
 ---| ---| ---| ---|
