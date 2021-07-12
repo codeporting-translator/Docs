@@ -1814,6 +1814,28 @@ void foo() {
 
 **Default value:** false
 
+### force_const_ref_return_type_for_auto_properties ###
+
+| Allowed value | Meaning | Example
+---| ---| ---|
+| true | Auto-property getters of shared pointer types return const referencs to backed fields. |
+| false | Auto-property getters of shared pointer types return copies of values of backed fields. |
+
+**Since version:** 21.7
+
+**Default value:** false
+
+### force_enum_flags_attribute ###
+
+| Allowed value | Meaning | Example
+---| ---| ---|
+| true | Generate operators for all enums, as if 'Flags' attribute was present. |
+| false | Only generate enum operators where 'Flags' attribute is present. |
+
+**Since version:** 21.7
+
+**Default value:** false
+
 ## Debug and developer version code options ##
 
 These options control debug and developer version code in generated C++ files.

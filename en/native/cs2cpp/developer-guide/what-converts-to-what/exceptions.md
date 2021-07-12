@@ -1,5 +1,5 @@
 ---
-date: "2021-06-09"
+date: "2021-07-09"
 author:
   display_name: "Wiki code generator"
 draft: "false"
@@ -10,7 +10,7 @@ menu:
   docs:
     parent: "What Converts to What"
     weight: "1"
-lastmod: "2021-06-09"
+lastmod: "2021-07-09"
 weight: "1"
 ---
 
@@ -69,6 +69,80 @@ namespace TypesPorting
         //so forward declaration Details_BadArgumentException and alias BadArgumentException before defining need to take up
         protected BadArgumentException(SerializationInfo info, StreamingContext context) : base(info, context) { }
     }
+
+    // No fields, no ctors
+    public class Exception1 : Exception
+    {
+    }
+
+    // Some field, no ctors
+    public class Exception2 : Exception
+    {
+        public int field;
+    }
+
+    // No fields, static ctor
+    public class Exception3 : Exception
+    {
+        static Exception3() { }
+    }
+
+
+    // Some field, static ctor
+    public class Exception4 : Exception
+    {
+        static readonly long field;
+
+        static Exception4()
+        {
+            field = 0;
+        }
+    }
+
+
+    // No fields, normal ctor
+    public class Exception5 : Exception
+    {
+        public Exception5() { }
+    }
+
+    // Some field, normal ctor
+    public class Exception6 : Exception
+    {
+        public int field;
+
+        public Exception6()
+        {
+            field = -1;
+        }
+    }
+
+
+    // No fields, static and normal ctors
+    public class Exception7 : Exception
+    {
+        static Exception7() { }
+
+        public Exception7() { }
+    }
+
+    // Some fields, static and normal ctors
+    public class Exception8 : Exception
+    {
+        static readonly long field1;
+        public int field2;
+
+        static Exception8()
+        {
+            field1 = 0;
+        }
+
+        public Exception8()
+        {
+            field2 = -1;
+        }
+
+    }
 }
 {{< /highlight >}}
 
@@ -82,6 +156,7 @@ namespace TypesPorting
 #include <system/string.h>
 #include <system/runtime/serialization/streaming_context.h>
 #include <system/exceptions.h>
+#include <cstdint>
 
 namespace TypesPorting { class Details_BadArgumentException; using BadArgumentException = System::ExceptionWrapper<Details_BadArgumentException>; }
 namespace System { namespace Runtime { namespace Serialization { class SerializationInfo; } } }
@@ -222,6 +297,238 @@ protected:
     
 };
 
+// No fields, no ctors
+class Details_Exception1;
+using Exception1 = System::ExceptionWrapper<Details_Exception1>;
+
+class Details_Exception1 : public System::Details_Exception
+{
+    typedef Details_Exception1 ThisType;
+    typedef System::Details_Exception BaseType;
+    
+    typedef ::System::BaseTypesInfo<BaseType> ThisTypeBaseTypesInfo;
+    RTTI_INFO_DECL();
+    
+    friend class System::ExceptionWrapperHelper;
+    template <typename T> friend class System::ExceptionWrapper;
+    
+protected:
+
+    [[noreturn]] void DoThrow(const System::ExceptionPtr& self) const override;
+    
+    Details_Exception1();
+    
+    MEMBER_FUNCTION_MAKE_OBJECT_DECLARATION(Details_Exception1, CODEPORTING_ARGS());
+    
+};
+
+// Some field, no ctors
+class Details_Exception2;
+using Exception2 = System::ExceptionWrapper<Details_Exception2>;
+
+class Details_Exception2 : public System::Details_Exception
+{
+    typedef Details_Exception2 ThisType;
+    typedef System::Details_Exception BaseType;
+    
+    typedef ::System::BaseTypesInfo<BaseType> ThisTypeBaseTypesInfo;
+    RTTI_INFO_DECL();
+    
+    friend class System::ExceptionWrapperHelper;
+    template <typename T> friend class System::ExceptionWrapper;
+    
+public:
+
+    int32_t field;
+    
+protected:
+
+    [[noreturn]] void DoThrow(const System::ExceptionPtr& self) const override;
+    
+    Details_Exception2();
+    
+    MEMBER_FUNCTION_MAKE_OBJECT_DECLARATION(Details_Exception2, CODEPORTING_ARGS());
+    
+};
+
+// No fields, static ctor
+class Details_Exception3;
+using Exception3 = System::ExceptionWrapper<Details_Exception3>;
+
+class Details_Exception3 : public System::Details_Exception
+{
+    typedef Details_Exception3 ThisType;
+    typedef System::Details_Exception BaseType;
+    
+    typedef ::System::BaseTypesInfo<BaseType> ThisTypeBaseTypesInfo;
+    RTTI_INFO_DECL();
+    
+    friend class System::ExceptionWrapperHelper;
+    template <typename T> friend class System::ExceptionWrapper;
+    
+protected:
+
+    [[noreturn]] void DoThrow(const System::ExceptionPtr& self) const override;
+    
+    Details_Exception3();
+    
+    MEMBER_FUNCTION_MAKE_OBJECT_DECLARATION(Details_Exception3, CODEPORTING_ARGS());
+    
+private:
+
+    static struct __StaticConstructor__ { __StaticConstructor__(); } s_constructor__;
+    
+};
+
+// Some field, static ctor
+class Details_Exception4;
+using Exception4 = System::ExceptionWrapper<Details_Exception4>;
+
+class Details_Exception4 : public System::Details_Exception
+{
+    typedef Details_Exception4 ThisType;
+    typedef System::Details_Exception BaseType;
+    
+    typedef ::System::BaseTypesInfo<BaseType> ThisTypeBaseTypesInfo;
+    RTTI_INFO_DECL();
+    
+    friend class System::ExceptionWrapperHelper;
+    template <typename T> friend class System::ExceptionWrapper;
+    
+protected:
+
+    [[noreturn]] void DoThrow(const System::ExceptionPtr& self) const override;
+    
+    Details_Exception4();
+    
+    MEMBER_FUNCTION_MAKE_OBJECT_DECLARATION(Details_Exception4, CODEPORTING_ARGS());
+    
+private:
+
+    static int64_t field;
+    
+    static struct __StaticConstructor__ { __StaticConstructor__(); } s_constructor__;
+    
+};
+
+// No fields, normal ctor
+class Details_Exception5;
+using Exception5 = System::ExceptionWrapper<Details_Exception5>;
+
+class Details_Exception5 : public System::Details_Exception
+{
+    typedef Details_Exception5 ThisType;
+    typedef System::Details_Exception BaseType;
+    
+    typedef ::System::BaseTypesInfo<BaseType> ThisTypeBaseTypesInfo;
+    RTTI_INFO_DECL();
+    
+    friend class System::ExceptionWrapperHelper;
+    template <typename T> friend class System::ExceptionWrapper;
+    
+protected:
+
+    [[noreturn]] void DoThrow(const System::ExceptionPtr& self) const override;
+    
+    Details_Exception5();
+    
+    MEMBER_FUNCTION_MAKE_OBJECT_DECLARATION(Details_Exception5, CODEPORTING_ARGS());
+    
+};
+
+// Some field, normal ctor
+class Details_Exception6;
+using Exception6 = System::ExceptionWrapper<Details_Exception6>;
+
+class Details_Exception6 : public System::Details_Exception
+{
+    typedef Details_Exception6 ThisType;
+    typedef System::Details_Exception BaseType;
+    
+    typedef ::System::BaseTypesInfo<BaseType> ThisTypeBaseTypesInfo;
+    RTTI_INFO_DECL();
+    
+    friend class System::ExceptionWrapperHelper;
+    template <typename T> friend class System::ExceptionWrapper;
+    
+public:
+
+    int32_t field;
+    
+protected:
+
+    [[noreturn]] void DoThrow(const System::ExceptionPtr& self) const override;
+    
+    Details_Exception6();
+    
+    MEMBER_FUNCTION_MAKE_OBJECT_DECLARATION(Details_Exception6, CODEPORTING_ARGS());
+    
+};
+
+// No fields, static and normal ctors
+class Details_Exception7;
+using Exception7 = System::ExceptionWrapper<Details_Exception7>;
+
+class Details_Exception7 : public System::Details_Exception
+{
+    typedef Details_Exception7 ThisType;
+    typedef System::Details_Exception BaseType;
+    
+    typedef ::System::BaseTypesInfo<BaseType> ThisTypeBaseTypesInfo;
+    RTTI_INFO_DECL();
+    
+    friend class System::ExceptionWrapperHelper;
+    template <typename T> friend class System::ExceptionWrapper;
+    
+protected:
+
+    [[noreturn]] void DoThrow(const System::ExceptionPtr& self) const override;
+    
+    Details_Exception7();
+    
+    MEMBER_FUNCTION_MAKE_OBJECT_DECLARATION(Details_Exception7, CODEPORTING_ARGS());
+    
+private:
+
+    static struct __StaticConstructor__ { __StaticConstructor__(); } s_constructor__;
+    
+};
+
+// Some fields, static and normal ctors
+class Details_Exception8;
+using Exception8 = System::ExceptionWrapper<Details_Exception8>;
+
+class Details_Exception8 : public System::Details_Exception
+{
+    typedef Details_Exception8 ThisType;
+    typedef System::Details_Exception BaseType;
+    
+    typedef ::System::BaseTypesInfo<BaseType> ThisTypeBaseTypesInfo;
+    RTTI_INFO_DECL();
+    
+    friend class System::ExceptionWrapperHelper;
+    template <typename T> friend class System::ExceptionWrapper;
+    
+public:
+
+    int32_t field2;
+    
+protected:
+
+    [[noreturn]] void DoThrow(const System::ExceptionPtr& self) const override;
+    
+    Details_Exception8();
+    
+    MEMBER_FUNCTION_MAKE_OBJECT_DECLARATION(Details_Exception8, CODEPORTING_ARGS());
+    
+private:
+
+    static int64_t field1;
+    
+    static struct __StaticConstructor__ { __StaticConstructor__(); } s_constructor__;
+    
+};
+
 } // namespace TypesPorting
 
 
@@ -330,6 +637,142 @@ Details_BadArgumentException::Details_BadArgumentException(System::SharedPtr<Sys
 }
 
 MEMBER_FUNCTION_MAKE_OBJECT_DEFINITION(Details_BadArgumentException, CODEPORTING_ARGS(System::SharedPtr<System::Runtime::Serialization::SerializationInfo> info, System::Runtime::Serialization::StreamingContext context), CODEPORTING_ARGS(info,context));
+
+RTTI_INFO_IMPL_HASH_NAMED(731907242u, ::TypesPorting::Details_Exception1, "TypesPorting::Exception1", ThisTypeBaseTypesInfo);
+
+[[noreturn]] void Details_Exception1::DoThrow(const System::ExceptionPtr& self) const
+{
+    throw System::ExceptionWrapper<Details_Exception1>(self);
+}
+
+Details_Exception1::Details_Exception1() : System::Details_Exception()
+{
+}
+
+MEMBER_FUNCTION_MAKE_OBJECT_DEFINITION(Details_Exception1, CODEPORTING_ARGS(), CODEPORTING_ARGS());
+
+RTTI_INFO_IMPL_HASH_NAMED(731907243u, ::TypesPorting::Details_Exception2, "TypesPorting::Exception2", ThisTypeBaseTypesInfo);
+
+[[noreturn]] void Details_Exception2::DoThrow(const System::ExceptionPtr& self) const
+{
+    throw System::ExceptionWrapper<Details_Exception2>(self);
+}
+
+Details_Exception2::Details_Exception2() : System::Details_Exception(), field(0)
+{
+}
+
+MEMBER_FUNCTION_MAKE_OBJECT_DEFINITION(Details_Exception2, CODEPORTING_ARGS(), CODEPORTING_ARGS());
+
+RTTI_INFO_IMPL_HASH_NAMED(731907244u, ::TypesPorting::Details_Exception3, "TypesPorting::Exception3", ThisTypeBaseTypesInfo);
+
+Details_Exception3::__StaticConstructor__ Details_Exception3::s_constructor__;
+
+[[noreturn]] void Details_Exception3::DoThrow(const System::ExceptionPtr& self) const
+{
+    throw System::ExceptionWrapper<Details_Exception3>(self);
+}
+
+Details_Exception3::__StaticConstructor__::__StaticConstructor__()
+{
+}
+
+Details_Exception3::Details_Exception3() : System::Details_Exception()
+{
+}
+
+MEMBER_FUNCTION_MAKE_OBJECT_DEFINITION(Details_Exception3, CODEPORTING_ARGS(), CODEPORTING_ARGS());
+
+RTTI_INFO_IMPL_HASH_NAMED(731907245u, ::TypesPorting::Details_Exception4, "TypesPorting::Exception4", ThisTypeBaseTypesInfo);
+
+int64_t Details_Exception4::field = 0;
+
+Details_Exception4::__StaticConstructor__ Details_Exception4::s_constructor__;
+
+[[noreturn]] void Details_Exception4::DoThrow(const System::ExceptionPtr& self) const
+{
+    throw System::ExceptionWrapper<Details_Exception4>(self);
+}
+
+Details_Exception4::__StaticConstructor__::__StaticConstructor__()
+{
+    Exception4::field = 0;
+}
+
+Details_Exception4::Details_Exception4() : System::Details_Exception()
+{
+}
+
+MEMBER_FUNCTION_MAKE_OBJECT_DEFINITION(Details_Exception4, CODEPORTING_ARGS(), CODEPORTING_ARGS());
+
+RTTI_INFO_IMPL_HASH_NAMED(731907246u, ::TypesPorting::Details_Exception5, "TypesPorting::Exception5", ThisTypeBaseTypesInfo);
+
+[[noreturn]] void Details_Exception5::DoThrow(const System::ExceptionPtr& self) const
+{
+    throw System::ExceptionWrapper<Details_Exception5>(self);
+}
+
+Details_Exception5::Details_Exception5()
+{
+}
+
+MEMBER_FUNCTION_MAKE_OBJECT_DEFINITION(Details_Exception5, CODEPORTING_ARGS(), CODEPORTING_ARGS());
+
+RTTI_INFO_IMPL_HASH_NAMED(731907247u, ::TypesPorting::Details_Exception6, "TypesPorting::Exception6", ThisTypeBaseTypesInfo);
+
+[[noreturn]] void Details_Exception6::DoThrow(const System::ExceptionPtr& self) const
+{
+    throw System::ExceptionWrapper<Details_Exception6>(self);
+}
+
+Details_Exception6::Details_Exception6() : field(0)
+{
+    field = -1;
+}
+
+MEMBER_FUNCTION_MAKE_OBJECT_DEFINITION(Details_Exception6, CODEPORTING_ARGS(), CODEPORTING_ARGS());
+
+RTTI_INFO_IMPL_HASH_NAMED(731907248u, ::TypesPorting::Details_Exception7, "TypesPorting::Exception7", ThisTypeBaseTypesInfo);
+
+Details_Exception7::__StaticConstructor__ Details_Exception7::s_constructor__;
+
+[[noreturn]] void Details_Exception7::DoThrow(const System::ExceptionPtr& self) const
+{
+    throw System::ExceptionWrapper<Details_Exception7>(self);
+}
+
+Details_Exception7::__StaticConstructor__::__StaticConstructor__()
+{
+}
+
+Details_Exception7::Details_Exception7()
+{
+}
+
+MEMBER_FUNCTION_MAKE_OBJECT_DEFINITION(Details_Exception7, CODEPORTING_ARGS(), CODEPORTING_ARGS());
+
+RTTI_INFO_IMPL_HASH_NAMED(731907249u, ::TypesPorting::Details_Exception8, "TypesPorting::Exception8", ThisTypeBaseTypesInfo);
+
+int64_t Details_Exception8::field1 = 0;
+
+Details_Exception8::__StaticConstructor__ Details_Exception8::s_constructor__;
+
+[[noreturn]] void Details_Exception8::DoThrow(const System::ExceptionPtr& self) const
+{
+    throw System::ExceptionWrapper<Details_Exception8>(self);
+}
+
+Details_Exception8::__StaticConstructor__::__StaticConstructor__()
+{
+    Exception8::field1 = 0;
+}
+
+Details_Exception8::Details_Exception8() : field2(0)
+{
+    field2 = -1;
+}
+
+MEMBER_FUNCTION_MAKE_OBJECT_DEFINITION(Details_Exception8, CODEPORTING_ARGS(), CODEPORTING_ARGS());
 
 } // namespace TypesPorting
 

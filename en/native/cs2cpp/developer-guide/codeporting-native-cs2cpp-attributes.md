@@ -176,6 +176,39 @@ class Foo
 };
 {{< /highlight >}}
 
+### CppConstRefReturnType ###
+
+**Used on**: Property
+
+**Argument**: None
+
+Makes properties return const references to avoid copying.
+
+{{< highlight cs >}}
+class Foo
+{
+    [CsToCppPorter.CppConstRefReturnType]
+    public Foo Parent
+    {
+        get
+        {
+            return m_parent;
+        }
+    }
+    private Foo m_parent;
+}
+{{< /highlight >}}
+
+{{< highlight cpp >}}
+class Foo
+{
+    ...
+    const SharedPtr<Foo>& get_Parent();
+};
+{{< /highlight >}}
+
+**Since version**: 21.7
+
 ### CppConstWrapper ###
 
 **Used on**: Method

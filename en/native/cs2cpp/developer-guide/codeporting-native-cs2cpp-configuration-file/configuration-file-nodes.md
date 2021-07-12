@@ -850,6 +850,8 @@ The following subsections are allowed:
     * **property** - individual replacement entry. **cstext** attribute means text to be replaced, **getter_text** is replacement for getter and **setter_text** is replacement for setter.
 * **options** - list of options related to documentation generation. The following options are allowed:
     * **fix_setter_return_tag** - remove 'return' tag from setter documentation.
+* **replacements** - list of allowed replacements for the specified tags in comments to specified items.
+    * **comment** - the contents of this item will replace the contents of specified tag of the specified member of specified tag. If both type and member are unset, this replacement will be done by default to all occurrances of mentioned tag where no other replacements apply.
 
 For mentioned subtags attributes, see below.
 
