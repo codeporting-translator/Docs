@@ -33,6 +33,7 @@ weight: "1"
 1. User-defined conversion operators translation was fixed for the case of generic types.
 1. Compilability of property compound assignment operators on GCC 6 was fixed.
 1. The CppConstWrapper attribute misplaced method comments in translated code. This was fixed.
+1. Inclusion related to assembly reflection support was fixed to avoid including internal headers from public ones.
 
 Please consult respective sections of our wiki for more information.
 
@@ -54,6 +55,7 @@ Please consult respective sections of our wiki for more information.
 | PDFCPP-1611 | C# examples in API Reference for C++ | New feature |
 | SLIDESCPP-2997 | Porter: Fix binary operations porting for enumerations without Flags attribute | New feature |
 | TASKSCPP-1639 | Implement CppConstRefReturnType support for generic parameters | New feature |
+| PDFCPP-1620 | Preparing to release, test "Release build for build-21.7.0.337" | Task |
 
 ## Public API and Backward Incompatible Changes ##
 
