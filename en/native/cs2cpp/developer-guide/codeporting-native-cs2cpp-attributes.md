@@ -90,6 +90,11 @@ void Foo([CsToCppPorter.CppArgumentKind(CsToCppPorter.ArgumentKind.ConstPointer)
 {{< /highlight >}} | {{< highlight cpp >}}
 void Foo(System::Object const *constPointer) { ... }
 {{< /highlight >}} | 
+| UnsafeConst | Mark unsafe pointer as const. | {{< highlight cs >}}
+unsafe void Foo([CsToCppPorter.CppArgumentKind(CsToCppPorter.ArgumentKind.UnsafeConst)]char *data) { ... }
+{{< /highlight >}} | {{< highlight cpp >}}
+void Foo(const char16_t *constPointer) { ... }
+{{< /highlight >}} | 
 
 ### CppConstexpr ###
 

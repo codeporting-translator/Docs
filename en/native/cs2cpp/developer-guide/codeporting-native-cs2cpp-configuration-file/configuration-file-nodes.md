@@ -1025,7 +1025,7 @@ Allowed sub-items:
 </types_with_begin_and_end_methods>
 {{< /highlight >}}
 
-Makes porter generate simplier code for 'foreach' statements, if ['foreach_as_range_based_for_loop' option](https://wiki.lutsk.dynabic.com/Codeporting/Dynabic.csPorter%20for%20Cpp/Documentation%20and%20Support%20Materials/Production%20documentation%20storage%20point/Developer%20Guide/CodePorting.Native%20Cs2Cpp%20configuration%20files/Configuration%20file%20options/#Hforeach_as_range_based_for_loop) is enabled.
+Makes porter generate simplier code for 'foreach' statements, if ['foreach_as_range_based_for_loop' option](/native/cs2cpp/developer-guide/codeporting-native-cs2cpp-configuration-file/configuration-file-options/) is enabled.
 
 | Attribute | Meaning | Mandatory | Default Value
 ---| ---| ---| ---|
