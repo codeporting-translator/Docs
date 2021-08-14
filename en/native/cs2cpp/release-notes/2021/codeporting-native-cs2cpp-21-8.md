@@ -1,15 +1,15 @@
 ---
 date: "2021-08-14"
 author:
-display_name: "Dmitry Baskakov"
+  display_name: "Nikolay Shestakov"
 draft: "false"
 toc: true
 title: "CodePorting.Native Cs2Cpp 21.8"
 linktitle: "CodePorting.Native Cs2Cpp 21.8"
 menu:
-docs:
-parent: "2021"
-weight: "1"
+  docs:
+    parent: "2021"
+    weight: "1"
 lastmod: "2021-08-14"
 weight: "1"
 ---
