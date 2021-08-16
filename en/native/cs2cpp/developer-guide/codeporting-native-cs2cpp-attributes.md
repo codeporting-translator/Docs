@@ -95,6 +95,16 @@ unsafe void Foo([CsToCppPorter.CppArgumentKind(CsToCppPorter.ArgumentKind.Unsafe
 {{< /highlight >}} | {{< highlight cpp >}}
 void Foo(const char16_t *constPointer) { ... }
 {{< /highlight >}} | 
+| ArrayRawPointer | Make argument a pointer to collection data. | {{< highlight cs >}}
+unsafe void Foo([CsToCppPorter.CppArgumentKind(CsToCppPorter.ArgumentKind.ArrayRawPointer)]Object pointer) { ... }
+{{< /highlight >}} | {{< highlight cpp >}}
+void Foo(Object *constPointer) { ... }
+{{< /highlight >}} | 
+| ConstArrayRawPointer | Make argument a const pointer to collection data. | {{< highlight cs >}}
+unsafe void Foo([CsToCppPorter.CppArgumentKind(CsToCppPorter.ArgumentKind.ConstArrayRawPointer)]Object pointer) { ... }
+{{< /highlight >}} | {{< highlight cpp >}}
+void Foo(const Object *constPointer) { ... }
+{{< /highlight >}} | 
 
 ### CppConstexpr ###
 
