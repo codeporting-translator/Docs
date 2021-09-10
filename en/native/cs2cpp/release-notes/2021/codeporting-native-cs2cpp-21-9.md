@@ -55,7 +55,7 @@ Please consult respective sections of our wiki for more information.
 | TASKSCPP-1647 | Implement CppWeakPtr attribute appliance to properties/fields which type is a template parameter | Task |
 | SLIDESCPP-3088 | Porter: Improve the translation of exceptions | Enhancement |
 | CSPORTCPP-4501 | Do small fixes to code | Enhancement |
-| PDFCPP-1648 | Implement new attribute ArrayOnStack for porter | 
+| PDFCPP-1648 | Implement new attribute ArrayOnStack for porter | New feature |
 | CSPORTCPP-4451 | Review user-defined exceptions: article and approach | Enhancement |
 | SLIDESCPP-3083 | Implement BinaryWriter.Write(String) method | New feature |
 | SLIDESCPP-3107 | Porter: Fix CppInline attribute usage for getters/setters | Enhancement |
