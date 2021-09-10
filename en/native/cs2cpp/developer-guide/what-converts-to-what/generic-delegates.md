@@ -1,5 +1,5 @@
 ---
-date: "2021-08-09"
+date: "2021-09-10"
 author:
   display_name: "Wiki code generator"
 draft: "false"
@@ -10,7 +10,7 @@ menu:
   docs:
     parent: "What Converts to What"
     weight: "1"
-lastmod: "2021-08-09"
+lastmod: "2021-09-10"
 weight: "1"
 ---
 
@@ -49,8 +49,11 @@ namespace TypesPorting
 #include <system/object.h>
 #include <system/multicast_delegate.h>
 
-namespace System { class ICloneable; }
-namespace System { class IConvertible; }
+namespace System 
+{
+class IConvertible;
+class ICloneable;
+} // namespace System
 
 namespace TypesPorting {
 

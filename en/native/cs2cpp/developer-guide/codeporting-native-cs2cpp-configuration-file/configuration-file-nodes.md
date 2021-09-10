@@ -1096,3 +1096,20 @@ Allowed sub-items:
 | Attribute | Meaning | Mandatory | Default Value
 ---| ---| ---| ---|
 | name | A path to a file that must be excluded from UNITY_BUILD. | Yes | -
+
+## external_include ##
+
+{{< highlight xml >}}
+<external_include file="AddFunctionArgument_PassFunctionArgument_Tests.cs" include="function_traits.hpp" include_to="source" include_as="local"/>
+{{< /highlight >}}
+
+Makes the porter generate additional include directives into the translated version of the specified cs file. Can do the same thing CppForceInclude attribute does, but can also include any file the porter doesn't know about.
+
+| Attribute | Meaning | Mandatory | Default Value
+---| ---| ---| ---|
+| file | Cs file the inclusion should be added to the translated version of. | Yes | -
+| include | Include text (header name with all directories required). | Yes | -
+| include_to | Whether to add the include into header ('header') file or into the source ('source') file. | Yes | -
+| include_as | Whether to use local inclusion syntax (double quotes, 'local') or global inclusion syntax (angle brackets, 'global'). | Yes | -
+
+**Since version**: 21.9.

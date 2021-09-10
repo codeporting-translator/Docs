@@ -57,121 +57,181 @@ As an example, lets define new exception class UnknownValueException, which is i
 
 It is not allowed to create instances of exception body manually. It is only allowed to create ExceptionWrapper instances, which will create and own instances of required exception bodies. To throw exception, ExceptionWrapper::Throw() method must be called. Throwing ExceptionWrapper instances directly is not recommended, as the exception type will be trimmed to the one being thrown. Using ExceptionWrapper::Throw guarantees, that the type of contained exception body will be rethrown, even if the ExceptionWrapper instance was type-trimmed.
 
-## Requirements ##
+## Declaring compatible exceptions ##
 
-There is a requirement to define correct RTTI information for each exception body. This is necessary to allow ExceptionWrapper template create correct inheritance tree using SFINAE. ThisType and BaseType typedefs serve for this purpose.
+There are several macros available to simplify declaring the compatible excecption types. When there's a single module involved, the compact declaration may be done at a single place. When the exception instances are to cross module border, one may use the syntax to define the exception class and its members separately, which also allows for neccessary export macros.
 
-All of exception body constructors must be defined in protected section to remove possibility of creation instances both on stack and heap. All exception body instances must be created implicitly by creating ExceptionWrapper template instance.
+All neccessary macros are defined at &lt;system/exception.h&gt; header in the 'include' subdirectory of CodePorting.Native Cs2Cpp package.
 
-To allow creation of exception body instances on heap by creating ExceptionWrapper instance on stack each protected constructor must be accompanied with MakeObject() member function. Most common way is to use MEMBER_FUNCTION_MAKE_OBJECT_DECLARATION macro in exception body declaration, which accepts exception body class name as a first parameter and an accompanied constructor argument list as a second parameter. In source file it is needed to add MEMBER_FUNCTION_MAKE_OBJECT_DEFINITION, which also accepts exception body class name as a first parameter, an accompanied constructor argument list as a second parameter and list of accompanied constructor argument names. Another way is to use MEMBER_FUNCTION_MAKE_OBJECT_DEFINITION macro, which defines and implements member function object in class declaration. Most common way to use it is for template classes, which are declared and defined in header file. The macro argument list is the same as for MEMBER_FUNCTION_MAKE_OBJECT_DEFINITION.
+### Compact definition ###
 
-It is needed to add friend declarations for ExceptionWrapper and its helper class to allow ExceptionWrapper class call protected MakeObject() member functions (defined by macro) of exception body classes. ExceptionWrapper template has variadic template constructor, which passes all arguments to exception body constructor, when allocates it on heap.
+There are 3 macros to use when defining custom exception type in-place:
 
-All exception bodies must be inherited from other exception body to preserve inheritance hierarchy.
+1. **CODEPORTING_USER_EXCEPTION_BEGIN** which starts the exception class declaration with neccessary internal members. It also defines the required ExceptionWrapper specialization. After this macro, you're effectively inside the exception body class and may define constructors and other members. This macro takes the following arguments:
+    1. Full namespace the class is being defined into (e. g. 'Living::FoodControl');
+    1. Name of the exception class (without 'Details_' prefix, e. g. 'MealMissed');
+    1. Name of the parent exception body class (with 'Details_' prefix, e. g. 'System::Details_Exception').
+1. **CODEPORTING_USER_EXCEPTION_CONSTRUCTOR** which starts the exception constructor definition. Please note that this is the only valid way of adding constructors to exception classes (but the members of other kinds can be added normally). Constructor body must follow this macro. All constructors defined this way are protected which is the intended as only the ExceptionWrapper class is allowed to instantiate exception bodies. This macro takes the following arguments:
+    1. Name of the exception class (without 'Details_' prefix);
+    1. Arguments with types, wrapped into CODEPORTING_ARGS macro (e. g. 'CODEPORTING_ARGS(String mealName, bool hungry)' or 'CODEPORTING_ARGS()' for default constructor);
+    1. Arguments without types, wrapped into CODEPORTING_ARGS macro (e. g. 'CODEPORTING_ARGS(mealName, hungry)' or 'CODEPORTING_ARGS()).
+1. **CODEPORTING_USER_EXCEPTION_END** which closes the exception class declaration.
 
-Exception body declaration must be defined after its forward declaration and ExceptionWrapper aliasing. Alias allows to simplify using of ExceptionWrapper classes. As an example, in library System::Exception is an alias for ExceptionWrapper&lt;System::Details_Exception&gt;.
-
-Exception body class name must be prefixed with "Detail_" string to distinguish them from aliased ExceptionWrapper class instances.
-
-It is needed to define override for DoThrow() method for exception body. This method must throw stack-allocated instance of ExceptionWrapper template class instantiation, which must be created by calling constructor overload, which accepts only exception body shared pointer passed to a DoThrow() call as an argument. This method will be called, once ExceptionWrapper&lt;&gt;::Throw() method is called.
-
-But all this requirements are applied only for the case when library user defines exceptions manually. When CodePorting.Native.Cs2Cpp porter is used, all requirements are met automatically.
-
-## Throwing mechanism description ##
-
-Let us have an instance of ExceptionWrapper&lt;System::Details_Exception&gt; class. This instance contains a shared pointer to System::Details_Exception exception body but actually it is an instance of Details_UnknownValueException exception body. Library user calls ExceptionWrapper&lt;System::Details_Exception&gt;::Throw() method. It calls System::Details_Exception::DoThrow() method from exception body by derefencing shared pointer and passed this shared pointer as an argument to System::Details_Exception::DoThrow() function call. Using dynamic polymorphism Details_UnknownValueException::DoThrow() method is actually called. It creates new instance of ExceptionWrapper&lt;Details_UnknownValueException&gt;, which stores shared pointer to the same exception body instance as a caller and throws fresh ExceptionWrapper&lt;Details_UnknownValueException&gt; instance.
-
-## Minimal code samples ##
-
-{{< highlight cs >}}
-// C# code sample
-public class SomeException : Exception
-{
-    public SomeException() { }
-
-    public SomeException(object message) : base(message == null ? null : message.ToString()) { }
-}
-{{< /highlight >}}
+The below example defines two exception classes, MealMissed and DinnerMissed, the later being the subclass and the former being the superclass. The code that follows illustrates that the aforementioned problem is solved.
 
 {{< highlight cpp >}}
-// C++ header
-class Details_SomeOtherException;
-using SomeOtherException = System::ExceptionWrapper<Details_SomeOtherException>;
+#include <system/exceptions.h>
+using namespace System;
 
-class Details_SomeOtherException : public System::Details_DivideByZeroException
+namespace Living
 {
-    typedef Details_SomeOtherException ThisType;
-    typedef System::Details_DivideByZeroException BaseType;
-    
-    typedef ::System::BaseTypesInfo<BaseType> ThisTypeBaseTypesInfo;
-    RTTI_INFO_DECL();
-    
-    friend class System::ExceptionWrapperHelper;
-    template <typename T> friend class System::ExceptionWrapper;
-    
-protected:
+    namespace FoodControl
+    {
+        CODEPORTING_USER_EXCEPTION_BEGIN(Living::FoodControl, MealMissed, System::Details_Exception)
+            CODEPORTING_USER_EXCEPTION_CONSTRUCTOR(MealMissed, CODEPORTING_ARGS(String mealName, bool hungry), CODEPORTING_ARGS(mealName, hungry))
+                : ::System::Details_Exception(u"Missed a meal: " + mealName), m_hungry(hungry)
+            {}
+        public:
+            bool isHungry() const
+            {
+                return m_hungry;
+            }
+        private:
+            bool m_hungry;
+        CODEPORTING_USER_EXCEPTION_END
 
-    [[noreturn]] void DoThrow(const System::ExceptionPtr& self) const override;
-    
-    Details_SomeOtherException();
-    
-    MEMBER_FUNCTION_MAKE_OBJECT_DECLARATION(Details_SomeOtherException, CODEPORTING_ARGS());
-
-    Details_SomeOtherException(System::SharedPtr<System::Object> message);
-    
-    MEMBER_FUNCTION_MAKE_OBJECT_DECLARATION(Details_SomeOtherException, CODEPORTING_ARGS(System::SharedPtr<System::Object> message));
-    
-};
-{{< /highlight >}}
-
-{{< highlight cpp >}}
-// C++ source
-RTTI_INFO_IMPL_HASH_NAMED(927407390u, ::Details_SomeException, "SomeException", ThisTypeBaseTypesInfo);
-
-[[noreturn]] void Details_SomeException::DoThrow(const System::ExceptionPtr& self) const
-{
-    throw System::ExceptionWrapper<Details_SomeException>(self);
+        CODEPORTING_USER_EXCEPTION_BEGIN(Living::FoodControl, DinnerMissed, Details_MealMissed)
+            CODEPORTING_USER_EXCEPTION_CONSTRUCTOR(DinnerMissed, CODEPORTING_ARGS(), CODEPORTING_ARGS())
+                : Details_MealMissed(u"dinner", true)
+            {}
+        CODEPORTING_USER_EXCEPTION_END
+    }
 }
 
-Details_SomeException::Details_SomeException(System::SharedPtr<System::Object> message)
-     : System::Details_Exception(message == nullptr ? nullptr : System::ObjectExt::ToString(message))
-{    
-}
-
-MEMBER_FUNCTION_MAKE_OBJECT_DEFINITION(Details_SomeException, CODEPORTING_ARGS(System::SharedPtr<System::Object> message), CODEPORTING_ARGS(message));
-
-Details_SomeException::Details_SomeException() : System::Details_Exception()
+TEST(ExceptionsTest, UserDefinedExceptionTest)
 {
-}
+    Living::FoodControl::MealMissed exception(nullptr);
 
-MEMBER_FUNCTION_MAKE_OBJECT_DEFINITION(Details_SomeException, CODEPORTING_ARGS(), CODEPORTING_ARGS());
-{{< /highlight >}}
-
-{{< highlight cpp >}}
-// C++ exception throwing
-try
-{
-    // Exception is an alias to ExceptionWrapper<Details_Exception>
-    Exception exception = nullptr;
     try
     {
-        // ExceptionWrapper<Details_SomeException> allocated on stack, Details_SomeException allocated on heap by ExceptionWrapper<Details_SomeException>
-        // Fresh instance of ExceptionWrapper<Details_SomeException> is thrown
-        throw SomeException();
+        throw Living::FoodControl::DinnerMissed();
     }
-    catch (SomeException& e)
+    catch (const Living::FoodControl::MealMissed &caught)
     {
-        // It is caught in catch block and reassigned to `exception` variable with exception type trimming.
-        // But this trimming is applied to ExceptionWrapper<Details_SomeException> only, which still stores shared pointer to Details_SomeException.
-        exception = e;
-        // ExceptionWrapper<Details_Exception>::Throw() method is called.
-        // It calls Details_SomeException::DoThrow() method.
-        // Fresh ExceptionWrapper<Details_SomeException> instance created inside Details_SomeException::DoThrow() is thrown
-        exception.Throw();
+        exception = caught;
+    }
+
+    try
+    {
+        exception.Throw(); // Unlike 'throw exception', won't trim the type
+        FAIL();
+    }
+    catch (const Living::FoodControl::DinnerMissed &caught)
+    {
+        ASSERT_TRUE(caught->isHungry());
+        ASSERT_EQ(caught->get_Message(), u"Missed a meal: dinner");
+    }
+    catch (const Living::FoodControl::MealMissed&)
+    {
+        FAIL();
+    }
+    catch (...)
+    {
+        FAIL();
     }
 }
-catch (SomeException& e)
+
+{{< /highlight >}}
+
+### Cross-module exceptions ###
+
+There are the macros to use when defining custom exception type that is capable of crossing module's borders.
+
+1. **CODEPORTING_DECLARE_USER_EXCEPTION_BEGIN** which starts the exported exception class declaration with neccessary internal members. It also defines the required ExceptionWrapper specialization. After this macro, you're effectively inside the exception body class and may define constructors and other members. This macro takes the following arguments:
+    1. Export/import macro for the class level (e. g. '__attribute__((visibility("default")))');
+    1. Export/import macro for the method level (e. g. '__declspec(dllexport)');
+    1. Full namespace the class is being defined into (e. g. 'Living::FoodControl');
+    1. Name of the exception class (without 'Details_' prefix, e. g. 'MealMissed');
+    1. Name of the parent exception body class (with 'Details_' prefix, e. g. 'System::Details_Exception').
+1. **CODEPORTING_EXPORTED_USER_EXCEPTION_CONSTRUCTOR** which makes the exception constructor declaration. Please note that this is the only valid way of adding constructors to exception classes (but the members of other kinds can be added normally). Constructor body must be defined separately. All constructors defined this way are protected which is the intended as only the ExceptionWrapper class is allowed to instantiate exception bodies. This macro takes the following arguments:
+    1. Export/import macro for the method level (e. g. '__declspec(dllimport)');
+    1. Name of the exception class (without 'Details_' prefix);
+    1. Arguments with types, wrapped into CODEPORTING_ARGS macro (e. g. 'CODEPORTING_ARGS(String mealName, bool hungry)' or 'CODEPORTING_ARGS()' for default constructor);
+    1. Arguments without types, wrapped into CODEPORTING_ARGS macro (e. g. 'CODEPORTING_ARGS(mealName, hungry)' or 'CODEPORTING_ARGS()).
+1. **CODEPORTING_USER_EXCEPTION_END** which closes the exception class declaration.
+1. **CODEPORTING_USER_EXCEPTION_IMPLEMENTATION** which defines all internal members of the exception class. Unlike all other macros, this should only be used in a 'cpp' file.
+
+The below example defines the exception class in an exportable-importable way.
+
+{{< highlight cpp >}}
+// api_defs.h
+
+#pragma once
+
+#if defined(_MSC_VER)
+    #if defined(MY_MODULE_SHARED_EXPORTS)
+        #define MY_MODULE_SHARED_API __declspec(dllexport)
+    #else
+        #define MY_MODULE_SHARED_API __declspec(dllimport)
+    #endif
+    #define MY_MODULE_SHARED_CLASS
+#elif defined(__GNUC__)
+    #if defined(MY_MODULE_SHARED_EXPORTS)
+        #define MY_MODULE_SHARED_API __attribute__((visibility("default")))
+        #define MY_MODULE_SHARED_CLASS __attribute__((visibility("default")))
+    #else
+        #define MY_MODULE_SHARED_API
+        #define MY_MODULE_SHARED_CLASS
+    #endif
+#else
+    #define MY_MODULE_SHARED_CLASS
+    #define MY_MODULE_SHARED_API
+#endif
+{{< /highlight >}}
+
+{{< highlight cpp >}}
+// cross_module_exception.h
+
+#pragma once
+
+#include "api_defs.h"
+#include <system/exceptions.h>
+
+
+namespace my_module
 {
-    // ExceptionWrapper<Details_SomeException> instance is caught without exception type trimming
+
+    enum class ThrownFrom
+    {
+        ProjectA,
+        ProjectB,
+        ProjectC
+    };
+
+    CODEPORTING_DECLARE_USER_EXCEPTION_BEGIN(MY_MODULE_SHARED_CLASS, MY_MODULE_SHARED_API, my_module, CrossModuleException, ::System::Details_Exception)
+        CODEPORTING_EXPORTED_USER_EXCEPTION_CONSTRUCTOR(MY_MODULE_SHARED_API, CrossModuleException, CODEPORTING_ARGS(ThrownFrom thrown_from), CODEPORTING_ARGS(thrown_from))
+    public:
+        MY_MODULE_SHARED_API ThrownFrom WhereThrown() const;
+    private:
+        ThrownFrom m_thrown_from;
+    CODEPORTING_USER_EXCEPTION_END
+
+}
+{{< /highlight >}}
+
+{{< highlight cpp >}}
+// cross_module_exception.cpp
+
+#include "cross_module_exception.h"
+
+CODEPORTING_USER_EXCEPTION_IMPLEMENTATION(MY_MODULE_SHARED_CLASS, MY_MODULE_SHARED_API, my_module, CrossModuleException, ::System::Details_Exception)
+
+my_module::Details_CrossModuleException::Details_CrossModuleException(ThrownFrom thrown_from)
+    : System::Details_Exception(u"CrossModule"), m_thrown_from(thrown_from)
+{}
+
+my_module::ThrownFrom my_module::Details_CrossModuleException::WhereThrown() const
+{
+    return m_thrown_from;
 }
 {{< /highlight >}}

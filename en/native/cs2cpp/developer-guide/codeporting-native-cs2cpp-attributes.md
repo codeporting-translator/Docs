@@ -24,6 +24,33 @@ To use an attribute, you must make it visible from your C# code. To do so, you s
 
 This section describes attributes available in CsToCppPorter.Attributes project. Use them to resolve porting issues or to improve porting experience.
 
+### CppAddFunctionArgument ###
+
+**Used on**: Methods
+
+**Arguments**: C++ type name of the argument to generate, argument name and optional argument default value
+
+Makes the porter to add custom argument to the attribute method after the C# arguments. These arguments can then be assigned values from the calling context using the CppPassFunctionArgument attribute.
+
+{{< highlight cs >}}
+class AddFunctionArgument_Tests
+{
+    [CsToCppPorter.CppAddFunctionArgument("int", "length")]
+    private static void sum_array([CsToCppPorter.CppArgumentKind(CsToCppPorter.ArgumentKind.ConstArrayRawPointer)]int[] arr)
+    {
+    }
+}
+
+{{< /highlight >}}
+
+{{< highlight cpp >}}
+void AddFunctionArgument_Tests::sum_array(int32_t const *arr, int length)
+{
+}
+{{< /highlight >}}
+
+**Since version**: 21.9
+
 ### CppAddStructDefaultMethods ###
 
 **Used on**: Structures
@@ -105,6 +132,86 @@ unsafe void Foo([CsToCppPorter.CppArgumentKind(CsToCppPorter.ArgumentKind.ConstA
 {{< /highlight >}} | {{< highlight cpp >}}
 void Foo(const Object *constPointer) { ... }
 {{< /highlight >}} | 
+
+### CppArrayInnerIndexer ###
+
+**Used on**: Methods
+
+**Arguments**: Names of the array variables used by this method
+
+Makes the porter to generate the code that accesses the specified arrays' elements using std::vector's API rather than such of System::Array and System::ArrayPtr. This improves the performance, but removes the boundary checking.
+
+{{< highlight cs >}}
+class ClassArrayInnerIndexer
+{
+    [CsToCppPorter.CppArrayInnerIndexer("array")]
+    public void test_0()
+    {
+        int[] array = new int[] { 0, 1, 2, 3 };
+        for(int n = 0; n < array.Length; ++n)
+        {
+            int k = array[n];
+        }
+    }
+}
+{{< /highlight >}}
+
+{{< highlight cpp >}}
+void ClassArrayInnerIndexer::test_0()
+{
+    System::ArrayPtr<int32_t> array = System::MakeArray<int32_t>({0, 1, 2, 3});
+    for (int32_t n = 0; n < array->get_Length(); ++n)
+    {
+        int32_t k = array->data().data()[n];
+    }
+}
+{{< /highlight >}}
+
+**Since version**: 21.9
+
+### CppArrayOnStack ###
+
+**Used on**: Methods
+
+**Arguments**: Names of the array variables to move to stack
+
+Generates on-stack arrays in ported code instead of using System::Array wrappers.
+
+{{< highlight cs >}}
+class ClassArrayOnStack
+{
+    [CsToCppPorter.CppArrayOnStack("arr", "arr2", "arr3", "arr4", "arr5", "arr6", "arr7", "arr8")]
+    public void ArrayOnStackMethod()
+    {
+        byte[] arr = new byte[] { 0 };
+        byte[] arr2 = new byte[10];
+        byte[,] arr3 = new byte[,] { { 1, 2 }, { 3, 4 }, { 5, 6 }, { 7, 8 } } , arr4 = new byte[4, 2] { { 1, 2 }, { 3, 4 }, { 5, 6 }, { 7, 8 } };
+        
+        byte[,,] arr5 = new byte[,,] { { { 1, 2 }, { 3, 4 } }, { { 5, 6 }, { 7, 8 } } };
+        byte[,,] arr6 = new byte[2, 2, 2] { { { 1, 2 }, { 3, 4 } }, { { 5, 6 }, { 7, 8 } } };
+
+        byte[,,] arr7 = new byte[,,] { { { 1, 2, 3 }, { 4, 5, 6 } }, { { 7, 8, 9 }, { 10, 11, 12 } } };
+        byte[,,] arr8 = new byte[2, 2, 3] { { { 1, 2, 3 }, { 4, 5, 6 } }, { { 7, 8, 9 }, { 10, 11, 12 } } };
+    }
+}
+{{< /highlight >}}
+
+{{< highlight cpp >}}
+void ClassArrayOnStack::ArrayOnStackMethod()
+{
+    uint8_t arr[] = {0};
+    uint8_t arr2[10] = {0};
+    uint8_t arr3[][2] = {{1,2}, {3,4}, {5,6}, {7,8}}, arr4[][2] = {{1,2}, {3,4}, {5,6}, {7,8}};
+    
+    uint8_t arr5[][2][2] = {{{1,2},{3,4}}, {{5,6},{7,8}}};
+    uint8_t arr6[][2][2] = {{{1,2},{3,4}}, {{5,6},{7,8}}};
+    
+    uint8_t arr7[][2][3] = {{{1,2,3},{4,5,6}}, {{7,8,9},{10,11,12}}};
+    uint8_t arr8[][2][3] = {{{1,2,3},{4,5,6}}, {{7,8,9},{10,11,12}}};
+}
+{{< /highlight >}}
+
+**Since version**: 21.9
 
 ### CppConstexpr ###
 
@@ -563,7 +670,7 @@ Disables translating 'where' clauses to C++.
 
 ### CppInline ###
 
-**Used on**: Method or type
+**Used on**: Method, property accessor or type
 
 **Argument**: Optional string comment which is always ignored
 
@@ -741,6 +848,44 @@ Forces translate this method as TestFixtureSetUp, overriding existing one (if an
 **Arguments**: None
 
 Forces translate this method as TestFixtureTearDown, overriding existing one (if any). Also, forces method to be static.
+
+### CppPassFunctionArgument ###
+
+**Used on**: Methods
+
+**Arguments**: Callee C# type name, callee method, callee additional argument name and the C++ code for the value to pass
+
+Passes a value to the argument introduced by CppAddFunctionArgument attribute. The CppPassFunctionArgument method should be placed to the method which makes the call requiring additional arguments, and the attribute's arguments describe the method being called.
+
+{{< highlight cs >}}
+class AddFunctionArgument_PassFunctionArgument_Tests
+{
+    [CsToCppPorter.CppAddFunctionArgument("int", "length")]
+    private static void sum_array([CsToCppPorter.CppArgumentKind(CsToCppPorter.ArgumentKind.ConstArrayRawPointer)]int[] arr)
+    {
+    }
+
+    [CsToCppPorter.CppPassFunctionArgument("PorterAttributes.AddFunctionArgument_PassFunctionArgument_Tests", "private static void sum_array(int[])", "length", "sizeof(i_array)/sizeof(i_array[0])")]
+    [CsToCppPorter.CppArrayOnStack("i_array")]
+    private static bool test_using_example()
+    {
+        int[] i_array = { 0,1,2,3 };
+        sum_array(i_array);
+        return true;
+    }
+}
+{{< /highlight >}}
+
+{{< highlight cpp >}}
+bool AddFunctionArgument_PassFunctionArgument_Tests::test_using_example()
+{
+    int32_t i_array[] = {0, 1, 2, 3};
+    sum_array(i_array, sizeof(i_array)/sizeof(i_array[0]));
+    return true;
+}
+{{< /highlight >}}
+
+**Since version**: 21.9
 
 ### CppPlaceAfter ###
 

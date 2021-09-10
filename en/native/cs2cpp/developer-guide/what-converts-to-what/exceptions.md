@@ -1,5 +1,5 @@
 ---
-date: "2021-08-09"
+date: "2021-09-10"
 author:
   display_name: "Wiki code generator"
 draft: "false"
@@ -10,7 +10,7 @@ menu:
   docs:
     parent: "What Converts to What"
     weight: "1"
-lastmod: "2021-08-09"
+lastmod: "2021-09-10"
 weight: "1"
 ---
 
@@ -54,6 +54,13 @@ namespace TypesPorting
         public CustomMessageInnerException(string message, Exception innerException) : base(message, innerException)
         {
         }
+    }
+
+    public class CustomMessageInnerExceptionInhetor : CustomMessageInnerException
+    {
+        CustomMessageInnerExceptionInhetor(string res)
+            : base(res, null)
+        { }
     }
 
     internal class BaseException : Exception
@@ -153,13 +160,25 @@ namespace TypesPorting
 {{< highlight cpp >}}
 #pragma once
 
-#include <system/string.h>
-#include <system/runtime/serialization/streaming_context.h>
 #include <system/exceptions.h>
 #include <cstdint>
 
-namespace TypesPorting { class Details_BadArgumentException; using BadArgumentException = System::ExceptionWrapper<Details_BadArgumentException>; }
-namespace System { namespace Runtime { namespace Serialization { class SerializationInfo; } } }
+namespace TypesPorting 
+{
+class Details_BadArgumentException; using BadArgumentException = System::ExceptionWrapper<Details_BadArgumentException>;
+} // namespace TypesPorting
+namespace System 
+{
+class String;
+namespace Runtime 
+{
+namespace Serialization 
+{
+class StreamingContext;
+class SerializationInfo;
+} // namespace Serialization
+} // namespace Runtime
+} // namespace System
 
 namespace TypesPorting {
 
@@ -244,6 +263,30 @@ protected:
     Details_CustomMessageInnerException(System::String message, System::Exception innerException);
     
     MEMBER_FUNCTION_MAKE_OBJECT_DECLARATION(Details_CustomMessageInnerException, CODEPORTING_ARGS(System::String message, System::Exception innerException));
+    
+};
+
+class Details_CustomMessageInnerExceptionInhetor;
+using CustomMessageInnerExceptionInhetor = System::ExceptionWrapper<Details_CustomMessageInnerExceptionInhetor>;
+
+class Details_CustomMessageInnerExceptionInhetor : public Details_CustomMessageInnerException
+{
+    typedef Details_CustomMessageInnerExceptionInhetor ThisType;
+    typedef Details_CustomMessageInnerException BaseType;
+    
+    typedef ::System::BaseTypesInfo<BaseType> ThisTypeBaseTypesInfo;
+    RTTI_INFO_DECL();
+    
+    friend class System::ExceptionWrapperHelper;
+    template <typename T> friend class System::ExceptionWrapper;
+    
+protected:
+
+    [[noreturn]] void DoThrow(const System::ExceptionPtr& self) const override;
+    
+    Details_CustomMessageInnerExceptionInhetor(System::String res);
+    
+    MEMBER_FUNCTION_MAKE_OBJECT_DECLARATION(Details_CustomMessageInnerExceptionInhetor, CODEPORTING_ARGS(System::String res));
     
 };
 
@@ -540,6 +583,8 @@ private:
 {{< highlight cpp >}}
 #include "Exceptions.h"
 
+#include <system/string.h>
+#include <system/runtime/serialization/streaming_context.h>
 #include <system/runtime/serialization/serialization_info.h>
 
 namespace TypesPorting {
@@ -603,6 +648,20 @@ Details_CustomMessageInnerException::Details_CustomMessageInnerException(System:
 }
 
 MEMBER_FUNCTION_MAKE_OBJECT_DEFINITION(Details_CustomMessageInnerException, CODEPORTING_ARGS(System::String message, System::Exception innerException), CODEPORTING_ARGS(message,innerException));
+
+RTTI_INFO_IMPL_HASH_NAMED(4188024334u, ::TypesPorting::Details_CustomMessageInnerExceptionInhetor, "TypesPorting::CustomMessageInnerExceptionInhetor", ThisTypeBaseTypesInfo);
+
+[[noreturn]] void Details_CustomMessageInnerExceptionInhetor::DoThrow(const System::ExceptionPtr& self) const
+{
+    throw System::ExceptionWrapper<Details_CustomMessageInnerExceptionInhetor>(self);
+}
+
+Details_CustomMessageInnerExceptionInhetor::Details_CustomMessageInnerExceptionInhetor(System::String res)
+     : Details_CustomMessageInnerException(res, nullptr)
+{
+}
+
+MEMBER_FUNCTION_MAKE_OBJECT_DEFINITION(Details_CustomMessageInnerExceptionInhetor, CODEPORTING_ARGS(System::String res), CODEPORTING_ARGS(res));
 
 RTTI_INFO_IMPL_HASH_NAMED(2166308278u, ::TypesPorting::Details_BaseException, "TypesPorting::BaseException", ThisTypeBaseTypesInfo);
 

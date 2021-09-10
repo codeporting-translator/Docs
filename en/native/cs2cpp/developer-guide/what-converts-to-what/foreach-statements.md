@@ -1,5 +1,5 @@
 ---
-date: "2021-08-09"
+date: "2021-09-10"
 author:
   display_name: "Wiki code generator"
 draft: "false"
@@ -10,7 +10,7 @@ menu:
   docs:
     parent: "What Converts to What"
     weight: "1"
-lastmod: "2021-08-09"
+lastmod: "2021-09-10"
 weight: "1"
 ---
 
@@ -129,7 +129,16 @@ namespace StatementsPorting
 #include <system/array.h>
 #include <cstdint>
 
-namespace System { namespace Collections { namespace Generic { template <typename> class IEnumerator; } } }
+namespace System 
+{
+namespace Collections 
+{
+namespace Generic 
+{
+template <typename> class IEnumerator;
+} // namespace Generic
+} // namespace Collections
+} // namespace System
 
 namespace StatementsPorting {
 
