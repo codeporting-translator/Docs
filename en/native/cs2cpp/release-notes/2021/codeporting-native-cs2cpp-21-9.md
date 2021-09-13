@@ -65,7 +65,7 @@ Please consult respective sections of our wiki for more information.
 | PDFCPP-1660 | Fix porter attribute reader for reading short CSharp types like uint, ulong, e.t.c | Enhancement |
 | PDFCPP-1661 | CppArrayInnerIndexer - submit on MR. | New feature |
 | EMAILCPP-309 | Implementing Linq GroupBy functionality in asposecpplib | New feature |
-| PAGECPP-36 | TBA | Bug |
+| PAGECPP-36 | Create test and MR for GraphicsPath::AddPath fix | Bug |
 | SLIDESCPP-3113 | Porter: Improve System.Tuple class handling | Enhancement |
 | SLIDESCPP-3102 | Improve Graphics::DrawImage() and Graphics::DrawImageUnscaled() methods | Bug |
 | CSPORTCPP-4528 | Separate code dependent on NRefactory from CsToCppPorter.Settings | Task |
