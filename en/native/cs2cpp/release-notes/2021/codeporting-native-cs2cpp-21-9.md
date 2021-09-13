@@ -16,11 +16,11 @@ weight: "1"
 
 ## Major Features ##
 
-1. The new CppArrayOnStack attribute was supported by porter which allows allocating constant length arrays on stack in the ported code.
+1. The new CppArrayOnStack attribute was supported by the porter. This attribute allows allocating constant length arrays on stack in the ported code.
 1. The macros were introduced to simplify defining custom exceptions. See [C++ user-defined exception classes](https://docs.codeporting.com/native/cs2cpp/developer-guide/cpp-user-defined-exception-classes/) for more details.
 1. The new CppArrayInnerIndexer attribute was supported by the porter which allows the ported code to use the members of internal vector to access array elements instead of .Net-styled accessors implemented at System::Array and System::ArrayPtr level. This increases the performance by the cost of skipping the boundary checks.
-1. The GroupBy LINQ was supported.
-1. The forward declarations in generated code are now grouped by namespaces and ordered to avoid violating C++ declare-before-use rule. Several related inclusion generation issues were fixed.
+1. The GroupBy LINQ method was supported.
+1. The forward declarations in the generated code are now grouped by namespaces and ordered to avoid violating C++ declare-before-use rule. Several related inclusion generation issues were fixed.
 1. The external_include configuration file node was added which makes the porter to insert custom inclusion lines into generated files.
 1. The CppAddFunctionArgument and CppPassFunctionArgument attributes were added which make the porter to generate and pass additional arguments for the methods being translated.
 
