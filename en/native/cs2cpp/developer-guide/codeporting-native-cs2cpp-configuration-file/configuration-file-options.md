@@ -934,7 +934,7 @@ class Abstract : public System::Object
 }
 {{< /highlight >}} | 
 
-**Default value**: true
+**Default value**: false
 
 ### use_weak_ptr_std_bind ###
 
