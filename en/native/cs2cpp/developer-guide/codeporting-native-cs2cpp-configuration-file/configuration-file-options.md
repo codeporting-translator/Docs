@@ -1841,6 +1841,35 @@ void foo() {
 
 **Default value:** false
 
+### alternative_debug_class ###
+
+Makes the porter convert the calls to the methods of the specified class into macros.
+
+C# code:
+
+{{< highlight cs >}}
+Aspose.Debug.Assert(true);
+{{< /highlight >}}
+
+Configuration file:
+
+{{< highlight xml >}}
+<typemap>
+    <class csname="Aspose.Debug" cppname="Aspose::Replace::NullDebug"/>
+</typemap>
+<opt name="alternative_debug_class" value="Aspose.Debug"/>
+{{< /highlight >}}
+
+C++ code:
+
+{{< highlight cpp >}}
+NULLDEBUG_ASSERT(true);
+{{< /highlight >}}
+
+**Since version:** 21.10
+
+**Default value:** false
+
 ## Debug and developer version code options ##
 
 These options control debug and developer version code in generated C++ files.

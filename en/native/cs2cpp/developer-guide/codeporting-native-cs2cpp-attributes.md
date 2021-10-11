@@ -827,9 +827,9 @@ Makes porter mark method with 'override' qualifier.
 
 **Used on**: Type or entity
 
-**Arguments**: Mandatory value of AccessModifiers enum.
+**Arguments**: Mandatory value of AccessModifiers enum: Public, Internal, Protected or Private.
 
-Switches element's access modifier to specified one in ported one.
+Switches element's access modifier to specified one in ported one. Also makes the porter behave as if the attributed entity had the specified access modifier on it, affecting all analysis that is done.
 
 **Since version:** 20.11
 

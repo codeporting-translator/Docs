@@ -71,6 +71,8 @@ To tell the porter which condition type to use, one must specify the 'condition'
 
 The below sections summarize what conditions are available and how to use them.
 
+When specifying the types in the condition-related attributes, the fully qualified type names may be used. Also, C# built-in types such as 'int' or 'char' can be used. The '[]' suffix goes for arrays.
+
 #### method_in_class_or_baseclass condition ####
 
 This condition applies its attribute to:
