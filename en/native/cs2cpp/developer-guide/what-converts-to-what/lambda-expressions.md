@@ -1,5 +1,5 @@
 ---
-date: "2021-09-10"
+date: "2021-10-09"
 author:
   display_name: "Wiki code generator"
 draft: "false"
@@ -10,7 +10,7 @@ menu:
   docs:
     parent: "What Converts to What"
     weight: "1"
-lastmod: "2021-09-10"
+lastmod: "2021-10-09"
 weight: "1"
 ---
 
@@ -1689,7 +1689,7 @@ void LambdaExpressions::ReusingVariable::Foo()
 }
 
 #ifdef ASPOSE_GET_SHARED_MEMBERS
-System::Object::shared_members_type StatementsPorting::LambdaExpressions::ReusingVariable::GetSharedMembers()
+System::Object::shared_members_type LambdaExpressions::ReusingVariable::GetSharedMembers()
 {
     auto result = System::Object::GetSharedMembers();
     
@@ -1810,7 +1810,7 @@ LambdaExpressions::MultipleLambdas::MultipleLambdas() : m_value(10)
 }
 
 #ifdef ASPOSE_GET_SHARED_MEMBERS
-System::Object::shared_members_type StatementsPorting::LambdaExpressions::MultipleLambdas::GetSharedMembers()
+System::Object::shared_members_type LambdaExpressions::MultipleLambdas::GetSharedMembers()
 {
     auto result = System::Object::GetSharedMembers();
     
@@ -1996,7 +1996,7 @@ void LambdaExpressions::LambdaPasses4::Foo(System::Func<int32_t> lambdaParam1, S
 }
 
 #ifdef ASPOSE_GET_SHARED_MEMBERS
-System::Object::shared_members_type StatementsPorting::LambdaExpressions::LambdaPasses4::GetSharedMembers()
+System::Object::shared_members_type LambdaExpressions::LambdaPasses4::GetSharedMembers()
 {
     auto result = System::Object::GetSharedMembers();
     
@@ -2100,7 +2100,7 @@ void LambdaExpressions::LambdaPasses3::Foo3(int32_t param)
 }
 
 #ifdef ASPOSE_GET_SHARED_MEMBERS
-System::Object::shared_members_type StatementsPorting::LambdaExpressions::LambdaPasses3::GetSharedMembers()
+System::Object::shared_members_type LambdaExpressions::LambdaPasses3::GetSharedMembers()
 {
     auto result = System::Object::GetSharedMembers();
     
@@ -2221,7 +2221,7 @@ void LambdaExpressions::SomeClass3::Foo()
 }
 
 #ifdef ASPOSE_GET_SHARED_MEMBERS
-System::Object::shared_members_type StatementsPorting::LambdaExpressions::SomeClass3::GetSharedMembers()
+System::Object::shared_members_type LambdaExpressions::SomeClass3::GetSharedMembers()
 {
     auto result = System::Object::GetSharedMembers();
     
@@ -2255,7 +2255,7 @@ void LambdaExpressions::SomeClass2::Foo()
 }
 
 #ifdef ASPOSE_GET_SHARED_MEMBERS
-System::Object::shared_members_type StatementsPorting::LambdaExpressions::SomeClass2::GetSharedMembers()
+System::Object::shared_members_type LambdaExpressions::SomeClass2::GetSharedMembers()
 {
     auto result = System::Object::GetSharedMembers();
     
@@ -2323,7 +2323,7 @@ LambdaExpressions::LambdaCapturesThisByReference::~LambdaCapturesThisByReference
 }
 
 #ifdef ASPOSE_GET_SHARED_MEMBERS
-System::Object::shared_members_type StatementsPorting::LambdaExpressions::LambdaCapturesThisByReference::GetSharedMembers()
+System::Object::shared_members_type LambdaExpressions::LambdaCapturesThisByReference::GetSharedMembers()
 {
     auto result = System::Object::GetSharedMembers();
     
@@ -3086,7 +3086,7 @@ LambdaExpressions::~LambdaExpressions()
 }
 
 #ifdef ASPOSE_GET_SHARED_MEMBERS
-System::Object::shared_members_type StatementsPorting::LambdaExpressions::GetSharedMembers()
+System::Object::shared_members_type LambdaExpressions::GetSharedMembers()
 {
     auto result = System::Object::GetSharedMembers();
     

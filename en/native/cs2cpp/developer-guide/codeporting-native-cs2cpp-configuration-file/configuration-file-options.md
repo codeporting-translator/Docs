@@ -384,7 +384,7 @@ private:
 };
 {{< /highlight >}} | 
 
-**Default value**: false
+**Default value**: true
 
 ### cast_delegate ###
 
@@ -740,7 +740,7 @@ class A {}
 class B : A {}
 class C : B {}
 {{< /highlight >}} | 
-| true | Order is unchanged | {{< highlight cpp >}}
+| false | Order is unchanged | {{< highlight cpp >}}
 class C : B {}
 class B : A {}
 class A {}
@@ -853,7 +853,7 @@ void MyClass::Foo()
 }
 {{< /highlight >}} | 
 
-**Default value**: false
+**Default value**: true
 
 ### indexer_as_method ###
 
@@ -1012,7 +1012,7 @@ MyClass::MyClass()
 }
 {{< /highlight >}} | 
 
-**Default value**: false
+**Default value**: true
 
 ### force_add_shared_api_macros ###
 
@@ -1126,7 +1126,7 @@ void Foo::Do(int32_t i, System::String s)
 {{< /highlight >}} | 
 | false | Doesn't generate required calls. |
 
-**Default value**: false
+**Default value**: true
 
 ### polymorphic_memberwiseclone ###
 
@@ -1223,6 +1223,9 @@ static System::String m_value;
 {{< /highlight >}} | 
 | native | Translate ThreadStatic attribute as thread_local storage class. | {{< highlight cpp >}}
 static thread_local System::String m_value;
+{{< /highlight >}} | 
+| singleton | Convert such fields into singletons. | {{< highlight cpp >}}
+static System::String m_value() { static thread_local value = false; return value; }
 {{< /highlight >}} | 
 
 **Default value**: native
@@ -1547,7 +1550,7 @@ class SimpleTest : public System::Object
 
 **Since version:** 20.9
 
-**Default value**: false
+**Default value**: true
 
 ### force_wrap_iostream ###
 
@@ -1572,7 +1575,7 @@ void IStream(std::basic_istream<CharType, Traits>& istream)
 }
 {{< /highlight >}} | 
 | false | Do not generate overload. | {{< highlight cpp >}}
-|void IStream(System::SharedPtr<System::IO::Stream> istream);
+void IStream(System::SharedPtr<System::IO::Stream> istream);
 {{< /highlight >}} | 
 
 **Since version:** 20.10
@@ -1648,6 +1651,8 @@ ExtensionClass::CallExtensionMethod(obj, arg);
 {{< /highlight >}} | 
 
 **Since version:** 20.11
+
+**Default value**: true
 
 ### generate_begin_end_methods ###
 
@@ -2475,7 +2480,7 @@ Enables porter transforming self-closing documentation comment tags into pairs o
 | true | Transform self-closing tags. | '&lt;tag/&gt;' transforms into '&lt;tag&gt;&lt;/tag&gt;'
 | false | Keep self-closing tags as they are. | '&lt;tag/&gt;' remains as it is.
 
-**Default value**: true
+**Default value**: false
 
 **Since version**: 20.1
 
