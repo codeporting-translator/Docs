@@ -16,7 +16,7 @@ weight: "1"
 
 ## Major Features ##
 
-1. Calls to the methods of System.Diagnostics.Debug are now translated into macros. This allows not performing any calculations in the Debug mode, same as in C#. The 'alternative_debug_class' option was supported by porter to apply this behavior to other classes.
+1. Calls to the methods of System.Diagnostics.Debug are now translated into macros. This allows not performing any calculations in the Debug mode, same as in C#. The ‘alternative_debug_class’ option was supported by the porter. This option can be used to apply this behavior to other classes.
 1. Debug libraries for Linux OS are no longer included in the CodePorting.Native Cs2Cpp packages. From now on, Release CodePorting.Native Cs2Cpp Linux libraries should be linked to your code both in Debug and in Release. For CMake users, no changes are required, as the references to correct libraries will be propagated automatically. In the pre-generated build and project files on Linux OS, references to libaspose_cpp_clang3_libstdcppd.so should be replaced with libaspose_cpp_clang3_libstdcpp.so, and references to libaspose_cpp_gcc6d.so should be repalced with libaspose_cpp_gcc6.so. For Windows users, no changes are required, as both Debug and Release libraries are still supplied for VS compiler.
 1. API reference was improved for multiple classes. Usage examples were added. Some misprints were fixed.
 1. The 'CppOverrideAccessModifier' attribute was improved. Protected and private modes were supported, and all analysis done by the porter is now affected by this attribute.
@@ -24,11 +24,11 @@ weight: "1"
 ## Minor fixes ##
 
 1. The Encoding::GetEncoding() method now throws ArgumentException if the encoding name is incorrect, same way as .Net implementation does.
-1. Memory corruption issue was fixed within System::String::Join method.
-1. The methods of MemoryManagement were fixed to work properly with the arguments of WeakPtr type.
+1. The memory corruption issue was fixed within the System::String::Join method.
+1. The methods of the MemoryManagement class were fixed to work properly with the arguments of the WeakPtr type.
 1. The 'override' qualifiers are now properly placed when the CppRenameEntity attribute is used.
 1. The bug was fixed in the porter which caused the 'CppOverrideAccessModifier' attribute place 'override' qualifier on the attributed methods.
-1. In the in-config attributes, the '\[\]' suffix can now be used for the arrays.
+1. Now the '\[\]' suffix can be used for the arrays in the in-config attributes.
 1. The bug was fixed in the porter leaving some cases of ArrayRawPointer and ConstArrayRawPointer parameter modes unrecognized in some cases.
 1. The bug was fixed in the porter affecting the 'import' configuration file tag sanity check.
 1. Some previously missing options were added into default porter.config file.
@@ -76,3 +76,4 @@ Please consult respective sections of our wiki for more information.
 ## Public API and Backward Incompatible Changes ##
 
 1. libaspose_cpp_clang3_libstdcppd.so and libaspose_cpp_gcc6d.so are no longer populated. If you have references to these libraries in your project or build files, please update them to use libaspose_cpp_clang3_libstdcpp.so or libaspose_cpp_gcc6.so instead.
+1. The CppAddFunctionArgument and CppPassFunctionArgument attributes are now deprecated. The ArrayRawPointer and ConstArrayRawPointer values of the CppArgumentKind attribute are also deprecated. The support of these will be removed in the next version of CodePorting.Native Cs2Cpp.
