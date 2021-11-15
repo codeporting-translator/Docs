@@ -162,6 +162,7 @@ This condition applies its attribute to the parameter of specified method or con
 {{< highlight xml >}}
 <attribute name="CppArgumentKind" method="* int Compare(?, ?)" interface="System.Collections.Generic.IComparer" parametername="*" parameterkind="ConstReference" condition="parameter"/>
 <attribute name="CppArgumentKind" method="void Insert(?, ?)" interface="System.Collections.Generic.IList" parametername="item" parameterkind="ConstReference" condition="parameter"/>
+<attribute name="CppArgumentKind" method="* CreateNode(*)" class="System.Xml.XmlDocument" parametertype="string" parameterkind="ConstReference" condition="parameter"/>
 <attribute name="CppLambdaShouldCaptureByReference" method="public * *(*)" class="System.Collections.Generic.List" parametername="match" condition="parameter" />
 {{< /highlight >}}
 

@@ -1830,6 +1830,17 @@ void foo() {
 
 **Default value:** false
 
+### force_const_ref_return_type_simple_properties ###
+
+| Allowed value | Meaning | Example
+---| ---| ---|
+| true | Simple property getters (that contain only one return statement) of shared pointer types return const references to backed fields. |
+| false | Simple property getters (that contain only one return statement) of shared pointer types return copies of values to backed fields. |
+
+**Since version:** 21.11
+
+**Default value:** false
+
 ### force_enum_flags_attribute ###
 
 | Allowed value | Meaning | Example

@@ -175,23 +175,24 @@ void ClassArrayInnerIndexer::test_0()
 
 **Arguments**: Names of the array variables to move to stack
 
-Generates on-stack arrays in ported code instead of using System::Array wrappers.
+Generates on-stack arrays in ported code instead of using System::Array wrappers. It can be applied only to single-dimensional arrays.
 
 {{< highlight cs >}}
 class ClassArrayOnStack
 {
-    [CsToCppPorter.CppArrayOnStack("arr", "arr2", "arr3", "arr4", "arr5", "arr6", "arr7", "arr8")]
+    [CsToCppPorter.CppArrayOnStack("arr1", "arr2", "arr3", "arr4", "arr6", "arr7", "arr8", "arr9")]
     public void ArrayOnStackMethod()
     {
-        byte[] arr = new byte[] { 0 };
+        byte[] arr1 = new byte[] { 0 };
         byte[] arr2 = new byte[10];
-        byte[,] arr3 = new byte[,] { { 1, 2 }, { 3, 4 }, { 5, 6 }, { 7, 8 } } , arr4 = new byte[4, 2] { { 1, 2 }, { 3, 4 }, { 5, 6 }, { 7, 8 } };
-        
-        byte[,,] arr5 = new byte[,,] { { { 1, 2 }, { 3, 4 } }, { { 5, 6 }, { 7, 8 } } };
-        byte[,,] arr6 = new byte[2, 2, 2] { { { 1, 2 }, { 3, 4 } }, { { 5, 6 }, { 7, 8 } } };
+        byte[,] arr3 = new byte[,] { { 1, 2 }, { 3, 4 }, { 5, 6 }, { 7, 8 } }, arr4 = new byte[4, 2] { { 1, 2 }, { 3, 4 }, { 5, 6 }, { 7, 8 } };
+        byte[,] arr5 = new byte[,] { { 1, 2 }, { 3, 4 }, { 5, 6 }, { 7, 8 } };
 
-        byte[,,] arr7 = new byte[,,] { { { 1, 2, 3 }, { 4, 5, 6 } }, { { 7, 8, 9 }, { 10, 11, 12 } } };
-        byte[,,] arr8 = new byte[2, 2, 3] { { { 1, 2, 3 }, { 4, 5, 6 } }, { { 7, 8, 9 }, { 10, 11, 12 } } };
+        byte[,,] arr6 = new byte[,,] { { { 1, 2 }, { 3, 4 } }, { { 5, 6 }, { 7, 8 } } };
+        byte[,,] arr7 = new byte[2, 2, 2] { { { 1, 2 }, { 3, 4 } }, { { 5, 6 }, { 7, 8 } } };
+
+        byte[,,] arr8 = new byte[,,] { { { 1, 2, 3 }, { 4, 5, 6 } }, { { 7, 8, 9 }, { 10, 11, 12 } } };
+        byte[,,] arr9 = new byte[2, 2, 3] { { { 1, 2, 3 }, { 4, 5, 6 } }, { { 7, 8, 9 }, { 10, 11, 12 } } };
     }
 }
 {{< /highlight >}}
@@ -199,15 +200,16 @@ class ClassArrayOnStack
 {{< highlight cpp >}}
 void ClassArrayOnStack::ArrayOnStackMethod()
 {
-    uint8_t arr[] = {0};
-    uint8_t arr2[10] = {0};
-    uint8_t arr3[][2] = {{1,2}, {3,4}, {5,6}, {7,8}}, arr4[][2] = {{1,2}, {3,4}, {5,6}, {7,8}};
+    System::Details::StackArray<uint8_t, 1> arr1 = {0};
+    System::Details::StackArray<uint8_t, 10> arr2 = {0};
+    System::ArrayPtr<std::vector<uint8_t>> arr3 = System::MakeArray<std::vector<uint8_t>>({{1,2}, {3,4}, {5,6}, {7,8}}), arr4 = System::MakeArray<std::vector<uint8_t>>({{1,2}, {3,4}, {5,6}, {7,8}});
+    System::ArrayPtr<std::vector<uint8_t>> arr5 = System::MakeArray<std::vector<uint8_t>>({{1,2}, {3,4}, {5,6}, {7,8}});
     
-    uint8_t arr5[][2][2] = {{{1,2},{3,4}}, {{5,6},{7,8}}};
-    uint8_t arr6[][2][2] = {{{1,2},{3,4}}, {{5,6},{7,8}}};
+    System::ArrayPtr<std::vector<std::vector<uint8_t>>> arr6 = System::MakeArray<std::vector<std::vector<uint8_t>>>({{{1,2},{3,4}}, {{5,6},{7,8}}});
+    System::ArrayPtr<std::vector<std::vector<uint8_t>>> arr7 = System::MakeArray<std::vector<std::vector<uint8_t>>>({{{1,2},{3,4}}, {{5,6},{7,8}}});
     
-    uint8_t arr7[][2][3] = {{{1,2,3},{4,5,6}}, {{7,8,9},{10,11,12}}};
-    uint8_t arr8[][2][3] = {{{1,2,3},{4,5,6}}, {{7,8,9},{10,11,12}}};
+    System::ArrayPtr<std::vector<std::vector<uint8_t>>> arr8 = System::MakeArray<std::vector<std::vector<uint8_t>>>({{{1,2,3},{4,5,6}}, {{7,8,9},{10,11,12}}});
+    System::ArrayPtr<std::vector<std::vector<uint8_t>>> arr9 = System::MakeArray<std::vector<std::vector<uint8_t>>>({{{1,2,3},{4,5,6}}, {{7,8,9},{10,11,12}}});
 }
 {{< /highlight >}}
 
