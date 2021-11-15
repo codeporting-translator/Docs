@@ -1,5 +1,5 @@
 ---
-date: "2021-10-09"
+date: "2021-11-09"
 author:
   display_name: "Wiki code generator"
 draft: "false"
@@ -10,7 +10,7 @@ menu:
   docs:
     parent: "What Converts to What"
     weight: "1"
-lastmod: "2021-10-09"
+lastmod: "2021-11-09"
 weight: "1"
 ---
 
@@ -163,22 +163,22 @@ namespace TypesPorting
 #include <system/exceptions.h>
 #include <cstdint>
 
-namespace TypesPorting 
+namespace System
+{
+namespace Runtime
+{
+namespace Serialization
+{
+class SerializationInfo;
+class StreamingContext;
+} // namespace Serialization
+} // namespace Runtime
+class String;
+} // namespace System
+namespace TypesPorting
 {
 class Details_BadArgumentException; using BadArgumentException = System::ExceptionWrapper<Details_BadArgumentException>;
 } // namespace TypesPorting
-namespace System 
-{
-class String;
-namespace Runtime 
-{
-namespace Serialization 
-{
-class StreamingContext;
-class SerializationInfo;
-} // namespace Serialization
-} // namespace Runtime
-} // namespace System
 
 namespace TypesPorting {
 

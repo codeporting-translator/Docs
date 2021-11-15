@@ -1,5 +1,5 @@
 ---
-date: "2021-10-09"
+date: "2021-11-09"
 author:
   display_name: "Wiki code generator"
 draft: "false"
@@ -10,7 +10,7 @@ menu:
   docs:
     parent: "What Converts to What"
     weight: "1"
-lastmod: "2021-10-09"
+lastmod: "2021-11-09"
 weight: "1"
 ---
 
@@ -62,7 +62,7 @@ namespace MembersPorting
 #include <system/object.h>
 #include <cstdint>
 
-namespace System 
+namespace System
 {
 class String;
 } // namespace System

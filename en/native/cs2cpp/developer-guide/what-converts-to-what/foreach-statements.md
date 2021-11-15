@@ -1,5 +1,5 @@
 ---
-date: "2021-10-09"
+date: "2021-11-09"
 author:
   display_name: "Wiki code generator"
 draft: "false"
@@ -10,7 +10,7 @@ menu:
   docs:
     parent: "What Converts to What"
     weight: "1"
-lastmod: "2021-10-09"
+lastmod: "2021-11-09"
 weight: "1"
 ---
 
@@ -129,11 +129,11 @@ namespace StatementsPorting
 #include <system/array.h>
 #include <cstdint>
 
-namespace System 
+namespace System
 {
-namespace Collections 
+namespace Collections
 {
-namespace Generic 
+namespace Generic
 {
 template <typename> class IEnumerator;
 } // namespace Generic
@@ -234,8 +234,8 @@ class Map : public System::Collections::Generic::Dictionary<uint32_t, System::Sh
     
 public:
 
-    void Add(uint32_t const &key, System::SharedPtr<Record> const &record);
-    void Add(System::SharedPtr<Map> const &map);
+    void Add(const uint32_t& key, const System::SharedPtr<Record>& record);
+    void Add(const System::SharedPtr<Map>& map);
     void SetTemplateWeakPtr(uint32_t argument) override;
     
 protected:
@@ -392,11 +392,11 @@ Record::Record() : pr_Value1(0), pr_Value2(0)
 
 RTTI_INFO_IMPL_HASH(1762413471u, ::StatementsPorting::Map, ThisTypeBaseTypesInfo);
 
-void Map::Add(uint32_t const &key, System::SharedPtr<Record> const &record)
+void Map::Add(const uint32_t& key, const System::SharedPtr<Record>& record)
 {
 }
 
-void Map::Add(System::SharedPtr<Map> const &map)
+void Map::Add(const System::SharedPtr<Map>& map)
 {
     for (auto pair : map)
     {
