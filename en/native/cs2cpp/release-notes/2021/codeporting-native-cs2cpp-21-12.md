@@ -22,7 +22,7 @@ weight: "1"
 
 ## Minor fixes ##
 1. The exceptions thrown by the `Socket` and `Dns` classes were improved.
-1. The `class_ptr_alias` option was supported by the porter. For echh public class, the porter generates `Ptr` member type which is an alias to the smart pointer for this class when this option is enabled.
+1. The `class_ptr_alias` option was supported by the porter. For each public class, the porter generates `Ptr` member type which is an alias to the smart pointer for this class when this option is enabled.
 1. The code of `Array::CopyTo()` and `ArrayView::CopyTo()` methods was simplified.
 1. The overloads were added to `RandomNumberGenerator` and `RNGCryptoServiceProvider` methods that work with `ArrayView` and `StackArray` instead of `ArrayPtr`.
 1. The access violation was fixed in the `HttpWebResponse::GetResponseHeader()` method.
