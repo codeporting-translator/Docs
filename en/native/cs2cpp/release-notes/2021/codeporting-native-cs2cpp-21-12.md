@@ -53,8 +53,8 @@ weight: "1"
 | WORDSCPP-1140 | lld linker reports ld.lld: warning: found local symbol | Bug |
 | CSPORTCPP-3916 | Upgrade Linux compilers | Task |
 | CSPORTCPP-4634 | Unify Linux packages | Task |
-| TASKSCPP-1681 | ??? | ??? |
-| TASKSCPP-1682 | ??? | ??? |
+| TASKSCPP-1681 | Enhance force_const_ref_return_type_simple_properties porter option appliance. | Enhancement |
+| TASKSCPP-1682 | Avoid CODEPORTING_CURRENT_RETTYPE macro usage in library and ported code | Enhancement |
 
 ## Public API and Backward Incompatible Changes ##
 1. The `get_Current` method of the `IEnumerable` class and its inheritors now returns the value by reference instead of returning by value when a collection stores reference types or strings. The implementations of this method should be updated where applicable.
