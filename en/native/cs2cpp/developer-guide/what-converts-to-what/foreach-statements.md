@@ -1,5 +1,5 @@
 ---
-date: "2021-11-09"
+date: "2021-12-09"
 author:
   display_name: "Wiki code generator"
 draft: "false"
@@ -10,7 +10,7 @@ menu:
   docs:
     parent: "What Converts to What"
     weight: "1"
-lastmod: "2021-11-09"
+lastmod: "2021-12-09"
 weight: "1"
 ---
 
@@ -295,7 +295,7 @@ void ForeachStatements::EnclosedForeach(System::ArrayPtr<System::ArrayPtr<System
 void ForeachStatements::ForeachOverList()
 {
     auto list = System::MakeObject<System::Collections::Generic::List<System::String>>(System::MakeArray<System::String>({u"1", u"2", u"3"}));
-    for (const auto& i : list)
+    for (auto&& i : list)
     {
         System::Console::WriteLine(i);
     }
@@ -304,7 +304,7 @@ void ForeachStatements::ForeachOverList()
 void ForeachStatements::ForeachOverIList()
 {
     System::SharedPtr<System::Collections::Generic::IList<System::String>> list = System::MakeObject<System::Collections::Generic::List<System::String>>(System::MakeArray<System::String>({u"1", u"2", u"3"}));
-    for (const auto& i : System::IterateOver(list))
+    for (auto&& i : System::IterateOver(list))
     {
         System::Console::WriteLine(i);
     }
@@ -313,7 +313,7 @@ void ForeachStatements::ForeachOverIList()
 void ForeachStatements::ForeachOverThis()
 {
     m_collection = System::MakeObject<System::Collections::Generic::List<System::String>>(System::MakeArray<System::String>({u"1", u"2", u"3"}));
-    for (const auto& i : *this)
+    for (auto&& i : *this)
     {
         System::Console::WriteLine(i);
     }
@@ -398,9 +398,9 @@ void Map::Add(const uint32_t& key, const System::SharedPtr<Record>& record)
 
 void Map::Add(const System::SharedPtr<Map>& map)
 {
-    for (auto pair : map)
+    for (auto&& pair : map)
     {
-        for (auto fir : pair.get_Value())
+        for (auto&& fir : pair.get_Value())
         {
             Add(pair.get_Key(), fir.get_Value());
         }

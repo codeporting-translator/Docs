@@ -1,5 +1,5 @@
 ---
-date: "2021-11-09"
+date: "2021-12-09"
 author:
   display_name: "Wiki code generator"
 draft: "false"
@@ -10,7 +10,7 @@ menu:
   docs:
     parent: "What Converts to What"
     weight: "1"
-lastmod: "2021-11-09"
+lastmod: "2021-12-09"
 weight: "1"
 ---
 
@@ -21,6 +21,8 @@ Additional command-line options passed to CsToCppPorter: none.
 ## Source C# Code ##
 
 {{< highlight cs >}}
+using System;
+
 namespace StatementsPorting
 {
     public class StandardTypeCast
@@ -210,6 +212,13 @@ namespace StatementsPorting
             byte dest9 = (byte) source;
             short dest10 = (short) source;
         }
+        
+        public void OperandCasts()
+        {
+            double maxDays1 = long.MaxValue / (TimeSpan.TicksPerMillisecond / 1000.0 / 60.0 / 60.0 / 24.0);
+            double maxDays2 = 9223372036854775807 / (TimeSpan.TicksPerMillisecond / 1000.0 / 60.0 / 60.0 / 24.0);
+            double maxDays3 = 9223372036854 / (TimeSpan.TicksPerMillisecond / 1000.0 / 60.0 / 60.0 / 24.0);
+        }
     }
 }
 {{< /highlight >}}
@@ -246,6 +255,7 @@ public:
     void FloatTypeCasts();
     void DoubleTypeCasts();
     void CharTypeCasts();
+    void OperandCasts();
     
 };
 
@@ -260,6 +270,8 @@ public:
 {{< highlight cpp >}}
 #include "StandardTypeCast.h"
 
+#include <system/timespan.h>
+#include <system/primitive_types.h>
 #include <cstdint>
 
 namespace StatementsPorting {
@@ -450,6 +462,13 @@ void StandardTypeCast::CharTypeCasts()
     int8_t dest8 = (int8_t)source;
     uint8_t dest9 = (uint8_t)source;
     int16_t dest10 = (int16_t)source;
+}
+
+void StandardTypeCast::OperandCasts()
+{
+    double maxDays1 = static_cast<double>(std::numeric_limits<int64_t>::max()) / (System::TimeSpan::TicksPerMillisecond / 1000.0 / 60.0 / 60.0 / 24.0);
+    double maxDays2 = static_cast<double>(9223372036854775807) / (System::TimeSpan::TicksPerMillisecond / 1000.0 / 60.0 / 60.0 / 24.0);
+    double maxDays3 = 9223372036854 / (System::TimeSpan::TicksPerMillisecond / 1000.0 / 60.0 / 60.0 / 24.0);
 }
 
 } // namespace StatementsPorting

@@ -302,11 +302,11 @@ class Foo
 
 ### CppConstRefReturnType ###
 
-**Used on**: Property
+**Used on**: Property, indexer, method
 
-**Argument**: None
+**Arguments**: None
 
-Makes properties return const references to avoid copying.
+Makes property/method return const references to avoid copying.
 
 {{< highlight cs >}}
 class Foo
@@ -426,6 +426,16 @@ Forces all static variables in attributed class as singletons and static constru
 
 Makes porter put type members into C++ code in the same order they are in C# code, istead of grouping them by access modifier.
 
+### CppDisableEnumeratorCurrentValueHolder ###
+
+**Used on**: Class or structure
+
+**Arguments**: None
+
+Disables value holding in prticular enumerator class (overrides global behaviour, if [emit_enumerator_current_value_holder](https://wiki.uly.dynabic.com/Codeporting/Dynabic.csPorter%20for%20Cpp/Documentation%20and%20Support%20Materials/Production%20documentation%20storage%20point/Developer%20Guide/CodePorting.Native%20Cs2Cpp%20configuration%20files/Configuration%20file%20options/#Hemit_enumerator_current_value_holder) global option is _on_)
+
+**Since version**: 21.12
+
 ### CppDoNotObfuscate ###
 
 **Used on**: Entity
@@ -433,6 +443,16 @@ Makes porter put type members into C++ code in the same order they are in C# cod
 **Arguments**: None
 
 Disables entity obfuscation if 'obfuscate_cpp_headers' option is enabled.
+
+### CppEmitEnumeratorCurrentValueHolder ###
+
+**Used on**: Class or structure
+
+**Arguments**: None
+
+Emits value holding in prticular enumerator class (overrides global behaviour, if [emit_enumerator_current_value_holder](https://wiki.uly.dynabic.com/Codeporting/Dynabic.csPorter%20for%20Cpp/Documentation%20and%20Support%20Materials/Production%20documentation%20storage%20point/Developer%20Guide/CodePorting.Native%20Cs2Cpp%20configuration%20files/Configuration%20file%20options/#Hemit_enumerator_current_value_holder) global option is _off_)
+
+**Since version**: 21.12
 
 ### CppEnumEnableMetadata ###
 

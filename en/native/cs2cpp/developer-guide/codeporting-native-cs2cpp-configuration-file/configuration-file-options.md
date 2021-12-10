@@ -671,6 +671,36 @@ class Foo
 
 **Default value**: false
 
+### emit_enumerator_current_value_holder ###
+
+{{< highlight cs >}}
+public MyClass Current
+{
+    get { return mInner.Current; }
+}
+{{< /highlight >}}
+
+| Allowed value | Meaning | Example
+---| ---| ---|
+| true | Emit value holder. If you think that the use of the holder in a particular case is not justified, you can mark enumerator class with [CppDisableEnumeratorCurrentValueHolder](https://wiki.uly.dynabic.com/Codeporting/Dynabic.csPorter%20for%20Cpp/Documentation%20and%20Support%20Materials/Production%20documentation%20storage%20point/Developer%20Guide/CodePorting.Native%20Cs2Cpp%20attributes/#HCppDisableEnumeratorCurrentValueHolder) attribute to override global option behaviour locally and disable its generation. | {{< highlight cpp >}}
+CODEPORTING_CURRENT_RETTYPE(System::SharedPtr<MyClass>) MyEnumerator::get_Current() const
+{
+    System::HolderInitializer<System::SharedPtr<MyClass>> holder(m_CurrentHolder);
+    
+     return holder.HoldIfTemporary(mInner->get_Current());
+}
+{{< /highlight >}} | 
+| false | Do not emit holder. In this mode you can catch С4172 compile error, or catch exceptions, SEH, or other types of UB at runtime, because the result of get_Current method is a local variable or other temporary object. If so, and you still want to keep this global option turned OFF, you can mark your enumerator class with [CppEmitEnumeratorCurrentValueHolder](https://wiki.uly.dynabic.com/Codeporting/Dynabic.csPorter%20for%20Cpp/Documentation%20and%20Support%20Materials/Production%20documentation%20storage%20point/Developer%20Guide/CodePorting.Native%20Cs2Cpp%20attributes/#HCppEmitEnumeratorCurrentValueHolder) attribute. This will override global option behaviour, so, holder will be emited. | {{< highlight cpp >}}
+CODEPORTING_CURRENT_RETTYPE(System::SharedPtr<MyClass>) MyEnumerator::get_Current() const
+{
+     return mInner->get_Current();
+}
+{{< /highlight >}} | 
+
+**Default value**: true
+
+**Since version**: 21.12
+
 ### exclude_volatile ###
 
 Whether to pass 'volatile' flag from C# to C++.
@@ -1878,6 +1908,39 @@ NULLDEBUG_ASSERT(true);
 {{< /highlight >}}
 
 **Since version:** 21.10
+
+**Default value:** false
+
+### class_ptr_alias ###
+
+Makes the porter generate a special 'Ptr' member type to each public class that aliases a smart poitner to this class.
+
+C# code:
+
+{{< highlight cs >}}
+public class MyClass
+{}
+{{< /highlight >}}
+
+| Allowed value | Meaning | Example
+---| ---| ---|
+| true | Generate 'Ptr' member type for all public classes. | {{< highlight cpp >}}
+class MyClass : public System::Object
+{
+    // ...
+public:
+    /// An alias for shared pointer to an instance of this class.
+    using Ptr = System::SharedPtr<MyClass>;
+}
+{{< /highlight >}} | 
+| false | Do not generate 'Ptr' member type. | {{< highlight cpp >}}
+class MyClass : public System::Object
+{
+    // ...
+}
+{{< /highlight >}} | 
+
+**Since version:** 21.12
 
 **Default value:** false
 

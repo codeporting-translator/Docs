@@ -1,5 +1,5 @@
 ---
-date: "2021-11-09"
+date: "2021-12-09"
 author:
   display_name: "Wiki code generator"
 draft: "false"
@@ -10,7 +10,7 @@ menu:
   docs:
     parent: "What Converts to What"
     weight: "1"
-lastmod: "2021-11-09"
+lastmod: "2021-12-09"
 weight: "1"
 ---
 
@@ -616,7 +616,7 @@ Details_CustomMessageException::Details_CustomMessageException()
 MEMBER_FUNCTION_MAKE_OBJECT_DEFINITION(Details_CustomMessageException, CODEPORTING_ARGS(), CODEPORTING_ARGS());
 
 Details_CustomMessageException::Details_CustomMessageException(System::String message)
-     : System::Details_Exception(message)
+    : System::Details_Exception(message)
 {
 }
 
@@ -636,14 +636,14 @@ Details_CustomMessageInnerException::Details_CustomMessageInnerException()
 MEMBER_FUNCTION_MAKE_OBJECT_DEFINITION(Details_CustomMessageInnerException, CODEPORTING_ARGS(), CODEPORTING_ARGS());
 
 Details_CustomMessageInnerException::Details_CustomMessageInnerException(System::String message)
-     : System::Details_Exception(message)
+    : System::Details_Exception(message)
 {
 }
 
 MEMBER_FUNCTION_MAKE_OBJECT_DEFINITION(Details_CustomMessageInnerException, CODEPORTING_ARGS(System::String message), CODEPORTING_ARGS(message));
 
 Details_CustomMessageInnerException::Details_CustomMessageInnerException(System::String message, System::Exception innerException)
-     : System::Details_Exception(message, innerException)
+    : System::Details_Exception(message, innerException)
 {
 }
 
@@ -657,7 +657,7 @@ RTTI_INFO_IMPL_HASH_NAMED(4188024334u, ::TypesPorting::Details_CustomMessageInne
 }
 
 Details_CustomMessageInnerExceptionInhetor::Details_CustomMessageInnerExceptionInhetor(System::String res)
-     : Details_CustomMessageInnerException(res, nullptr)
+    : Details_CustomMessageInnerException(res, nullptr)
 {
 }
 
@@ -677,7 +677,7 @@ Details_BaseException::Details_BaseException()
 MEMBER_FUNCTION_MAKE_OBJECT_DEFINITION(Details_BaseException, CODEPORTING_ARGS(), CODEPORTING_ARGS());
 
 Details_BaseException::Details_BaseException(System::SharedPtr<System::Runtime::Serialization::SerializationInfo> info, System::Runtime::Serialization::StreamingContext context)
-     : System::Details_Exception(info, context)
+    : System::Details_Exception(info, context)
 {
 }
 
@@ -691,7 +691,7 @@ RTTI_INFO_IMPL_HASH_NAMED(125447829u, ::TypesPorting::Details_BadArgumentExcepti
 }
 
 Details_BadArgumentException::Details_BadArgumentException(System::SharedPtr<System::Runtime::Serialization::SerializationInfo> info, System::Runtime::Serialization::StreamingContext context)
-     : Details_BaseException(info, context)
+    : Details_BaseException(info, context)
 {
 }
 
