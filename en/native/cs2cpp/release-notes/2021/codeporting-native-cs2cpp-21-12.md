@@ -22,7 +22,7 @@ weight: "1"
 
 ## Minor fixes ##
 1. The exceptions thrown by the `Socket` and `Dns` classes were improved.
-1. The `class_ptr_alias` option was supported by the porter. If enabled, it makes the porter generate `Ptr` member type which is an alias to the smart pointer for this class.
+1. The `class_ptr_alias` option was supported by the porter. For echh public class, the porter generates `Ptr` member type which is an alias to the smart pointer for this class when this option is enabled.
 1. The code of `Array::CopyTo()` and `ArrayView::CopyTo()` methods was simplified.
 1. The overloads were added to `RandomNumberGenerator` and `RNGCryptoServiceProvider` methods that work with `ArrayView` and `StackArray` instead of `ArrayPtr`.
 1. The access violation was fixed in the `HttpWebResponse::GetResponseHeader()` method.
@@ -31,8 +31,8 @@ weight: "1"
 1. The porter no longer generates unwanted forward declarations when translating the generic delegates.
 1. More usage examples were added to the API reference.
 1. The indentation was fixed in the generated code for the member initializers.
-1. The bug was fixed in the porter. The conditions of generating the `SetTemplateWeakPtr()` method were fixed.
-1. The bug was fixed in the library. Unwanted Boost symbols are no longer exported from Linux builds.
+1. The conditions of generating the `SetTemplateWeakPtr()` method were fixed.
+1. Unwanted Boost symbols are no longer exported from Linux builds.
 1. The `System::String` to `std::*string` conversion operators were moved to the `string.h` header.
 1. The memory management issue was fixed inside the `System::String::Join()` method.
 1. The `force_const_ref_return_type_simple_properties` porter option was improved. When it is enabled, the porter generated incorrect code for the properties where the property type didn't match the type of the field being returned. This was fixed. Also, this option now supports the properties with more than one return statement and with the field of the field (of the field, and so on) being returned. Previously, only a single return statement with this class'es fields were supported.
@@ -51,10 +51,11 @@ weight: "1"
 | CSPORTCPP-4731 | Fix styling for constructor initializer list | Enhancement |
 | CSPORTCPP-4732 | Fix bug with SetTemplateWeakPtr | Bug |
 | WORDSCPP-1140 | lld linker reports ld.lld: warning: found local symbol | Bug |
-| CSPORTCPP-3916 | Upgrade Linux compilers | Task |
 | CSPORTCPP-4634 | Unify Linux packages | Task |
 | TASKSCPP-1681 | Enhance force_const_ref_return_type_simple_properties porter option appliance. | Enhancement |
 | TASKSCPP-1682 | Avoid CODEPORTING_CURRENT_RETTYPE macro usage in library and ported code | Enhancement |
+| PDFCPP-1732 | Add support to RandomNumberGenerator and depended classes | Task |
+| BARCODECPP-478 | Add fixes to Metered License support | Task |
 
 ## Public API and Backward Incompatible Changes ##
 1. The `get_Current` method of the `IEnumerable` class and its inheritors now returns the value by reference instead of returning by value when a collection stores reference types or strings. The implementations of this method should be updated where applicable.
