@@ -77,3 +77,4 @@ Please consult respective sections of our wiki for more information.
 1. The implementation of `System::Xml` classes was completely reworked. Some APIs may have become unavailable. Some APIs may have changed. The new API is much closer to such of .Net. Please use the API reference for more information.
 2. The supported glibc version will be changed in the upcoming releases.
 3. The new `IEnumerable`-level iterators and iterators for collections with duck typing will be introduced in one of the upcoming releases. The code which is dependent on `EnumeratorBasedIterator` or `DuckTypedIterator` may require some changes.
+4. Some declarations (e. g. `StreamPtr`) will be removed from the global namespace in the upcoming releases.
