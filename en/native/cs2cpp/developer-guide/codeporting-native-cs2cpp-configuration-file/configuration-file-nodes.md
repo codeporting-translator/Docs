@@ -1113,3 +1113,25 @@ Makes the porter generate additional include directives into the translated vers
 | include_as | Whether to use local inclusion syntax (double quotes, 'local') or global inclusion syntax (angle brackets, 'global'). | Yes | -
 
 **Since version**: 21.9.
+
+## events_with_custom_accessors ##
+
+{{< highlight xml >}}
+<events_with_custom_accessors>
+    <event name="System.Xml.XmlReaderSettings.ValidationEventHandler"/>
+    <event name="System.Xml.XmlValidatingReader.ValidationEventHandler"/>
+    <event name="System.Xml.Schema.XmlSchemaSet.ValidationEventHandler"/>
+</events_with_custom_accessors>
+{{< /highlight >}}
+
+Makes the porter generate &lt;PropertyName&gt;_add()/&lt;PropertyName&gt;_remove() calls instead of +=/-= operators for specified custom events.
+
+Allowed sub-items:
+
+### event ###
+
+| Attribute | Meaning | Mandatory | Default Value
+---| ---| ---| ---|
+| name | Event name (with namespace and class name) | Yes | -
+
+**Since version**: 22.1.
