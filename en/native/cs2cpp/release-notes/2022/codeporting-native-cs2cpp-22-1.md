@@ -16,15 +16,15 @@ weight: "1"
 
 ## Major Features ##
 
-1. The new implementation for System::Xml was provided. Previously, we had custom implementation which was based on libxml2 and libxslt libraries. The new version is based on the ported CoreFX code.
-1. Readme files were added to Nuget and downloadable packages.
+1. The new implementation for System::Xml was provided. Previously, we had custom implementation which was based on the libxml2 and libxslt libraries. The new version is based on the ported CoreFX code.
+1. The Readme files were added to the Nuget and downloadable packages.
 1. The double-conversion library was upgraded to 3.1.7 version.
 1. The `events_with_custom_accessors` node was supported in the porter configuration files. It makes it possible to inform the porter on custom events in non-ported code.
 
 ## Minor fixes ##
 
-1. Compound assignment operators now work with the ported structures containing corresponding arithmetic operators.
-1. Comparison operators for the structures that have `IsNull` method were fixed.
+1. The compound assignment operators now work with the ported structures containing corresponding arithmetic operators.
+1. The comparison operators for the structures that have `IsNull` method were fixed.
 1. The `force_const_ref_parameters` option was imrpoved. If applied to the class constructor, it also affects generated member `MakeObject` function (if any), thus improving the performance of the ported code.
 1. Unwanted dependencies were removed from `make_const_ref.h`.
 1. This-comparison was optimized in the ported code. `SmartPtr` instance is no longer created.
