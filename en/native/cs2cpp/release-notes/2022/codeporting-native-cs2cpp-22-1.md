@@ -46,7 +46,6 @@ Please consult respective sections of our wiki for more information.
 | SLIDESCPP-3116 | Resolve asposecpplib porter's tests compilation errors | Task |
 | SLIDESCPP-3120 | Fix failed ported tests | Task |
 | SLIDESCPP-3131 | Find and apply profitable porter options | Task |
-| SLIDESCPP-3131 | Find and apply profitable porter options | Task |
 | SLIDESCPP-3132 | Replace 'for' loops with 'foreach' loops where possible | Task |
 | SLIDESCPP-3135 | Resolve compilation errors in Linux | Task |
 | SLIDESCPP-3142 | Find and try to enable disabled System.Xml tests | Task |
