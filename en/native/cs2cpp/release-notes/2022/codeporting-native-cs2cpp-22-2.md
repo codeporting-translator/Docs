@@ -36,6 +36,7 @@ weight: "1"
 1. The behavior of Graphics::DrawPolygon() method for incomplete polygons was fixed to match .Net behavior.
 1. The version information was included into the library binaries.
 1. The constructors of the Regex-related classes were sped-up by using shared pointer references instead of copying them.
+1. The lambda variable capturing was working incorreclty in the porter if the lambda was used as an argument to a constructor call. This was fixed.
 
 Please consult respective sections of our wiki for more information.
 
@@ -55,6 +56,7 @@ Please consult respective sections of our wiki for more information.
 | WORDSCPP-1163 | Possibility of adding -rpath='$ORIGIN/../lib' | New feature |
 | PDFCPP-1790 | Fix PathGradientBrush | Bug |
 | SLIDESCPP-3380 | Fix RegressionTests_v22_2.SLIDESJAVA_37693 test | Bug |
+| CSPORTCPP-4945 | Lambda capture holders are missing | Bug |
 
 ## Public API and Backward Incompatible Changes ##
 
