@@ -21,19 +21,19 @@ weight: "1"
 
 ## Minor fixes ##
 
-1. The porter generated incorrect code for creating instances of generic structures. This was fixed.
-1. The look of API reference for System::String::operator + was improved.
-1. The iostream-based overloads for constructors with Stream-based arguments were moved to ported cpp files where possible. Previously, it was neccessary for any user of such constructors to have all field types defined, which resulted in compilation errors.
-1. Previously, applying the CppSkipDefinition attribute to the test method resulted to exclusing both the test method and the test definition (TEST_F) from the ported code. This made this attribute impossible to be used for replacing test method definition with custom one while keeping the test itself. The test definition is no longer skipped by this attribute.
-1. The new overload of Char::IsWhiteSpace() method was supported.
+1. The porter generated an incorrect code for creating instances of generic structures. This was fixed.
+1. The look of API reference for `System::String::operator + ()` was improved.
+1. The iostream-based overloads of constructors with Stream-based arguments were moved to ported cpp files where possible. Previously, it was neccessary for any user of such constructors to have all field types defined, which resulted in compilation errors.
+1. Previously, applying the CppSkipDefinition attribute to a test method resulted to exclusing both the test method and the test definition (TEST_F) from the ported code. This made this attribute impossible to be used for replacing the test method definition with custom one while keeping the test itself. The test definition is no longer skipped by this attribute.
+1. The new overload of the `Char::IsWhiteSpace()` method was added.
 1. The porter now generates INT64_C/UINT64_C wrappers for constants that are not properly cast to int64_t/uint64_t by Apple Clang 13.0.
 1. Misprint was fixed in the readme files from our release packages.
 1. The System::WeakReference class was improved. Now it inherits the System::Object. Another constructor and RTTI information were added, the return type of the get_Target() method was fixed.
-1. The glibc version detection cmake code was fixed for some platforms.
+1. The glibc version detection in the cmake code was fixed for some platforms.
 1. The rpath value was added to the Linux libraries.
-1. The PathGradientBrush::get_InterpolationColors() method was fixed for some brushes.
+1. The `PathGradientBrush::get_InterpolationColors()` method was fixed for some brushes.
 1. The symbols from the Microsoft namespace are now properly exported on MacOS.
-1. The behavior of Graphics::DrawPolygon() method for incomplete polygons was fixed to match .Net behavior.
+1. The behavior of the `Graphics::DrawPolygon()` method for incomplete polygons was fixed to match .Net behavior.
 1. The version information was included into the library binaries.
 1. The constructors of the Regex-related classes were sped-up by using shared pointer references instead of copying them.
 1. The lambda variable capturing was working incorreclty in the porter if the lambda was used as an argument to a constructor call. This was fixed.
@@ -57,6 +57,8 @@ Please consult respective sections of our wiki for more information.
 | PDFCPP-1790 | Fix PathGradientBrush | Bug |
 | SLIDESCPP-3380 | Fix RegressionTests_v22_2.SLIDESJAVA_37693 test | Bug |
 | CSPORTCPP-4945 | Lambda capture holders are missing | Bug |
+| WORDSCPP-1145 | Port performance tests | Task |
+| WORDSCPP-1157 | Too slow TestTxt.TestJira17890 | Enhancement |
 
 ## Public API and Backward Incompatible Changes ##
 
