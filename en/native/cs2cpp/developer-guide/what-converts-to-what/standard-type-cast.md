@@ -1,5 +1,5 @@
 ---
-date: "2022-01-14"
+date: "2022-02-10"
 author:
   display_name: "Wiki code generator"
 draft: "false"
@@ -10,7 +10,7 @@ menu:
   docs:
     parent: "What Converts to What"
     weight: "1"
-lastmod: "2022-01-14"
+lastmod: "2022-02-10"
 weight: "1"
 ---
 
@@ -467,8 +467,8 @@ void StandardTypeCast::CharTypeCasts()
 void StandardTypeCast::OperandCasts()
 {
     double maxDays1 = static_cast<double>(std::numeric_limits<int64_t>::max()) / (System::TimeSpan::TicksPerMillisecond / 1000.0 / 60.0 / 60.0 / 24.0);
-    double maxDays2 = static_cast<double>(9223372036854775807) / (System::TimeSpan::TicksPerMillisecond / 1000.0 / 60.0 / 60.0 / 24.0);
-    double maxDays3 = 9223372036854 / (System::TimeSpan::TicksPerMillisecond / 1000.0 / 60.0 / 60.0 / 24.0);
+    double maxDays2 = static_cast<double>(INT64_C(9223372036854775807)) / (System::TimeSpan::TicksPerMillisecond / 1000.0 / 60.0 / 60.0 / 24.0);
+    double maxDays3 = INT64_C(9223372036854) / (System::TimeSpan::TicksPerMillisecond / 1000.0 / 60.0 / 60.0 / 24.0);
 }
 
 } // namespace StatementsPorting
