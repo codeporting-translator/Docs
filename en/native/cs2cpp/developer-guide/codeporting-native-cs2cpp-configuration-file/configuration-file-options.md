@@ -70,6 +70,32 @@ Whether to display line with completion percentage during the work.
 
 **Default value**: true
 
+### collect_porter_coverage_info ###
+
+Enables the porter to collect information on usage of its own code. Only works for the Debug (developer) builds of the porter.
+
+| Allowed value | Meaning
+---| ---|
+| true | Generate coverage information (porter_coverage_report.xml and porter_coverage_report.zip)
+| false | Do not generate coverage information
+
+**Default value**: false
+
+**Since version:** 22.3 (not available for publically released builds)
+
+### build_cs_projects ###
+
+Makes the porter build the project prior to parsing the C# code.
+
+| Allowed value | Meaning
+---| ---|
+| true | The porter builds the project passed to it and then translates it.
+| false | The porter just ports the project passed to it without building it.
+
+**Default value**: false
+
+**Since version:** 22.3 (not available for publically released builds)
+
 ## Output files control options ##
 
 These options control how output files are generated.
@@ -2034,7 +2060,7 @@ Calls DBG_GARBAGE_COLLECTION mechanism after each test.
 | Allowed value | Meaning | Example
 ---| ---| ---|
 | none | Doesn't collect garbage after tests |
-| report | Collects garbage and reports collected objects after each test. | {{< highlight txt >}}
+| report | Collects garbage and reports collected objects after each test. Class names, memory addresses, member names and addresses of objects these members point to are listed. | {{< highlight txt >}}
 Island of isolation is found.
 Objects:
     0x11223344: MyClass: 2 reference
@@ -2045,12 +2071,7 @@ Objects:
     0x99aabbcc: MyClass2: 1 reference
         m_owner: 0x11223344
 {{< /highlight >}} | 
-
-As one can see, class names, memory addresses, member names and addresses of objects these members point to are listed.
-
 | free | Report collected objects and delete them afterwards. |
----| ---| ---|
-
 
 **Default value**: none
 

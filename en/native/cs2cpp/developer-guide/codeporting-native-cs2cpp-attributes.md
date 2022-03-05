@@ -1255,7 +1255,7 @@ Forces using do-while form of switch translation inside this method. Similar to 
 
 **Arguments**: None
 
-Used to capture `this` using the `self` variable that stores the `WeakPtr` smart pointer to the current object.
+Used to capture `this` using the `self` variable that stores the `WeakPtr` smart pointer to the current object. This applies to lambdas translation.
 
 ### CppUsing ###
 

@@ -1,5 +1,5 @@
 ---
-date: "2022-02-10"
+date: "2022-03-04"
 author:
   display_name: "Wiki code generator"
 draft: "false"
@@ -10,7 +10,7 @@ menu:
   docs:
     parent: "What Converts to What"
     weight: "1"
-lastmod: "2022-02-10"
+lastmod: "2022-03-04"
 weight: "1"
 ---
 
@@ -157,6 +157,10 @@ public:
     using iterator = typename iterator_holder_type::iterator;
     /// Const iterator type.
     using const_iterator = typename iterator_holder_type::const_iterator;
+    /// Virtualized element type.
+    using virtualized_iterator_element = typename iterator_holder_type::virtualized_iterator_element;
+    /// Virtualized type.
+    using virtualized_iterator = typename iterator_holder_type::virtualized_iterator;
     
 public:
 
@@ -184,6 +188,26 @@ public:
     /// Gets iterator pointing right after the last const-qualified element (if any) of the collection.
     /// @return An iterator pointing right after the last const-qualified element (if any) of the collection
     const_iterator cend() const noexcept;
+    /// Gets iterator pointing to the first element (if any) of the collection.
+    /// @return An iterator pointing to the first element (if any) of the collection
+    /// Provides iterator implementation to container's first element.
+    /// @return Newly-created iterator object.
+    virtualized_iterator* virtualizeBeginIterator() override;
+    /// Gets iterator pointing right after the last element (if any) of the collection.
+    /// @return An iterator pointing right after the last element (if any) of the collection
+    /// Provides iterator implementation to container's end.
+    /// @return Newly-created iterator object.
+    virtualized_iterator* virtualizeEndIterator() override;
+    /// Gets iterator pointing to the first element (if any)of the const-qualified instance of the collection.
+    /// @return An iterator pointing to the first element (if any)of the const-qualified instance of the collection
+    /// Provides const iterator implementation to container's first element.
+    /// @return Newly-created iterator object.
+    virtualized_iterator* virtualizeBeginConstIterator() const override;
+    /// Gets iterator pointing right after the last element (if any)of the const-qualified instance of the collection.
+    /// @return An iterator pointing right after the last element (if any)of the const-qualified instance of the collection
+    /// Provides const iterator implementation to container's end.
+    /// @return Newly-created iterator object.
+    virtualized_iterator* virtualizeEndConstIterator() const override;
     
 protected:
 
@@ -351,6 +375,26 @@ ForeachStatements::const_iterator ForeachStatements::cbegin() const noexcept
 ForeachStatements::const_iterator ForeachStatements::cend() const noexcept
 {
     return m_collection->cend();
+}
+
+ForeachStatements::virtualized_iterator* ForeachStatements::virtualizeBeginIterator()
+{
+    return m_collection->virtualizeBeginIterator();
+}
+
+ForeachStatements::virtualized_iterator* ForeachStatements::virtualizeEndIterator()
+{
+    return m_collection->virtualizeEndIterator();
+}
+
+ForeachStatements::virtualized_iterator* ForeachStatements::virtualizeBeginConstIterator() const
+{
+    return m_collection->virtualizeBeginConstIterator();
+}
+
+ForeachStatements::virtualized_iterator* ForeachStatements::virtualizeEndConstIterator() const
+{
+    return m_collection->virtualizeEndConstIterator();
 }
 
 #ifdef ASPOSE_GET_SHARED_MEMBERS
