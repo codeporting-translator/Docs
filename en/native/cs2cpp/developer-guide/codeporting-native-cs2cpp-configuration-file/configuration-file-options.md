@@ -2071,7 +2071,6 @@ Objects:
     0x99aabbcc: MyClass2: 1 reference
         m_owner: 0x11223344
 {{< /highlight >}} | 
-| free | Report collected objects and delete them afterwards. |
 
 **Default value**: none
 
