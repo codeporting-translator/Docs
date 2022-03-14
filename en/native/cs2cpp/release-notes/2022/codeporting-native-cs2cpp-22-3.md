@@ -19,7 +19,7 @@ weight: "1"
 1. The iterators provided by the IEnumerable class and the duck-typed collections were improved. The performance was raised for those implemented via the native C++ containers, and the assignment to the referenced element was supported where possible.
 1. The new `build_cs_projects` option was supported by the porter.
 1. The definitions of some attributes were fixed. The `AttributeUsage` mask was updated.
-1. The method overloads were added to numerous classes that allow using `ArrayView` where only `ArrayPtr` was supported previously.
+1. The method overloads were added to numerous classes. These support `ArrayView`-typed parameters where only `ArrayPtr` was supported previously.
 1. The default messages of the exception classes were put in line with the .Net behavior. No language-specific messages are supported at the moment.
 
 ## Minor fixes ##
