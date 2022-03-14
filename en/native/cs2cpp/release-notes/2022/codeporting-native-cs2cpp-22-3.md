@@ -33,6 +33,7 @@ weight: "1"
 1. The size of the CodePorting.Native Cs2Cpp library was reduced on MacOS and Linux.
 1. The `operator ==` declared in the `System` namespace was causing compilation issues with the third party code if exported to the global namespace. This was fixed.
 1. The compilation issues were fixed for the case of the direct inclusion of some headers.
+1. The `free` value of the `tests_garbage_collection` option is no longer supported by the porter.
 
 Please consult respective sections of our wiki for more information.
 
@@ -53,8 +54,10 @@ Please consult respective sections of our wiki for more information.
 | CSPORTCPP-3466 | An invalid message is generated if the default constructor is used | Bug |
 | WORDSCPP-1170 | SmartPointer code is not checking is method IsNull exists | Bug |
 | CSPORTCPP-4987 | Compile each library header individually | Enhancement |
+| SLIDESCPP-3387 | Сorrupted display of circular references | Bug |
 
 ## Public API and Backward Incompatible Changes ##
 
 1. The iterator types of `System::Collections::Generic::IEnumerable` and duck typed-collections were completely reworked. This may alter some code.
 1. The supported glibc version will be changed in the upcoming releases.
+1. The support of the `tests_garbage_collection` option was reduced. There are no possible usecases for the retired values anyway.
