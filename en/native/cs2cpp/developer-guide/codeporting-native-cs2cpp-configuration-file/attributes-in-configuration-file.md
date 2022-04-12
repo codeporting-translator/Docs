@@ -98,6 +98,7 @@ In argument list, it is possible to use '?' as a substitution which means 'one p
 {{< highlight xml >}}
 <!-- Method of specific class (and overrides) -->
 <attribute name="CppConstMethod" class="System.Object" method="public System.Int32 GetHashCode()"/>
+<attribute name="CppRenameEntity" method="protected internal void Foo()" class="MyLib.MyClass"/>
 <!-- Method of any class (and overrides) -->
 <attribute name="CppRenameEntity" method="protected bool Equals(?)" class="*"/>
 <!-- Any method of the class (and overrides) -->
@@ -137,6 +138,7 @@ This condition applies its attribute to the constructor. The 'constructor' XML a
 
 {{< highlight xml >}}
 <attribute name="CppCTORSelfReference" class="Namespace.Class" condition="constructor" constructor="public Class(Parameter.Type)"/>
+<attribute name="CppArrayOnStack" constructor="static StaticCTOR()" class="PorterAttributes.StaticCTOR" parameter="arr" condition="constructor"/>
 {{< /highlight >}}
 
 #### type condition ####

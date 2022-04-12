@@ -1,5 +1,5 @@
 ---
-date: "2022-03-14"
+date: "2022-04-09"
 author:
   display_name: "Wiki code generator"
 draft: "false"
@@ -10,7 +10,7 @@ menu:
   docs:
     parent: "What Converts to What"
     weight: "1"
-lastmod: "2022-03-14"
+lastmod: "2022-04-09"
 weight: "1"
 ---
 
@@ -755,7 +755,7 @@ Details_Exception4::__StaticConstructor__ Details_Exception4::s_constructor__;
 
 Details_Exception4::__StaticConstructor__::__StaticConstructor__()
 {
-    Exception4::field = 0;
+    Details_Exception4::field = 0;
 }
 
 Details_Exception4::Details_Exception4() : System::Details_Exception()
@@ -823,7 +823,7 @@ Details_Exception8::__StaticConstructor__ Details_Exception8::s_constructor__;
 
 Details_Exception8::__StaticConstructor__::__StaticConstructor__()
 {
-    Exception8::field1 = 0;
+    Details_Exception8::field1 = 0;
 }
 
 Details_Exception8::Details_Exception8() : field2(0)

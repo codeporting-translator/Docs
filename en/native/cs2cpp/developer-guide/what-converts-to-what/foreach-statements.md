@@ -1,5 +1,5 @@
 ---
-date: "2022-03-14"
+date: "2022-04-09"
 author:
   display_name: "Wiki code generator"
 draft: "false"
@@ -10,7 +10,7 @@ menu:
   docs:
     parent: "What Converts to What"
     weight: "1"
-lastmod: "2022-03-14"
+lastmod: "2022-04-09"
 weight: "1"
 ---
 
@@ -214,7 +214,7 @@ protected:
     virtual ~ForeachStatements();
     
     #ifdef ASPOSE_GET_SHARED_MEMBERS
-    System::Object::shared_members_type GetSharedMembers() override;
+    System::Object::shared_members_type GetSharedMembers() const override;
     #endif
     
     
@@ -398,7 +398,7 @@ ForeachStatements::virtualized_iterator* ForeachStatements::virtualizeEndConstIt
 }
 
 #ifdef ASPOSE_GET_SHARED_MEMBERS
-System::Object::shared_members_type ForeachStatements::GetSharedMembers()
+System::Object::shared_members_type ForeachStatements::GetSharedMembers() const
 {
     auto result = System::Object::GetSharedMembers();
     
