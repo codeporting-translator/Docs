@@ -708,7 +708,7 @@ public MyClass Current
 
 | Allowed value | Meaning | Example
 ---| ---| ---|
-| true | Emit value holder. If you think that the use of the holder in a particular case is not justified, you can mark enumerator class with [CppDisableEnumeratorCurrentValueHolder](https://wiki.uly.dynabic.com/Codeporting/Dynabic.csPorter%20for%20Cpp/Documentation%20and%20Support%20Materials/Production%20documentation%20storage%20point/Developer%20Guide/CodePorting.Native%20Cs2Cpp%20attributes/#HCppDisableEnumeratorCurrentValueHolder) attribute to override global option behaviour locally and disable its generation. | {{< highlight cpp >}}
+| true | Emit value holder. If you think that the use of the holder in a particular case is not justified, you can mark enumerator class with [CppDisableEnumeratorCurrentValueHolder](/native/cs2cpp/developer-guide/codeporting-native-cs2cpp-attributes/) attribute to override global option behaviour locally and disable its generation. | {{< highlight cpp >}}
 CODEPORTING_CURRENT_RETTYPE(System::SharedPtr<MyClass>) MyEnumerator::get_Current() const
 {
     System::HolderInitializer<System::SharedPtr<MyClass>> holder(m_CurrentHolder);
@@ -716,7 +716,7 @@ CODEPORTING_CURRENT_RETTYPE(System::SharedPtr<MyClass>) MyEnumerator::get_Curren
      return holder.HoldIfTemporary(mInner->get_Current());
 }
 {{< /highlight >}} | 
-| false | Do not emit holder. In this mode you can catch С4172 compile error, or catch exceptions, SEH, or other types of UB at runtime, because the result of get_Current method is a local variable or other temporary object. If so, and you still want to keep this global option turned OFF, you can mark your enumerator class with [CppEmitEnumeratorCurrentValueHolder](https://wiki.uly.dynabic.com/Codeporting/Dynabic.csPorter%20for%20Cpp/Documentation%20and%20Support%20Materials/Production%20documentation%20storage%20point/Developer%20Guide/CodePorting.Native%20Cs2Cpp%20attributes/#HCppEmitEnumeratorCurrentValueHolder) attribute. This will override global option behaviour, so, holder will be emited. | {{< highlight cpp >}}
+| false | Do not emit holder. In this mode you can catch С4172 compile error, or catch exceptions, SEH, or other types of UB at runtime, because the result of get_Current method is a local variable or other temporary object. If so, and you still want to keep this global option turned OFF, you can mark your enumerator class with [CppEmitEnumeratorCurrentValueHolder](/native/cs2cpp/developer-guide/codeporting-native-cs2cpp-attributes/) attribute. This will override global option behaviour, so, holder will be emited. | {{< highlight cpp >}}
 CODEPORTING_CURRENT_RETTYPE(System::SharedPtr<MyClass>) MyEnumerator::get_Current() const
 {
      return mInner->get_Current();

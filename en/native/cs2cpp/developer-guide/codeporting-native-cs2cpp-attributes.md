@@ -432,7 +432,7 @@ Makes porter put type members into C++ code in the same order they are in C# cod
 
 **Arguments**: None
 
-Disables value holding in prticular enumerator class (overrides global behaviour, if [emit_enumerator_current_value_holder](https://wiki.uly.dynabic.com/Codeporting/Dynabic.csPorter%20for%20Cpp/Documentation%20and%20Support%20Materials/Production%20documentation%20storage%20point/Developer%20Guide/CodePorting.Native%20Cs2Cpp%20configuration%20files/Configuration%20file%20options/#Hemit_enumerator_current_value_holder) global option is _on_)
+Disables value holding in prticular enumerator class (overrides global behaviour, if [emit_enumerator_current_value_holder](/native/cs2cpp/developer-guide/codeporting-native-cs2cpp-configuration-file/configuration-file-options/) global option is _on_)
 
 **Since version**: 21.12
 
@@ -450,7 +450,7 @@ Disables entity obfuscation if 'obfuscate_cpp_headers' option is enabled.
 
 **Arguments**: None
 
-Emits value holding in prticular enumerator class (overrides global behaviour, if [emit_enumerator_current_value_holder](https://wiki.uly.dynabic.com/Codeporting/Dynabic.csPorter%20for%20Cpp/Documentation%20and%20Support%20Materials/Production%20documentation%20storage%20point/Developer%20Guide/CodePorting.Native%20Cs2Cpp%20configuration%20files/Configuration%20file%20options/#Hemit_enumerator_current_value_holder) global option is _off_)
+Emits value holding in prticular enumerator class (overrides global behaviour, if [emit_enumerator_current_value_holder](/native/cs2cpp/developer-guide/codeporting-native-cs2cpp-configuration-file/configuration-file-options/) global option is _off_)
 
 **Since version**: 21.12
 
