@@ -21,8 +21,11 @@ description: "Wiki guide to translating C# code to native C++ with the most accu
   \ on different platforms."
 title: "CodePorting.Translator Product Family"
 linktitle: "CodePorting.Translator Product Family"
+aliases:
+  - /native/
 menu:
   docs:
+    Post: "translator"
     parent: ""
     weight: "01"
 lastmod: "2019-05-28"
