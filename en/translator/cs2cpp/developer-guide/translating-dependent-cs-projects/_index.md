@@ -14,4 +14,4 @@ weight: "2"
 layout: base-home
 ---
 
-This Section will describe how easily CodePorting.Native Cs2Cpp can be used to translate Dependent C# Projects to C++:
+This Section will describe how easily CodePorting.Translator Cs2Cpp can be used to translate Dependent C# Projects to C++:

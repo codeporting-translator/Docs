@@ -20,7 +20,7 @@ weight: "3"
 
 Qt libraries provide many general use data types (e. g. strings, collections, I/O primitives and so on). They also contain many graphical types (colors, brushes, pens and so on).
 
-CodePorting.Translator Cs2Cpp also provides types for such applications. However, these types follow .Net API in order for the ported code to work properly. Qt is not used by CodePorting.Translator, and it is not required to use Qt in order to use CodePorting.Translator Cs2Cpp. On the other hand, CodePorting.Translator Cs2Cpp types are not compatible with their Qt analogs.
+CodePorting.Translator Cs2Cpp also provides types for such applications. However, these types follow .Net API in order for the translated code to work properly. Qt is not used by CodePorting.Translator, and it is not required to use Qt in order to use CodePorting.Translator Cs2Cpp. On the other hand, CodePorting.Translator Cs2Cpp types are not compatible with their Qt analogs.
 
 Those customers who use both CodePorting.Translator and Qt, may use helper functions available [here](https://github.com/codeporting-translator/codeporting-translator-cs2cpp/tree/master/qt_helpers). Please click on below links for more information:
 
@@ -42,7 +42,7 @@ QString string2 = Aspose::QtHelpers::Convert(string1); // Qt string
 System::String string3 = Aspose::QtHelpers::Convert(string2); // Back to CodePorting.Translator Cs2Cpp string
 
 QFile file("QtCoreHelpers.WrapQFile.txt"); // Qt file
-System::SharedPtr<System::IO::Stream> stream = Aspose::QtHelpers::Wrap(file); // Now this stream can be used to read from Qt file in ported code.
+System::SharedPtr<System::IO::Stream> stream = Aspose::QtHelpers::Wrap(file); // Now this stream can be used to read from Qt file in translated code.
 {{< /highlight >}}
 
 ## Qt Creator debugging helpers ##

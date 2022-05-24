@@ -394,7 +394,7 @@ When translator cannot completely resolve a C# type to generate complete definit
 
 ### Class' method named Type() in C# code may lead to name collisions in generated C++ code ###
 
-translator includes following static method in every generated C++ class
+Translator includes following static method in every generated C++ class
 
 {{< highlight cs >}}
 static const System::TypeInfo& Type();
@@ -462,7 +462,7 @@ System::SharedPtr<B> b = System::MakeObject<B>();
 
 ### Index-based collection initialization list is not supported. ###
 
-translator does not support index-based collection initialization lists. When translator encounters index-based collection initialization list, it will ouput an error message. Thus the following C# code will not be translated
+Translator does not support index-based collection initialization lists. When translator encounters index-based collection initialization list, it will ouput an error message. Thus the following C# code will not be translated
 
 {{< highlight cs >}}
 var numbers = new Dictionary<int, string> {
@@ -535,7 +535,7 @@ public:
 
 ## Binary arithmetic operators with one operand of 'Enum' type and the other operand of 'string' type are not supported ##
 
-translator does not support binary arithmetic operators with one operand of **Enum** type and the other of **string** type. Such operators will be translated into C++ code that won't link.
+Translator does not support binary arithmetic operators with one operand of **Enum** type and the other of **string** type. Such operators will be translated into C++ code that won't link.
  Thus, the following C# code will be translated into C++ code that will fail to link
 
 {{< highlight cs >}}
@@ -643,7 +643,7 @@ Translator option **allow_interface_members_base_class_impl** inforces emulation
 
 ### Boxing and unboxing of structures is not supported by default ###
 
-By default, Translator will translate boxing and unboxing of a structure into syntactically incorrect C++ code. In order to enable boxing and unboxing of a structure, the corresponding structure type must be marked with CodePorting.Translator.Cs2Cpp.CppAllowBoxing attribute and must provide implementation of method bool Equals(S) that compares two instances of a structure type and returns **true** if they are equal.
+By default, translator will translate boxing and unboxing of a structure into syntactically incorrect C++ code. In order to enable boxing and unboxing of a structure, the corresponding structure type must be marked with CodePorting.Translator.Cs2Cpp.CppAllowBoxing attribute and must provide implementation of method bool Equals(S) that compares two instances of a structure type and returns **true** if they are equal.
  Thus the following C# code defines a strucure that satisfies the requirements, which makes its generaed C++ counterpart boxable.
 
 {{< highlight cs >}}
@@ -717,7 +717,7 @@ namespace ns
 
 {{< /highlight >}}
 
-If this code is passed to Translator, it will generate C++ code that behaves differently
+If this code is passed to translator, it will generate C++ code that behaves differently
 
 {{< highlight cs >}}
 namespace ns {
