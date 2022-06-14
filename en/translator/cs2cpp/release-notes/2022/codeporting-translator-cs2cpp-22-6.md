@@ -29,12 +29,12 @@ weight: "1"
 1. Tha bug was fixed making a WeakReference class a value type in the translated code.
 1. The signature of the `GetSharedMembers()` method was optimized in the library and translated code.
 1. The translation of in-array delegate assignment was fixed.
-1. Proper exceptions are now thrown from Dictionary methods if nullptr is passed as a key.
+1. Proper exceptions are now thrown from the Dictionary methods if nullptr is passed as a key.
 1. The translator now supports using the inherited methods as TestCaseSource.
 1. Doxygen version used to generate the documentation was upgraded.
 1. The List::ForEach method now throws proper exceptions if the predicate changes the number of elements in the list.
 1. The growth of big (up to ~2 billion elements) MemoryStream was fixed.
-1. The DashCap::Triangle was supported. Other modes of the caps rendering were fixed.
+1. The DashCap::Triangle mode was supported. Other modes of the caps rendering were fixed.
 1. The behavior of String::IndexOf was fixed for the empty string case.
 1. The translation of Enum.TryParse calls were fixed for some parameter sets.
 1. The Tag property of the Image class was supported.
