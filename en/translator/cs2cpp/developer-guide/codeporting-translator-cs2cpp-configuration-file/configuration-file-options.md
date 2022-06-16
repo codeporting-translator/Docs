@@ -37,7 +37,7 @@ These options define general translator behavior: logging, errors handling, etc.
 
 ### log_level ###
 
-Defines cut level of logs being written by translating application. Logs of specified level and more severe ones are emitted, the logs with lower severity are suppressed.
+Defines cut level of logs being written by translator. Logs of specified level and more severe ones are emitted, the logs with lower severity are suppressed.
 
 | Allowed value | Meaning
 ---| ---|
@@ -50,7 +50,7 @@ Defines cut level of logs being written by translating application. Logs of spec
 
 ### abort_on_error ###
 
-States whether the translating application should abort execution if any error is encountered. Normally, some errors are not fatal.
+States whether the translator should abort execution if any error is encountered. Normally, some errors are not fatal.
 
 | Allowed value | Meaning
 ---| ---|
@@ -608,6 +608,19 @@ Enables translator generate code which makes casting faster with the price of bi
 **Default value**: false
 
 **Since version**: 20.12
+
+### force_static_cast ###
+
+Enables translator generate ForceStaticCast casts when translating any C-style cast instead of StaticCast or DynamicCast. The ForceStaticCast always works via simple static_cast, so this option can only use if you are sure that in translated code each dynamic_cast will succeed.
+
+| Allowed value | Meaning
+---| ---|
+| true | Perform all casts via dynamic_cast (through DynamicCast or StaticCast)
+| false | Perform all casts via static_cast (through ForceStaticCast)
+
+**Default value**: false
+
+**Since version**: 22.6
 
 ## C# code analysis options ##
 
@@ -1204,7 +1217,7 @@ By default, MemberwiseClone() method in translated code slices output object to 
 
 ### version_compatibility_check_mode ###
 
-Allows translating application generate code which compares headers version used to compile project and supplied library version on startup.
+Allows translator generate code which compares headers version used to compile project and supplied library version on startup.
 
 | Allowed value | Meaning | Example
 ---| ---| ---|
@@ -2125,7 +2138,7 @@ Enables translator using translator home directory and translator executable loc
 | Allowed value | Meaning | Example
 ---| ---| ---|
 | false | Only directory with current configuration file is used as a lookup for mentioned paths. |
-| true | Adds translating application binary location and %PorterHome% variable set either explicitly or via translator command line to the list of lookup directories. |
+| true | Adds translator binary location and %PorterHome% variable set either explicitly or via translator command line to the list of lookup directories. |
 
 **Default value**: false
 

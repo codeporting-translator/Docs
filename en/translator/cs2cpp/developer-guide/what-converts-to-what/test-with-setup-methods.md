@@ -1,5 +1,5 @@
 ---
-date: "2022-05-09"
+date: "2022-06-09"
 author:
   display_name: "Wiki code generator"
 draft: "false"
@@ -10,11 +10,11 @@ menu:
   docs:
     parent: "What Converts to What"
     weight: "1"
-lastmod: "2022-05-09"
+lastmod: "2022-06-09"
 weight: "1"
 ---
 
-This example demonstrates how NUnit test fixture with SetUp method is translated to C++. Googletest C++ library is used to translate NUnit tests to C++. SetUp, TearDown, TestFixtureSetUp, and TestFixtureTearDown methods are supported and translated to corresponding methods of googletest.
+This example demonstrates how NUnit test fixture with SetUp method is ported to C++. Googletest C++ library is used to translate NUnit tests to C++. SetUp, TearDown, TestFixtureSetUp, and TestFixtureTearDown methods are supported and translated to corresponding methods of googletest.
 
 Additional command-line options passed to CodePorting.Translator.Cs2Cpp: none.
 

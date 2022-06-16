@@ -1,5 +1,5 @@
 ---
-date: "2022-05-09"
+date: "2022-06-09"
 author:
   display_name: "Wiki code generator"
 draft: "false"
@@ -10,11 +10,11 @@ menu:
   docs:
     parent: "What Converts to What"
     weight: "1"
-lastmod: "2022-05-09"
+lastmod: "2022-06-09"
 weight: "1"
 ---
 
-This example demonstrates how class properties which have explicitly defined setters and getters are translated. Properties may have getter, setter, or both. Public, protected and private properties preserve their accessibility level. Internal properties become protected. Getters are translated to methods with prefix get_ and setters with prefix set_.
+This example demonstrates how class properties which have explicitly defined setters and getters are ported. Properties may have getter, setter, or both. Public, protected and private properties preserve their accessibility level. Internal properties become protected. Getters are ported to methods with prefix get_ and setters with prefix set_.
 
 Additional command-line options passed to CodePorting.Translator.Cs2Cpp: none.
 

@@ -460,7 +460,7 @@ Emits value holding in prticular enumerator class (overrides global behaviour, i
 
 **Arguments**: None
 
-Forces metadata generation for enum (string representation of values for parsing and serializing). Use if you need conversions between enum values and strings in translated application. cpp_enum_enable_metadata [option](/translator/cs2cpp/developer-guide/codeporting-translator-cs2cpp-configuration-file/configuration-file-options/) enables this behavior globally.
+Forces metadata generation for enum (string representation of values for parsing and serializing). Use if you need conversions between enum values and strings in translated application. [cpp_enum_enable_metadata option](/translator/cs2cpp/developer-guide/codeporting-translator-cs2cpp-configuration-file/configuration-file-options/) enables this behavior globally.
 
 ### CppEnumWithOperators ###
 
@@ -1150,7 +1150,7 @@ Same as CppCTORSelfReference, but works on method. No auto-placement option at t
 
 **Argument**: Optional boolean value - whether to generate exception-throwing stubs; defaults to 'true'.
 
-Skips translating method or class definition, leaving declaration in place. Optionally, generates stubs that throw exception without actually doing anything. Use this attribute on methods you want to substitute translator C++ implementation to.
+Skips translating method or class definition, leaving declaration in place. Optionally, generates stubs that throw exception without actually doing anything. Use this attribute on methods you want to substitute native C++ implementation to.
 
 {{< highlight cs >}}
 class SkipDefinitionTest
@@ -1527,7 +1527,7 @@ For more information, please refer to NUnit site at [https://nunit.org/](https:
 
 **Used on**: TestFixture class methods
 
-Maps test methods into categories allowing translating application excluding them based on category name.
+Maps test methods into categories allowing translator excluding them based on category name.
 
 ### NUnit.Framework.ExpectedException ###
 
@@ -1657,4 +1657,4 @@ Marks method as theory.
 
 ## Notes ##
 
-Code examples used on this page are for illustration purposes only. Efforts were put to keep them as simple as possible. Actual translating application output may differ.
+Code examples used on this page are for illustration purposes only. Efforts were put to keep them as simple as possible. Actual translator output may differ.

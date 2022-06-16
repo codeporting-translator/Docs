@@ -1,5 +1,5 @@
 ---
-date: "2022-05-09"
+date: "2022-06-09"
 author:
   display_name: "Wiki code generator"
 draft: "false"
@@ -10,11 +10,11 @@ menu:
   docs:
     parent: "What Converts to What"
     weight: "1"
-lastmod: "2022-05-09"
+lastmod: "2022-06-09"
 weight: "1"
 ---
 
-This example demonstrates how C# lambda expressions are translated to C++.
+This example demonstrates how C# lambda expressions are ported to C++.
 
 Additional command-line options passed to CodePorting.Translator.Cs2Cpp: none.
 
@@ -1065,7 +1065,7 @@ public:
     protected:
     
         #ifdef ASPOSE_GET_SHARED_MEMBERS
-        System::Object::shared_members_type GetSharedMembers() const override;
+        void GetSharedMembers(System::Object::shared_members_type& result) const override;
         #endif
         
         
@@ -1160,7 +1160,7 @@ private:
         virtual ~LambdaCapturesThisByReference();
         
         #ifdef ASPOSE_GET_SHARED_MEMBERS
-        System::Object::shared_members_type GetSharedMembers() const override;
+        void GetSharedMembers(System::Object::shared_members_type& result) const override;
         #endif
         
         
@@ -1204,7 +1204,7 @@ private:
     protected:
     
         #ifdef ASPOSE_GET_SHARED_MEMBERS
-        System::Object::shared_members_type GetSharedMembers() const override;
+        void GetSharedMembers(System::Object::shared_members_type& result) const override;
         #endif
         
         
@@ -1231,7 +1231,7 @@ private:
     protected:
     
         #ifdef ASPOSE_GET_SHARED_MEMBERS
-        System::Object::shared_members_type GetSharedMembers() const override;
+        void GetSharedMembers(System::Object::shared_members_type& result) const override;
         #endif
         
         
@@ -1311,7 +1311,7 @@ private:
     protected:
     
         #ifdef ASPOSE_GET_SHARED_MEMBERS
-        System::Object::shared_members_type GetSharedMembers() const override;
+        void GetSharedMembers(System::Object::shared_members_type& result) const override;
         #endif
         
         
@@ -1362,13 +1362,11 @@ private:
     protected:
     
         #ifdef ASPOSE_GET_SHARED_MEMBERS
-        System::Object::shared_members_type GetSharedMembers() const override
+        void GetSharedMembers(System::Object::shared_members_type& result) const override
         {
-            auto result = System::Object::GetSharedMembers();
+            System::Object::GetSharedMembers(result);
             
             result.Add("StatementsPorting::LambdaExpressions::GenericClass::m_value", this->m_value);
-            
-            return result;
         }
         #endif
         
@@ -1447,7 +1445,7 @@ private:
     protected:
     
         #ifdef ASPOSE_GET_SHARED_MEMBERS
-        System::Object::shared_members_type GetSharedMembers() const override;
+        void GetSharedMembers(System::Object::shared_members_type& result) const override;
         #endif
         
         
@@ -1551,7 +1549,7 @@ private:
     protected:
     
         #ifdef ASPOSE_GET_SHARED_MEMBERS
-        System::Object::shared_members_type GetSharedMembers() const override;
+        void GetSharedMembers(System::Object::shared_members_type& result) const override;
         #endif
         
         
@@ -1617,7 +1615,7 @@ protected:
     virtual ~LambdaExpressions();
     
     #ifdef ASPOSE_GET_SHARED_MEMBERS
-    System::Object::shared_members_type GetSharedMembers() const override;
+    void GetSharedMembers(System::Object::shared_members_type& result) const override;
     #endif
     
     
@@ -1689,13 +1687,11 @@ void LambdaExpressions::ReusingVariable::Foo()
 }
 
 #ifdef ASPOSE_GET_SHARED_MEMBERS
-System::Object::shared_members_type LambdaExpressions::ReusingVariable::GetSharedMembers() const
+void LambdaExpressions::ReusingVariable::GetSharedMembers(System::Object::shared_members_type& result) const
 {
-    auto result = System::Object::GetSharedMembers();
+    System::Object::GetSharedMembers(result);
     
     result.Add("StatementsPorting::LambdaExpressions::ReusingVariable::m_lambda", this->m_lambda);
-    
-    return result;
 }
 #endif
 
@@ -1810,13 +1806,11 @@ LambdaExpressions::MultipleLambdas::MultipleLambdas() : m_value(10)
 }
 
 #ifdef ASPOSE_GET_SHARED_MEMBERS
-System::Object::shared_members_type LambdaExpressions::MultipleLambdas::GetSharedMembers() const
+void LambdaExpressions::MultipleLambdas::GetSharedMembers(System::Object::shared_members_type& result) const
 {
-    auto result = System::Object::GetSharedMembers();
+    System::Object::GetSharedMembers(result);
     
     result.Add("StatementsPorting::LambdaExpressions::MultipleLambdas::m_lambda", this->m_lambda);
-    
-    return result;
 }
 #endif
 
@@ -1996,13 +1990,11 @@ void LambdaExpressions::LambdaPasses4::Foo(System::Func<int32_t> lambdaParam1, S
 }
 
 #ifdef ASPOSE_GET_SHARED_MEMBERS
-System::Object::shared_members_type LambdaExpressions::LambdaPasses4::GetSharedMembers() const
+void LambdaExpressions::LambdaPasses4::GetSharedMembers(System::Object::shared_members_type& result) const
 {
-    auto result = System::Object::GetSharedMembers();
+    System::Object::GetSharedMembers(result);
     
     result.Add("StatementsPorting::LambdaExpressions::LambdaPasses4::m_lambda", this->m_lambda);
-    
-    return result;
 }
 #endif
 
@@ -2100,13 +2092,11 @@ void LambdaExpressions::LambdaPasses3::Foo3(int32_t param)
 }
 
 #ifdef ASPOSE_GET_SHARED_MEMBERS
-System::Object::shared_members_type LambdaExpressions::LambdaPasses3::GetSharedMembers() const
+void LambdaExpressions::LambdaPasses3::GetSharedMembers(System::Object::shared_members_type& result) const
 {
-    auto result = System::Object::GetSharedMembers();
+    System::Object::GetSharedMembers(result);
     
     result.Add("StatementsPorting::LambdaExpressions::LambdaPasses3::m_lambda", this->m_lambda);
-    
-    return result;
 }
 #endif
 
@@ -2221,13 +2211,11 @@ void LambdaExpressions::SomeClass3::Foo()
 }
 
 #ifdef ASPOSE_GET_SHARED_MEMBERS
-System::Object::shared_members_type LambdaExpressions::SomeClass3::GetSharedMembers() const
+void LambdaExpressions::SomeClass3::GetSharedMembers(System::Object::shared_members_type& result) const
 {
-    auto result = System::Object::GetSharedMembers();
+    System::Object::GetSharedMembers(result);
     
     result.Add("StatementsPorting::LambdaExpressions::SomeClass3::m_lambda", this->m_lambda);
-    
-    return result;
 }
 #endif
 
@@ -2255,13 +2243,11 @@ void LambdaExpressions::SomeClass2::Foo()
 }
 
 #ifdef ASPOSE_GET_SHARED_MEMBERS
-System::Object::shared_members_type LambdaExpressions::SomeClass2::GetSharedMembers() const
+void LambdaExpressions::SomeClass2::GetSharedMembers(System::Object::shared_members_type& result) const
 {
-    auto result = System::Object::GetSharedMembers();
+    System::Object::GetSharedMembers(result);
     
     result.Add("StatementsPorting::LambdaExpressions::SomeClass2::m_lambda", this->m_lambda);
-    
-    return result;
 }
 #endif
 
@@ -2323,14 +2309,12 @@ LambdaExpressions::LambdaCapturesThisByReference::~LambdaCapturesThisByReference
 }
 
 #ifdef ASPOSE_GET_SHARED_MEMBERS
-System::Object::shared_members_type LambdaExpressions::LambdaCapturesThisByReference::GetSharedMembers() const
+void LambdaExpressions::LambdaCapturesThisByReference::GetSharedMembers(System::Object::shared_members_type& result) const
 {
-    auto result = System::Object::GetSharedMembers();
+    System::Object::GetSharedMembers(result);
     
     result.Add("StatementsPorting::LambdaExpressions::LambdaCapturesThisByReference::m_lambda1", this->m_lambda1);
     result.Add("StatementsPorting::LambdaExpressions::LambdaCapturesThisByReference::m_lambda2", this->m_lambda2);
-    
-    return result;
 }
 #endif
 
@@ -3086,13 +3070,11 @@ LambdaExpressions::~LambdaExpressions()
 }
 
 #ifdef ASPOSE_GET_SHARED_MEMBERS
-System::Object::shared_members_type LambdaExpressions::GetSharedMembers() const
+void LambdaExpressions::GetSharedMembers(System::Object::shared_members_type& result) const
 {
-    auto result = System::Object::GetSharedMembers();
+    System::Object::GetSharedMembers(result);
     
     result.Add("StatementsPorting::LambdaExpressions::m_lambda", this->m_lambda);
-    
-    return result;
 }
 #endif
 

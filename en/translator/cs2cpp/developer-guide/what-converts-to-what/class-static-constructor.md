@@ -1,5 +1,5 @@
 ---
-date: "2022-05-09"
+date: "2022-06-09"
 author:
   display_name: "Wiki code generator"
 draft: "false"
@@ -10,11 +10,11 @@ menu:
   docs:
     parent: "What Converts to What"
     weight: "1"
-lastmod: "2022-05-09"
+lastmod: "2022-06-09"
 weight: "1"
 ---
 
-This example demonstrates how static class constructor is translated to C++. A static field with special name s_constructor__ of special type __StaticConstructor__ is added. The code is executed on program startup and this behavior is different from C# static constructors which are called right before first class usage.
+This example demonstrates how static class constructor is ported to C++. A static field with special name s_constructor__ of special type __StaticConstructor__ is added. The code is executed on program startup and this behavior is different from C# static constructors which are called right before first class usage.
 
 Additional command-line options passed to CodePorting.Translator.Cs2Cpp: none.
 

@@ -1,5 +1,5 @@
 ---
-date: "2022-05-09"
+date: "2022-06-09"
 author:
   display_name: "Wiki code generator"
 draft: "false"
@@ -10,11 +10,11 @@ menu:
   docs:
     parent: "What Converts to What"
     weight: "1"
-lastmod: "2022-05-09"
+lastmod: "2022-06-09"
 weight: "1"
 ---
 
-This example demonstrates how class constructors are translated to C++. Public, protected and private constructors preserve their accessibility level. Internal constructors become protected.
+This example demonstrates how class constructors are ported to C++. Public, protected and private constructors preserve their accessibility level. Internal constructors become protected.
 
 Additional command-line options passed to CodePorting.Translator.Cs2Cpp: none.
 

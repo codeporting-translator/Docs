@@ -122,7 +122,7 @@ Single directory to copy additional C++ source files from.
 <import config="details.config"/>
 {{< /highlight >}}
 
-Imports configuration file as if all its contents were added into the current one. Imported configuration file must have valid structure ('translator' node in the root and so on).
+Imports configuration file as if all its contents were added into the current one. Imported configuration file must have valid structure ('porter' node in the root and so on).
 
 | Attribute | Meaning | Mandatory | Default value
 ---| ---| ---| ---|

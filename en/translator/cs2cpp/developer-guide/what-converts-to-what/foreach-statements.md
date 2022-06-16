@@ -1,5 +1,5 @@
 ---
-date: "2022-05-09"
+date: "2022-06-09"
 author:
   display_name: "Wiki code generator"
 draft: "false"
@@ -10,11 +10,11 @@ menu:
   docs:
     parent: "What Converts to What"
     weight: "1"
-lastmod: "2022-05-09"
+lastmod: "2022-06-09"
 weight: "1"
 ---
 
-This example demonstrates how foreach statement is translated to C++. It is translated to C++ for statement.
+This example demonstrates how foreach statement is ported to C++. It is translated to C++ for statement.
 
 Additional command-line options passed to CodePorting.Translator.Cs2Cpp: -o foreach_as_range_based_for_loop=true.
 
@@ -214,7 +214,7 @@ protected:
     virtual ~ForeachStatements();
     
     #ifdef ASPOSE_GET_SHARED_MEMBERS
-    System::Object::shared_members_type GetSharedMembers() const override;
+    void GetSharedMembers(System::Object::shared_members_type& result) const override;
     #endif
     
     
@@ -398,13 +398,11 @@ ForeachStatements::virtualized_iterator* ForeachStatements::virtualizeEndConstIt
 }
 
 #ifdef ASPOSE_GET_SHARED_MEMBERS
-System::Object::shared_members_type ForeachStatements::GetSharedMembers() const
+void ForeachStatements::GetSharedMembers(System::Object::shared_members_type& result) const
 {
-    auto result = System::Object::GetSharedMembers();
+    System::Object::GetSharedMembers(result);
     
     result.Add("StatementsPorting::ForeachStatements::m_collection", this->m_collection);
-    
-    return result;
 }
 #endif
 

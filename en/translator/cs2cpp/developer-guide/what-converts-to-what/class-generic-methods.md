@@ -1,5 +1,5 @@
 ---
-date: "2022-05-09"
+date: "2022-06-09"
 author:
   display_name: "Wiki code generator"
 draft: "false"
@@ -10,11 +10,11 @@ menu:
   docs:
     parent: "What Converts to What"
     weight: "1"
-lastmod: "2022-05-09"
+lastmod: "2022-06-09"
 weight: "1"
 ---
 
-This example demonstrates how generic class methods are translated to C++. In C++ they become template methods.
+This example demonstrates how generic class methods are ported to C++. In C++ they become template methods.
 
 Additional command-line options passed to CodePorting.Translator.Cs2Cpp: none.
 

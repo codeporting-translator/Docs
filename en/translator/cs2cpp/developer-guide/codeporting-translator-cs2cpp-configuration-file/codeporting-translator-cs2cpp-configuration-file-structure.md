@@ -60,7 +60,7 @@ Use relative paths if you need cross-directory pathing.
 To include default configuration file or other files from translator default configuration files directory, use special '%PorterHome%' placeholder:
 
 {{< highlight xml >}}
-<import config="%PorterHome%/porter.config"/>
+<import config="%PorterHome%/translator.config"/>
 {{< /highlight >}}
 
 ## Configuration file splitting ##
@@ -68,13 +68,13 @@ To include default configuration file or other files from translator default con
 It is recommended to move everything related to library support to a separate file and import this file in the configuration file you use to translate your project:
 
 {{< highlight xml >}}
-<import config="porter.lib_aspose_drawing_skia.config"/>
+<import config="translator.lib_aspose_drawing_skia.config"/>
 {{< /highlight >}}
 
 This such approach allows easily switch to different lib implementation:
 
 {{< highlight xml >}}
-<import config="porter.lib_aspose_drawing_cario.config"/>
+<import config="translator.lib_aspose_drawing_cario.config"/>
 {{< /highlight >}}
 
 Also, one can reuse library configuration file when translating several projects.
