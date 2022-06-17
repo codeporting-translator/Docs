@@ -14,7 +14,7 @@ lastmod: "2022-06-09"
 weight: "1"
 ---
 
-This example demonstrates how static classes are ported to C++. They are not inherited from System::Object unlike others and have no RTTI declared.
+This example demonstrates how static classes are translated to C++. They are not inherited from System::Object unlike others and have no RTTI declared.
 
 Additional command-line options passed to CodePorting.Translator.Cs2Cpp: none.
 

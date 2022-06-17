@@ -14,7 +14,7 @@ lastmod: "2022-06-09"
 weight: "1"
 ---
 
-This example demonstrates how simple C# struct is ported to C++. A result C++ class inherits System::Object class and contains definitions for RTTI. 
+This example demonstrates how simple C# struct is translated to C++. A result C++ class inherits System::Object class and contains definitions for RTTI. 
 
 Additional command-line options passed to CodePorting.Translator.Cs2Cpp: none.
 

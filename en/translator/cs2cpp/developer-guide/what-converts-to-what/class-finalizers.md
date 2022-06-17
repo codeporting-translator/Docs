@@ -14,7 +14,7 @@ lastmod: "2022-06-09"
 weight: "1"
 ---
 
-This example demonstrates how class finalizer is ported to C++. In C++ it becomes class destructor.
+This example demonstrates how class finalizer is translated to C++. In C++ it becomes class destructor.
 
 Additional command-line options passed to CodePorting.Translator.Cs2Cpp: none.
 

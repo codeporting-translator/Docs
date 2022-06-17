@@ -14,7 +14,7 @@ lastmod: "2022-06-09"
 weight: "1"
 ---
 
-This example demonstrates how try-catch statement is ported to C++.
+This example demonstrates how try-catch statement is translated to C++.
 
 Additional command-line options passed to CodePorting.Translator.Cs2Cpp: -o finally_statement_as_lambda=true.
 

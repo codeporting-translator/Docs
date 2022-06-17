@@ -14,7 +14,7 @@ lastmod: "2022-06-09"
 weight: "1"
 ---
 
-This example demonstrates how class static properties are ported. Static properties may have getter, setter, or both. Public, protected and private static properties preserve their accessibility level. Internal static properties become protected. Getters are ported to static methods with prefix get_ and setters with prefix set_.
+This example demonstrates how class static properties are translated. Static properties may have getter, setter, or both. Public, protected and private static properties preserve their accessibility level. Internal static properties become protected. Getters are translated to static methods with prefix get_ and setters with prefix set_.
 
 Additional command-line options passed to CodePorting.Translator.Cs2Cpp: none.
 

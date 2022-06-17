@@ -14,7 +14,7 @@ lastmod: "2022-06-09"
 weight: "1"
 ---
 
-This example demonstrates how nested classes are ported to C++. Public, protected and private classes preserve their accessibility level. Internal classes become protected.
+This example demonstrates how nested classes are translated to C++. Public, protected and private classes preserve their accessibility level. Internal classes become protected.
 
 Additional command-line options passed to CodePorting.Translator.Cs2Cpp: none.
 

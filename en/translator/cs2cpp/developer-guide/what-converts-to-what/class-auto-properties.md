@@ -14,7 +14,7 @@ lastmod: "2022-06-09"
 weight: "1"
 ---
 
-This example demonstrates how class auto properties are ported to C++. Public, protected and private properties preserve their accessibility level. Internal properties become protected. Getters are ported to  methods with prefix get_ and setters with prefix set_.
+This example demonstrates how class auto properties are translated to C++. Public, protected and private properties preserve their accessibility level. Internal properties become protected. Getters are translated to  methods with prefix get_ and setters with prefix set_.
 
 Additional command-line options passed to CodePorting.Translator.Cs2Cpp: none.
 

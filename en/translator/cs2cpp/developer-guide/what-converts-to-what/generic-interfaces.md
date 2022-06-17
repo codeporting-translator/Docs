@@ -14,7 +14,7 @@ lastmod: "2022-06-09"
 weight: "1"
 ---
 
-This example demonstrates how generic interfaces are ported to C++. They become C++ template classes which are inherited from System::Object and have RTTI declared.
+This example demonstrates how generic interfaces are translated to C++. They become C++ template classes which are inherited from System::Object and have RTTI declared.
 
 Additional command-line options passed to CodePorting.Translator.Cs2Cpp: none.
 

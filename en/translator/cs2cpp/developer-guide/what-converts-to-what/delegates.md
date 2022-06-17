@@ -14,7 +14,7 @@ lastmod: "2022-06-09"
 weight: "1"
 ---
 
-This example demonstrates how delegates are ported to C++. They are declared using special type System::MulticastDelegate<T> from asposecpplib.
+This example demonstrates how delegates are translated to C++. They are declared using special type System::MulticastDelegate<T> from asposecpplib.
 
 Additional command-line options passed to CodePorting.Translator.Cs2Cpp: none.
 

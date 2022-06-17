@@ -14,7 +14,7 @@ lastmod: "2022-06-09"
 weight: "1"
 ---
 
-This example demonstrates how switch statement is ported to C++. Switch statement with stings is translated to C++ if statement.
+This example demonstrates how switch statement is translated to C++. Switch statement with stings is translated to C++ if statement.
 
 Additional command-line options passed to CodePorting.Translator.Cs2Cpp: none.
 

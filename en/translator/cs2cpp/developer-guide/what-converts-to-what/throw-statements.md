@@ -14,7 +14,7 @@ lastmod: "2022-06-09"
 weight: "1"
 ---
 
-This example demonstrates how throw statement is ported to C++.
+This example demonstrates how throw statement is translated to C++.
 
 Additional command-line options passed to CodePorting.Translator.Cs2Cpp: none.
 

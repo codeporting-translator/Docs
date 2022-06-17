@@ -14,7 +14,7 @@ lastmod: "2022-06-09"
 weight: "1"
 ---
 
-This example demonstrates how exceptions are ported to C++. They become C++ classes which are inherited from System::Exception.
+This example demonstrates how exceptions are translated to C++. They become C++ classes which are inherited from System::Exception.
 
 Additional command-line options passed to CodePorting.Translator.Cs2Cpp: none.
 

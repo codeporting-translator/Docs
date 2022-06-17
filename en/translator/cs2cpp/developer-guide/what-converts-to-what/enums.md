@@ -14,7 +14,7 @@ lastmod: "2022-06-09"
 weight: "1"
 ---
 
-This example demonstrates how C# enums are ported to C++. Flags enums have additional declarations for supporting logical operations.
+This example demonstrates how C# enums are translated to C++. Flags enums have additional declarations for supporting logical operations.
 
 Additional command-line options passed to CodePorting.Translator.Cs2Cpp: none.
 

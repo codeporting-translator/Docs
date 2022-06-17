@@ -14,7 +14,7 @@ lastmod: "2022-06-09"
 weight: "1"
 ---
 
-This example demonstrates how NUnit test with expected exception attribute applied is ported to C++. Googletest C++ library is used to translate NUnit tests to C++.
+This example demonstrates how NUnit test with expected exception attribute applied is translated to C++. Googletest C++ library is used to translate NUnit tests to C++.
 
 Additional command-line options passed to CodePorting.Translator.Cs2Cpp: none.
 

@@ -14,7 +14,7 @@ lastmod: "2022-06-09"
 weight: "1"
 ---
 
-This example demonstrates how foreach statement is ported to C++. It is translated to C++ for statement.
+This example demonstrates how foreach statement is translated to C++. It is translated to C++ for statement.
 
 Additional command-line options passed to CodePorting.Translator.Cs2Cpp: -o foreach_as_range_based_for_loop=true.
 
