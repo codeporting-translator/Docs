@@ -40,7 +40,7 @@ weight: "1"
 1. The Tag property of the Image class was supported.
 1. Several Clang-Tidy warnings were fixed across the codebase, potentially improving the performance.
 
-Please consult respective sections of our wiki for more information.
+Please consult respective sections of our wiki for more information..
 
 ## Full List of Issues Covering all Changes in this Release ##
 
