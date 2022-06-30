@@ -17,7 +17,7 @@ weight: "5"
 ## Major Features ##
 
 1. The conflict was resolved when using both Aspose.Cells for C++ and CodePorting.Native.Cs2Cpp.API headers from the same file.
-1. MacOS-specific release package was added.
+1. MacOS-specific release package was added..
 
 ## Minor fixes ##
 
