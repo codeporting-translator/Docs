@@ -1,5 +1,5 @@
 ---
-date: "2022-06-09"
+date: "2022-07-10"
 author:
   display_name: "Wiki code generator"
 draft: "false"
@@ -10,7 +10,7 @@ menu:
   docs:
     parent: "What Converts to What"
     weight: "1"
-lastmod: "2022-06-09"
+lastmod: "2022-07-10"
 weight: "1"
 ---
 
@@ -1713,9 +1713,9 @@ RTTI_INFO_IMPL_HASH(2620931565u, ::StatementsPorting::LambdaExpressions::HasAmbi
 System::Func<int32_t> LambdaExpressions::HasAmbiguityInsideLambda::Foo()
 {
     auto self = System::SharedPtr<LambdaExpressions::HasAmbiguityInsideLambda>(this);
-    return System::Func<int32_t>(static_cast<std::function<int32_t()>>([self]() -> int32_t
+    return static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([self]() -> int32_t
     {
-        System::Func<int32_t> lambda = System::Func<int32_t>(static_cast<std::function<int32_t()>>([&self]() -> int32_t
+        System::Func<int32_t> lambda = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([&self]() -> int32_t
         {
             self->LambdaExpressions::HasAmbiguityInsideLambdaBase::Foo(10);
             return self->m_field;
@@ -1744,9 +1744,9 @@ System::Func<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>> LambdaEx
     {
         auto __finally_guard_0 = ::System::MakeScopeGuard([&param, this]()
         {
-            System::Func<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>> lambdaInsideFinally = System::Func<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>>(static_cast<std::function<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>()>>([&param, this]() -> System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>
+            System::Func<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>> lambdaInsideFinally = static_cast<System::Func<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>>>(static_cast<std::function<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>()>>([&param, this]() -> System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>
             {
-                System::Func<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>> lambda = System::Func<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>>(static_cast<std::function<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>()>>([&param, this]() -> System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>
+                System::Func<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>> lambda = static_cast<System::Func<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>>>(static_cast<std::function<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>()>>([&param, this]() -> System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>
                 {
                     int32_t value = param;
                     return System::MakeSharedPtr(this);
@@ -1758,9 +1758,9 @@ System::Func<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>> LambdaEx
         try
         {
             auto self = System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>(this);
-            return System::Func<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>>(static_cast<std::function<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>()>>([_lch_param, &_param, self]() -> System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>
+            return static_cast<System::Func<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>>>(static_cast<std::function<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>()>>([_lch_param, &_param, self]() -> System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>
             {
-                System::Func<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>> lambda = System::Func<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>>(static_cast<std::function<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>()>>([&_param, &self]() -> System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>
+                System::Func<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>> lambda = static_cast<System::Func<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>>>(static_cast<std::function<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>()>>([&_param, &self]() -> System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>
                 {
                     int32_t value = _param;
                     return self;
@@ -1785,11 +1785,11 @@ RTTI_INFO_IMPL_HASH(2208338373u, ::StatementsPorting::LambdaExpressions::Multipl
 System::Func<int32_t> LambdaExpressions::MultipleLambdas::Foo()
 {
     auto self = System::SharedPtr<LambdaExpressions::MultipleLambdas>(this);
-    System::Func<int32_t> result = System::Func<int32_t>(static_cast<std::function<int32_t()>>([self]() -> int32_t
+    System::Func<int32_t> result = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([self]() -> int32_t
     {
         return self->m_value;
     })).template AddHeldVariable<System::Func<int32_t>>("self", self);
-    System::Func<int32_t> localLambda = System::Func<int32_t>(static_cast<std::function<int32_t()>>([this]() -> int32_t
+    System::Func<int32_t> localLambda = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([this]() -> int32_t
     {
         return m_value;
     }));
@@ -1819,7 +1819,7 @@ RTTI_INFO_IMPL_HASH(1180203451u, ::StatementsPorting::LambdaExpressions::Finally
 System::Func<int32_t> LambdaExpressions::FinallyCapturesThis2::Foo1()
 {
     auto self = System::SharedPtr<LambdaExpressions::FinallyCapturesThis2>(this);
-    return System::Func<int32_t>(static_cast<std::function<int32_t()>>([self]() -> int32_t
+    return static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([self]() -> int32_t
     {
         
         {
@@ -1843,7 +1843,7 @@ System::Func<int32_t> LambdaExpressions::FinallyCapturesThis2::Foo1()
 System::Func<int32_t> LambdaExpressions::FinallyCapturesThis2::Foo2()
 {
     auto self = System::SharedPtr<LambdaExpressions::FinallyCapturesThis2>(this);
-    System::Func<int32_t> result = System::Func<int32_t>(static_cast<std::function<int32_t()>>([self]() -> int32_t
+    System::Func<int32_t> result = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([self]() -> int32_t
     {
         return self->m_value;
     })).template AddHeldVariable<System::Func<int32_t>>("self", self);
@@ -1961,11 +1961,11 @@ LambdaExpressions::LambdaPasses4::LambdaPasses4(int32_t param)
     
     System::Details::LambdaCaptureHolder<int32_t> _lch_param = param;
     int32_t& _param = _lch_param.GetCapture();
-    System::Func<int32_t> lambda1 = System::Func<int32_t>(static_cast<std::function<int32_t()>>([&param]() -> int32_t
+    System::Func<int32_t> lambda1 = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([&param]() -> int32_t
     {
         return param;
     }));
-    System::Func<int32_t> lambda2 = System::Func<int32_t>(static_cast<std::function<int32_t()>>([_lch_param, &_param]() -> int32_t
+    System::Func<int32_t> lambda2 = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([_lch_param, &_param]() -> int32_t
     {
         return _param;
     })).template AddHeldVariable<System::Func<int32_t>>("_param", _param);
@@ -1976,7 +1976,7 @@ void LambdaExpressions::LambdaPasses4::Foo()
 {
     const System::Details::LambdaCaptureHolder<int32_t> _lch_value = 20;
     const int32_t &value = _lch_value.GetCapture();
-    System::Func<int32_t> lambda = System::Func<int32_t>(static_cast<std::function<int32_t()>>([_lch_value, &value]() -> int32_t
+    System::Func<int32_t> lambda = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([_lch_value, &value]() -> int32_t
     {
         return value;
     })).template AddHeldVariable<System::Func<int32_t>>("value", value);
@@ -2004,7 +2004,7 @@ int32_t LambdaExpressions::LambdaPasses3::get_Property()
 {
     const System::Details::LambdaCaptureHolder<int32_t> _lch_value = 20;
     const int32_t &value = _lch_value.GetCapture();
-    System::Func<int32_t> lambda = System::Func<int32_t>(static_cast<std::function<int32_t()>>([_lch_value, &value]() -> int32_t
+    System::Func<int32_t> lambda = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([_lch_value, &value]() -> int32_t
     {
         return value;
     })).template AddHeldVariable<System::Func<int32_t>>("value", value);
@@ -2016,7 +2016,7 @@ void LambdaExpressions::LambdaPasses3::set_Property(int32_t value)
 {
     System::Details::LambdaCaptureHolder<int32_t> _lch_value = value;
     int32_t& _value = _lch_value.GetCapture();
-    System::Func<int32_t> lambda = System::Func<int32_t>(static_cast<std::function<int32_t()>>([_lch_value, &_value]() -> int32_t
+    System::Func<int32_t> lambda = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([_lch_value, &_value]() -> int32_t
     {
         return _value;
     })).template AddHeldVariable<System::Func<int32_t>>("_value", _value);
@@ -2031,7 +2031,7 @@ LambdaExpressions::LambdaPasses3::LambdaPasses3()
     
     const System::Details::LambdaCaptureHolder<int32_t> _lch_value = 20;
     const int32_t &value = _lch_value.GetCapture();
-    System::Func<int32_t> lambda = System::Func<int32_t>(static_cast<std::function<int32_t()>>([_lch_value, &value]() -> int32_t
+    System::Func<int32_t> lambda = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([_lch_value, &value]() -> int32_t
     {
         return value;
     })).template AddHeldVariable<System::Func<int32_t>>("value", value);
@@ -2042,7 +2042,7 @@ int32_t LambdaExpressions::LambdaPasses3::idx_get(int32_t index)
 {
     System::Details::LambdaCaptureHolder<int32_t> _lch_index = index;
     int32_t& _index = _lch_index.GetCapture();
-    System::Func<int32_t> lambda = System::Func<int32_t>(static_cast<std::function<int32_t()>>([_lch_index, &_index]() -> int32_t
+    System::Func<int32_t> lambda = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([_lch_index, &_index]() -> int32_t
     {
         return _index;
     })).template AddHeldVariable<System::Func<int32_t>>("_index", _index);
@@ -2056,7 +2056,7 @@ void LambdaExpressions::LambdaPasses3::idx_set(int32_t index, int32_t value)
     int32_t& _index = _lch_index.GetCapture();
     System::Details::LambdaCaptureHolder<int32_t> _lch_value = value;
     int32_t& _value = _lch_value.GetCapture();
-    System::Func<int32_t> lambda = System::Func<int32_t>(static_cast<std::function<int32_t()>>([_lch_index, &_index, _lch_value, &_value]() -> int32_t
+    System::Func<int32_t> lambda = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([_lch_index, &_index, _lch_value, &_value]() -> int32_t
     {
         return _index * _value;
     })).template AddHeldVariable<System::Func<int32_t>>("_index", _index).template AddHeldVariable<System::Func<int32_t>>("_value", _value);
@@ -2084,7 +2084,7 @@ void LambdaExpressions::LambdaPasses3::Foo3(int32_t param)
 {
     System::Details::LambdaCaptureHolder<int32_t> _lch_param = param;
     int32_t& _param = _lch_param.GetCapture();
-    System::Func<int32_t> lambda = System::Func<int32_t>(static_cast<std::function<int32_t()>>([_lch_param, &_param]() -> int32_t
+    System::Func<int32_t> lambda = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([_lch_param, &_param]() -> int32_t
     {
         return _param;
     })).template AddHeldVariable<System::Func<int32_t>>("_param", _param);
@@ -2105,7 +2105,7 @@ RTTI_INFO_IMPL_HASH(47662933u, ::StatementsPorting::LambdaExpressions::LambdaPas
 int32_t LambdaExpressions::LambdaPasses2::get_Property()
 {
     const int32_t value = 20;
-    System::Func<int32_t> lambda = System::Func<int32_t>(static_cast<std::function<int32_t()>>([&value]() -> int32_t
+    System::Func<int32_t> lambda = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([&value]() -> int32_t
     {
         return value;
     }));
@@ -2115,7 +2115,7 @@ int32_t LambdaExpressions::LambdaPasses2::get_Property()
 
 void LambdaExpressions::LambdaPasses2::set_Property(int32_t value)
 {
-    System::Func<int32_t> lambda = System::Func<int32_t>(static_cast<std::function<int32_t()>>([&value]() -> int32_t
+    System::Func<int32_t> lambda = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([&value]() -> int32_t
     {
         return value;
     }));
@@ -2129,7 +2129,7 @@ LambdaExpressions::LambdaPasses2::LambdaPasses2()
     //---------------------------------------------------------Self Reference
     
     const int32_t value = 20;
-    System::Func<int32_t> lambda = System::Func<int32_t>(static_cast<std::function<int32_t()>>([&value]() -> int32_t
+    System::Func<int32_t> lambda = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([&value]() -> int32_t
     {
         return value;
     }));
@@ -2138,7 +2138,7 @@ LambdaExpressions::LambdaPasses2::LambdaPasses2()
 
 int32_t LambdaExpressions::LambdaPasses2::idx_get(int32_t index)
 {
-    System::Func<int32_t> lambda = System::Func<int32_t>(static_cast<std::function<int32_t()>>([&index]() -> int32_t
+    System::Func<int32_t> lambda = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([&index]() -> int32_t
     {
         return index;
     }));
@@ -2148,7 +2148,7 @@ int32_t LambdaExpressions::LambdaPasses2::idx_get(int32_t index)
 
 void LambdaExpressions::LambdaPasses2::idx_set(int32_t index, int32_t value)
 {
-    System::Func<int32_t> lambda = System::Func<int32_t>(static_cast<std::function<int32_t()>>([&index, &value]() -> int32_t
+    System::Func<int32_t> lambda = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([&index, &value]() -> int32_t
     {
         return index * value;
     }));
@@ -2259,7 +2259,7 @@ LambdaExpressions::SomeClass1::SomeClass1()
     System::Details::ThisProtector __local_self_ref(this);
     //---------------------------------------------------------Self Reference
     
-    System::Func<System::SharedPtr<LambdaExpressions::SomeClass1>> lambda = System::Func<System::SharedPtr<LambdaExpressions::SomeClass1>>(static_cast<std::function<System::SharedPtr<LambdaExpressions::SomeClass1>()>>([this]() -> System::SharedPtr<LambdaExpressions::SomeClass1>
+    System::Func<System::SharedPtr<LambdaExpressions::SomeClass1>> lambda = static_cast<System::Func<System::SharedPtr<LambdaExpressions::SomeClass1>>>(static_cast<std::function<System::SharedPtr<LambdaExpressions::SomeClass1>()>>([this]() -> System::SharedPtr<LambdaExpressions::SomeClass1>
     {
         return System::MakeSharedPtr(this);
     }));
@@ -2269,7 +2269,7 @@ MEMBER_FUNCTION_MAKE_OBJECT_DEFINITION(LambdaExpressions::SomeClass1, CODEPORTIN
 
 void LambdaExpressions::SomeClass1::Foo()
 {
-    System::Func<System::SharedPtr<LambdaExpressions::SomeClass1>> lambda = System::Func<System::SharedPtr<LambdaExpressions::SomeClass1>>(static_cast<std::function<System::SharedPtr<LambdaExpressions::SomeClass1>()>>([this]() -> System::SharedPtr<LambdaExpressions::SomeClass1>
+    System::Func<System::SharedPtr<LambdaExpressions::SomeClass1>> lambda = static_cast<System::Func<System::SharedPtr<LambdaExpressions::SomeClass1>>>(static_cast<std::function<System::SharedPtr<LambdaExpressions::SomeClass1>()>>([this]() -> System::SharedPtr<LambdaExpressions::SomeClass1>
     {
         return System::MakeSharedPtr(this);
     }));
@@ -2323,7 +2323,7 @@ RTTI_INFO_IMPL_HASH(692807633u, ::StatementsPorting::LambdaExpressions::LambdaCa
 void LambdaExpressions::LambdaCapturesThisByValue::Foo1()
 {
     auto self = System::SharedPtr<LambdaExpressions::LambdaCapturesThisByValue>(this);
-    System::Func<int32_t> lambda = System::Func<int32_t>(static_cast<std::function<int32_t()>>([self]() -> int32_t
+    System::Func<int32_t> lambda = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([self]() -> int32_t
     {
         return self->m_value;
     })).template AddHeldVariable<System::Func<int32_t>>("self", self);
@@ -2332,7 +2332,7 @@ void LambdaExpressions::LambdaCapturesThisByValue::Foo1()
 void LambdaExpressions::LambdaCapturesThisByValue::Foo2()
 {
     auto self = System::WeakPtr<LambdaExpressions::LambdaCapturesThisByValue>(this);
-    System::Func<int32_t> lambda = System::Func<int32_t>(static_cast<std::function<int32_t()>>([self]() -> int32_t
+    System::Func<int32_t> lambda = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([self]() -> int32_t
     {
         return self->m_value;
     })).template AddHeldVariable<System::Func<int32_t>>("self", self);
@@ -2349,7 +2349,7 @@ System::Func<int32_t> LambdaExpressions::LambdaCapturesThis7::Foo()
     if (m_condition)
     {
         auto self = System::SharedPtr<LambdaExpressions::LambdaCapturesThis7>(this);
-        return System::Func<int32_t>(static_cast<std::function<int32_t()>>([self]() -> int32_t
+        return static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([self]() -> int32_t
         {
             return 2 * self->m_field;
         })).template AddHeldVariable<System::Func<int32_t>>("self", self);
@@ -2357,7 +2357,7 @@ System::Func<int32_t> LambdaExpressions::LambdaCapturesThis7::Foo()
     else
     {
         auto self = System::SharedPtr<LambdaExpressions::LambdaCapturesThis7>(this);
-        return System::Func<int32_t>(static_cast<std::function<int32_t()>>([self]() -> int32_t
+        return static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([self]() -> int32_t
         {
             return 3 * self->m_field;
         })).template AddHeldVariable<System::Func<int32_t>>("self", self);
@@ -2375,7 +2375,7 @@ System::Func<int32_t> LambdaExpressions::LambdaCapturesThis6::Foo()
     try
     {
         auto self = System::SharedPtr<LambdaExpressions::LambdaCapturesThis6>(this);
-        return System::Func<int32_t>(static_cast<std::function<int32_t()>>([self]() -> int32_t
+        return static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([self]() -> int32_t
         {
             return self->m_field;
         })).template AddHeldVariable<System::Func<int32_t>>("self", self);
@@ -2386,7 +2386,7 @@ System::Func<int32_t> LambdaExpressions::LambdaCapturesThis6::Foo()
     
     
     auto self = System::SharedPtr<LambdaExpressions::LambdaCapturesThis6>(this);
-    return System::Func<int32_t>(static_cast<std::function<int32_t()>>([self]() -> int32_t
+    return static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([self]() -> int32_t
     {
         return self->m_field;
     })).template AddHeldVariable<System::Func<int32_t>>("self", self);
@@ -2414,18 +2414,18 @@ System::Func<int32_t> LambdaExpressions::get_LambdaInsideLambda1()
     const System::Details::LambdaCaptureHolder<int32_t> _lch_value = 10;
     const int32_t &value = _lch_value.GetCapture();
     auto self = System::SharedPtr<LambdaExpressions>(this);
-    System::Func<int32_t> lambda = System::Func<int32_t>(static_cast<std::function<int32_t()>>([_lch_value, &value, self]() -> int32_t
+    System::Func<int32_t> lambda = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([_lch_value, &value, self]() -> int32_t
     {
         self->SomeAction(value);
-        LambdaExpressions::VoidVoidDelegate voidDelegate = LambdaExpressions::VoidVoidDelegate(static_cast<std::function<void()>>([&self]() -> void
+        LambdaExpressions::VoidVoidDelegate voidDelegate = static_cast<LambdaExpressions::VoidVoidDelegate>(static_cast<std::function<void()>>([&self]() -> void
         {
             self->SomeAction(20);
         }));
         voidDelegate();
-        LambdaExpressions::VoidVoidDelegate voidDelegate2 = LambdaExpressions::VoidVoidDelegate(static_cast<std::function<void()>>([&value, &self]() -> void
+        LambdaExpressions::VoidVoidDelegate voidDelegate2 = static_cast<LambdaExpressions::VoidVoidDelegate>(static_cast<std::function<void()>>([&value, &self]() -> void
         {
             self->SomeAction(30);
-            LambdaExpressions::VoidVoidDelegate voidDelegate3 = LambdaExpressions::VoidVoidDelegate(static_cast<std::function<void()>>([&value, &self]() -> void
+            LambdaExpressions::VoidVoidDelegate voidDelegate3 = static_cast<LambdaExpressions::VoidVoidDelegate>(static_cast<std::function<void()>>([&value, &self]() -> void
             {
                 int32_t smth = value;
                 self->SomeAction(smth);
@@ -2440,7 +2440,7 @@ System::Func<int32_t> LambdaExpressions::get_LambdaInsideLambda1()
 void LambdaExpressions::set_LambdaInsideLambda1(System::Func<int32_t> value)
 {
     const int32_t smth = 10;
-    System::Func<int32_t> lambda = System::Func<int32_t>(static_cast<std::function<int32_t()>>([&smth, this]() -> int32_t
+    System::Func<int32_t> lambda = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([&smth, this]() -> int32_t
     {
         this->SomeAction(smth);
         return smth;
@@ -2467,24 +2467,24 @@ void LambdaExpressions::LambdaWithReturnValueExpressions()
     {
         return 777;
     })));
-    System::Func<int32_t, int32_t> selector1 = System::Func<int32_t, int32_t>(std::bind(&LambdaExpressions::SomeSelector, this, std::placeholders::_1));
+    System::Func<int32_t, int32_t> selector1 = static_cast<System::Func<int32_t, int32_t>>(std::bind(&LambdaExpressions::SomeSelector, this, std::placeholders::_1));
     SomeCalculation(selector1);
-    System::Func<int32_t, int32_t> selector2 = System::Func<int32_t, int32_t>(static_cast<std::function<int32_t(int32_t value)>>([](int32_t value) -> int32_t
+    System::Func<int32_t, int32_t> selector2 = static_cast<System::Func<int32_t, int32_t>>(static_cast<std::function<int32_t(int32_t value)>>([](int32_t value) -> int32_t
     {
         return value + 2;
     }));
     SomeCalculation(selector2);
-    System::Func<int32_t, int32_t> selector3 = System::Func<int32_t, int32_t>(static_cast<std::function<int32_t(int32_t value)>>([&delta](int32_t value) -> int32_t
+    System::Func<int32_t, int32_t> selector3 = static_cast<System::Func<int32_t, int32_t>>(static_cast<std::function<int32_t(int32_t value)>>([&delta](int32_t value) -> int32_t
     {
         return value + delta;
     }));
     SomeCalculation(selector3);
-    System::Func<int32_t, int32_t> selector4 = System::Func<int32_t, int32_t>(static_cast<std::function<int32_t(int32_t value)>>([this](int32_t value) -> int32_t
+    System::Func<int32_t, int32_t> selector4 = static_cast<System::Func<int32_t, int32_t>>(static_cast<std::function<int32_t(int32_t value)>>([this](int32_t value) -> int32_t
     {
         return value + mSomeDelta;
     }));
     SomeCalculation(selector4);
-    System::Func<int32_t, int32_t> selector5 = System::Func<int32_t, int32_t>(static_cast<std::function<int32_t(int32_t _)>>([](int32_t _) -> int32_t
+    System::Func<int32_t, int32_t> selector5 = static_cast<System::Func<int32_t, int32_t>>(static_cast<std::function<int32_t(int32_t _)>>([](int32_t _) -> int32_t
     {
         return 777;
     }));
@@ -2511,24 +2511,24 @@ void LambdaExpressions::LambdaWithoutReturnValueExpressions()
     {
         System::Console::WriteLine(777);
     })));
-    System::Action<int32_t> action1 = System::Action<int32_t>(std::bind(&LambdaExpressions::SomeAction, this, std::placeholders::_1));
+    System::Action<int32_t> action1 = static_cast<System::Action<int32_t>>(std::bind(&LambdaExpressions::SomeAction, this, std::placeholders::_1));
     SomeProcessor(action1);
-    System::Action<int32_t> action2 = System::Action<int32_t>(static_cast<std::function<void(int32_t value)>>([](int32_t value) -> void
+    System::Action<int32_t> action2 = static_cast<System::Action<int32_t>>(static_cast<std::function<void(int32_t value)>>([](int32_t value) -> void
     {
         System::Console::WriteLine(value + 2);
     }));
     SomeProcessor(action2);
-    System::Action<int32_t> action3 = System::Action<int32_t>(static_cast<std::function<void(int32_t value)>>([&delta](int32_t value) -> void
+    System::Action<int32_t> action3 = static_cast<System::Action<int32_t>>(static_cast<std::function<void(int32_t value)>>([&delta](int32_t value) -> void
     {
         System::Console::WriteLine(value + delta);
     }));
     SomeProcessor(action3);
-    System::Action<int32_t> action4 = System::Action<int32_t>(static_cast<std::function<void(int32_t value)>>([this](int32_t value) -> void
+    System::Action<int32_t> action4 = static_cast<System::Action<int32_t>>(static_cast<std::function<void(int32_t value)>>([this](int32_t value) -> void
     {
         System::Console::WriteLine(value + mSomeDelta);
     }));
     SomeProcessor(action4);
-    System::Action<int32_t> action5 = System::Action<int32_t>(static_cast<std::function<void(int32_t _)>>([](int32_t _) -> void
+    System::Action<int32_t> action5 = static_cast<System::Action<int32_t>>(static_cast<std::function<void(int32_t _)>>([](int32_t _) -> void
     {
         System::Console::WriteLine(777);
     }));
@@ -2537,27 +2537,27 @@ void LambdaExpressions::LambdaWithoutReturnValueExpressions()
 
 void LambdaExpressions::LambdaCurrying()
 {
-    System::Func<int32_t, int32_t, int32_t> someFun = System::Func<int32_t, int32_t, int32_t>(static_cast<std::function<int32_t(int32_t value1, int32_t value2)>>([](int32_t value1, int32_t value2) -> int32_t
+    System::Func<int32_t, int32_t, int32_t> someFun = static_cast<System::Func<int32_t, int32_t, int32_t>>(static_cast<std::function<int32_t(int32_t value1, int32_t value2)>>([](int32_t value1, int32_t value2) -> int32_t
     {
         return value1 + value2;
     }));
-    System::Func<int32_t, int32_t> simpleFun1 = System::Func<int32_t, int32_t>(static_cast<std::function<int32_t(int32_t value)>>([&someFun](int32_t value) -> int32_t
+    System::Func<int32_t, int32_t> simpleFun1 = static_cast<System::Func<int32_t, int32_t>>(static_cast<std::function<int32_t(int32_t value)>>([&someFun](int32_t value) -> int32_t
     {
         return someFun(value, 666);
     }));
-    System::Func<int32_t, int32_t> simpleFun2 = System::Func<int32_t, int32_t>(static_cast<std::function<int32_t(int32_t value)>>([&someFun](int32_t value) -> int32_t
+    System::Func<int32_t, int32_t> simpleFun2 = static_cast<System::Func<int32_t, int32_t>>(static_cast<std::function<int32_t(int32_t value)>>([&someFun](int32_t value) -> int32_t
     {
         return someFun(777, value);
     }));
-    System::Action<int32_t, int32_t> someAction = System::Action<int32_t, int32_t>(static_cast<std::function<void(int32_t value1, int32_t value2)>>([](int32_t value1, int32_t value2) -> void
+    System::Action<int32_t, int32_t> someAction = static_cast<System::Action<int32_t, int32_t>>(static_cast<std::function<void(int32_t value1, int32_t value2)>>([](int32_t value1, int32_t value2) -> void
     {
         System::Console::WriteLine(value1 + value2);
     }));
-    System::Action<int32_t> simpleAction1 = System::Action<int32_t>(static_cast<std::function<void(int32_t value)>>([&someAction](int32_t value) -> void
+    System::Action<int32_t> simpleAction1 = static_cast<System::Action<int32_t>>(static_cast<std::function<void(int32_t value)>>([&someAction](int32_t value) -> void
     {
         someAction(value, 666);
     }));
-    System::Action<int32_t> simpleAction2 = System::Action<int32_t>(static_cast<std::function<void(int32_t value)>>([&someAction](int32_t value) -> void
+    System::Action<int32_t> simpleAction2 = static_cast<System::Action<int32_t>>(static_cast<std::function<void(int32_t value)>>([&someAction](int32_t value) -> void
     {
         someAction(777, value);
     }));
@@ -2565,14 +2565,14 @@ void LambdaExpressions::LambdaCurrying()
 
 void LambdaExpressions::LambdaReturnedFromFunctionExpressions()
 {
-    System::Func<int32_t, int32_t> lambda1 = System::Func<int32_t, int32_t>(CreateFun(666));
-    System::Func<int32_t, int32_t> lambda2 = System::Func<int32_t, int32_t>(CreateFun(-13));
+    System::Func<int32_t, int32_t> lambda1 = static_cast<System::Func<int32_t, int32_t>>(CreateFun(666));
+    System::Func<int32_t, int32_t> lambda2 = static_cast<System::Func<int32_t, int32_t>>(CreateFun(-13));
 }
 
 void LambdaExpressions::PassVariableByValue()
 {
     int32_t value = 10;
-    LambdaExpressions::VoidVoidDelegate lambda = LambdaExpressions::VoidVoidDelegate(static_cast<std::function<void()>>([value]() -> void
+    LambdaExpressions::VoidVoidDelegate lambda = static_cast<LambdaExpressions::VoidVoidDelegate>(static_cast<std::function<void()>>([value]() -> void
     {
         System::Console::WriteLine(value);
     })).template AddHeldVariable<LambdaExpressions::VoidVoidDelegate>("value", value);
@@ -2582,7 +2582,7 @@ void LambdaExpressions::PassTwoVariablesByValue()
 {
     int32_t value1 = 10;
     int32_t value2 = 20;
-    LambdaExpressions::VoidVoidDelegate lambda = LambdaExpressions::VoidVoidDelegate(static_cast<std::function<void()>>([value1, value2]() -> void
+    LambdaExpressions::VoidVoidDelegate lambda = static_cast<LambdaExpressions::VoidVoidDelegate>(static_cast<std::function<void()>>([value1, value2]() -> void
     {
         System::Console::WriteLine(value1);
         System::Console::WriteLine(value2);
@@ -2595,7 +2595,7 @@ void LambdaExpressions::AllCaptureMechanisms()
     int32_t value2 = 20;
     System::Details::LambdaCaptureHolder<int32_t> _lch_value3 = 30;
     int32_t &value3 = _lch_value3.GetCapture();
-    LambdaExpressions::VoidVoidDelegate lambda = LambdaExpressions::VoidVoidDelegate(static_cast<std::function<void()>>([&value1, value2, _lch_value3, &value3]() -> void
+    LambdaExpressions::VoidVoidDelegate lambda = static_cast<LambdaExpressions::VoidVoidDelegate>(static_cast<std::function<void()>>([&value1, value2, _lch_value3, &value3]() -> void
     {
         System::Console::WriteLine(value1);
         System::Console::WriteLine(value2);
@@ -2608,7 +2608,7 @@ void LambdaExpressions::LambdaCapturesForLoopInitializers()
     const int32_t itemsCount = 10;
     for (int32_t i = 0, j = 0; i < itemsCount; i++)
     {
-        System::Func<int32_t> lambda = System::Func<int32_t>(static_cast<std::function<int32_t()>>([&i]() -> int32_t
+        System::Func<int32_t> lambda = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([&i]() -> int32_t
         {
             return i;
         }));
@@ -2620,7 +2620,7 @@ void LambdaExpressions::LambdaCapturesLocalVariableInForLoop()
     int32_t value = 10;
     for (int32_t i = 0; i < 20; i++)
     {
-        System::Func<int32_t> lambda = System::Func<int32_t>(static_cast<std::function<int32_t()>>([&i, &value]() -> int32_t
+        System::Func<int32_t> lambda = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([&i, &value]() -> int32_t
         {
             return i * value;
         }));
@@ -2629,11 +2629,11 @@ void LambdaExpressions::LambdaCapturesLocalVariableInForLoop()
 
 void LambdaExpressions::LambdaCapturesMethodParam(int32_t param)
 {
-    System::Func<int32_t> lambda1 = System::Func<int32_t>(static_cast<std::function<int32_t()>>([&param]() -> int32_t
+    System::Func<int32_t> lambda1 = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([&param]() -> int32_t
     {
         return 2 * param;
     }));
-    System::Func<int32_t> lambda2 = System::Func<int32_t>(static_cast<std::function<int32_t()>>([&param]() -> int32_t
+    System::Func<int32_t> lambda2 = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([&param]() -> int32_t
     {
         return 3 * param;
     }));
@@ -2641,7 +2641,7 @@ void LambdaExpressions::LambdaCapturesMethodParam(int32_t param)
 
 void LambdaExpressions::LambdaCapturesThis1()
 {
-    System::Func<int32_t> lambda = System::Func<int32_t>(static_cast<std::function<int32_t()>>([this]() -> int32_t
+    System::Func<int32_t> lambda = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([this]() -> int32_t
     {
         return this->mSomeDelta;
     }));
@@ -2651,11 +2651,11 @@ void LambdaExpressions::LambdaCapturesThis1()
 System::Func<System::SharedPtr<LambdaExpressions>> LambdaExpressions::LambdaCapturesThis2()
 {
     auto self = System::SharedPtr<LambdaExpressions>(this);
-    System::Func<System::SharedPtr<LambdaExpressions>> lambda1 = System::Func<System::SharedPtr<LambdaExpressions>>(static_cast<std::function<System::SharedPtr<LambdaExpressions>()>>([self]() -> System::SharedPtr<LambdaExpressions>
+    System::Func<System::SharedPtr<LambdaExpressions>> lambda1 = static_cast<System::Func<System::SharedPtr<LambdaExpressions>>>(static_cast<std::function<System::SharedPtr<LambdaExpressions>()>>([self]() -> System::SharedPtr<LambdaExpressions>
     {
         return self;
     })).template AddHeldVariable<System::Func<System::SharedPtr<LambdaExpressions>>>("self", self);
-    System::Func<System::SharedPtr<LambdaExpressions>> lambda2 = System::Func<System::SharedPtr<LambdaExpressions>>(static_cast<std::function<System::SharedPtr<LambdaExpressions>()>>([]() -> System::SharedPtr<LambdaExpressions>
+    System::Func<System::SharedPtr<LambdaExpressions>> lambda2 = static_cast<System::Func<System::SharedPtr<LambdaExpressions>>>(static_cast<std::function<System::SharedPtr<LambdaExpressions>()>>([]() -> System::SharedPtr<LambdaExpressions>
     {
         return System::MakeObject<LambdaExpressions>();
     }));
@@ -2665,7 +2665,7 @@ System::Func<System::SharedPtr<LambdaExpressions>> LambdaExpressions::LambdaCapt
 
 System::SharedPtr<LambdaExpressions> LambdaExpressions::LambdaCapturesThis3()
 {
-    System::Func<System::SharedPtr<LambdaExpressions>> lambda = System::Func<System::SharedPtr<LambdaExpressions>>(static_cast<std::function<System::SharedPtr<LambdaExpressions>()>>([this]() -> System::SharedPtr<LambdaExpressions>
+    System::Func<System::SharedPtr<LambdaExpressions>> lambda = static_cast<System::Func<System::SharedPtr<LambdaExpressions>>>(static_cast<std::function<System::SharedPtr<LambdaExpressions>()>>([this]() -> System::SharedPtr<LambdaExpressions>
     {
         return System::MakeSharedPtr(this);
     }));
@@ -2674,7 +2674,7 @@ System::SharedPtr<LambdaExpressions> LambdaExpressions::LambdaCapturesThis3()
 
 void LambdaExpressions::LambdaCapturesThis4()
 {
-    System::Func<System::SharedPtr<LambdaExpressions>> lambda = System::Func<System::SharedPtr<LambdaExpressions>>(static_cast<std::function<System::SharedPtr<LambdaExpressions>()>>([this]() -> System::SharedPtr<LambdaExpressions>
+    System::Func<System::SharedPtr<LambdaExpressions>> lambda = static_cast<System::Func<System::SharedPtr<LambdaExpressions>>>(static_cast<std::function<System::SharedPtr<LambdaExpressions>()>>([this]() -> System::SharedPtr<LambdaExpressions>
     {
         return System::MakeSharedPtr(this);
     }));
@@ -2683,7 +2683,7 @@ void LambdaExpressions::LambdaCapturesThis4()
 
 System::Func<System::SharedPtr<LambdaExpressions>> LambdaExpressions::LambdaCapturesThis5()
 {
-    System::Func<System::SharedPtr<LambdaExpressions>> lambda = System::Func<System::SharedPtr<LambdaExpressions>>(static_cast<std::function<System::SharedPtr<LambdaExpressions>()>>([]() -> System::SharedPtr<LambdaExpressions>
+    System::Func<System::SharedPtr<LambdaExpressions>> lambda = static_cast<System::Func<System::SharedPtr<LambdaExpressions>>>(static_cast<std::function<System::SharedPtr<LambdaExpressions>()>>([]() -> System::SharedPtr<LambdaExpressions>
     {
         return System::MakeObject<LambdaExpressions>();
     }));
@@ -2709,7 +2709,7 @@ void LambdaExpressions::LambdaCapturesClassField()
 void LambdaExpressions::LambdaCapturesByte()
 {
     uint8_t b = 10;
-    System::Func<int32_t> lambda = System::Func<int32_t>(static_cast<std::function<int32_t()>>([&b]() -> int32_t
+    System::Func<int32_t> lambda = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([&b]() -> int32_t
     {
         return b * 2;
     }));
@@ -2717,7 +2717,7 @@ void LambdaExpressions::LambdaCapturesByte()
 
 int32_t LambdaExpressions::idx_get(int32_t index)
 {
-    System::Func<int32_t> lambda = System::Func<int32_t>(static_cast<std::function<int32_t()>>([&index]() -> int32_t
+    System::Func<int32_t> lambda = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([&index]() -> int32_t
     {
         return 2 * index;
     }));
@@ -2726,7 +2726,7 @@ int32_t LambdaExpressions::idx_get(int32_t index)
 
 void LambdaExpressions::idx_set(int32_t index, int32_t value)
 {
-    System::Func<int32_t> lambda = System::Func<int32_t>(static_cast<std::function<int32_t()>>([&index, &value]() -> int32_t
+    System::Func<int32_t> lambda = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([&index, &value]() -> int32_t
     {
         return index * value;
     }));
@@ -2736,7 +2736,7 @@ void LambdaExpressions::idx_set(int32_t index, int32_t value)
 void LambdaExpressions::LambdaCapturesBoxedDateTime()
 {
     System::SharedPtr<System::Object> value = System::ObjectExt::Box<System::DateTime>(System::DateTime(2020, 8, 31));
-    System::Func<int32_t> lambda = System::Func<int32_t>(static_cast<std::function<int32_t()>>([&value]() -> int32_t
+    System::Func<int32_t> lambda = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([&value]() -> int32_t
     {
         return System::ObjectExt::GetHashCode(value);
     }));
@@ -2745,7 +2745,7 @@ void LambdaExpressions::LambdaCapturesBoxedDateTime()
 void LambdaExpressions::LambdaCapturesBoxedString()
 {
     System::SharedPtr<System::Object> value = System::ObjectExt::Box<System::String>(u"1e-02");
-    System::Func<bool> lambda = System::Func<bool>(static_cast<std::function<bool()>>([&value]() -> bool
+    System::Func<bool> lambda = static_cast<System::Func<bool>>(static_cast<std::function<bool()>>([&value]() -> bool
     {
         return System::ObjectExt::Equals(value, System::ObjectExt::Box<System::String>(u"1e-02"));
     }));
@@ -2753,7 +2753,7 @@ void LambdaExpressions::LambdaCapturesBoxedString()
 
 void LambdaExpressions::LambdaCapturesClassProperty()
 {
-    System::Func<int32_t> lambda = System::Func<int32_t>(static_cast<std::function<int32_t()>>([this]() -> int32_t
+    System::Func<int32_t> lambda = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([this]() -> int32_t
     {
         return get_SomeDelta();
     }));
@@ -2762,11 +2762,11 @@ void LambdaExpressions::LambdaCapturesClassProperty()
 void LambdaExpressions::LambdaCapturesLocalVariables1()
 {
     int32_t value = 30;
-    System::Func<int32_t> lambda1 = System::Func<int32_t>(static_cast<std::function<int32_t()>>([&value]() -> int32_t
+    System::Func<int32_t> lambda1 = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([&value]() -> int32_t
     {
         return value;
     }));
-    System::Func<int32_t> lambda2 = System::Func<int32_t>(lambda1);
+    System::Func<int32_t> lambda2 = lambda1;
     int32_t result = lambda2();
 }
 
@@ -2774,18 +2774,18 @@ System::Func<int32_t> LambdaExpressions::LambdaCapturesLocalVariables2()
 {
     System::Details::LambdaCaptureHolder<int32_t> _lch_value = 30;
     int32_t &value = _lch_value.GetCapture();
-    System::Func<int32_t> lambda1 = System::Func<int32_t>(static_cast<std::function<int32_t()>>([_lch_value, &value]() -> int32_t
+    System::Func<int32_t> lambda1 = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([_lch_value, &value]() -> int32_t
     {
         return value;
     })).template AddHeldVariable<System::Func<int32_t>>("value", value);
-    System::Func<int32_t> lambda2 = System::Func<int32_t>(lambda1);
+    System::Func<int32_t> lambda2 = lambda1;
     return lambda2;
 }
 
 int32_t LambdaExpressions::LambdaCapturesLocalVariables3()
 {
     int32_t value = 30;
-    System::Func<int32_t> lambda = System::Func<int32_t>(static_cast<std::function<int32_t()>>([&value]() -> int32_t
+    System::Func<int32_t> lambda = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([&value]() -> int32_t
     {
         return value;
     }));
@@ -2796,7 +2796,7 @@ void LambdaExpressions::LambdaIsPassedAsLinqParam1()
 {
     auto list = [&]{ int32_t init_0[] = {1, 2, 3, 4}; auto list_0 = System::MakeObject<System::Collections::Generic::List<int32_t>>(); list_0->AddInitializer(4, init_0); return list_0; }();
     int32_t multiplier = 10;
-    System::Func<int32_t, int32_t> lambda = System::Func<int32_t, int32_t>(static_cast<std::function<int32_t(int32_t x)>>([&multiplier](int32_t x) -> int32_t
+    System::Func<int32_t, int32_t> lambda = static_cast<System::Func<int32_t, int32_t>>(static_cast<std::function<int32_t(int32_t x)>>([&multiplier](int32_t x) -> int32_t
     {
         return x * multiplier;
     }));
@@ -2817,7 +2817,7 @@ void LambdaExpressions::LambdaIsAssignedToClassField1()
 {
     System::Details::LambdaCaptureHolder<int32_t> _lch_value = 30;
     int32_t &value = _lch_value.GetCapture();
-    System::Func<int32_t> lambda = System::Func<int32_t>(static_cast<std::function<int32_t()>>([_lch_value, &value]() -> int32_t
+    System::Func<int32_t> lambda = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([_lch_value, &value]() -> int32_t
     {
         return value;
     })).template AddHeldVariable<System::Func<int32_t>>("value", value);
@@ -2828,7 +2828,7 @@ void LambdaExpressions::LambdaIsAssignedToClassField2()
 {
     System::Details::LambdaCaptureHolder<int32_t> _lch_value = 30;
     int32_t &value = _lch_value.GetCapture();
-    System::Func<int32_t> lambda = System::Func<int32_t>(static_cast<std::function<int32_t()>>([_lch_value, &value]() -> int32_t
+    System::Func<int32_t> lambda = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([_lch_value, &value]() -> int32_t
     {
         return value;
     })).template AddHeldVariable<System::Func<int32_t>>("value", value);
@@ -2838,11 +2838,11 @@ void LambdaExpressions::LambdaIsAssignedToClassField2()
 void LambdaExpressions::LambdasCycle1()
 {
     int32_t value = 10;
-    System::Func<int32_t> lambda1 = System::Func<int32_t>(static_cast<std::function<int32_t()>>([&value]() -> int32_t
+    System::Func<int32_t> lambda1 = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([&value]() -> int32_t
     {
         return value;
     }));
-    System::Func<int32_t> lambda2 = System::Func<int32_t>(static_cast<std::function<int32_t()>>([]() -> int32_t
+    System::Func<int32_t> lambda2 = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([]() -> int32_t
     {
         return 20;
     }));
@@ -2854,11 +2854,11 @@ void LambdaExpressions::LambdasCycle2()
 {
     System::Details::LambdaCaptureHolder<int32_t> _lch_value = 10;
     int32_t &value = _lch_value.GetCapture();
-    System::Func<int32_t> lambda1 = System::Func<int32_t>(static_cast<std::function<int32_t()>>([_lch_value, &value]() -> int32_t
+    System::Func<int32_t> lambda1 = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([_lch_value, &value]() -> int32_t
     {
         return value;
     })).template AddHeldVariable<System::Func<int32_t>>("value", value);
-    System::Func<int32_t> lambda2 = System::Func<int32_t>(static_cast<std::function<int32_t()>>([]() -> int32_t
+    System::Func<int32_t> lambda2 = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([]() -> int32_t
     {
         return 20;
     }));
@@ -2897,7 +2897,7 @@ void LambdaExpressions::LambdaCapturesAnonymousFunction(System::Func<int32_t, in
 void LambdaExpressions::CallLambdaCapturesAnonymousFunction()
 {
     const int32_t value = 10;
-    System::Func<int32_t, int32_t> lambda = System::Func<int32_t, int32_t>(static_cast<std::function<int32_t(int32_t x)>>([&value](int32_t x) -> int32_t
+    System::Func<int32_t, int32_t> lambda = static_cast<System::Func<int32_t, int32_t>>(static_cast<std::function<int32_t(int32_t x)>>([&value](int32_t x) -> int32_t
     {
         return x * value;
     }));
@@ -2907,7 +2907,7 @@ void LambdaExpressions::CallLambdaCapturesAnonymousFunction()
 void LambdaExpressions::LambdaParamChainToLocal()
 {
     const int32_t value = 10;
-    System::Func<int32_t, int32_t> lambda = System::Func<int32_t, int32_t>(static_cast<std::function<int32_t(int32_t x)>>([&value](int32_t x) -> int32_t
+    System::Func<int32_t, int32_t> lambda = static_cast<System::Func<int32_t, int32_t>>(static_cast<std::function<int32_t(int32_t x)>>([&value](int32_t x) -> int32_t
     {
         return x * value;
     }));
@@ -2928,7 +2928,7 @@ void LambdaExpressions::LambdaParamChainToField()
 {
     const System::Details::LambdaCaptureHolder<int32_t> _lch_value = 10;
     const int32_t &value = _lch_value.GetCapture();
-    System::Func<int32_t> lambda = System::Func<int32_t>(static_cast<std::function<int32_t()>>([_lch_value, &value]() -> int32_t
+    System::Func<int32_t> lambda = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([_lch_value, &value]() -> int32_t
     {
         return value;
     })).template AddHeldVariable<System::Func<int32_t>>("value", value);
@@ -2963,16 +2963,16 @@ void LambdaExpressions::CheckCppLambdaMustCaptureByReferenceAttribute()
     {
         return value;
     })));
-    MustUseHolders(System::Func<int32_t>(static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([_lch_value, &value]() -> int32_t
+    MustUseHolders(static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([_lch_value, &value]() -> int32_t
     {
         return value;
-    }))).template AddHeldVariable<System::Func<int32_t>>("value", value));
+    })).template AddHeldVariable<System::Func<int32_t>>("value", value));
 }
 
 void LambdaExpressions::GenericClassTest()
 {
     const int32_t multiplier = 20;
-    System::Func<int32_t, int32_t> lambda = System::Func<int32_t, int32_t>(static_cast<std::function<int32_t(int32_t value)>>([&multiplier](int32_t value) -> int32_t
+    System::Func<int32_t, int32_t> lambda = static_cast<System::Func<int32_t, int32_t>>(static_cast<std::function<int32_t(int32_t value)>>([&multiplier](int32_t value) -> int32_t
     {
         return multiplier * value;
     }));
@@ -3002,7 +3002,7 @@ System::Func<int32_t, int32_t> LambdaExpressions::CreateFun(int32_t delta)
 {
     System::Details::LambdaCaptureHolder<int32_t> _lch_delta = delta;
     int32_t& _delta = _lch_delta.GetCapture();
-    return System::Func<int32_t, int32_t>(static_cast<std::function<int32_t(int32_t value)>>([_lch_delta, &_delta](int32_t value) -> int32_t
+    return static_cast<System::Func<int32_t, int32_t>>(static_cast<std::function<int32_t(int32_t value)>>([_lch_delta, &_delta](int32_t value) -> int32_t
     {
         return value + _delta;
     })).template AddHeldVariable<System::Func<int32_t, int32_t>>("_delta", _delta);
@@ -3012,9 +3012,9 @@ LambdaExpressions::VoidVoidDelegate LambdaExpressions::LambdaInsideLambda2(int32
 {
     System::Details::LambdaCaptureHolder<int32_t> _lch_param = param;
     int32_t& _param = _lch_param.GetCapture();
-    LambdaExpressions::VoidVoidDelegate lambda = LambdaExpressions::VoidVoidDelegate(static_cast<std::function<void()>>([_lch_param, &_param]() -> void
+    LambdaExpressions::VoidVoidDelegate lambda = static_cast<LambdaExpressions::VoidVoidDelegate>(static_cast<std::function<void()>>([_lch_param, &_param]() -> void
     {
-        LambdaExpressions::VoidVoidDelegate lambda2 = LambdaExpressions::VoidVoidDelegate(static_cast<std::function<void()>>([&_param]() -> void
+        LambdaExpressions::VoidVoidDelegate lambda2 = static_cast<LambdaExpressions::VoidVoidDelegate>(static_cast<std::function<void()>>([&_param]() -> void
         {
             int32_t value = _param;
         }));
@@ -3025,11 +3025,11 @@ LambdaExpressions::VoidVoidDelegate LambdaExpressions::LambdaInsideLambda2(int32
 
 void LambdaExpressions::LambdaInsideLambda4()
 {
-    System::Func<int32_t, int32_t> lambda = System::Func<int32_t, int32_t>(static_cast<std::function<int32_t(int32_t x)>>([](int32_t x) -> int32_t
+    System::Func<int32_t, int32_t> lambda = static_cast<System::Func<int32_t, int32_t>>(static_cast<std::function<int32_t(int32_t x)>>([](int32_t x) -> int32_t
     {
-        System::Func<int32_t> lambda2 = System::Func<int32_t>(static_cast<std::function<int32_t()>>([&x]() -> int32_t
+        System::Func<int32_t> lambda2 = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([&x]() -> int32_t
         {
-            System::Func<int32_t> lambda3 = System::Func<int32_t>(static_cast<std::function<int32_t()>>([&x]() -> int32_t
+            System::Func<int32_t> lambda3 = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([&x]() -> int32_t
             {
                 return x;
             }));

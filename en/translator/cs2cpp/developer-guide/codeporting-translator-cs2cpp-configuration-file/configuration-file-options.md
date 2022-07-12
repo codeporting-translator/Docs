@@ -1850,21 +1850,11 @@ void foo() {
   })).template AddHeldVariable<LambdaCaptureTest::VoidVoidDelegate>("value", value);
 }
 {{< /highlight >}} | 
+| pass_by_reference_when_holder_is_redundant (since version: 22.7) | The translator will analyze if `LambdaCaptureHolder` must be used for wrapping. Variables and `this` will be passed to lambda expressions by reference when it is possible. |
 
 **Since version:** 21.2
 
-**Default value:** use_holders
-
-### avoid_lambda_holders_if_possible ###
-
-| Allowed value | Meaning | Example
----| ---| ---|
-| true | The translator will analyze if `LambdaCaptureHolder` must be used for wrapping. Variables and `this` will be passed to lambda expressions by reference when it is possible. |
-| false | The analysis is disabled. Variables will be captured using the algotithm specified in the `default_lambda_capture_mechanism` option value. |
-
-**Since version:** 21.2
-
-**Default value:** true
+**Default value:** pass_by_reference_when_holder_is_redundant
 
 ### always_include_delegates ###
 
@@ -2709,6 +2699,7 @@ Options no longer supported but still recognized (and ignored) by translator for
 * insert_using_statement_guard
 * using_statement_as_lambda
 * using_statement_enhanced
+* avoid_lambda_holders_if_possible
 
 ## Notes ##
 
