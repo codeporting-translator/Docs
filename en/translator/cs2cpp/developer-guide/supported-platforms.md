@@ -69,6 +69,6 @@ Only 64-bit platform is supported.
 
 These are the requirements to run the translated code:
 
-1. MacOS 12.1 or above, capable of running the code built for Intel architecture (either directly or via Rosetta.
+1. MacOS 12.1 or above, capable of running the code built for Intel architecture (either directly or via Rosetta).
 
 Only 64-bit platform is supported.

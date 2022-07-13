@@ -2686,7 +2686,7 @@ Makes translator remove comments for private entities.
 
 **Since version:** 20.8
 
-## Legacy options ##
+## Redundant options ##
 
 Options no longer supported but still recognized (and ignored) by translator for compatibility reasons are:
 
