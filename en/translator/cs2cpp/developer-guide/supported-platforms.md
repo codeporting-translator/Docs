@@ -1,3 +1,19 @@
+---
+date: "2022-07-13"
+author:
+  display_name: "Nikolay Shestakov"
+draft: "false"
+toc: true
+title: "Supported platforms"
+linktitle: "Supported platforms"
+menu:
+  docs:
+    parent: "Developer Guide"
+    weight: "12"
+lastmod: "2022-07-13"
+weight: "12"
+---
+
 There are different requirements for running CodePorting.Translator.Cs2Cpp (including the GUI) and for building/running the translated code.
 
 ## Running the Translator ##
