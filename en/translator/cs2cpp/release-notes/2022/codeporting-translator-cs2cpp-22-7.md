@@ -20,12 +20,13 @@ weight: "1"
 1. The Skia version used is updated.
 1. The libc version detection mechanism is fixed in the cmake scipts and now it works on RHEL.
 
-## Minor fixes ##
+## Minor Fixes ##
 
 1. The redundant `static_cast` to a delegate is present in a delegate constructor in a translated code when a lambda captures variables using holders or captures by value. Fixed.
+1. The `ParameterizedThreadStart`, `ThreadStart`, `WaitCallback`, `TimerCallback`, and `AsyncCallback` delegates are now aliases to `System::MulticastDelegate` instead of aliases to `std::function`.
 1. `Bitmap::LockBits` works incorrect on the `kGray_8_SkColorType` images. Fixed. Now the `kGray_8_SkColorType` images are treated as `kN32_SkColorType`.
 1. Performance of the `Bitmap::LockBits`, `Bitmap::GetSkBitmapFromArray` and `Bitmap::ConvertToARGBImage` methods is improved.
-1. The 'System::SystemException: ucnv_fromUChars failed with error code 10' error is thrown when an emptry replacement string is passed to the `EncoderReplacementFallback` constructor.
+1. The 'System::SystemException: ucnv_fromUChars failed with error code 10' error is thrown when an emptry replacement string is passed to the `EncoderReplacementFallback` constructor. Fixed.
 1. The result type of the coalesce function is fully aligned to the result type of the ?? operator in C#.
 1. The kerning and ligature settings are improved.
 1. The `return isnull ? nullptr : u"relax";` translated code calls an incorrect constructor. Fixed.
@@ -44,3 +45,8 @@ weight: "1"
 | CSPORTCPP-4761 | Revise glibc we use | Task |
 | SLIDESCPP-3414 | Fix RegressionTests_v22_3.SLIDESNET_35671 test | Task |
 | PDFCPP-1930 | Issue with porting Null value strings in conditional expressions | Task |
+
+
+## Public API and Backward Incompatible Changes ##
+
+1. The supported glibc version remains the same.
