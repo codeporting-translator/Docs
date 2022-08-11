@@ -1973,6 +1973,86 @@ class MyClass : public System::Object
 
 **Default value:** false
 
+### ignore_constraints ###
+
+{{< highlight xml >}}
+<opt name="ignore_constraints" value="true"/>
+{{< /highlight >}}
+
+Skip generation of asserts that constrain types in C++ template translated from C# generic. Works same as attribute
+
+{{< highlight cs >}}
+[CodePorting.Translator.Cs2Cpp.CppIgnoreConstraints]
+{{< /highlight >}} but applied to all classes in project.
+
+{{< highlight cs >}}
+namespace IgnoreConstraintsTestOpt
+{
+    public class MyClass<T> where T : IEnumerable
+    {}
+}
+{{< /highlight >}}
+
+| Allowed value | Meaning | Example
+---| ---| ---|
+| true | Skip generation of asserts in C++ translated template. | {{< highlight cpp >}}
+template<typename T>
+class MyClass : public System::Object
+{
+    typedef MyClass<T> ThisType;
+    typedef System::Object BaseType;
+    
+    typedef ::System::BaseTypesInfo<BaseType> ThisTypeBaseTypesInfo;
+    RTTI_INFO_TEMPLATE_CLASS(ThisType, ThisTypeBaseTypesInfo);
+    
+    template<typename FT0> friend class IgnoreConstraintsOptTest::MyClass;
+    
+public:
+
+    void SetTemplateWeakPtr(uint32_t argument) override
+    {
+        switch (argument)
+        {
+            case 0:
+                break;
+                
+        }
+    }
+    
+};
+{{< /highlight >}} | 
+| false | Don't skip generation of asserts in C++ translated template. | {{< highlight cpp >}}
+template<typename T>
+class MyClass : public System::Object
+{
+    typedef System::Collections::IEnumerable BaseT_IEnumerable;
+    assert_is_base_of(BaseT_IEnumerable, T);
+    
+    typedef MyClass<T> ThisType;
+    typedef System::Object BaseType;
+    
+    typedef ::System::BaseTypesInfo<BaseType> ThisTypeBaseTypesInfo;
+    RTTI_INFO_TEMPLATE_CLASS(ThisType, ThisTypeBaseTypesInfo);
+    
+    template<typename FT0> friend class IgnoreConstraintsOptTest::MyClass;
+    
+public:
+
+    void SetTemplateWeakPtr(uint32_t argument) override
+    {
+        switch (argument)
+        {
+            case 0:
+                break;
+                
+        }
+    }
+    
+};
+{{< /highlight >}} | 
+
+**Default value**: false
+
 ## Debug and developer version code options ##
 
 These options control debug and developer version code in generated C++ files.

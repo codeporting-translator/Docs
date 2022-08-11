@@ -1135,3 +1135,35 @@ Allowed sub-items:
 | name | Event name (with namespace and class name) | Yes | -
 
 **Since version**: 22.1.
+
+## insert_code_to_tests ##
+
+{{< highlight xml >}}
+<insert_code_to_tests include="myinclude.h">
+<![CDATA[
+// Any C++ code
+]]>
+</insert_code_to_tests>
+{{< /highlight >}}
+
+Adds some snippet of C++ code into beginning of each Google.Test
+
+{{< highlight cpp >}}
+TEST_F
+{{< /highlight >}}/
+
+{{< highlight cpp >}}
+TEST_P
+{{< /highlight >}} method translated from NUnit tests. Recommended to wrap C++ code to XML
+
+{{< highlight xml >}}
+CDATA
+{{< /highlight >}} to avoid problems during parsing configuration
+
+| Attribute | Meaning | Mandatory | Default Value
+---| ---| ---| ---|
+| include | Name of header file that will be included in every C++ source file contains tests affected by{{< highlight xml >}}
+insert_code_to_tests
+{{< /highlight >}}. | No | - | 
+
+Multiple usage of tag is allowed and will add all code snippets and all includes consequentially.
