@@ -21,9 +21,9 @@ weight: "1"
 
 
 ## Minor Fixes ##
-1. The `CODEPORTING_WINDOWS`, `CODEPORTING_MACOS`, `CODEPORTING_LINUX`, and `CODEPORTING_WEBASSEMBLY` macroses used to detect OS are added.
+1. The `CODEPORTING_WINDOWS`, `CODEPORTING_MACOS`, `CODEPORTING_LINUX`, and `CODEPORTING_WEBASSEMBLY` macros used to detect OS are added.
 1. The collecting of test case data is moved to the proper stage.
-1. The cocurrrency issues of collecting `TestCase` and `TestCaseData` information are fixed.
+1. The concurrency issues of collecting `TestCase` and `TestCaseData` information are fixed.
 1. The `insert_code_to_tests` configuration file node is added. It is used to add a specified C++ code into the beginning of each Google.Test `TEST_F`/`TEST_P` method that is translated from the NUnit tests.
 1. The translator generated incorrect arguments when the '+=' operator was used to subscribe to events. Now the cast operator is added in case of mismatching types.
 1. The `-ns` command line argument is removed. It was used to add support for nanoseconds in DateTime.
@@ -57,4 +57,4 @@ weight: "1"
 
 
 ## Public API and Backward Incompatible Changes ##
-1. The `DynamicCast`, `DynamicCast_noexcept`, `StaticCast`, `StaticCast_noexcept` methods use `dynamic_cast` that looks uncorrectly. These methods will be marked as deprecated and removed in the upcoming releases. The `ExplicitCast` and `AsCast` methods will be used instead of them. The translator will generate a code that uses the new casts.
+1. The `DynamicCast`, `DynamicCast_noexcept`, `StaticCast`, `StaticCast_noexcept` methods use `dynamic_cast` that looks incorrectly. These methods will be marked as deprecated and removed in the upcoming releases. The `ExplicitCast` and `AsCast` methods will be used instead of them. The translator will generate a code that uses the new casts.
