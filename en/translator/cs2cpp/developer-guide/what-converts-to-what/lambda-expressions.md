@@ -1,5 +1,5 @@
 ---
-date: "2022-08-10"
+date: "2022-09-11"
 author:
   display_name: "Wiki code generator"
 draft: "false"
@@ -10,7 +10,7 @@ menu:
   docs:
     parent: "What Converts to What"
     weight: "1"
-lastmod: "2022-08-10"
+lastmod: "2022-09-11"
 weight: "1"
 ---
 
@@ -1671,332 +1671,301 @@ private:
 
 namespace StatementsPorting {
 
-RTTI_INFO_IMPL_HASH(3460900502u, ::StatementsPorting::LambdaExpressions::ReusingVariable, ThisTypeBaseTypesInfo);
+RTTI_INFO_IMPL_HASH(48475181u, ::StatementsPorting::LambdaExpressions::LambdaCapturesThis6, ThisTypeBaseTypesInfo);
 
-void LambdaExpressions::ReusingVariable::Foo()
+System::Func<int32_t> LambdaExpressions::LambdaCapturesThis6::Foo()
 {
-    System::Details::LambdaCaptureHolder<int32_t> _lch_i = 0;
-    int32_t &i = _lch_i.GetCapture();
-    m_lambda = System::Func<int32_t>(static_cast<std::function<int32_t()>>([_lch_i, &i]() -> int32_t
+    try
     {
-        return i;
-    })).template AddHeldVariable<System::Func<int32_t>>("i", i);
-    for (i = 0; i < 10; i++)
-    {
-    }
-}
-
-#ifdef ASPOSE_GET_SHARED_MEMBERS
-void LambdaExpressions::ReusingVariable::GetSharedMembers(System::Object::shared_members_type& result) const
-{
-    System::Object::GetSharedMembers(result);
-    
-    result.Add("StatementsPorting::LambdaExpressions::ReusingVariable::m_lambda", this->m_lambda);
-}
-#endif
-
-RTTI_INFO_IMPL_HASH(599952173u, ::StatementsPorting::LambdaExpressions::DataPointElement, ThisTypeBaseTypesInfo);
-
-System::SharedPtr<LambdaExpressions::PointF> LambdaExpressions::DataPointElement::get_Center()
-{
-    return System::MakeObject<LambdaExpressions::PointF>(0.0f, 0.0f);
-}
-
-RTTI_INFO_IMPL_HASH(3201930733u, ::StatementsPorting::LambdaExpressions::PointF, ThisTypeBaseTypesInfo);
-
-LambdaExpressions::PointF::PointF(float x, float y)
-{
-}
-
-RTTI_INFO_IMPL_HASH(2620931565u, ::StatementsPorting::LambdaExpressions::HasAmbiguityInsideLambda, ThisTypeBaseTypesInfo);
-
-System::Func<int32_t> LambdaExpressions::HasAmbiguityInsideLambda::Foo()
-{
-    auto self = System::SharedPtr<LambdaExpressions::HasAmbiguityInsideLambda>(this);
-    return static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([self]() -> int32_t
-    {
-        System::Func<int32_t> lambda = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([&self]() -> int32_t
+        auto self = System::SharedPtr<LambdaExpressions::LambdaCapturesThis6>(this);
+        return static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([self]() -> int32_t
         {
-            self->LambdaExpressions::HasAmbiguityInsideLambdaBase::Foo(10);
             return self->m_field;
-        }));
-        return lambda();
+        })).template AddHeldVariable<System::Func<int32_t>>("self", self);
+    }
+    catch (System::Exception& )
+    {
+    }
+    
+    
+    auto self = System::SharedPtr<LambdaExpressions::LambdaCapturesThis6>(this);
+    return static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([self]() -> int32_t
+    {
+        return self->m_field;
     })).template AddHeldVariable<System::Func<int32_t>>("self", self);
 }
 
-LambdaExpressions::HasAmbiguityInsideLambda::HasAmbiguityInsideLambda() : m_field(10)
+LambdaExpressions::LambdaCapturesThis6::LambdaCapturesThis6() : m_field(10)
 {
 }
 
-RTTI_INFO_IMPL_HASH(3349675710u, ::StatementsPorting::LambdaExpressions::HasAmbiguityInsideLambdaBase, ThisTypeBaseTypesInfo);
+RTTI_INFO_IMPL_HASH(48475182u, ::StatementsPorting::LambdaExpressions::LambdaCapturesThis7, ThisTypeBaseTypesInfo);
 
-void LambdaExpressions::HasAmbiguityInsideLambdaBase::Foo(int32_t x)
+System::Func<int32_t> LambdaExpressions::LambdaCapturesThis7::Foo()
 {
-}
-
-RTTI_INFO_IMPL_HASH(3489867922u, ::StatementsPorting::LambdaExpressions::LambdaInsideLambda3, ThisTypeBaseTypesInfo);
-
-System::Func<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>> LambdaExpressions::LambdaInsideLambda3::Foo(int32_t param)
-{
-    System::Details::LambdaCaptureHolder<int32_t> _lch_param = param;
-    int32_t& _param = _lch_param.GetCapture();
-    
+    if (m_condition)
     {
-        auto __finally_guard_0 = ::System::MakeScopeGuard([&param, this]()
+        auto self = System::SharedPtr<LambdaExpressions::LambdaCapturesThis7>(this);
+        return static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([self]() -> int32_t
         {
-            System::Func<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>> lambdaInsideFinally = static_cast<System::Func<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>>>(static_cast<std::function<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>()>>([&param, this]() -> System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>
-            {
-                System::Func<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>> lambda = static_cast<System::Func<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>>>(static_cast<std::function<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>()>>([&param, this]() -> System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>
-                {
-                    int32_t value = param;
-                    return System::MakeSharedPtr(this);
-                }));
-                return lambda();
-            }));
-        });
-        
-        try
+            return 2 * self->m_field;
+        })).template AddHeldVariable<System::Func<int32_t>>("self", self);
+    }
+    else
+    {
+        auto self = System::SharedPtr<LambdaExpressions::LambdaCapturesThis7>(this);
+        return static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([self]() -> int32_t
         {
-            auto self = System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>(this);
-            return static_cast<System::Func<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>>>(static_cast<std::function<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>()>>([_lch_param, &_param, self]() -> System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>
-            {
-                System::Func<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>> lambda = static_cast<System::Func<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>>>(static_cast<std::function<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>()>>([&_param, &self]() -> System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>
-                {
-                    int32_t value = _param;
-                    return self;
-                }));
-                return lambda();
-            })).template AddHeldVariable<System::Func<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>>>("_param", _param).template AddHeldVariable<System::Func<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>>>("self", self);
-        }
-        catch (System::Exception& e)
-        {
-            System::Console::WriteLine(e);
-            throw;
-        }
+            return 3 * self->m_field;
+        })).template AddHeldVariable<System::Func<int32_t>>("self", self);
     }
 }
 
-LambdaExpressions::LambdaInsideLambda3::~LambdaInsideLambda3()
+LambdaExpressions::LambdaCapturesThis7::LambdaCapturesThis7() : m_field(10), m_condition(false)
 {
 }
 
-RTTI_INFO_IMPL_HASH(2208338373u, ::StatementsPorting::LambdaExpressions::MultipleLambdas, ThisTypeBaseTypesInfo);
+RTTI_INFO_IMPL_HASH(692807633u, ::StatementsPorting::LambdaExpressions::LambdaCapturesThisByValue, ThisTypeBaseTypesInfo);
 
-System::Func<int32_t> LambdaExpressions::MultipleLambdas::Foo()
+void LambdaExpressions::LambdaCapturesThisByValue::Foo1()
 {
-    auto self = System::SharedPtr<LambdaExpressions::MultipleLambdas>(this);
-    System::Func<int32_t> result = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([self]() -> int32_t
+    auto self = System::SharedPtr<LambdaExpressions::LambdaCapturesThisByValue>(this);
+    System::Func<int32_t> lambda = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([self]() -> int32_t
     {
         return self->m_value;
     })).template AddHeldVariable<System::Func<int32_t>>("self", self);
-    System::Func<int32_t> localLambda = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([this]() -> int32_t
-    {
-        return m_value;
-    }));
-    // TO DO: The lambda expression captures this by the strong reference, and is assigned to the class field or property
-    m_lambda = System::Func<int32_t>(static_cast<std::function<int32_t()>>([self]() -> int32_t
-    {
-        return self->m_value;
-    })).template AddHeldVariable<System::Func<int32_t>>("self", self);
-    return result;
 }
 
-LambdaExpressions::MultipleLambdas::MultipleLambdas() : m_value(10)
+void LambdaExpressions::LambdaCapturesThisByValue::Foo2()
+{
+    auto self = System::WeakPtr<LambdaExpressions::LambdaCapturesThisByValue>(this);
+    System::Func<int32_t> lambda = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([self]() -> int32_t
+    {
+        return self->m_value;
+    })).template AddHeldVariable<System::Func<int32_t>>("self", self);
+}
+
+LambdaExpressions::LambdaCapturesThisByValue::LambdaCapturesThisByValue() : m_value(30)
+{
+}
+
+RTTI_INFO_IMPL_HASH(1767181163u, ::StatementsPorting::LambdaExpressions::LambdaCapturesThisByReference, ThisTypeBaseTypesInfo);
+
+void LambdaExpressions::LambdaCapturesThisByReference::Foo1()
+{
+    const System::Details::LambdaCaptureHolder<int32_t> _lch_value = 30;
+    const int32_t &value = _lch_value.GetCapture();
+    m_lambda1 = System::Func<int32_t>(static_cast<std::function<int32_t()>>([_lch_value, &value, this]() -> int32_t
+    {
+        return m_value * value;
+    })).template AddHeldVariable<System::Func<int32_t>>("value", value);
+}
+
+void LambdaExpressions::LambdaCapturesThisByReference::Foo2()
+{
+    const int32_t value = 30;
+    m_lambda2 = static_cast<std::function<System::SharedPtr<LambdaExpressions::LambdaCapturesThisByReference>()>>([this]() -> System::SharedPtr<LambdaExpressions::LambdaCapturesThisByReference>
+    {
+        return System::MakeSharedPtr(this);
+    });
+}
+
+LambdaExpressions::LambdaCapturesThisByReference::LambdaCapturesThisByReference() : m_value(0)
+{
+}
+
+LambdaExpressions::LambdaCapturesThisByReference::~LambdaCapturesThisByReference()
 {
 }
 
 #ifdef ASPOSE_GET_SHARED_MEMBERS
-void LambdaExpressions::MultipleLambdas::GetSharedMembers(System::Object::shared_members_type& result) const
+void LambdaExpressions::LambdaCapturesThisByReference::GetSharedMembers(System::Object::shared_members_type& result) const
 {
     System::Object::GetSharedMembers(result);
     
-    result.Add("StatementsPorting::LambdaExpressions::MultipleLambdas::m_lambda", this->m_lambda);
+    result.Add("StatementsPorting::LambdaExpressions::LambdaCapturesThisByReference::m_lambda1", this->m_lambda1);
+    result.Add("StatementsPorting::LambdaExpressions::LambdaCapturesThisByReference::m_lambda2", this->m_lambda2);
 }
 #endif
 
-RTTI_INFO_IMPL_HASH(1180203451u, ::StatementsPorting::LambdaExpressions::FinallyCapturesThis2, ThisTypeBaseTypesInfo);
+RTTI_INFO_IMPL_HASH(2223103236u, ::StatementsPorting::LambdaExpressions::SomeClass1, ThisTypeBaseTypesInfo);
 
-System::Func<int32_t> LambdaExpressions::FinallyCapturesThis2::Foo1()
-{
-    auto self = System::SharedPtr<LambdaExpressions::FinallyCapturesThis2>(this);
-    return static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([self]() -> int32_t
-    {
-        
-        {
-            auto __finally_guard_0 = ::System::MakeScopeGuard([&self]()
-            {
-                self->m_value = 20;
-            });
-            
-            try
-            {
-            }
-            catch (System::Exception& )
-            {
-            }
-        }
-        
-        return self->m_value;
-    })).template AddHeldVariable<System::Func<int32_t>>("self", self);
-}
-
-System::Func<int32_t> LambdaExpressions::FinallyCapturesThis2::Foo2()
-{
-    auto self = System::SharedPtr<LambdaExpressions::FinallyCapturesThis2>(this);
-    System::Func<int32_t> result = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([self]() -> int32_t
-    {
-        return self->m_value;
-    })).template AddHeldVariable<System::Func<int32_t>>("self", self);
-    
-    
-    {
-        auto __finally_guard_0 = ::System::MakeScopeGuard([this]()
-        {
-            m_value = 30;
-        });
-        
-        try
-        {
-        }
-        catch (System::Exception& )
-        {
-        }
-    }
-    
-    return result;
-}
-
-LambdaExpressions::FinallyCapturesThis2::FinallyCapturesThis2() : m_value(10)
-{
-}
-
-RTTI_INFO_IMPL_HASH(4274230327u, ::StatementsPorting::LambdaExpressions::FinallyCapturesThis, ThisTypeBaseTypesInfo);
-
-void LambdaExpressions::FinallyCapturesThis::Foo1()
-{
-    StatementsPorting::LambdaExpressions::FinallyCapturesThisBase::Foo1();
-    
-    {
-        auto __finally_guard_0 = ::System::MakeScopeGuard([this]()
-        {
-            StatementsPorting::LambdaExpressions::FinallyCapturesThisBase::Foo1();
-        });
-        
-        try
-        {
-            StatementsPorting::LambdaExpressions::FinallyCapturesThisBase::Foo1();
-        }
-        catch (System::Exception& e)
-        {
-            StatementsPorting::LambdaExpressions::FinallyCapturesThisBase::Foo1();
-            System::Console::WriteLine(e);
-            throw;
-        }
-    }
-}
-
-void LambdaExpressions::FinallyCapturesThis::Foo2()
-{
-}
-
-void LambdaExpressions::FinallyCapturesThis::Foo3()
-{
-    this->Foo2();
-    
-    {
-        auto __finally_guard_0 = ::System::MakeScopeGuard([this]()
-        {
-            this->Foo2();
-        });
-        
-        try
-        {
-            this->Foo2();
-        }
-        catch (System::Exception& e)
-        {
-            this->Foo2();
-            System::Console::WriteLine(e);
-            throw;
-        }
-    }
-}
-
-void LambdaExpressions::FinallyCapturesThis::Foo4()
-{
-    Foo2();
-    
-    {
-        auto __finally_guard_0 = ::System::MakeScopeGuard([this]()
-        {
-            Foo2();
-        });
-        
-        try
-        {
-            Foo2();
-        }
-        catch (System::Exception& e)
-        {
-            Foo2();
-            System::Console::WriteLine(e);
-            throw;
-        }
-    }
-}
-
-RTTI_INFO_IMPL_HASH(3379612424u, ::StatementsPorting::LambdaExpressions::FinallyCapturesThisBase, ThisTypeBaseTypesInfo);
-
-void LambdaExpressions::FinallyCapturesThisBase::Foo1()
-{
-}
-
-RTTI_INFO_IMPL_HASH(47662935u, ::StatementsPorting::LambdaExpressions::LambdaPasses4, ThisTypeBaseTypesInfo);
-
-LambdaExpressions::LambdaPasses4::LambdaPasses4(int32_t param)
+LambdaExpressions::SomeClass1::SomeClass1()
 {
     //Self Reference+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     System::Details::ThisProtector __local_self_ref(this);
     //---------------------------------------------------------Self Reference
     
-    System::Details::LambdaCaptureHolder<int32_t> _lch_param = param;
-    int32_t& _param = _lch_param.GetCapture();
-    System::Func<int32_t> lambda1 = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([&param]() -> int32_t
+    System::Func<System::SharedPtr<LambdaExpressions::SomeClass1>> lambda = static_cast<System::Func<System::SharedPtr<LambdaExpressions::SomeClass1>>>(static_cast<std::function<System::SharedPtr<LambdaExpressions::SomeClass1>()>>([this]() -> System::SharedPtr<LambdaExpressions::SomeClass1>
     {
-        return param;
+        return System::MakeSharedPtr(this);
     }));
-    System::Func<int32_t> lambda2 = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([_lch_param, &_param]() -> int32_t
-    {
-        return _param;
-    })).template AddHeldVariable<System::Func<int32_t>>("_param", _param);
-    Foo(lambda1, lambda2);
 }
 
-void LambdaExpressions::LambdaPasses4::Foo()
+MEMBER_FUNCTION_MAKE_OBJECT_DEFINITION(LambdaExpressions::SomeClass1, CODEPORTING_ARGS(), CODEPORTING_ARGS());
+
+void LambdaExpressions::SomeClass1::Foo()
 {
-    const System::Details::LambdaCaptureHolder<int32_t> _lch_value = 20;
-    const int32_t &value = _lch_value.GetCapture();
-    System::Func<int32_t> lambda = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([_lch_value, &value]() -> int32_t
+    System::Func<System::SharedPtr<LambdaExpressions::SomeClass1>> lambda = static_cast<System::Func<System::SharedPtr<LambdaExpressions::SomeClass1>>>(static_cast<std::function<System::SharedPtr<LambdaExpressions::SomeClass1>()>>([this]() -> System::SharedPtr<LambdaExpressions::SomeClass1>
     {
-        return value;
-    })).template AddHeldVariable<System::Func<int32_t>>("value", value);
-    Foo(lambda, lambda);
+        return System::MakeSharedPtr(this);
+    }));
 }
 
-void LambdaExpressions::LambdaPasses4::Foo(System::Func<int32_t> lambdaParam1, System::Func<int32_t> lambdaParam2)
+LambdaExpressions::SomeClass1::~SomeClass1()
 {
-    int32_t value = lambdaParam1();
-    m_lambda = lambdaParam2;
+}
+
+RTTI_INFO_IMPL_HASH(2223103237u, ::StatementsPorting::LambdaExpressions::SomeClass2, ThisTypeBaseTypesInfo);
+
+LambdaExpressions::SomeClass2::SomeClass2() : m_data(0)
+{
+    auto self = System::WeakPtr<LambdaExpressions::SomeClass2>(this);
+    m_lambda = System::Func<int32_t>(static_cast<std::function<int32_t()>>([self]() -> int32_t
+    {
+        return self->m_data;
+    })).template AddHeldVariable<System::Func<int32_t>>("self", self);
+}
+
+MEMBER_FUNCTION_MAKE_OBJECT_DEFINITION(LambdaExpressions::SomeClass2, CODEPORTING_ARGS(), CODEPORTING_ARGS());
+
+void LambdaExpressions::SomeClass2::Foo()
+{
+    auto self = System::SharedPtr<LambdaExpressions::SomeClass2>(this);
+    // TO DO: The lambda expression captures this by the strong reference, and is assigned to the class field or property
+    m_lambda = System::Func<int32_t>(static_cast<std::function<int32_t()>>([self]() -> int32_t
+    {
+        return self->m_data;
+    })).template AddHeldVariable<System::Func<int32_t>>("self", self);
 }
 
 #ifdef ASPOSE_GET_SHARED_MEMBERS
-void LambdaExpressions::LambdaPasses4::GetSharedMembers(System::Object::shared_members_type& result) const
+void LambdaExpressions::SomeClass2::GetSharedMembers(System::Object::shared_members_type& result) const
 {
     System::Object::GetSharedMembers(result);
     
-    result.Add("StatementsPorting::LambdaExpressions::LambdaPasses4::m_lambda", this->m_lambda);
+    result.Add("StatementsPorting::LambdaExpressions::SomeClass2::m_lambda", this->m_lambda);
 }
 #endif
+
+RTTI_INFO_IMPL_HASH(2223103238u, ::StatementsPorting::LambdaExpressions::SomeClass3, ThisTypeBaseTypesInfo);
+
+LambdaExpressions::SomeClass3::SomeClass3() : m_data(0)
+{
+    auto self = System::WeakPtr<LambdaExpressions::SomeClass3>(this);
+    m_lambda = System::Func<int32_t>(static_cast<std::function<int32_t()>>([self]() -> int32_t
+    {
+        return self->m_data;
+    })).template AddHeldVariable<System::Func<int32_t>>("self", self);
+}
+
+MEMBER_FUNCTION_MAKE_OBJECT_DEFINITION(LambdaExpressions::SomeClass3, CODEPORTING_ARGS(), CODEPORTING_ARGS());
+
+void LambdaExpressions::SomeClass3::Foo()
+{
+    auto self = System::WeakPtr<LambdaExpressions::SomeClass3>(this);
+    m_lambda = System::Func<int32_t>(static_cast<std::function<int32_t()>>([self]() -> int32_t
+    {
+        return self->m_data;
+    })).template AddHeldVariable<System::Func<int32_t>>("self", self);
+}
+
+#ifdef ASPOSE_GET_SHARED_MEMBERS
+void LambdaExpressions::SomeClass3::GetSharedMembers(System::Object::shared_members_type& result) const
+{
+    System::Object::GetSharedMembers(result);
+    
+    result.Add("StatementsPorting::LambdaExpressions::SomeClass3::m_lambda", this->m_lambda);
+}
+#endif
+
+RTTI_INFO_IMPL_HASH(47662932u, ::StatementsPorting::LambdaExpressions::LambdaPasses1, ThisTypeBaseTypesInfo);
+
+LambdaExpressions::LambdaPasses1::LambdaPasses1(System::Func<int32_t> lambdaParam)
+{
+    //Self Reference+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    System::Details::ThisProtector __local_self_ref(this);
+    //---------------------------------------------------------Self Reference
+    
+    int32_t value = lambdaParam();
+}
+
+void LambdaExpressions::LambdaPasses1::Foo1(System::Func<int32_t> lambdaParam)
+{
+    int32_t value = lambdaParam();
+}
+
+RTTI_INFO_IMPL_HASH(47662933u, ::StatementsPorting::LambdaExpressions::LambdaPasses2, ThisTypeBaseTypesInfo);
+
+int32_t LambdaExpressions::LambdaPasses2::get_Property()
+{
+    const int32_t value = 20;
+    System::Func<int32_t> lambda = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([&value]() -> int32_t
+    {
+        return value;
+    }));
+    Foo1(lambda, 3);
+    return 0;
+}
+
+void LambdaExpressions::LambdaPasses2::set_Property(int32_t value)
+{
+    System::Func<int32_t> lambda = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([&value]() -> int32_t
+    {
+        return value;
+    }));
+    Foo1(lambda, 3);
+}
+
+LambdaExpressions::LambdaPasses2::LambdaPasses2()
+{
+    //Self Reference+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    System::Details::ThisProtector __local_self_ref(this);
+    //---------------------------------------------------------Self Reference
+    
+    const int32_t value = 20;
+    System::Func<int32_t> lambda = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([&value]() -> int32_t
+    {
+        return value;
+    }));
+    Foo1(lambda, 3);
+}
+
+int32_t LambdaExpressions::LambdaPasses2::idx_get(int32_t index)
+{
+    System::Func<int32_t> lambda = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([&index]() -> int32_t
+    {
+        return index;
+    }));
+    Foo1(lambda, 3);
+    return index;
+}
+
+void LambdaExpressions::LambdaPasses2::idx_set(int32_t index, int32_t value)
+{
+    System::Func<int32_t> lambda = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([&index, &value]() -> int32_t
+    {
+        return index * value;
+    }));
+    Foo1(lambda, 3);
+}
+
+void LambdaExpressions::LambdaPasses2::Foo1(System::Func<int32_t> lambdaParam1, int32_t count)
+{
+    if (count > 0)
+    {
+        Foo2(lambdaParam1, --count);
+    }
+    else
+    {
+        int32_t value = lambdaParam1();
+    }
+}
+
+void LambdaExpressions::LambdaPasses2::Foo2(System::Func<int32_t> lambdaParam2, int32_t count)
+{
+    Foo1(lambdaParam2, count);
+}
 
 RTTI_INFO_IMPL_HASH(47662934u, ::StatementsPorting::LambdaExpressions::LambdaPasses3, ThisTypeBaseTypesInfo);
 
@@ -2100,301 +2069,332 @@ void LambdaExpressions::LambdaPasses3::GetSharedMembers(System::Object::shared_m
 }
 #endif
 
-RTTI_INFO_IMPL_HASH(47662933u, ::StatementsPorting::LambdaExpressions::LambdaPasses2, ThisTypeBaseTypesInfo);
+RTTI_INFO_IMPL_HASH(47662935u, ::StatementsPorting::LambdaExpressions::LambdaPasses4, ThisTypeBaseTypesInfo);
 
-int32_t LambdaExpressions::LambdaPasses2::get_Property()
-{
-    const int32_t value = 20;
-    System::Func<int32_t> lambda = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([&value]() -> int32_t
-    {
-        return value;
-    }));
-    Foo1(lambda, 3);
-    return 0;
-}
-
-void LambdaExpressions::LambdaPasses2::set_Property(int32_t value)
-{
-    System::Func<int32_t> lambda = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([&value]() -> int32_t
-    {
-        return value;
-    }));
-    Foo1(lambda, 3);
-}
-
-LambdaExpressions::LambdaPasses2::LambdaPasses2()
+LambdaExpressions::LambdaPasses4::LambdaPasses4(int32_t param)
 {
     //Self Reference+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     System::Details::ThisProtector __local_self_ref(this);
     //---------------------------------------------------------Self Reference
     
-    const int32_t value = 20;
-    System::Func<int32_t> lambda = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([&value]() -> int32_t
+    System::Details::LambdaCaptureHolder<int32_t> _lch_param = param;
+    int32_t& _param = _lch_param.GetCapture();
+    System::Func<int32_t> lambda1 = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([&param]() -> int32_t
+    {
+        return param;
+    }));
+    System::Func<int32_t> lambda2 = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([_lch_param, &_param]() -> int32_t
+    {
+        return _param;
+    })).template AddHeldVariable<System::Func<int32_t>>("_param", _param);
+    Foo(lambda1, lambda2);
+}
+
+void LambdaExpressions::LambdaPasses4::Foo()
+{
+    const System::Details::LambdaCaptureHolder<int32_t> _lch_value = 20;
+    const int32_t &value = _lch_value.GetCapture();
+    System::Func<int32_t> lambda = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([_lch_value, &value]() -> int32_t
     {
         return value;
-    }));
-    Foo1(lambda, 3);
+    })).template AddHeldVariable<System::Func<int32_t>>("value", value);
+    Foo(lambda, lambda);
 }
 
-int32_t LambdaExpressions::LambdaPasses2::idx_get(int32_t index)
+void LambdaExpressions::LambdaPasses4::Foo(System::Func<int32_t> lambdaParam1, System::Func<int32_t> lambdaParam2)
 {
-    System::Func<int32_t> lambda = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([&index]() -> int32_t
-    {
-        return index;
-    }));
-    Foo1(lambda, 3);
-    return index;
-}
-
-void LambdaExpressions::LambdaPasses2::idx_set(int32_t index, int32_t value)
-{
-    System::Func<int32_t> lambda = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([&index, &value]() -> int32_t
-    {
-        return index * value;
-    }));
-    Foo1(lambda, 3);
-}
-
-void LambdaExpressions::LambdaPasses2::Foo1(System::Func<int32_t> lambdaParam1, int32_t count)
-{
-    if (count > 0)
-    {
-        Foo2(lambdaParam1, --count);
-    }
-    else
-    {
-        int32_t value = lambdaParam1();
-    }
-}
-
-void LambdaExpressions::LambdaPasses2::Foo2(System::Func<int32_t> lambdaParam2, int32_t count)
-{
-    Foo1(lambdaParam2, count);
-}
-
-RTTI_INFO_IMPL_HASH(47662932u, ::StatementsPorting::LambdaExpressions::LambdaPasses1, ThisTypeBaseTypesInfo);
-
-LambdaExpressions::LambdaPasses1::LambdaPasses1(System::Func<int32_t> lambdaParam)
-{
-    //Self Reference+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    System::Details::ThisProtector __local_self_ref(this);
-    //---------------------------------------------------------Self Reference
-    
-    int32_t value = lambdaParam();
-}
-
-void LambdaExpressions::LambdaPasses1::Foo1(System::Func<int32_t> lambdaParam)
-{
-    int32_t value = lambdaParam();
-}
-
-RTTI_INFO_IMPL_HASH(2223103238u, ::StatementsPorting::LambdaExpressions::SomeClass3, ThisTypeBaseTypesInfo);
-
-LambdaExpressions::SomeClass3::SomeClass3() : m_data(0)
-{
-    auto self = System::WeakPtr<LambdaExpressions::SomeClass3>(this);
-    m_lambda = System::Func<int32_t>(static_cast<std::function<int32_t()>>([self]() -> int32_t
-    {
-        return self->m_data;
-    })).template AddHeldVariable<System::Func<int32_t>>("self", self);
-}
-
-MEMBER_FUNCTION_MAKE_OBJECT_DEFINITION(LambdaExpressions::SomeClass3, CODEPORTING_ARGS(), CODEPORTING_ARGS());
-
-void LambdaExpressions::SomeClass3::Foo()
-{
-    auto self = System::WeakPtr<LambdaExpressions::SomeClass3>(this);
-    m_lambda = System::Func<int32_t>(static_cast<std::function<int32_t()>>([self]() -> int32_t
-    {
-        return self->m_data;
-    })).template AddHeldVariable<System::Func<int32_t>>("self", self);
+    int32_t value = lambdaParam1();
+    m_lambda = lambdaParam2;
 }
 
 #ifdef ASPOSE_GET_SHARED_MEMBERS
-void LambdaExpressions::SomeClass3::GetSharedMembers(System::Object::shared_members_type& result) const
+void LambdaExpressions::LambdaPasses4::GetSharedMembers(System::Object::shared_members_type& result) const
 {
     System::Object::GetSharedMembers(result);
     
-    result.Add("StatementsPorting::LambdaExpressions::SomeClass3::m_lambda", this->m_lambda);
+    result.Add("StatementsPorting::LambdaExpressions::LambdaPasses4::m_lambda", this->m_lambda);
 }
 #endif
 
-RTTI_INFO_IMPL_HASH(2223103237u, ::StatementsPorting::LambdaExpressions::SomeClass2, ThisTypeBaseTypesInfo);
+RTTI_INFO_IMPL_HASH(3379612424u, ::StatementsPorting::LambdaExpressions::FinallyCapturesThisBase, ThisTypeBaseTypesInfo);
 
-LambdaExpressions::SomeClass2::SomeClass2() : m_data(0)
+void LambdaExpressions::FinallyCapturesThisBase::Foo1()
 {
-    auto self = System::WeakPtr<LambdaExpressions::SomeClass2>(this);
-    m_lambda = System::Func<int32_t>(static_cast<std::function<int32_t()>>([self]() -> int32_t
+}
+
+RTTI_INFO_IMPL_HASH(4274230327u, ::StatementsPorting::LambdaExpressions::FinallyCapturesThis, ThisTypeBaseTypesInfo);
+
+void LambdaExpressions::FinallyCapturesThis::Foo1()
+{
+    StatementsPorting::LambdaExpressions::FinallyCapturesThisBase::Foo1();
+    
     {
-        return self->m_data;
+        auto __finally_guard_0 = ::System::MakeScopeGuard([this]()
+        {
+            StatementsPorting::LambdaExpressions::FinallyCapturesThisBase::Foo1();
+        });
+        
+        try
+        {
+            StatementsPorting::LambdaExpressions::FinallyCapturesThisBase::Foo1();
+        }
+        catch (System::Exception& e)
+        {
+            StatementsPorting::LambdaExpressions::FinallyCapturesThisBase::Foo1();
+            System::Console::WriteLine(e);
+            throw;
+        }
+    }
+}
+
+void LambdaExpressions::FinallyCapturesThis::Foo2()
+{
+}
+
+void LambdaExpressions::FinallyCapturesThis::Foo3()
+{
+    this->Foo2();
+    
+    {
+        auto __finally_guard_0 = ::System::MakeScopeGuard([this]()
+        {
+            this->Foo2();
+        });
+        
+        try
+        {
+            this->Foo2();
+        }
+        catch (System::Exception& e)
+        {
+            this->Foo2();
+            System::Console::WriteLine(e);
+            throw;
+        }
+    }
+}
+
+void LambdaExpressions::FinallyCapturesThis::Foo4()
+{
+    Foo2();
+    
+    {
+        auto __finally_guard_0 = ::System::MakeScopeGuard([this]()
+        {
+            Foo2();
+        });
+        
+        try
+        {
+            Foo2();
+        }
+        catch (System::Exception& e)
+        {
+            Foo2();
+            System::Console::WriteLine(e);
+            throw;
+        }
+    }
+}
+
+RTTI_INFO_IMPL_HASH(1180203451u, ::StatementsPorting::LambdaExpressions::FinallyCapturesThis2, ThisTypeBaseTypesInfo);
+
+System::Func<int32_t> LambdaExpressions::FinallyCapturesThis2::Foo1()
+{
+    auto self = System::SharedPtr<LambdaExpressions::FinallyCapturesThis2>(this);
+    return static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([self]() -> int32_t
+    {
+        
+        {
+            auto __finally_guard_0 = ::System::MakeScopeGuard([&self]()
+            {
+                self->m_value = 20;
+            });
+            
+            try
+            {
+            }
+            catch (System::Exception& )
+            {
+            }
+        }
+        
+        return self->m_value;
     })).template AddHeldVariable<System::Func<int32_t>>("self", self);
 }
 
-MEMBER_FUNCTION_MAKE_OBJECT_DEFINITION(LambdaExpressions::SomeClass2, CODEPORTING_ARGS(), CODEPORTING_ARGS());
-
-void LambdaExpressions::SomeClass2::Foo()
+System::Func<int32_t> LambdaExpressions::FinallyCapturesThis2::Foo2()
 {
-    auto self = System::SharedPtr<LambdaExpressions::SomeClass2>(this);
+    auto self = System::SharedPtr<LambdaExpressions::FinallyCapturesThis2>(this);
+    System::Func<int32_t> result = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([self]() -> int32_t
+    {
+        return self->m_value;
+    })).template AddHeldVariable<System::Func<int32_t>>("self", self);
+    
+    
+    {
+        auto __finally_guard_0 = ::System::MakeScopeGuard([this]()
+        {
+            m_value = 30;
+        });
+        
+        try
+        {
+        }
+        catch (System::Exception& )
+        {
+        }
+    }
+    
+    return result;
+}
+
+LambdaExpressions::FinallyCapturesThis2::FinallyCapturesThis2() : m_value(10)
+{
+}
+
+RTTI_INFO_IMPL_HASH(2208338373u, ::StatementsPorting::LambdaExpressions::MultipleLambdas, ThisTypeBaseTypesInfo);
+
+System::Func<int32_t> LambdaExpressions::MultipleLambdas::Foo()
+{
+    auto self = System::SharedPtr<LambdaExpressions::MultipleLambdas>(this);
+    System::Func<int32_t> result = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([self]() -> int32_t
+    {
+        return self->m_value;
+    })).template AddHeldVariable<System::Func<int32_t>>("self", self);
+    System::Func<int32_t> localLambda = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([this]() -> int32_t
+    {
+        return m_value;
+    }));
     // TO DO: The lambda expression captures this by the strong reference, and is assigned to the class field or property
     m_lambda = System::Func<int32_t>(static_cast<std::function<int32_t()>>([self]() -> int32_t
     {
-        return self->m_data;
+        return self->m_value;
     })).template AddHeldVariable<System::Func<int32_t>>("self", self);
+    return result;
 }
 
-#ifdef ASPOSE_GET_SHARED_MEMBERS
-void LambdaExpressions::SomeClass2::GetSharedMembers(System::Object::shared_members_type& result) const
-{
-    System::Object::GetSharedMembers(result);
-    
-    result.Add("StatementsPorting::LambdaExpressions::SomeClass2::m_lambda", this->m_lambda);
-}
-#endif
-
-RTTI_INFO_IMPL_HASH(2223103236u, ::StatementsPorting::LambdaExpressions::SomeClass1, ThisTypeBaseTypesInfo);
-
-LambdaExpressions::SomeClass1::SomeClass1()
-{
-    //Self Reference+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    System::Details::ThisProtector __local_self_ref(this);
-    //---------------------------------------------------------Self Reference
-    
-    System::Func<System::SharedPtr<LambdaExpressions::SomeClass1>> lambda = static_cast<System::Func<System::SharedPtr<LambdaExpressions::SomeClass1>>>(static_cast<std::function<System::SharedPtr<LambdaExpressions::SomeClass1>()>>([this]() -> System::SharedPtr<LambdaExpressions::SomeClass1>
-    {
-        return System::MakeSharedPtr(this);
-    }));
-}
-
-MEMBER_FUNCTION_MAKE_OBJECT_DEFINITION(LambdaExpressions::SomeClass1, CODEPORTING_ARGS(), CODEPORTING_ARGS());
-
-void LambdaExpressions::SomeClass1::Foo()
-{
-    System::Func<System::SharedPtr<LambdaExpressions::SomeClass1>> lambda = static_cast<System::Func<System::SharedPtr<LambdaExpressions::SomeClass1>>>(static_cast<std::function<System::SharedPtr<LambdaExpressions::SomeClass1>()>>([this]() -> System::SharedPtr<LambdaExpressions::SomeClass1>
-    {
-        return System::MakeSharedPtr(this);
-    }));
-}
-
-LambdaExpressions::SomeClass1::~SomeClass1()
-{
-}
-
-RTTI_INFO_IMPL_HASH(1767181163u, ::StatementsPorting::LambdaExpressions::LambdaCapturesThisByReference, ThisTypeBaseTypesInfo);
-
-void LambdaExpressions::LambdaCapturesThisByReference::Foo1()
-{
-    const System::Details::LambdaCaptureHolder<int32_t> _lch_value = 30;
-    const int32_t &value = _lch_value.GetCapture();
-    m_lambda1 = System::Func<int32_t>(static_cast<std::function<int32_t()>>([_lch_value, &value, this]() -> int32_t
-    {
-        return m_value * value;
-    })).template AddHeldVariable<System::Func<int32_t>>("value", value);
-}
-
-void LambdaExpressions::LambdaCapturesThisByReference::Foo2()
-{
-    const int32_t value = 30;
-    m_lambda2 = static_cast<std::function<System::SharedPtr<LambdaExpressions::LambdaCapturesThisByReference>()>>([this]() -> System::SharedPtr<LambdaExpressions::LambdaCapturesThisByReference>
-    {
-        return System::MakeSharedPtr(this);
-    });
-}
-
-LambdaExpressions::LambdaCapturesThisByReference::LambdaCapturesThisByReference() : m_value(0)
-{
-}
-
-LambdaExpressions::LambdaCapturesThisByReference::~LambdaCapturesThisByReference()
+LambdaExpressions::MultipleLambdas::MultipleLambdas() : m_value(10)
 {
 }
 
 #ifdef ASPOSE_GET_SHARED_MEMBERS
-void LambdaExpressions::LambdaCapturesThisByReference::GetSharedMembers(System::Object::shared_members_type& result) const
+void LambdaExpressions::MultipleLambdas::GetSharedMembers(System::Object::shared_members_type& result) const
 {
     System::Object::GetSharedMembers(result);
     
-    result.Add("StatementsPorting::LambdaExpressions::LambdaCapturesThisByReference::m_lambda1", this->m_lambda1);
-    result.Add("StatementsPorting::LambdaExpressions::LambdaCapturesThisByReference::m_lambda2", this->m_lambda2);
+    result.Add("StatementsPorting::LambdaExpressions::MultipleLambdas::m_lambda", this->m_lambda);
 }
 #endif
 
-RTTI_INFO_IMPL_HASH(692807633u, ::StatementsPorting::LambdaExpressions::LambdaCapturesThisByValue, ThisTypeBaseTypesInfo);
+RTTI_INFO_IMPL_HASH(3489867922u, ::StatementsPorting::LambdaExpressions::LambdaInsideLambda3, ThisTypeBaseTypesInfo);
 
-void LambdaExpressions::LambdaCapturesThisByValue::Foo1()
+System::Func<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>> LambdaExpressions::LambdaInsideLambda3::Foo(int32_t param)
 {
-    auto self = System::SharedPtr<LambdaExpressions::LambdaCapturesThisByValue>(this);
-    System::Func<int32_t> lambda = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([self]() -> int32_t
-    {
-        return self->m_value;
-    })).template AddHeldVariable<System::Func<int32_t>>("self", self);
-}
-
-void LambdaExpressions::LambdaCapturesThisByValue::Foo2()
-{
-    auto self = System::WeakPtr<LambdaExpressions::LambdaCapturesThisByValue>(this);
-    System::Func<int32_t> lambda = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([self]() -> int32_t
-    {
-        return self->m_value;
-    })).template AddHeldVariable<System::Func<int32_t>>("self", self);
-}
-
-LambdaExpressions::LambdaCapturesThisByValue::LambdaCapturesThisByValue() : m_value(30)
-{
-}
-
-RTTI_INFO_IMPL_HASH(48475182u, ::StatementsPorting::LambdaExpressions::LambdaCapturesThis7, ThisTypeBaseTypesInfo);
-
-System::Func<int32_t> LambdaExpressions::LambdaCapturesThis7::Foo()
-{
-    if (m_condition)
-    {
-        auto self = System::SharedPtr<LambdaExpressions::LambdaCapturesThis7>(this);
-        return static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([self]() -> int32_t
-        {
-            return 2 * self->m_field;
-        })).template AddHeldVariable<System::Func<int32_t>>("self", self);
-    }
-    else
-    {
-        auto self = System::SharedPtr<LambdaExpressions::LambdaCapturesThis7>(this);
-        return static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([self]() -> int32_t
-        {
-            return 3 * self->m_field;
-        })).template AddHeldVariable<System::Func<int32_t>>("self", self);
-    }
-}
-
-LambdaExpressions::LambdaCapturesThis7::LambdaCapturesThis7() : m_field(10), m_condition(false)
-{
-}
-
-RTTI_INFO_IMPL_HASH(48475181u, ::StatementsPorting::LambdaExpressions::LambdaCapturesThis6, ThisTypeBaseTypesInfo);
-
-System::Func<int32_t> LambdaExpressions::LambdaCapturesThis6::Foo()
-{
-    try
-    {
-        auto self = System::SharedPtr<LambdaExpressions::LambdaCapturesThis6>(this);
-        return static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([self]() -> int32_t
-        {
-            return self->m_field;
-        })).template AddHeldVariable<System::Func<int32_t>>("self", self);
-    }
-    catch (System::Exception& )
-    {
-    }
+    System::Details::LambdaCaptureHolder<int32_t> _lch_param = param;
+    int32_t& _param = _lch_param.GetCapture();
     
-    
-    auto self = System::SharedPtr<LambdaExpressions::LambdaCapturesThis6>(this);
+    {
+        auto __finally_guard_0 = ::System::MakeScopeGuard([&param, this]()
+        {
+            System::Func<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>> lambdaInsideFinally = static_cast<System::Func<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>>>(static_cast<std::function<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>()>>([&param, this]() -> System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>
+            {
+                System::Func<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>> lambda = static_cast<System::Func<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>>>(static_cast<std::function<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>()>>([&param, this]() -> System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>
+                {
+                    int32_t value = param;
+                    return System::MakeSharedPtr(this);
+                }));
+                return lambda();
+            }));
+        });
+        
+        try
+        {
+            auto self = System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>(this);
+            return static_cast<System::Func<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>>>(static_cast<std::function<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>()>>([_lch_param, &_param, self]() -> System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>
+            {
+                System::Func<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>> lambda = static_cast<System::Func<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>>>(static_cast<std::function<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>()>>([&_param, &self]() -> System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>
+                {
+                    int32_t value = _param;
+                    return self;
+                }));
+                return lambda();
+            })).template AddHeldVariable<System::Func<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>>>("_param", _param).template AddHeldVariable<System::Func<System::SharedPtr<LambdaExpressions::LambdaInsideLambda3>>>("self", self);
+        }
+        catch (System::Exception& e)
+        {
+            System::Console::WriteLine(e);
+            throw;
+        }
+    }
+}
+
+LambdaExpressions::LambdaInsideLambda3::~LambdaInsideLambda3()
+{
+}
+
+RTTI_INFO_IMPL_HASH(3349675710u, ::StatementsPorting::LambdaExpressions::HasAmbiguityInsideLambdaBase, ThisTypeBaseTypesInfo);
+
+void LambdaExpressions::HasAmbiguityInsideLambdaBase::Foo(int32_t x)
+{
+}
+
+RTTI_INFO_IMPL_HASH(2620931565u, ::StatementsPorting::LambdaExpressions::HasAmbiguityInsideLambda, ThisTypeBaseTypesInfo);
+
+System::Func<int32_t> LambdaExpressions::HasAmbiguityInsideLambda::Foo()
+{
+    auto self = System::SharedPtr<LambdaExpressions::HasAmbiguityInsideLambda>(this);
     return static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([self]() -> int32_t
     {
-        return self->m_field;
+        System::Func<int32_t> lambda = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([&self]() -> int32_t
+        {
+            self->LambdaExpressions::HasAmbiguityInsideLambdaBase::Foo(10);
+            return self->m_field;
+        }));
+        return lambda();
     })).template AddHeldVariable<System::Func<int32_t>>("self", self);
 }
 
-LambdaExpressions::LambdaCapturesThis6::LambdaCapturesThis6() : m_field(10)
+LambdaExpressions::HasAmbiguityInsideLambda::HasAmbiguityInsideLambda() : m_field(10)
 {
 }
+
+RTTI_INFO_IMPL_HASH(3201930733u, ::StatementsPorting::LambdaExpressions::PointF, ThisTypeBaseTypesInfo);
+
+LambdaExpressions::PointF::PointF(float x, float y)
+{
+}
+
+RTTI_INFO_IMPL_HASH(599952173u, ::StatementsPorting::LambdaExpressions::DataPointElement, ThisTypeBaseTypesInfo);
+
+System::SharedPtr<LambdaExpressions::PointF> LambdaExpressions::DataPointElement::get_Center()
+{
+    return System::MakeObject<LambdaExpressions::PointF>(0.0f, 0.0f);
+}
+
+RTTI_INFO_IMPL_HASH(3460900502u, ::StatementsPorting::LambdaExpressions::ReusingVariable, ThisTypeBaseTypesInfo);
+
+void LambdaExpressions::ReusingVariable::Foo()
+{
+    System::Details::LambdaCaptureHolder<int32_t> _lch_i = 0;
+    int32_t &i = _lch_i.GetCapture();
+    m_lambda = System::Func<int32_t>(static_cast<std::function<int32_t()>>([_lch_i, &i]() -> int32_t
+    {
+        return i;
+    })).template AddHeldVariable<System::Func<int32_t>>("i", i);
+    for (i = 0; i < 10; i++)
+    {
+    }
+}
+
+#ifdef ASPOSE_GET_SHARED_MEMBERS
+void LambdaExpressions::ReusingVariable::GetSharedMembers(System::Object::shared_members_type& result) const
+{
+    System::Object::GetSharedMembers(result);
+    
+    result.Add("StatementsPorting::LambdaExpressions::ReusingVariable::m_lambda", this->m_lambda);
+}
+#endif
 
 
 RTTI_INFO_IMPL_HASH(539392951u, ::StatementsPorting::LambdaExpressions, ThisTypeBaseTypesInfo);

@@ -1,5 +1,5 @@
 ---
-date: "2022-08-10"
+date: "2022-09-11"
 author:
   display_name: "Wiki code generator"
 draft: "false"
@@ -10,11 +10,11 @@ menu:
   docs:
     parent: "What Converts to What"
     weight: "1"
-lastmod: "2022-08-10"
+lastmod: "2022-09-11"
 weight: "1"
 ---
 
-This example demonstrates standard way how foreach statement is translated to C++. It is translated to C++ while statement.
+This example demonstrates standard way how foreach statement is ported to C++. It is translated to C++ while statement.
 
 Additional command-line options passed to CodePorting.Translator.Cs2Cpp: -o foreach_as_range_based_for_loop=false.
 

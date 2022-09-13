@@ -1,5 +1,5 @@
 ---
-date: "2022-08-10"
+date: "2022-09-11"
 author:
   display_name: "Wiki code generator"
 draft: "false"
@@ -10,7 +10,7 @@ menu:
   docs:
     parent: "What Converts to What"
     weight: "1"
-lastmod: "2022-08-10"
+lastmod: "2022-09-11"
 weight: "1"
 ---
 
@@ -127,13 +127,13 @@ private:
 
 namespace TypesPorting {
 
-RTTI_INFO_IMPL_HASH(490849539u, ::TypesPorting::OuterClass::PrivateNestedClass, ThisTypeBaseTypesInfo);
-
-RTTI_INFO_IMPL_HASH(3027911832u, ::TypesPorting::OuterClass::ProtectedNestedClass, ThisTypeBaseTypesInfo);
+RTTI_INFO_IMPL_HASH(918013299u, ::TypesPorting::OuterClass::PublicNestedClass, ThisTypeBaseTypesInfo);
 
 RTTI_INFO_IMPL_HASH(1087067711u, ::TypesPorting::OuterClass::InternalNestedClass, ThisTypeBaseTypesInfo);
 
-RTTI_INFO_IMPL_HASH(918013299u, ::TypesPorting::OuterClass::PublicNestedClass, ThisTypeBaseTypesInfo);
+RTTI_INFO_IMPL_HASH(3027911832u, ::TypesPorting::OuterClass::ProtectedNestedClass, ThisTypeBaseTypesInfo);
+
+RTTI_INFO_IMPL_HASH(490849539u, ::TypesPorting::OuterClass::PrivateNestedClass, ThisTypeBaseTypesInfo);
 
 
 RTTI_INFO_IMPL_HASH(615668933u, ::TypesPorting::OuterClass, ThisTypeBaseTypesInfo);

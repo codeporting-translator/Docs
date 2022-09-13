@@ -1,5 +1,5 @@
 ---
-date: "2022-08-10"
+date: "2022-09-11"
 author:
   display_name: "Wiki code generator"
 draft: "false"
@@ -10,11 +10,11 @@ menu:
   docs:
     parent: "What Converts to What"
     weight: "1"
-lastmod: "2022-08-10"
+lastmod: "2022-09-11"
 weight: "1"
 ---
 
-This example demonstrates how try-catch-finally statement is translated to C++. They are translated to lambda expressions passed to System::DoTryFinally function.
+This example demonstrates how try-catch-finally statement is ported to C++. They are translated to lambda expressions passed to System::DoTryFinally function.
 
 Additional command-line options passed to CodePorting.Translator.Cs2Cpp: -o finally_statement_as_lambda=true.
 
