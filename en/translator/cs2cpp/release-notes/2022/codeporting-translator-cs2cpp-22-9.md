@@ -16,11 +16,12 @@ weight: "1"
 
 ## Major Features ##
 1. Now the translator prints the warning when the`<summary>` tag contains `<code>` or `<example>` in  the C# documentation comments. These situations cause mistakes in the translated C++ documentation.
-1. An opportunity to include/exclude `[TestCase]` as well as `[Test]` is added.
+1. Now the `nunit_categories` configuration file node can be used to filter tests marked by `[TestCase]` as well as `[Test]`.
 1. The `IsUpper` method is added to the `Char` class. Method `IsLower` behavior is brought in line with .Net.
 1. The nested classes in a translated code are now ordered the way they are in the C# source code.
 1. The `ExtendLifetimeAsWeakPostponed` method is added to the `MemoryManagement` class. It creates a smart pointer using the aliasing constructor and copies `object1` and `object2` to the "proxy" objects holder. The method creates a pointer to `object1` and extends the lifetime of all objects to the lifetime of this pointer. The resulting pointer guarantees all parameters to remain alive even if it is the only pointer that keeps track of them.
 1. Now the `libcodeporting.translator.cs2cpp.framework_appleclang.dylib` library is linked to the freetype and fontconfig libraries by the use of `@rpath` instead of the full path.
+1. Now the `Image::get_Flags()` and `Bitmap::get_Flags()` methods support the `ImageFlags::HasRealDpi` flag.
 
 ## Minor Fixes ##
 1. The operator used to concatenate string and a bool value is added. The behavior of this concatenation is brought in line with .Net.
@@ -35,6 +36,7 @@ weight: "1"
 |PDFCPP-1975|Fix the problem of "Full paths to third-party libraries" in the system library (MacOS,'libcodeporting.translator.cs2cpp.framework_appleclang.dylib').|Task|
 |PDFCPP-2004|Specifications string operators for bool values|Task|
 |WORDSCPP-1195|"'_T': macro redefinition" warning is thrown when "#include <tchar.h>" is used.|Bug|
+|PDFCPP-1966|Investigate regression in EncryptionTests.IncorectPassword|Task|
 
 ## Public API and Backward Incompatible Changes ##
 1. The `DynamicCast`, `DynamicCast_noexcept`, `StaticCast`, `StaticCast_noexcept` methods use `dynamic_cast` that looks incorrectly. These methods will be marked as deprecated and removed in the upcoming releases. The `ExplicitCast` and `AsCast` methods will be used instead of them. The translator will generate a code that uses the new casts.
