@@ -1,5 +1,5 @@
 ---
-date: "2022-09-11"
+date: "2022-10-09"
 author:
   display_name: "Wiki code generator"
 draft: "false"
@@ -10,7 +10,7 @@ menu:
   docs:
     parent: "What Converts to What"
     weight: "1"
-lastmod: "2022-09-11"
+lastmod: "2022-10-09"
 weight: "1"
 ---
 
@@ -2735,7 +2735,7 @@ void LambdaExpressions::idx_set(int32_t index, int32_t value)
 
 void LambdaExpressions::LambdaCapturesBoxedDateTime()
 {
-    System::SharedPtr<System::Object> value = System::ObjectExt::Box<System::DateTime>(System::DateTime(2020, 8, 31));
+    System::SharedPtr<System::Object> value = System::ExplicitCast<System::Object>(System::DateTime(2020, 8, 31));
     System::Func<int32_t> lambda = static_cast<System::Func<int32_t>>(static_cast<std::function<int32_t()>>([&value]() -> int32_t
     {
         return System::ObjectExt::GetHashCode(value);
@@ -2744,10 +2744,10 @@ void LambdaExpressions::LambdaCapturesBoxedDateTime()
 
 void LambdaExpressions::LambdaCapturesBoxedString()
 {
-    System::SharedPtr<System::Object> value = System::ObjectExt::Box<System::String>(u"1e-02");
+    System::SharedPtr<System::Object> value = System::ExplicitCast<System::Object>(u"1e-02");
     System::Func<bool> lambda = static_cast<System::Func<bool>>(static_cast<std::function<bool()>>([&value]() -> bool
     {
-        return System::ObjectExt::Equals(value, System::ObjectExt::Box<System::String>(u"1e-02"));
+        return System::ObjectExt::Equals(value, System::ExplicitCast<System::Object>(u"1e-02"));
     }));
 }
 

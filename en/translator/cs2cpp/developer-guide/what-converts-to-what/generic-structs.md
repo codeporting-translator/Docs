@@ -1,5 +1,5 @@
 ---
-date: "2022-09-11"
+date: "2022-10-09"
 author:
   display_name: "Wiki code generator"
 draft: "false"
@@ -10,7 +10,7 @@ menu:
   docs:
     parent: "What Converts to What"
     weight: "1"
-lastmod: "2022-09-11"
+lastmod: "2022-10-09"
 weight: "1"
 ---
 
@@ -67,7 +67,7 @@ namespace TypesPorting
 namespace TypesPorting {
 
 template<typename TInner>
-class GenericStruct : public System::Object
+class GenericStruct : public System::Object, public System::Details::BoxableObjectBase
 {
     typedef GenericStruct<TInner> ThisType;
     typedef System::Object BaseType;
@@ -96,7 +96,7 @@ public:
 };
 
 template<typename TInner>
-class GenericStructWithTypeConstraint : public System::Object
+class GenericStructWithTypeConstraint : public System::Object, public System::Details::BoxableObjectBase
 {
     typedef System::ICloneable BaseT_ICloneable;
     assert_is_base_of(BaseT_ICloneable, TInner);
@@ -128,7 +128,7 @@ public:
 };
 
 template<typename TInner>
-class GenericStructWithClassConstraint : public System::Object
+class GenericStructWithClassConstraint : public System::Object, public System::Details::BoxableObjectBase
 {
     assert_is_cs_class(TInner);
     
@@ -159,7 +159,7 @@ public:
 };
 
 template<typename TInner>
-class GenericStructWithStructConstraint : public System::Object
+class GenericStructWithStructConstraint : public System::Object, public System::Details::BoxableObjectBase
 {
     assert_is_cs_struct(TInner);
     
@@ -190,7 +190,7 @@ public:
 };
 
 template<typename TInner>
-class GenericStructWithNewConstraint : public System::Object
+class GenericStructWithNewConstraint : public System::Object, public System::Details::BoxableObjectBase
 {
     assert_is_constructable(TInner);
     
@@ -221,7 +221,7 @@ public:
 };
 
 template<typename TInner>
-class GenericStructWithSeveralConstraints : public System::Object
+class GenericStructWithSeveralConstraints : public System::Object, public System::Details::BoxableObjectBase
 {
     assert_is_cs_class(TInner);
     typedef System::ICloneable BaseT_ICloneable;

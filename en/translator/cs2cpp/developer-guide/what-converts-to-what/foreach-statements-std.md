@@ -1,5 +1,5 @@
 ---
-date: "2022-09-11"
+date: "2022-10-09"
 author:
   display_name: "Wiki code generator"
 draft: "false"
@@ -10,7 +10,7 @@ menu:
   docs:
     parent: "What Converts to What"
     weight: "1"
-lastmod: "2022-09-11"
+lastmod: "2022-10-09"
 weight: "1"
 ---
 
@@ -77,7 +77,7 @@ namespace StatementsPorting
 
 namespace StatementsPorting {
 
-class TheStruct : public System::Object
+class TheStruct : public System::Object, public System::Details::BoxableObjectBase
 {
     typedef TheStruct ThisType;
     typedef System::Object BaseType;

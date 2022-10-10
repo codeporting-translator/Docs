@@ -1900,6 +1900,21 @@ void foo() {
 
 **Default value:** false
 
+### generate_struct_default_methods ###
+
+Forces translator to generate code with default ValueType methods (operator==, Equals, ToString and GetHashCode) for all structures if these methods not defined by the user.
+
+The option is equivalent to set [CodePorting.Translator.Cs2Cpp.CppAddStructDefaultMethods] attribute to all structures in the project.
+
+| Allowed value | Meaning |
+---| ---| ---|
+| true | Generate default methods for all structs. |
+| false | Generate methods for structs only marked with [CodePorting.Translator.Cs2Cpp.CppAddStructDefaultMethods] attribute. |
+
+**Since version:** 22.9
+
+**Default value:** false
+
 ### force_enum_flags_attribute ###
 
 | Allowed value | Meaning | Example

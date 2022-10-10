@@ -478,22 +478,6 @@ Enables bitwise operators for enum. Use if you are using them.
 
 Passes array initializer expression directly from C# to C++ without parsing and code generation. Speeds up long initializers (like thousands of string elements, etc.).
 
-### CppForceDynamicCastFromTypeParam ###
-
-**Used on**: Generic type or method
-
-**Argument**: String name of template parameter to affect
-
-Forces dynamic casts from argument type parameter to Object instead of static casts used by default.
-
-### CppForceDynamicCastToTypeParam ###
-
-**Used on**: Generic type or method
-
-**Argument**: String name of template parameter to affect
-
-Forces dynamic casts from Object to argument type parameter instead of static casts used by default.
-
 ### CppForceArrayInitializerCast ###
 
 **Used on**: Methods
@@ -1227,14 +1211,6 @@ private string GetFruitColor(string fruit)
 }
 {{< /highlight >}}
 
-### CppUnknownTypeParam ###
-
-**Used on**: Generic type or method
-
-**Argument**: String name of template parameter to treat as unknown type
-
-Force treating type argument as unknown type: calling ObjectExt::UnknownToObject() and ObjectExt::ObjectToUnknown() whenever the conversion is required. Fixes some type conversion issues with type parameters.
-
 ### CppUseAlternativeSwitch ###
 
 **Used on**: Method
@@ -1654,6 +1630,40 @@ Specifies theory inline data.
 **Used on**: Methods
 
 Marks method as theory.
+
+## Obsolete attributes ##
+
+This section describes attributes available in CodePorting.Translator.Cs2Cpp.Control project, but obsolete and with no meaning now. Do not use them and remove from your C# code as soon as possible.
+
+### CppUnknownTypeParam ###
+
+**Used on**: Generic type or method
+
+**Argument**: String name of template parameter to treat as unknown type
+
+Force treating type argument as unknown type: calling ObjectExt::UnknownToObject() and ObjectExt::ObjectToUnknown() whenever the conversion is required. Fixes some type conversion issues with type parameters.
+
+**Obsolete since version**: 22.9
+
+### CppForceDynamicCastFromTypeParam ###
+
+**Used on**: Generic type or method
+
+**Argument**: String name of template parameter to affect
+
+Forces dynamic casts from argument type parameter to Object instead of static casts used by default.
+
+**Obsolete since version**: 22.9
+
+### CppForceDynamicCastToTypeParam ###
+
+**Used on**: Generic type or method
+
+**Argument**: String name of template parameter to affect
+
+Forces dynamic casts from Object to argument type parameter instead of static casts used by default.
+
+**Obsolete since version**: 22.9
 
 ## Notes ##
 
