@@ -35,9 +35,9 @@ weight: "1"
 |CSPORTCPP-5573|Automatic boxing for all structures|Task|
 |CSPORTCPP-5627|Automatic default members for all structures|Task|
 |SLIDESCPP-3548|Optimization of searching in ZipFile|Task|
-|CSPORTCPP-5635|Translator fails if has end-of-line in command arguments.|Task|
+|CSPORTCPP-5635|Translator fails if has end-of-line in command arguments.|Bug|
 
 ## Public API and Backward Incompatible Changes ##
 
 1. The `DynamicCast`, `DynamicCast_noexcept`, `StaticCast`, `StaticCast_noexcept` functions now marked as deprecated and will be removed in the upcoming releases. The `ExplicitCast` and `AsCast` functions may be used instead of them. The translator now generate a code that uses the new casts.
-1. Attributes `[CodePorting.Translator.Cs2Cpp.CppForceDynamicCastFromTypeParam]`, `[CodePorting.Translator.Cs2Cpp.CppForceDynamicCastToTypeParam]` and '[CodePorting.Translator.Cs2Cpp.CppUnknownTypeParam]' are marked as obsolete and should no longer be used.
+1. Attributes `[CodePorting.Translator.Cs2Cpp.CppForceDynamicCastFromTypeParam]`, `[CodePorting.Translator.Cs2Cpp.CppForceDynamicCastToTypeParam]` and `[CodePorting.Translator.Cs2Cpp.CppUnknownTypeParam]` are marked as obsolete and should no longer be used.
