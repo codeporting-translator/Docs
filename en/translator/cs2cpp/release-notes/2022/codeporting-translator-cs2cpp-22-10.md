@@ -19,14 +19,6 @@ weight: "1"
 1. Now the translator generates new `ExplicitCast` and `AsCast` methods instead of obolete `DynamicCast`, `DynamicCast_noexcept`, `StaticCast` and `StaticCast_noexcept`.
 1. New `generate_struct_default_methods` option is added. This option forces translator to generate default methods for all structs in the project.
 
-1. Now the translator prints the warning when the`<summary>` tag contains `<code>` or `<example>` in  the C# documentation comments. These situations cause mistakes in the translated C++ documentation.
-1. Now the `nunit_categories` configuration file node can be used to filter tests marked by `[TestCase]` as well as `[Test]`.
-1. The `IsUpper` method is added to the `Char` class. Method `IsLower` behavior is brought in line with .Net.
-1. The nested classes in a translated code are now ordered the way they are in the C# source code.
-1. The `ExtendLifetimeAsWeakPostponed` method is added to the `MemoryManagement` class. It creates a smart pointer using the aliasing constructor and copies `object1` and `object2` to the "proxy" objects holder. The method creates a pointer to `object1` and extends the lifetime of all objects to the lifetime of this pointer. The resulting pointer guarantees all parameters to remain alive even if it is the only pointer that keeps track of them.
-1. Now the `libcodeporting.translator.cs2cpp.framework_appleclang.dylib` library is linked to the freetype and fontconfig libraries by the use of `@rpath` instead of the full path.
-1. Now the `Image::get_Flags()` and `Bitmap::get_Flags()` methods support the `ImageFlags::HasRealDpi` flag.
-
 ## Minor Fixes ##
 
 1. All structures in trsnalted code are considered `IsBoxable` now.
