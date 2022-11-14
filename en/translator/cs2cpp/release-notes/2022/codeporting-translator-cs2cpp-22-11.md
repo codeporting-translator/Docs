@@ -16,16 +16,16 @@ weight: "1"
 
 ## Major Features ##
 
-1. Normalization, comparation and joining of strings are optimized.
-1. SKIA library is updated. Now with disabled limits of image size.
+1. Normalization, comparison, and joining of strings are optimized.
+1. Updated the SKIA library with disabled limits of image size.
 
 ## Minor Fixes ##
 
-1. Removed `noexept` from iterators. Now iterators can throw exceptions.
-1. Fixed `for_each_member` tool to show memory leaks for aliased pointers.
-1. Added warning about undefined behaviour when `double` casts to `unsigned int`.
-1. Fixed trasnlator crashes during multithreading translation on some projects.
-1. Fixed `deferred_init` translator option.
+1. Removed `noexcept` from the iterators. Now iterators can throw exceptions.
+1. Fixed the `for_each_member` tool to show memory leaks for aliased pointers.
+1. Warning added for the undefined behavior of `double` casting to an `unsigned int`.
+1. Fixed translator crashes during multithreaded translation on some projects.
+1. Fixed the `deferred_init` translator option.
 1. Removed the dependency on the Botan library from the `System::Drawing` implementation.
 
 ## Full List of Issues Covering all Changes in this Release ##
