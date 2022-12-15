@@ -35,7 +35,7 @@ weight: "1"
 | --- | --- | --- |
 | SLIDESCPP-3597 | Add tests for the 'use_weak_ptr_std_bind' option                         | Task |
 | CSPORTCPP-5672 | Remove support of ArrayList from the translator and the framework        | Task |
-| EMAILCPP-362   | Fix is_Authentificated exception                                         | Task |
+| EMAILCPP-362   | Fix `is_Authentificated` exception                                       | Bug |
 | PDFCPP-2066    | Build asposecpplib static library                                        | Task |
 | PDFCPP-2083    | Fix bugs in translator code generator for the CppDeferredInit attribute. | Task |
 | SLIDESCPP-3601 | Implement translation of the 'is' operator for System.Enum               | Task |
