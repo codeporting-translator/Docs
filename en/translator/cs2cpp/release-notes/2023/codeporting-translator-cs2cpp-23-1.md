@@ -16,14 +16,14 @@ weight: "1"
 
 ## Major Features ##
 
-1. Improved usability of `Aspose.Slides for C++` API for setter expressions.
+1. The usability of `Aspose.Slides for the C++` API for setter expressions has been improved.
 
 ## Minor fixes ##
 
-1. Fixed asposecpplib static build for Linux.
-1. Improved `CommentReplacementHelper` notifications.
-1. Fixed translator code generation for `ArrayOnStack` attribute.
-1. Fixed crash in `for_each_member` mechanism.
+1. Asposecpplib static build now works on Linux.
+1. Notifications for `CommentReplacementHelper` have been improved.
+1. Fixed translator code generation for the `ArrayOnStack` attribute.
+1. A crash in the `for_each_member` mechanism has been fixed.
 
 ## Full List of Issues Covering all Changes in this Release ##
 
