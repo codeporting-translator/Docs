@@ -10,8 +10,8 @@ menu:
   docs:
     identifier: "2018"
     parent: "Release Notes"
-    weight: "5"
+    weight: "6"
 lastmod: "2019-05-28"
 layout: base-home
-weight: "5"
+weight: "6"
 ---
