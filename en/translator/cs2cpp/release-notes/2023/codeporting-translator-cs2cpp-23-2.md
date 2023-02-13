@@ -20,9 +20,9 @@ None.
 
 ## Minor fixes ##
 
-1. Size of asposecpplib on Emscripten is reduced.
-1. One more 'String::LastIndexOf' function overoload is added.
-1. Stub for `Metafile::PlayRecord` function is added.
+1. The size of asposecpplib on Emscripten is reduced.
+1. Added one more overload of the `String::LastIndexOf` function.
+1. A stub for the `Metafile::PlayRecord` function is added.
 
 ## Full List of Issues Covering all Changes in this Release ##
 
