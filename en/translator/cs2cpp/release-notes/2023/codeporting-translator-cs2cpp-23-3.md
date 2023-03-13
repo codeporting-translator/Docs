@@ -33,7 +33,7 @@ weight: "1"
 | SLIDESCPP-3656 | Update the Doxygen configuration file | Task |
 | SLIDESCPP-3686 | Fix a typo in the asposecpplib library | Bug |
 | SLIDESCPP-3659 | Implement Graphics::Flush(FlushIntention intention) method | Task |
-| PDFCPP-2218 | Investigate 'third-party' libraries exceptions support on Emscripten | Task |
+| PDFCPP-2210 | Build 'asposecpplib 23.2' on Emscripten | Task |
 
 ## Public API and Backward Incompatible Changes ##
 
