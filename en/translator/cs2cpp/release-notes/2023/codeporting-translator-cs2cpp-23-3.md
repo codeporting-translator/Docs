@@ -16,14 +16,14 @@ weight: "1"
 
 ## Major Features ##
 
-1. The generation of indexer setters methods is reworked.
+1. The generation of indexer-setter methods has been reworked.
 1. Updated the Doxygen documentation.
 
 ## Minor fixes ##
 
-1. Fixed typo in `NullReferenceException` default error message.
-1. Implemented `Graphics::Flush` method.
-1. Added exceptions support for Emscripten.
+1. A typo was fixed in the `NullReferenceException` default error message.
+1. Implemented the `Graphics::Flush` method.
+1. Added exception support for Emscripten.
 1. Accessor by index in `System::Text::RegularExpressions::GroupCollection` is overriden.
 
 ## Full List of Issues Covering all Changes in this Release ##
