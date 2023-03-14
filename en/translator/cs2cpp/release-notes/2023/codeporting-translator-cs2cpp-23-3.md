@@ -24,6 +24,7 @@ weight: "1"
 1. Fixed typo in `NullReferenceException` default error message.
 1. Implemented `Graphics::Flush` method.
 1. Added exceptions support for Emscripten.
+1. Accessor by index in `System::Text::RegularExpressions::GroupCollection` is overriden.
 
 ## Full List of Issues Covering all Changes in this Release ##
 
