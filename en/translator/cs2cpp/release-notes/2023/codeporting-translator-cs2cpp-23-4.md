@@ -47,6 +47,7 @@ weight: "1"
 | SLIDESCPP-3705 | False triggering of "Property does not override" error | Task |
 | CSPORTCPP-5827 | Remove unnecessary indexer attribute for ICollection indexer. | Investigation |
 | SLIDESCPP-3708 | Fix RegressionTests_v23_4.SLIDESNET_43822 test | Task |
+| TASKSCPP-1833 | Fix `[Values]` attribute porting for bool parameters | Task |
 
 ## Public API and Backward Incompatible Changes ##
 
