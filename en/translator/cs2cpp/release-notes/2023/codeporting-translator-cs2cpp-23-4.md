@@ -17,11 +17,11 @@ weight: "1"
 ## Major Features ##
 
 1. Delegate behavior brought to a state closer to that in C#.
-1.1 The delegate comparison logic has been redesigned. The system no longer tries to compare delegates written via `std::bind` or `std::function` by postulating that they are not equal.
-1.1. Delegates as member functions are written without `std::bind`, which allows graceful detachment in accordance with similar behavior in C#.
-1.1. Delegate now behaves like a full fledged immutable reference type.
-1.1. Added `operator +` and `operator -`. The order of adding and removing callbacks has been corrected.
-1.1. Lots of other tweaks.
+    * The delegate comparison logic has been redesigned. The system no longer tries to compare delegates written via `std::bind` or `std::function` by postulating that they are not equal.
+    * Delegates as member functions are written without `std::bind`, which allows graceful detachment in accordance with similar behavior in C#.
+    * Delegate now behaves like a full fledged immutable reference type.
+    * Added `operator +` and `operator -`. The order of adding and removing callbacks has been corrected.
+    * Lots of other tweaks.
 
 ## Minor fixes ##
 
