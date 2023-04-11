@@ -1,5 +1,5 @@
 ---
-date: "2023-03-09"
+date: "2023-04-10"
 author:
   display_name: "Wiki code generator"
 draft: "false"
@@ -10,7 +10,7 @@ menu:
   docs:
     parent: "What Converts to What"
     weight: "1"
-lastmod: "2023-03-09"
+lastmod: "2023-04-10"
 weight: "1"
 ---
 
@@ -2450,7 +2450,7 @@ void LambdaExpressions::set_LambdaInsideLambda1(System::Func<int32_t> value)
 void LambdaExpressions::LambdaWithReturnValueExpressions()
 {
     int32_t delta = 767;
-    SomeCalculation(static_cast<System::Func<int32_t, int32_t>>(std::bind(&LambdaExpressions::SomeSelector, this, std::placeholders::_1)));
+    SomeCalculation(static_cast<System::Func<int32_t, int32_t>>(System::Delegate<int32_t(int32_t)>(&LambdaExpressions::SomeSelector, this)));
     SomeCalculation(static_cast<System::Func<int32_t, int32_t>>(static_cast<std::function<int32_t(int32_t value)>>([](int32_t value) -> int32_t
     {
         return value + 2;
@@ -2467,7 +2467,7 @@ void LambdaExpressions::LambdaWithReturnValueExpressions()
     {
         return 777;
     })));
-    System::Func<int32_t, int32_t> selector1 = static_cast<System::Func<int32_t, int32_t>>(std::bind(&LambdaExpressions::SomeSelector, this, std::placeholders::_1));
+    System::Func<int32_t, int32_t> selector1 = static_cast<System::Func<int32_t, int32_t>>(System::Delegate<int32_t(int32_t)>(&LambdaExpressions::SomeSelector, this));
     SomeCalculation(selector1);
     System::Func<int32_t, int32_t> selector2 = static_cast<System::Func<int32_t, int32_t>>(static_cast<std::function<int32_t(int32_t value)>>([](int32_t value) -> int32_t
     {
@@ -2494,7 +2494,7 @@ void LambdaExpressions::LambdaWithReturnValueExpressions()
 void LambdaExpressions::LambdaWithoutReturnValueExpressions()
 {
     int32_t delta = 767;
-    SomeProcessor(static_cast<System::Action<int32_t>>(std::bind(&LambdaExpressions::SomeAction, this, std::placeholders::_1)));
+    SomeProcessor(static_cast<System::Action<int32_t>>(System::Delegate<void(int32_t)>(&LambdaExpressions::SomeAction, this)));
     SomeProcessor(static_cast<System::Action<int32_t>>(static_cast<std::function<void(int32_t value)>>([](int32_t value) -> void
     {
         System::Console::WriteLine(value + 2);
@@ -2511,7 +2511,7 @@ void LambdaExpressions::LambdaWithoutReturnValueExpressions()
     {
         System::Console::WriteLine(777);
     })));
-    System::Action<int32_t> action1 = static_cast<System::Action<int32_t>>(std::bind(&LambdaExpressions::SomeAction, this, std::placeholders::_1));
+    System::Action<int32_t> action1 = static_cast<System::Action<int32_t>>(System::Delegate<void(int32_t)>(&LambdaExpressions::SomeAction, this));
     SomeProcessor(action1);
     System::Action<int32_t> action2 = static_cast<System::Action<int32_t>>(static_cast<std::function<void(int32_t value)>>([](int32_t value) -> void
     {

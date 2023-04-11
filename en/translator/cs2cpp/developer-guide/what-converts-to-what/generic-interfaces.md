@@ -1,5 +1,5 @@
 ---
-date: "2023-03-09"
+date: "2023-04-10"
 author:
   display_name: "Wiki code generator"
 draft: "false"
@@ -10,7 +10,7 @@ menu:
   docs:
     parent: "What Converts to What"
     weight: "1"
-lastmod: "2023-03-09"
+lastmod: "2023-04-10"
 weight: "1"
 ---
 
@@ -65,7 +65,7 @@ namespace TypesPorting
 namespace TypesPorting {
 
 template<typename TInner>
-class IGenericInterface : public System::Object
+class IGenericInterface : public virtual System::Object
 {
     typedef IGenericInterface<TInner> ThisType;
     typedef System::Object BaseType;
@@ -76,7 +76,7 @@ class IGenericInterface : public System::Object
 };
 
 template<typename TInner>
-class IGenericInterfaceWithTypeConstraint : public System::Object
+class IGenericInterfaceWithTypeConstraint : public virtual System::Object
 {
     typedef System::ICloneable BaseT_ICloneable;
     assert_is_base_of(BaseT_ICloneable, TInner);
@@ -90,7 +90,7 @@ class IGenericInterfaceWithTypeConstraint : public System::Object
 };
 
 template<typename TInner>
-class IGenericInterfaceWithClassConstraint : public System::Object
+class IGenericInterfaceWithClassConstraint : public virtual System::Object
 {
     assert_is_cs_class(TInner);
     
@@ -103,7 +103,7 @@ class IGenericInterfaceWithClassConstraint : public System::Object
 };
 
 template<typename TInner>
-class IGenericInterfaceWithStructConstraint : public System::Object
+class IGenericInterfaceWithStructConstraint : public virtual System::Object
 {
     assert_is_cs_struct(TInner);
     
@@ -116,7 +116,7 @@ class IGenericInterfaceWithStructConstraint : public System::Object
 };
 
 template<typename TInner>
-class IGenericInterfaceWithNewConstraint : public System::Object
+class IGenericInterfaceWithNewConstraint : public virtual System::Object
 {
     assert_is_constructable(TInner);
     
@@ -129,7 +129,7 @@ class IGenericInterfaceWithNewConstraint : public System::Object
 };
 
 template<typename TInner>
-class IGenericInterfaceWithSeveralConstraints : public System::Object
+class IGenericInterfaceWithSeveralConstraints : public virtual System::Object
 {
     assert_is_cs_class(TInner);
     typedef System::ICloneable BaseT_ICloneable;

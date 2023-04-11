@@ -1,5 +1,5 @@
 ---
-date: "2023-03-09"
+date: "2023-04-10"
 author:
   display_name: "Wiki code generator"
 draft: "false"
@@ -10,7 +10,7 @@ menu:
   docs:
     parent: "What Converts to What"
     weight: "1"
-lastmod: "2023-03-09"
+lastmod: "2023-04-10"
 weight: "1"
 ---
 
@@ -314,7 +314,7 @@ void StandardTypeCast::ByteTypeCasts()
 
 void StandardTypeCast::ShortTypeCasts()
 {
-    int16_t source = static_cast<int16_t>(-333);
+    int16_t source = -333;
     // implicit casts
     int32_t dest1 = source;
     int64_t dest2 = source;
@@ -331,7 +331,7 @@ void StandardTypeCast::ShortTypeCasts()
 
 void StandardTypeCast::UShortTypeCasts()
 {
-    uint16_t source = static_cast<uint16_t>(666);
+    uint16_t source = 666;
     // implicit casts
     int32_t dest1 = source;
     uint32_t dest2 = source;

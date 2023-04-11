@@ -1,5 +1,5 @@
 ---
-date: "2023-03-09"
+date: "2023-04-10"
 author:
   display_name: "Wiki code generator"
 draft: "false"
@@ -10,7 +10,7 @@ menu:
   docs:
     parent: "What Converts to What"
     weight: "1"
-lastmod: "2023-03-09"
+lastmod: "2023-04-10"
 weight: "1"
 ---
 
@@ -147,8 +147,8 @@ void EnumTypeCast::NumberEnumToCasts()
 {
     int8_t source1 = -11;
     uint8_t source2 = 13;
-    int16_t source3 = static_cast<int16_t>(-333);
-    uint16_t source4 = static_cast<uint16_t>(666);
+    int16_t source3 = -333;
+    uint16_t source4 = 666;
     int32_t source5 = -333333;
     uint32_t source6 = 666666;
     int64_t source7 = -333333333;

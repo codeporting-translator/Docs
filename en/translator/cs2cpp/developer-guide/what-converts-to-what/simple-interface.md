@@ -1,5 +1,5 @@
 ---
-date: "2023-03-09"
+date: "2023-04-10"
 author:
   display_name: "Wiki code generator"
 draft: "false"
@@ -10,7 +10,7 @@ menu:
   docs:
     parent: "What Converts to What"
     weight: "1"
-lastmod: "2023-03-09"
+lastmod: "2023-04-10"
 weight: "1"
 ---
 
@@ -40,7 +40,7 @@ namespace TypesPorting
 
 namespace TypesPorting {
 
-class ISimpleInterface : public System::Object
+class ISimpleInterface : public virtual System::Object
 {
     typedef ISimpleInterface ThisType;
     typedef System::Object BaseType;
