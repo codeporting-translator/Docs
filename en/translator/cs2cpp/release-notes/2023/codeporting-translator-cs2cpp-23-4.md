@@ -17,15 +17,15 @@ weight: "1"
 ## Major Features ##
 
 1. Delegate behavior brought to a state closer to that in C#.
-    * The delegate comparison logic has been redesigned. The system no longer tries to compare delegates written via `std::bind` or `std::function` by postulating that they are not equal.
-    * Delegates as member functions are written without `std::bind`, which allows graceful detachment in accordance with similar behavior in C#.
-    * Delegate now behaves like a full fledged immutable reference type.
-    * Added `operator +` and `operator -`. The order of adding and removing callbacks has been corrected.
-    * Lots of other tweaks.
+    1. The delegate comparison logic has been redesigned. The system no longer tries to compare delegates written via `std::bind` or `std::function` by postulating that they are not equal.
+    1. Delegates as member functions are written without `std::bind` allowing graceful detachment following the similar behavior in C#.
+    1. Delegate now behaves like a full-fledged immutable reference type.
+    1. Added `operator +` and `operator -`. The order of adding and removing callbacks has been corrected.
+    1. Lots of other tweaks.
 
 ## Minor fixes ##
 
-1. Accessor by index in GroupCollection is overriden.
+1. Accessor by index in GroupCollection is overridden.
 1. Name qualification for template base members is fixed.
 1. Removed unnecessary `static_cast` generation when using trivial numeric types.
 1. The `AllowBoxing` attribute is deprecated.
@@ -33,10 +33,10 @@ weight: "1"
 1. Fixed ambiguity in getting types of boxed objects.
 1. Removed circular dependency between `boxed_value.h` and `object_ext.h` files.
 1. Zip stream is reset now to allow reading after an unsuccessful attempt.
-1. Property overriding now checks handle when getter and setter declared in different interfaces.
-1. Unnecessary `CppConstMethod` attribute for `ICollection` indexer is removed.
+1. Property overriding now checks the handle when getter and setter are declared in different interfaces.
+1. Unnecessary `CppConstMethod` attribute for the `ICollection` indexer is removed.
 1. Fixed generation of parameterized boolean tests.
-1. Added new feature to keep CRC stream position.
+1. Added a new feature to keep CRC stream position.
 
 ## Full List of Issues Covering all Changes in this Release ##
 
