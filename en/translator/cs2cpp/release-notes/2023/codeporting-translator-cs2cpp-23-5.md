@@ -22,7 +22,7 @@ None.
 
 1. Fixed delegate initializer generation via `return` statement.
 1. Fixed `System::String::LastIndexOf` misbehavior resulting in `ArgumentOutOfRangeException`.
-1. Perfomance of `MemoryStream` is improved.
+1. The perfomance of `MemoryStream` has improved.
 
 ## Full List of Issues Covering all Changes in this Release ##
 
