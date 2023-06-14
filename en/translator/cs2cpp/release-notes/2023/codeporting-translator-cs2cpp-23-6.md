@@ -20,21 +20,22 @@ None.
 
 ## Minor fixes ##
 
+1. Enum operations with type arguments are supported now.
 1. Fixed initialization of `Dictionary` with delegate in key or value.
 1. `FileAttributes::Normal` is set when `ZipEntry` is created from the stream.
-1. Option `reference_configurations' is now supported.
-1. Synchronized `System::Random` class with .NET equivalent and fixed its inheritance bug.
+1. Option `reference_configurations` is now supported.
+1. Synchronized `System::Random` class with .NET equivalent.
 
 ## Full List of Issues Covering all Changes in this Release ##
 
 | Key | Summary | Category |
 | --- | --- | --- |
-| SLIDESCPP-3740 | Fixed initialization of Dictionary with delegate in key or value | Task |
-| PDFCPP-2346-ZipEntry_default_attributes | set FileAttributes::Normal when ZipEntry created from stream | Task |
-| PDFCPP-2284_ReferencesConfigurations2 | option 'references_configurations' | Task |
-| SLIDESCPP-3730 | Fixed bug on System::Random inheritance | Task |
-| SLIDESCPP-3723 | Fixed mistakes in Doxygen comments | Bug |
-| SLIDESCPP-3730 | Synchronized System::Random class with .NET equivalent | Task |
+| FONTCPP-123 | issue of enum methods with type arguments | Task |
+| SLIDESCPP-3740 | Porter: Incorrect initialization of dictionaries with delegates | Task |
+| PDFCPP-2346 | Fix PptxExportTests.PDFNET_50458 | Task |
+| PDFCPP-2284 | CsToCppPorter - parse referenced dependencies in right configurations | Task |
+| SLIDESCPP-3723 | Fix the generation warnings of the updated API Reference | Task |
+| SLIDESCPP-3730 | Synchronize System::Random class with .NET equivalent | Task |
 
 ## Public API and Backward Incompatible Changes ##
 
