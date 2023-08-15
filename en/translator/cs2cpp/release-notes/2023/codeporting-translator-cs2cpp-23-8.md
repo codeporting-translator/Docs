@@ -25,7 +25,7 @@ None.
 1. Fixed wrap mode for gradient brushes.
 1. Fixed `System::IO::File::SetLastWriteTimeUtc` call on directory.
 1. `WebHeaderCollection::IsRestricted` method is implemented.
-1. Namespace `icu` replaced with `codeporting_icu` to avoid conflict when asposecpplib used together with another ICU version.
+1. Namespace `icu` replaced with `codeporting_icu` to avoid conflict when asposecpplib is used together with another ICU version.
 
 ## Full List of Issues Covering all Changes in this Release ##
 
