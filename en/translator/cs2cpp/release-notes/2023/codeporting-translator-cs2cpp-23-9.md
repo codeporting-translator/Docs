@@ -4,8 +4,8 @@ author:
   display_name: "Vitaliy Molchanov"
 draft: "false"
 toc: true
-title: "CodePorting.Translator Cs2Cpp 23.8"
-linktitle: "CodePorting.Translator Cs2Cpp 23.8"
+title: "CodePorting.Translator Cs2Cpp 23.9"
+linktitle: "CodePorting.Translator Cs2Cpp 23.9"
 menu:
   docs:
     parent: "2023"
