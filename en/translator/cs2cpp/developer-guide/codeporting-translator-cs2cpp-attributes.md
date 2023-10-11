@@ -24,6 +24,33 @@ To use an attribute, you must make it visible from your C# code. To do so, you s
 
 This section describes attributes available in CodePorting.Translator.Cs2Cpp.Control project. Use them to resolve translating issues or to improve translation experience.
 
+### CppAddFunctionArgument ###
+
+**Used on**: Methods
+
+**Arguments**: C++ type name of the argument to generate, argument name and optional argument default value
+
+Makes the translator to add custom argument to the attribute method after the C# arguments. These arguments can then be assigned values from the calling context using the CppPassFunctionArgument attribute.
+
+{{< highlight cs >}}
+class AddFunctionArgument_Tests
+{
+    [CodePorting.Translator.Cs2Cpp.CppAddFunctionArgument("int", "length")]
+    private static void sum_array([CodePorting.Translator.Cs2Cpp.CppArgumentKind(CodePorting.Translator.Cs2Cpp.ArgumentKind.ConstArrayRawPointer)]int[] arr)
+    {
+    }
+}
+
+{{< /highlight >}}
+
+{{< highlight cpp >}}
+void AddFunctionArgument_Tests::sum_array(int32_t const *arr, int length)
+{
+}
+{{< /highlight >}}
+
+**Since version**: 21.9
+
 ### CppAddStructDefaultMethods ###
 
 **Used on**: Structures
@@ -827,6 +854,44 @@ Forces translate this method as TestFixtureSetUp, overriding existing one (if an
 **Arguments**: None
 
 Forces translate this method as TestFixtureTearDown, overriding existing one (if any). Also, forces method to be static.
+
+### CppPassFunctionArgument ###
+
+**Used on**: Methods
+
+**Arguments**: Callee C# type name, callee method, callee additional argument name and the C++ code for the value to pass
+
+Passes a value to the argument introduced by CppAddFunctionArgument attribute. The CppPassFunctionArgument method should be placed to the method which makes the call requiring additional arguments, and the attribute's arguments describe the method being called.
+
+{{< highlight cs >}}
+class AddFunctionArgument_PassFunctionArgument_Tests
+{
+    [CodePorting.Translator.Cs2Cpp.CppAddFunctionArgument("int", "length")]
+    private static void sum_array([CodePorting.Translator.Cs2Cpp.CppArgumentKind(CodePorting.Translator.Cs2Cpp.ArgumentKind.ConstArrayRawPointer)]int[] arr)
+    {
+    }
+
+    [CodePorting.Translator.Cs2Cpp.CppPassFunctionArgument("PorterAttributes.AddFunctionArgument_PassFunctionArgument_Tests", "private static void sum_array(int[])", "length", "sizeof(i_array)/sizeof(i_array[0])")]
+    [CodePorting.Translator.Cs2Cpp.CppArrayOnStack("i_array")]
+    private static bool test_using_example()
+    {
+        int[] i_array = { 0,1,2,3 };
+        sum_array(i_array);
+        return true;
+    }
+}
+{{< /highlight >}}
+
+{{< highlight cpp >}}
+bool AddFunctionArgument_PassFunctionArgument_Tests::test_using_example()
+{
+    int32_t i_array[] = {0, 1, 2, 3};
+    sum_array(i_array, sizeof(i_array)/sizeof(i_array[0]));
+    return true;
+}
+{{< /highlight >}}
+
+**Since version**: 21.9
 
 ### CppPlaceAfter ###
 
