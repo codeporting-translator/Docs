@@ -21,8 +21,8 @@ None.
 ## Minor fixes ##
 
 1. Forced `TextWriter` flushing in `XmlTextEncoder` to reserve buffer space for the surrogate pair.
-1. Implemented `TestCase` with nullable parameter.
-1. `InvalidEnumArgumentException` definition is fixed.
+1. Implemented `TestCase` with a nullable parameter.
+1. The `InvalidEnumArgumentException` definition is fixed.
 
 ## Full List of Issues Covering all Changes in this Release ##
 
