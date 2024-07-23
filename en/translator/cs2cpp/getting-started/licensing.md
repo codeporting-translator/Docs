@@ -18,9 +18,7 @@ weight: "03"
 
 You can always download the latest version of the translator from the CodePorting <a href="https://products.codeporting.com/translator/csharp-to-cpp/release">website</a>. The evaluation version of CodePorting.Translator Cs2Cpp (without a license specified) provides full product functionality, but it throws evaluation error message and stops the translating process when source C# project does not comply to evaluation limitations.
 
-{{<note>}}
-If you want to use CodePorting.Translator Cs2Cpp without the evaluation version limitations, you can request a 1-year Temporary License. Please visit this <a href="https://www.codeporting.com/get-license">page</a> to get a free license key.
-{{</note>}}
+> If you want to use CodePorting.Translator Cs2Cpp without the evaluation version limitations, you can request a 1-year Temporary License. Please visit this <a href="https://www.codeporting.com/get-license">page</a> to get a free license key.
 
 ## Evaluation Limitations ##
 
