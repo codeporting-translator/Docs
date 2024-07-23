@@ -10,28 +10,25 @@ menu:
   docs:
     parent: "Getting Started"
     weight: "03"
-lastmod: "2019-05-28"
+lastmod: "2024-07-23"
 weight: "03"
 ---
 
-## Evaluate CodePorting.Translator Cs2Cpp ##
+## CodePorting.Translator Cs2Cpp download ##
 
-You can easily download CodePorting.Translator Cs2Cpp for evaluation. The evaluation download is the same as the purchased download. The evaluation version simply becomes licensed when you apply license to CodePorting.Translator Cs2Cpp.
-
-The evaluation version of CodePorting.Translator Cs2Cpp (without a license specified) provides full product functionality, but it throws evaluation error message and stops the translating process when source C# project does not comply to evaluation limitations.
+You can always download the latest version of the translator from the CodePorting <a href="https://products.codeporting.com/translator/csharp-to-cpp/release">website</a>. The evaluation version of CodePorting.Translator Cs2Cpp (without a license specified) provides full product functionality, but it throws evaluation error message and stops the translating process when source C# project does not comply to evaluation limitations.
 
 {{<note>}}
-If you want to test CodePorting.Translator Cs2Cpp without the evaluation version limitations, you can also request a 30-day Temporary License. Please refer to <a href="https://purchase.csporter.com/temporary-license">How to get a Temporary License?</a>
+If you want to use CodePorting.Translator Cs2Cpp without the evaluation version limitations, you can request a 1-year Temporary License. Please visit this <a href="https://www.codeporting.com/get-license">page</a> to get a free license key.
 {{</note>}}
-
 
 ## Evaluation Limitations ##
 
-You can easily download CodePorting.Translator Cs2Cpp for evaluation. The evaluation download is the same as the purchased download. However, you will face following limitations while using the API without the license. 
+You can easily use CodePorting.Translator Cs2Cpp for evaluation without licensing, however, you will face following limitations:
 
-* Project with a single file with a single class
-* Maximum 10 members declaration
-* No non-system dependencies allowed
+* project with a single file with a single class;
+* maximum 10 members declaration;
+* no non-system dependencies allowed.
 
 ## Licensing ##
 
