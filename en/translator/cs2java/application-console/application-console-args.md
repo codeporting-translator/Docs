@@ -7,7 +7,7 @@ CodePorting.Applications.Console.exe -h
 ```
 ## The window will display basic information on using the Console application.
 ```
-CodePorting.Translator 22.3.0.0 (Closed Beta, Configuration: 'Release')
+CodePorting.Applications.Console 24.7.0.0 ()
 Available parameters:
     ['-help', '-h'] Help
     ['-conversionworkflow', '-wf'] Conversion workflow (A GUID of conversion workflow to run.)
@@ -28,16 +28,16 @@ Available extension parameters:
     ['-oldfolderpath', '-oldfolderpath(compareandsync)'] Old folder (Folder with the old version of the java project)
     ['-newfolderpath', '-newfolderpath(compareandsync)'] New folder (Folder with the new version of the java project)
     ['-outputfolderpath', '-outputfolderpath(compareandsync)'] Result java folder (Folder with java project to which the merge will be applied)
-
-    Extension assembly name: CodePorting.Extensions.Applications.Tools.ConfigMigrator.ConfigMigratorToolExtension
-    ['-migrateconfig', '-migrateconfig(migrateconfig)'] migrateConfig (Migrates the old configuration file to the new format)
-    ['-configsourcepath', '-configsourcepath(migrateconfig)'] Old config file path (Path of the old config file)
-    ['-destinationpath', '-destinationpath(migrateconfig)'] Destination folder path (Path of the new config file directory)
+    ['-syncfoldermappingspath', '-syncfoldermappingspath(compareandsync)'] Mappings Config File Path (Path to the file with folders mapping rules)
 
     Extension assembly name: CodePorting.Extensions.Applications.Tools.Analysis.AnalyzeToolExtension
     ['-analyze', '-analyze(analyze)'] analyze
     ['-sourcepaths', '-sourcepaths(analyze)'] Source paths (Source paths for analysis)
-    ['-destinationpath(analyze)'] Destination path (The path for storing the analysis result)
+    ['-destinationpath', '-destinationpath(analyze)'] Destination path (The path for storing the analysis result)
+
+    Extension assembly name: CodePorting.Extensions.Applications.Tools.TranslationAttributes.TranslationAttributesToolExtension
+    ['-translationattributes', '-translationattributes(translationattributes)'] TranslationAttributes (Tool for storing attributes in config and code snippets in dedicated folder)
+    ['-solutionpath', '-solutionpath(translationattributes)'] Solution path (Specify the path to the solution you are going to work with)
 
 Available parameter prefixes: ['-', '/', '\']
 Press any key to exit.

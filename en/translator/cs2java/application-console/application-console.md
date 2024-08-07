@@ -50,8 +50,9 @@ Working with code fragments (snippets)
 
 Place the code snippet into some file with cs extension. For example, let's take the "C#-001-1 code snippet" in question and put it into the file test.cs. Let's translate the code snippet with the following command.
 ```
-CodePorter.Applications.Console.exe -m p -s <path-to-sourse>\test.cs -d <path-to-destination-directory>
+CodePorter.Applications.Console.exe -wf {634C1942-3E89-4312-9891-8A0671B4D7F1} -s <path-to-sourse>\test.cs -d <path-to-destination-directory>
 ```
+**Make sure** to execute it from the directory where CodePorter.Applications.Console.exe is located, otherwise license file will not be detected.
 The result of the translation will be the test.java file. The content of the file must match "Java-001-1 code snippet".
 
 Note that <path-to-sourse> must be present. It doesn't matter if this path is absolute or relative (even in the form .\ ), but the path must be there, otherwise porting will fail.
@@ -62,18 +63,15 @@ Working with projects or solutions from the Visual Studio IDE, is almost complet
 
 for the project
 ```
-CodePorter.Applications.Console.exe -m p -s <path-to-sourse>\<name-of-project>.csproj -d <path-to-destination-directory>
+CodePorter.Applications.Console.exe -wf {634C1942-3E89-4312-9891-8A0671B4D7F1} -s <path-to-sourse>\<name-of-project>.csproj -d <path-to-destination-directory>
 ```
 Or, to solution
 ```
-CodePorter.Applications.Console.exe -m p -s <path-to-sourse>\<name-of-solution>.sln -d <path-to-destination-directory>
+CodePorter.Applications.Console.exe -wf {634C1942-3E89-4312-9891-8A0671B4D7F1} -s <path-to-sourse>\<name-of-solution>.sln -d <path-to-destination-directory>
 ```
-Examples of use:
-
-To port the solution, use: `CodePorting.Applications.Console.exe -m p -s \*.sln`
-
-To simplify the solution, use: `CodePorting.Applications.Console.exe -m s -s \*.sln`
-
-To analyze the solution, use: `CodePorting.Applications.Console.exe -m a -s \*.sln`
-
-To save the result (txt or html formats are supported), use : `CodePorting.Applications.Console.exe -m a $targetFilePath.txt$ -s \*.sln`
+Available workflows (-wf argument values) :
+| Workflow name | GUID |
+| -- | -- |
+| Translate C# code to Java | {634C1942-3E89-4312-9891-8A0671B4D7F1} |
+| Simplify C# code using ILSpy | {EEE636EA-A492-4909-A0D6-BA83FCB5C866} |
+| Simplify C# code using ILSpy and translate to Java | {F321F095-2C33-4B29-9B8E-9B0783F612B0} |
