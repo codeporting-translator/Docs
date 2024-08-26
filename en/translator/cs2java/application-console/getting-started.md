@@ -24,7 +24,6 @@ bin/console/CodePorting.Applications.Console.exe -wf <workflow-id> -s <source-pa
 In order to translate example project, run following commands :
 ```
 mkdir result_java
-cd bin/console
-./CodePorting.Applications.Console.exe -wf "{634C1942-3E89-4312-9891-8A0671B4D7F1}" -s "C:/translator_tutorial/codeporting-translator-cs2java/ExampleProjects/TranslatorTestProject/TranslatorTestProject.sln" -d "../../result_java"
+bin/console/CodePorting.Applications.Console.exe -wf "{634C1942-3E89-4312-9891-8A0671B4D7F1}" -s "codeporting-translator-cs2java/ExampleProjects/TranslatorTestProject/TranslatorTestProject.sln" -d "result_java"
 ```
 When translation is over, result java files will be located at the path `C:/translator_tutorial/result_java` 
