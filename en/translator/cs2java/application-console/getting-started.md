@@ -19,10 +19,11 @@ After that, directory `C:/translator_tutorial/codeporting-translator-cs2java` mu
 ### Running example project translation
 To translate C# project, you must specify such arguments, as **workflow** (-wf), **source path** (-s) and **destination path** (-d) :
 ```
-bin/console/CodePorting.Applications.Console.exe -wf <workflow-id> -s <path-to-sources> -d <destination-path>
+bin/console/CodePorting.Applications.Console.exe -wf <workflow-id> -s <source-path> -d <destination-path>
 ```
 In order to translate example project, run following commands :
 ```
+mkdir result_java
 cd bin/console
 ./CodePorting.Applications.Console.exe -wf "{634C1942-3E89-4312-9891-8A0671B4D7F1}" -s "C:/translator_tutorial/codeporting-translator-cs2java/ExampleProjects/TranslatorTestProject/TranslatorTestProject.sln" -d "../../result_java"
 ```
