@@ -63,11 +63,11 @@ Working with projects or solutions from the Visual Studio IDE, is almost complet
 
 for the project
 ```
-CodePorter.Applications.Console.exe -wf {634C1942-3E89-4312-9891-8A0671B4D7F1} -s <path-to-sourse>\<name-of-project>.csproj -d <path-to-destination-directory>
+CodePorter.Applications.Console.exe -wf "{634C1942-3E89-4312-9891-8A0671B4D7F1}" -s <path-to-sourse>\<name-of-project>.csproj -d <path-to-destination-directory>
 ```
 Or, to solution
 ```
-CodePorter.Applications.Console.exe -wf {634C1942-3E89-4312-9891-8A0671B4D7F1} -s <path-to-sourse>\<name-of-solution>.sln -d <path-to-destination-directory>
+CodePorter.Applications.Console.exe -wf "{634C1942-3E89-4312-9891-8A0671B4D7F1}" -s <path-to-sourse>\<name-of-solution>.sln -d <path-to-destination-directory>
 ```
 Available workflows (-wf argument values) :
 | Workflow name | GUID |
