@@ -1,6 +1,6 @@
 # CodePorting.Translator Cs2Java Documentation
 CodePorting.Translator Cs2Java is a translator application that quickly translates C# project to Java with high accuracy.  It is very easy to use without any major learning curve and saves number of hours and money of development for translating C# codebase to Java.  It converts C# codebase to Java in such a way that it can be used by Java developers in the same way as if they were originally developed in this language.
-## Index of Contents:
+## Table of Contents:
 ### Console application
 1. [Getting started with command line application (Windows)](application-console/getting-started.md)
 2. [CodePorting.Translator Cs2Java translator: console application](application-console/application-console.md)
