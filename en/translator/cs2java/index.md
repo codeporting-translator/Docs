@@ -8,5 +8,7 @@ CodePorting.Translator Cs2Java is a translator application that quickly translat
 ### GUI application
 1. [Getting started with GUI application (Windows)](application-wpf/getting-started.md)
 2. [CodePorting.Translator application configuration](application-wpf/applications-config.md)
+### CodePorting.Translator Java Class Library (JCL)
+1. [Adding CodePorting.Translator JCL to the Maven project](jcl/adding_jcl_to_maven_project.md)
 ### Examples
 1. [Code snippet](examples/snippet-ex001.md)
