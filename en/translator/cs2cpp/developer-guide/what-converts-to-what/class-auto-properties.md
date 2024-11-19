@@ -1,5 +1,5 @@
 ---
-date: "2024-10-11"
+date: "2024-11-11"
 author:
   display_name: "Wiki code generator"
 draft: "false"
@@ -10,7 +10,7 @@ menu:
   docs:
     parent: "What Converts to What"
     weight: "1"
-lastmod: "2024-10-11"
+lastmod: "2024-11-11"
 weight: "1"
 ---
 
