@@ -1,17 +1,17 @@
 ---
-date: "2025-01-21"
+date: "2025-05-19"
 author:
   display_name: "Vitaliy Molchanov"
 draft: "false"
 toc: true
-title: "CodePorting.Translator Cs2Cpp 25.1"
-linktitle: "CodePorting.Translator Cs2Cpp 25.1"
+title: "CodePorting.Translator Cs2Cpp 25.5"
+linktitle: "CodePorting.Translator Cs2Cpp 25.5"
 menu:
   docs:
     parent: "2025"
-    weight: "5"
-lastmod: "2025-01-21"
-weight: "5"
+    weight: "1"
+lastmod: "2025-04-19"
+weight: "1"
 ---
 
 ## Major Features ##
