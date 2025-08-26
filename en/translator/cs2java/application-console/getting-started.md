@@ -4,7 +4,8 @@
 [Download latest release here](https://products.codeporting.com/translator/csharp-to-java/release)
 
 ### Dependencies
-The translator requires the Visual Studio Build Tools to function properly. You can install either Visual Studio (2022, 2019, or 2017) or the Build Tools separately.  
+The translator requires the Visual Studio Build Tools to function properly.  
+You can install either Visual Studio (2022, 2019, or 2017) or the Build Tools separately.  
 To download Visual Studio, please visit: [Download Visual Studio](https://visualstudio.microsoft.com/ru/downloads/)
 
 ### Extracting archive
@@ -32,4 +33,4 @@ bin/console/CodePorting.Applications.Console.exe -wf "{634C1942-3E89-4312-9891-8
 ```
 When translation is over, result java files will be located at the path `C:/translator_tutorial/result_java`
 
-The translated Java code requires the Aspose.JCL library to function correctly. For instructions on how to add the CodePorting.Translator JCL to your Maven project, please refer to the following guide: [Adding CodePorting.Translator JCL to the Maven project](../jcl/adding_jcl_to_maven_project.md)
+The translated Java code requires the CodePorting.Translator JCL library to function correctly. For details, see: [Adding CodePorting.Translator JCL to the Maven project](../jcl/adding_jcl_to_maven_project.md)
