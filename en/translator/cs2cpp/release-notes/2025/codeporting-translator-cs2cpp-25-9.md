@@ -16,9 +16,9 @@ weight: "1"
 
 ## Major Features ##
 
-Added partial support of Task and related entities.
+1. Added partial support of Task and related entities.
 
 ## Minor fixes ##
 
-Added optimization of Directory::GetEntries()
+1. `System::IO::Directory::GetEntries` method implementation optimized.
  
