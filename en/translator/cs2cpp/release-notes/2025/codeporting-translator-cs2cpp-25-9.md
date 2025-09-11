@@ -16,7 +16,7 @@ weight: "1"
 
 ## Major Features ##
 
-1. Added partial support of Task and related entities.
+1. Added partial support of `System::Threading::Tasks::Task` and related entities.
 
 ## Minor fixes ##
 
