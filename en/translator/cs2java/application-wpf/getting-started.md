@@ -1,5 +1,10 @@
 ## Getting started with GUI application (Windows)
 
+### Dependencies
+The translator requires the Visual Studio Build Tools to function properly.  
+You can install either Visual Studio (2022, 2019, or 2017) or the Build Tools separately.  
+To download Visual Studio, please visit: [Download Visual Studio](https://visualstudio.microsoft.com/ru/downloads/)
+
 ###  Download release archive
 
 [Download latest release here](https://products.codeporting.com/translator/csharp-to-java/release)
@@ -30,3 +35,5 @@ git clone https://github.com/codeporting-translator/codeporting-translator-cs2ja
 8. Click "Finish" and wait for the translation process end
 
 When translation is over, java files will be located in the output directory you selected in step 7.
+
+The translated Java code requires the CodePorting.Translator JCL library to function correctly. For details, see: [Adding CodePorting.Translator JCL to the Maven project](../jcl/adding_jcl_to_maven_project.md)
