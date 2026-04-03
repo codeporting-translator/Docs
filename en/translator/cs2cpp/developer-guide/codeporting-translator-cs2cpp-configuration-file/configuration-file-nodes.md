@@ -79,7 +79,7 @@ Allows it to specify output project name.
 <opt name="Name" value="Value"/>
 {{< /highlight >}}
 
-Translator option. See [Configuration file options](/translator/cs2cpp/developer-guide/codeporting-translator-cs2cpp-configuration-file/configuration-file-options/) for details on what options are available.
+Translator option. See [[Configuration file options|doc:Codeporting.Dynabic\.csPorter for Cpp.Documentation and Support Materials.Production documentation storage point.Developer Guide.CodePorting\.Translator Cs2Cpp configuration file.Configuration file options.WebHome]] for details on what options are available.
 
 | Attribute | Meaning | Mandatory | Default value
 ---| ---| ---| ---|
@@ -773,7 +773,7 @@ Individual underlying type mapping rule.
 <attribute name="CppAttributeName" ... />
 {{< /highlight >}}
 
-Single attribute record. See [Attributes in configuration file](/translator/cs2cpp/developer-guide/codeporting-translator-cs2cpp-configuration-file/attributes-in-configuration-file/) for more details.
+Single attribute record. See [[Attributes in configuration file|doc:Codeporting.Dynabic\.csPorter for Cpp.Documentation and Support Materials.Production documentation storage point.Developer Guide.CodePorting\.Translator Cs2Cpp configuration file.Attributes in configuration file.WebHome]] for more details.
 
 | Attribute | Meaning | Mandatory | Default value
 ---| ---| ---| ---|
@@ -1025,7 +1025,7 @@ Allowed sub-items:
 </types_with_begin_and_end_methods>
 {{< /highlight >}}
 
-Makes translator generate simplier code for 'foreach' statements, if ['foreach_as_range_based_for_loop' option](/translator/cs2cpp/developer-guide/codeporting-translator-cs2cpp-configuration-file/configuration-file-options/) is enabled.
+Makes translator generate simplier code for 'foreach' statements, if [['foreach_as_range_based_for_loop' option|doc:Codeporting.Dynabic\.csPorter for Cpp.Documentation and Support Materials.Production documentation storage point.Developer Guide.CodePorting\.Translator Cs2Cpp configuration file.Configuration file options.WebHome]] is enabled.
 
 | Attribute | Meaning | Mandatory | Default Value
 ---| ---| ---| ---|

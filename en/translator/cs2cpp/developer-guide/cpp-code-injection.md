@@ -20,7 +20,7 @@ There are several features providing this behavior.
 
 ## Definition replacement ##
 
-Placing 'CppSkipDefinition' [attribute](/translator/cs2cpp/developer-guide/codeporting-translator-cs2cpp-attributes/) at some method will remove this method's definition (but not declaration) from translated code. After doing this, you can either provide an alternative definition using 'implementation' [cofiguration file node](/translator/cs2cpp/developer-guide/codeporting-translator-cs2cpp-configuration-file/configuration-file-nodes/), or simply include a *.cpp file containing one directly into your project - when translation is done, this file will be copied into output project unchanged.
+Placing 'CppSkipDefinition' [[attribute|doc:Codeporting.Dynabic\.csPorter for Cpp.Documentation and Support Materials.Production documentation storage point.Developer Guide.CodePorting\.Translator Cs2Cpp attributes.WebHome]] at some method will remove this method's definition (but not declaration) from translated code. After doing this, you can either provide an alternative definition using 'implementation' [[cofiguration file node|doc:Codeporting.Dynabic\.csPorter for Cpp.Documentation and Support Materials.Production documentation storage point.Developer Guide.CodePorting\.Translator Cs2Cpp configuration file.Configuration file nodes.WebHome]], or simply include a *.cpp file containing one directly into your project - when translation is done, this file will be copied into output project unchanged.
 
 ## Code line injection ##
 

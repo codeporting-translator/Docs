@@ -405,7 +405,7 @@ Makes translator put type members into C++ code in the same order they are in C#
 
 **Arguments**: None
 
-Disables value holding in prticular enumerator class (overrides global behaviour, if [emit_enumerator_current_value_holder](/translator/cs2cpp/developer-guide/codeporting-translator-cs2cpp-configuration-file/configuration-file-options/) global option is _on_)
+Disables value holding in prticular enumerator class (overrides global behaviour, if [[emit_enumerator_current_value_holder|doc:Codeporting.Dynabic\.csPorter for Cpp.Documentation and Support Materials.Production documentation storage point.Developer Guide.CodePorting\.Translator Cs2Cpp configuration file.Configuration file options.WebHome|anchor="Hemit_enumerator_current_value_holder"]] global option is _on_)
 
 **Since version**: 21.12
 
@@ -423,7 +423,7 @@ Disables entity obfuscation if 'obfuscate_cpp_headers' option is enabled.
 
 **Arguments**: None
 
-Emits value holding in prticular enumerator class (overrides global behaviour, if [emit_enumerator_current_value_holder](/translator/cs2cpp/developer-guide/codeporting-translator-cs2cpp-configuration-file/configuration-file-options/) global option is _off_)
+Emits value holding in prticular enumerator class (overrides global behaviour, if [[emit_enumerator_current_value_holder|doc:Codeporting.Dynabic\.csPorter for Cpp.Documentation and Support Materials.Production documentation storage point.Developer Guide.CodePorting\.Translator Cs2Cpp configuration file.Configuration file options.WebHome|anchor="Hemit_enumerator_current_value_holder"]] global option is _off_)
 
 **Since version**: 21.12
 
@@ -433,7 +433,7 @@ Emits value holding in prticular enumerator class (overrides global behaviour, i
 
 **Arguments**: None
 
-Forces metadata generation for enum (string representation of values for parsing and serializing). Use if you need conversions between enum values and strings in translated application. [cpp_enum_enable_metadata option](/translator/cs2cpp/developer-guide/codeporting-translator-cs2cpp-configuration-file/configuration-file-options/) enables this behavior globally.
+Forces metadata generation for enum (string representation of values for parsing and serializing). Use if you need conversions between enum values and strings in translated application. [[cpp_enum_enable_metadata option|doc:Codeporting.Dynabic\.csPorter for Cpp.Documentation and Support Materials.Production documentation storage point.Developer Guide.CodePorting\.Translator Cs2Cpp configuration file.Configuration file options.WebHome]] enables this behavior globally.
 
 ### CppEnumWithOperators ###
 
