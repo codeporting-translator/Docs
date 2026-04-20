@@ -9,9 +9,9 @@ linktitle: "CodePorting.Translator Cs2Cpp 26.2"
 menu:
   docs:
     parent: "2026"
-    weight: "2"
+    weight: "3"
 lastmod: "2026-02-18"
-weight: "2"
+weight: "3"
 ---
 
 ## Major Features ##
