@@ -12,4 +12,6 @@ To translate a single C# file, a project, or an entire solution, follow these st
 1. Run the built application. Fix any runtime errors.
 1. Enjoy your translated C# to C++ application.
 
-For more complex scenarios, refer to the developer guide.
+Conversion is performed on a per-project basis, thus in order to convert a multi-project C# solution each project has to be converted separately. If the C# project to be converted has a dependency on another C# project, the dependent-upon project has to be converted first. Then, when converting the dependent project, the information about its dependencies has to be specified in the configuration file that is passed to the Translator along with the project. The general rule is that projects should be converted in the order from the least dependent to the most dependent.
+
+For more complex scenarios, refer to the user guide.
