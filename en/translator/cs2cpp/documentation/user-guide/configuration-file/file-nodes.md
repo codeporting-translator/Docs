@@ -1012,9 +1012,9 @@ Allowed sub-items:
 
 ### event ###
 
-| Attribute | Meaning | Mandatory | | Default Value
+| Attribute | Meaning | Mandatory |
 | --- | --- | --- |
-| name | Event name (with namespace and class name) | Yes | -
+| name | Event name (with namespace and class name) | Yes |
 
 ## insert_code_to_tests ##
 
