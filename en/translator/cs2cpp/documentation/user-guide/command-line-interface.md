@@ -1,58 +1,61 @@
 # Command Line Interface Reference #
 
-## Overview ##
+CodePorting.Translator Cs2Cpp provides a command-line option for converting C# code into equivalent C++ code. The input to the translator is a C# project and a configuration file that contains options governing different aspects of the conversion process. The output is a set of .cpp and .h files, together with CMake configuration files that can be used to generate project files and makefiles and build the sources for one of the supported platforms or compilers.
 
-CodePorting.Translator Cs2Cpp provides a command-line option to convert C# code into equivalent C++ code. The input for the CodePorting.Translator Cs2Cpp is a C# project and a configuration file that contains options governing different aspects of the conversion process. The output of CodePorting.Translator Cs2Cpp a set of .cpp and .h files and a set of Cmake configuration files that can be used to generate project files and makefiles and build the sources for one of the supported platforms/compilers.
+The translator comes with a default configuration file that contains default values for all options. It uses this file when the user does not specify an alternative configuration file. In most cases, the default configuration file is a good choice for simple projects that have no dependencies. For more complex projects, or for projects that depend on other projects, a custom configuration file should be created and passed to the translator.
 
-Translator comes with a default configuration file, which contains default values for all options. Translator uses default configuration file if user does not specify an alternative configuration file. Usually default configuration file is a good option for the simplest projects that have no dependencies. However, for more complex projects and/or projects that depend on other projects, configuration file has to be created and passed to the Translator.
+## Usage ##
 
-Translator executable *CodeTranslator.Cs2Cpp.Console.exe* file for command-line auto translating option is located in *bin/code_translator* directory in Translator installation directory.
+The translator executable file, CodeTranslator.Cs2Cpp.Console.exe, is located in the bin/code_translator directory of the translator installation folder.It should be run using format:
 
-> Usage: CodeTranslator.Cs2Cpp.Console.exe [project] [output_dir] [options]
+```ps
+CodeTranslator.Cs2Cpp.Console.exe [project] [output_dir] [options]
+```
 
-**project** A path to the .csproj file of the C# project to be converted. This can be a full path or a path relative to the current directory. Single files (\*.cs) and entire solutions (\*.sln) are supported too. When 'project' option is not specified in command line, it can be specified in configuration file.
+**project** A path to the .csproj file of the C# project to be converted. This can be either a full path or a path relative to the current directory. Single files (\*.cs) and entire solutions (\*.sln) are also supported. If the project option is not specified on the command line, it can be provided in the configuration file.
 
-**output_dir** A path to the directory where Translator will put the generated files. This can be a full path or a path relative to the current directory. If the specified directory does not exist Translator will create it. When 'output_dir' option is not specified in command line, it can be specified in configuration file.
+**output_dir** A path to the directory where the translator will place the generated files. This can be either a full path or a path relative to the current directory. If the specified directory does not exist, the translator will create it. If the output directory is not specified on the command line, it can be provided in the configuration file.
 
-**options** Denotes a list of options that control different aspects of conversion process.
+**options** A list of options that control different aspects of the conversion process.
 
 > Example: CodeTranslator.Cs2Cpp.Console.exe C:\SimpleConsoleApp\SimpleConsoleApp.csproj C:\output -c C:\SimpleConsoleApp\SimpleConsoleApp.translator.config
 
 ## Supported Options ##
 
-**-h, --help, /h, /?** Prints short instruction of how to use Translator from command line and a list of command line options with short description.
+**-h, --help, /h, /?** Prints a short usage message for the command-line interface and a list of available options with brief descriptions.
 
-**-c \<path\>** Specifies a configuration file containing the conversion options to be applied when converting the C# project. 'path' is a path to the configuration file; this can be a full path or a path relative to the current directory. If this option is not specified Translator will use default configuration file *translator.config* located in the Translator’s home directory.
+**-c \<path\>** Specifies a configuration file containing the conversion options to apply. The \<path\> can be either absolute or relative to the current directory. If this option is not specified, the translator uses the default configuration file, translator.config, located in the translator home directory.
 
-**-ct** Traces config hierarchy being loaded to log.
+**-ct** Traces the configuration hierarchy being loaded to the log.
 
-**-H \<path\>** Sets a Translator home directory used by Translator when resolving paths. Normally this option should not be used.
+**-H \<path\>** Sets the translator home directory used when resolving paths. Normally, this option should not be used.
 
-**-g \<configuration\>** Specifies a name of the configuration (e.g. Debug, Release etc.) defined in input C# project to be used by Translator. In order to properly convert the project, Translator needs to know project settings specified under particular configuration. This option tells Translator which configuration to read the settings from. The input C# project must have at least one configuration defined, otherwise conversion fails. If this option is missing, a configuration with name “Debug” is used by default.
+**-g \<configuration\>** Specifies the name of the configuration (for example, Debug or Release) defined in the input C# project to be used by the translator. To convert the project correctly, the translator must read the project settings defined for that configuration. The input C# project must have at least one configuration defined; otherwise, conversion fails. If this option is omitted, the configuration named "Debug" is used by default.
 
-**-w0** Specifies that the Translator should always return 0 despite the number of errors or warnings that occurred during translating. This option is inconsistent with **-w1** and **-w2**.
+**-w0** Specifies that the translator should always return 0 regardless of the number of errors or warnings that occur during translation. This option is incompatible with **-w1** and **-w2**.
 
-**-w1** Specifies that the Translator should return 1 in case if an error (but not warning) occurs during translating. If no errors occurred during translating the return value will be 0. This behavior is default. This option is inconsistent with **-w0** and **-w2**.
+**-w1** Specifies that the translator should return 1 if an error occurs, but not if only a warning occurs. If no errors occur, the return value is 0. This is the default behavior. This option is incompatible with **-w0** and **-w2**.
 
-**-w2** Specifies that the Translator should return 1 in case if an error or warning occurs during translating. If neither errors nor warnings occurred during translating, the return value will be 0. This option is inconsistent with **-w0** and **-w1**.
+**-w2** Specifies that the translator should return 1 if an error or warning occurs. If neither errors nor warnings occur, the return value is 0. This option is incompatible with **-w0** and **-w1**.
 
-**-d0** Specifies that all pre-processor directives encountered in C# code should not be inserted in the output C++ code as comments. Also see option **-d1**. This option is inconsistent with **-d1**.
+**-d0** Specifies that preprocessor directives encountered in the C# code should not be inserted into the output C++ code as comments. See also **-d1**. This option is incompatible with **-d1**.
 
-**-d1** Specifies that all pre-processor directives encountered in C# code should be inserted to the resulting C++ code as comments. This may be helpful when debugging the conversion. This behavior is default. This option is inconsistent with **-d0**.
+**-d1** Specifies that preprocessor directives encountered in the C# code should be inserted into the resulting C++ code as comments. This may be helpful when debugging the conversion. This is the default behavior. This option is incompatible with **-d0**.
 
-**-m \<true|false|N\>** Specifies if Translator should use a single thread (when 'value' is `false`) or multiple threads (maximum available when 'value' `true` or specified `N` number) when translating a project. If this option is not specified, the default value `true` is used.
+**-m <true|false|N>** Specifies whether the translator should use a single thread (when the \<value\> is `false`) or multiple threads (when the \<value\> is `true` or when a specific `N` \<value\> is provided) when translating a project. If this option is not specified, the default value is `true`.
 
-**-d \<name\>** Defines a variable with the specified name which can be referred to in \<if\> node in Translator configuration file. Refer to Translator configuration documentation for further details.
+**-d \<name\>** Defines a variable with the specified name that can be referenced from an \<if\> node in the translator configuration file. Refer to the translator configuration documentation for more details.
 
-**-o \<name\>=\<value\>** Assigns a value 'value' to the Translator configuration option named 'name'. A value specified by this option takes precedence over the value specified in the input configuration file.
+**-o \<name\>=\<value\>** Assigns the specified \<value\> to the translator configuration option named \<name\>. A value specified by this option takes precedence over the value specified in the input configuration file.
 
-**-ot \<name\>** trace config option named 'name' value to log (allows wildcards).
-> Example: -ot force_* will trace to log all options values whose names start from 'force_'
+**-ot \<name\>** Traces the value of the configuration option named \<name\> to the log. Wildcards are supported.
 
-**-O** Instructs Translator to put the output files and directories directly to the directory specified by **<output_dir>** command line argument. By default if this option is omitted, Translator will create a sub-directory under **<output_dir>** named **<project_name>_Cpp** (where **<project_name>** is the name of the input C# project) and will put the output files and directories in it.
+> Example: -ot force_* traces all option values whose names start with "force_".
 
-**-ts** Skips translation phase, only load configuration and log if needed.
+**-O** Instructs the translator to place the output files and directories directly in the directory specified by the **<output_dir>** command-line argument. By default, if this option is omitted, the translator creates a subdirectory named **<project_name>_Cpp** under **<output_dir>** and places the output files and directories there.
+
+**-ts** Skips the translation phase and only loads the configuration and logs, if needed.
 
 ## Obsolete Options ##
 
-Options **-q**, **-a**, **-st** and **-lf** are obsolete and will be ignored by Translator.
+The options **-q**, **-a**, **-st**, and **-lf** are obsolete and will be ignored by the translator.
