@@ -62,7 +62,7 @@ Allows it to specify output project name.
 <opt name="Name" value="Value"/>
 ```
 
-Translator option. See [configuration file options](file-options.md) for details on what options are available.
+Translator option. See [configuration file options](options.md) for details on what options are available.
 
 | Attribute | Meaning | Mandatory |
 | --- | --- | --- |
