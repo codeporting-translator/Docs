@@ -56,6 +56,10 @@ CodeTranslator.Cs2Cpp.Console.exe [project] [output_dir] [options]
 
 **-ts** Skips the translation phase and only loads the configuration and logs, if needed.
 
+**-ll \<severity\>** Minimum logging level. Default value is 'Info'. Available values: Trace, Debug, Info, Warn, Error, Fatal, Off.  
+
+**-ltf \<time_format\>** Logger time format. Supports Nlog time format i.e. yyyy-MM-dd_HH\:mm\:ss. Please note that special characters must be escaped with slash.
+
 ## Obsolete Options ##
 
 The options **-q**, **-a**, **-st**, and **-lf** are obsolete and will be ignored by the translator.
