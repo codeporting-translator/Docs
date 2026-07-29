@@ -1,12 +1,10 @@
-# Configuration file structure #
+# Configuration file refrence #
 
-CodePorting.Translator Cs2Cpp translator configuration files are of plain XML format. This section describes the meaning of allowed elements and attributes.
-
-There is a default translator.config file supplied alongside with the translator one can refer to.
+There is a default *translator.config* file supplied alongside with the translator one can refer to. For simple projects, this is sufficient, but for more complex ones, you'll need your own file (or several files) that extend the default settings. This section describes how to do that.
 
 ## General structure ##
 
-The root node of the configuration file must be 'porter'. It has no attributes:
+CodePorting.Translator Cs2Cpp translator configuration files are of plain XML format. This section describes the meaning of allowed elements and attributes. The root node of the configuration file must be \<porter\>. It has no attributes:
 
 ```xml
 <porter>
@@ -34,7 +32,7 @@ All paths in the configuration file are written related to current .config file.
 
 ## Configuration files inclusion ##
 
-Use 'import' element with 'config' attribute to include the file which resides in the same location as your current directory:
+Use \<import\> element with 'config' attribute to include the file which resides in the same location as your current directory:
 
 ```xml
 <import config="other_config_file.config"/>
@@ -63,3 +61,9 @@ This such approach allows easily switch to different lib implementation:
 ```
 
 Also, one can reuse library configuration file when translating several projects.
+
+See also:
+
+* [Configuration file nodes](nodes.md)
+* [Configuration file options](options.md)
+* [Attributes in configuration file](attributes.md)
