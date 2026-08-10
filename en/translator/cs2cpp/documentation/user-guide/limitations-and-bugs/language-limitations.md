@@ -27,7 +27,7 @@ which should never be compiled.
 
 ## Nested types inheriting from surrounding types ##
 
-Code below correct in C#:
+The code below is correct in C#:
 
 ```cs
 public class CommonNode
@@ -38,7 +38,7 @@ public class CommonNode
 }
 ```
 
-But when translate to C++
+But when translated to C++:
 
 ```cpp
 class CommonNode
@@ -50,7 +50,7 @@ private:
 };
 ```
 
-we'll got compilation error because `CommonNode` is incomplete type during `DerviedNode` compilation.
+we get a compilation error because `CommonNode` is an incomplete type during `DerivedNode` compilation.
 
 ## Circular type dependencies and other declaration order issues ##
 
@@ -58,27 +58,109 @@ In C#, the order in which symbols are defined is generally unimportant, as long 
 
 ## Memory management issues ##
 
-Because C# has a garbage collector and C++ has reference counting, we have problems with circular references and the nonsense of some of the APIs that handle garbage collection.
+Because C# has a garbage collector and C++ has reference counting, we have problems with circular references and with some of the APIs that handle garbage collection.
+
+```cs
+public class A
+{
+    public B BRef;
+}
+
+public class B
+{
+    public A ARef;
+}
+```
+
+In C++ translation, those references are often represented via `System::SharedPtr`, which can create a reference cycle and prevent objects from being released:
+
+```cpp
+class A : public System::Object
+{
+public:
+    System::SharedPtr<B> BRef;
+};
+
+class B : public System::Object
+{
+public:
+    System::SharedPtr<A> ARef;
+};
+```
+
+It is necessary to use the special attribute [CppWeakPtr] to indicate which object actually owns another object and which one only references it.
 
 ## Reflection issues ##
 
-Although a small portion of reflection is implemented in the compiler's system library, some elements of reflection are fundamentally unimplementable in C++. For example, in C#, you can dynamically parameterize a generic type and then instantiate it. This is obviously impossible in C++, as it would require compiling the template source code on run time.
+Although a small portion of reflection is implemented in the compiler's system library, some elements of reflection are fundamentally unimplementable in C++. For example, in C#, you can dynamically parameterize a generic type and then instantiate it. This is obviously impossible in C++, as it would require compiling the template source code at runtime.
+
+```cs
+Type genericList = typeof(System.Collections.Generic.List<>);
+Type listOfInt = genericList.MakeGenericType(typeof(int));
+object instance = Activator.CreateInstance(listOfInt);
+```
 
 ## 'new' modifier in method declaration is not supported ##
 
-Translator does not support **new** modifier in method declaration because there is no available equivalent in C++. Translator ignores **new** modifier in method declaration and translates the method declaration as if it had no **new** modifier. It is recommended to manually rename new methods or use appropriate attributes.
+Translator does not support the **new** modifier in method declarations because there is no available equivalent in C++. 
+
+```cs
+public class Base
+{
+    public void F()
+    {
+    }
+}
+
+public class Derived : Base
+{
+    public new void F()
+    {
+    }
+}
+```
+
+Translator ignores the **new** modifier in method declarations and translates the method declaration as if it had no **new** modifier. It is recommended to manually rename `new` methods or use appropriate attributes.
 
 ## Variant and covariant type parameters are translated as invariant type parameters ##
 
-Variance annotation - keywords **in** and **out** in variant type parameters lists - are ignored by translator. All covariant and contravariant type parameters of an interface or a delegate encountered in C# code by translator are interpreted and translated as invariant type parameters.
+Variance annotations—keywords **in** and **out** in variant type parameter lists—are ignored by the translator. All covariant and contravariant type parameters of an interface or a delegate encountered in C# code by the translator are interpreted and translated as invariant type parameters.
+
+```cs
+public interface IReadOnlyList<out T>
+{
+    T Get(int index);
+}
+
+public interface IComparer<in T>
+{
+    int Compare(T x, T y);
+}
+```
 
 ## Overloaded generic types ##
 
-In C#, a generic type can have a variable number of parameters, including none at all. In C++, this is not allowed, leading to unpleasant collisions and generally not having a good solution. The translator can attempt to emulate overloading via variadic template specialization or rename the delegate by appending the number of arguments to the class name. However, manual renaming is generally recommended.
+In C#, a generic type can have a variable number of parameters, including none at all.
+
+```cs
+public class Foo
+{
+}
+
+public class Foo<T>
+{
+}
+
+public class Foo<T1, T2>
+{
+}
+```
+
+ In C++, this is not allowed, leading to unpleasant collisions and generally not having a good solution. The translator can attempt to emulate overloading via variadic template specialization or rename the delegate by appending the number of arguments to the class name. However, manual renaming is generally recommended.
 
 ## Translation of invocation of virtual method in a class constructor may not preserve semantics ##
 
-Translator translates invocation of virtual method in a C# class' constructor into invocation of virtual method in a C++ class' consructor without emulating rules applied in C# to resolve virtual method version to be invoked. This may result in a run-time difference between behavior of a C# class hierarchy and corresponding C++ class hierarchy generated by translator. In the following example at the runtime during instantiation of class B in method Main() method B.f() will be invoked in the constructor of class A:
+Translator translates invocation of a virtual method in a C# class constructor into invocation of a virtual method in a C++ class constructor without emulating rules applied in C# to resolve which virtual method version will be invoked. This may result in a runtime difference between behavior of a C# class hierarchy and the corresponding C++ class hierarchy generated by the translator. In the following example, at runtime during instantiation of class `B` in method `Main()`, `B.f()` will be invoked in the constructor of class `A`:
 
 ```cs
 namespace ns
@@ -111,9 +193,9 @@ namespace ns
 }
 ```
 
-but in corresponding C++ code generated by translator, method A::f() will be invoked in the constructor of class A:
+but in the corresponding C++ code generated by the translator, method `A::f()` will be invoked in the constructor of class `A`:
 
-```cs
+```cpp
 namespace ns {
 
 class A : public System::Object
@@ -150,9 +232,18 @@ public:
 
 In C#, the order of argument evaluation is strictly defined, but in C++ it is not. In some cases, this can lead to different runtime behavior between the original and translated code.
 
+```cs
+int i = 0;
+void M(int x, int y) { }
+
+M(i++, i++);
+```
+
+In C#, arguments are evaluated left to right, so the first call uses `0` and increments `i` to `1` before the second call. In C++, the order of evaluation is unspecified and the runtime values may differ.
+
 ## 'internal' access modifier has no analog in C++ ##
 
-Because in C++ there is no analog of C#'s **internal** access modifier, internal members of C# classes are translated as protected or public (when related [config option](../configuration-file/options.md#internal_as_public) is turned on). Thus the following C# class
+Because in C++ there is no analog of C#'s **internal** access modifier, internal members of C# classes are translated as protected or public (when the related [config option](../configuration-file/options.md#internal_as_public) is turned on). Thus the following C# class
 
 ```cs
 class A
@@ -162,7 +253,7 @@ class A
 }
 ```
 
-will be translated into following C++ class (when 'internal_as_public' is on)
+will be translated into the following C++ class (when `internal_as_public` is on)
 
 ```cpp
 class A : public System::Object
@@ -174,7 +265,7 @@ public:
 };
 ```
 
-or to following otherwise:
+or to the following otherwise:
 
 ```cpp
 class A : public System::Object
