@@ -20,6 +20,8 @@ There allowed XML attributes fall into several categories:
 | Attribute parameters | Defines the attribute parameters | argument, argument0, argument1, ..., argumentN, parameterkind
 | Attribute additional behavior | Defines how translator should behave when workin on this attribute definition | error_if_unused
 
+[TOC]
+
 ## Defining C# attrbitues in configuration file ##
 
 The below guide shows how to define code attributes in configuration file. There are several steps to do so:

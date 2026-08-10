@@ -2,6 +2,8 @@
 
 This section lists all tags allowed in configuration file.
 
+[TOC]
+
 ## csproj ##
 
 ```xml

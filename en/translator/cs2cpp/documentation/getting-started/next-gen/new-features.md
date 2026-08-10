@@ -2,6 +2,8 @@
 
 Here is a list of C# language features that the old translator could not translate, but the new one translates in whole or in part.
 
+[TOC]
+
 ## C# 1.0 ##
 
 ### Structures implementing interfaces ###

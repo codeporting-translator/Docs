@@ -13,6 +13,8 @@ There is a number of options that can be used with translator config. The genera
 
 The options can be split into several categories. This page presents full list of available options.
 
+[TOC]
+
 ## Output files control options ##
 
 These options control how output files are generated.
