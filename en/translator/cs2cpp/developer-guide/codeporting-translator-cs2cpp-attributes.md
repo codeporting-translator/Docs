@@ -32,14 +32,6 @@ This section describes attributes available in CodePorting.Translator.Cs2Cpp.Con
 
 Forces generating default ValueType methods: `operator==`, `Equals`, `ToString` and `GetHashCode`.
 
-### CppAllowBoxing ###
-
-**Used on**: Structures
-
-**Arguments**: None
-
-Allows boxing for this type. This requires the type to implement operator == (), ToString() const and GetHashCode() const.
-
 ### CppAllowStackAllocation ###
 
 **Used on**: Classes
@@ -399,34 +391,6 @@ Forces all static variables in attributed class as singletons and static constru
 
 Makes translator put type members into C++ code in the same order they are in C# code, istead of grouping them by access modifier.
 
-### CppDisableEnumeratorCurrentValueHolder ###
-
-**Used on**: Class or structure
-
-**Arguments**: None
-
-Disables value holding in prticular enumerator class (overrides global behaviour, if [[emit_enumerator_current_value_holder|doc:Codeporting.Dynabic\.csPorter for Cpp.Documentation and Support Materials.Production documentation storage point.Developer Guide.CodePorting\.Translator Cs2Cpp configuration file.Configuration file options.WebHome|anchor="Hemit_enumerator_current_value_holder"]] global option is _on_)
-
-**Since version**: 21.12
-
-### CppDoNotObfuscate ###
-
-**Used on**: Entity
-
-**Arguments**: None
-
-Disables entity obfuscation if 'obfuscate_cpp_headers' option is enabled.
-
-### CppEmitEnumeratorCurrentValueHolder ###
-
-**Used on**: Class or structure
-
-**Arguments**: None
-
-Emits value holding in prticular enumerator class (overrides global behaviour, if [[emit_enumerator_current_value_holder|doc:Codeporting.Dynabic\.csPorter for Cpp.Documentation and Support Materials.Production documentation storage point.Developer Guide.CodePorting\.Translator Cs2Cpp configuration file.Configuration file options.WebHome|anchor="Hemit_enumerator_current_value_holder"]] global option is _off_)
-
-**Since version**: 21.12
-
 ### CppEnumEnableMetadata ###
 
 **Used on**: Enum types
@@ -442,14 +406,6 @@ Forces metadata generation for enum (string representation of values for parsing
 **Arguments**: None
 
 Enables bitwise operators for enum. Use if you are using them.
-
-### CppExactArrayInitializer ###
-
-**Used on**: Array type field
-
-**Arguments**: None
-
-Passes array initializer expression directly from C# to C++ without parsing and code generation. Speeds up long initializers (like thousands of string elements, etc.).
 
 ### CppForceArrayInitializerCast ###
 
@@ -500,14 +456,6 @@ Inside attributed type, always use forward declaration of argument type instead 
 
 Inside attributed type, always include header with argument type definition instead of forward declaration.
 
-### CppForceObfuscate ###
-
-**Used on**: Entities
-
-**Arguments**: None
-
-Forces attributed entity to be obfuscated if 'obfuscate_cpp_headers' option is enabled.
-
 ### CppForceSharedApi ###
 
 **Used on**: Entity
@@ -546,6 +494,79 @@ class Foo
 ...
 Foo::Bar(System::String(u"abc")); //If translated as 'Foo::Bar(u"abc")', this would call Foo::Bar(bool), not Foo::Bar(System::String&)
 {{< /highlight >}}
+
+### CppFragment ###
+
+**Used on**: Method
+
+**Arguments**: C# code pattern to replace and C++ code to replace with.
+
+Directly translates given C# code fragment as C++ code snippet.
+
+Pattern only applicable to statements, expressions or variable declarations inside of method body. Can be raw C# source code or with single wildcard ('...' sign) inside.
+
+Replacement code can be:
+
+* Raw C++ code to replace with.
+
+{{< highlight cs >}}
+[CodePorting.Translator.Cs2Cpp.CppFragment("10", "15")]
+public void LiteralExpressionTest()
+{
+    var x = 10;
+}
+{{< /highlight >}}
+
+{{< highlight cpp >}}
+void Fragment::LiteralExpressionTest()
+{
+    int32_t x = 15;
+}
+{{< /highlight >}}
+
+* C++ code with widcard ('...' sign) to prefix or postfix normally translated code.
+
+{{< highlight cs >}}
+[CodePorting.Translator.Cs2Cpp.CppFragment("...= 10", "...0")]
+public void PostfixTest()
+{
+    var x = 10;
+}        
+{{< /highlight >}}
+
+{{< highlight cpp >}}
+void Fragment::PostfixTest()
+{
+    int32_t x = 100;
+}
+{{< /highlight >}}
+
+* C++ code with replacement ('' sign) to replace fragment in normally translated code.
+
+{{< highlight cs >}}
+[CodePorting.Translator.Cs2Cpp.CppFragment("if...", "11-->10")]
+public void ReplacementTest()
+{
+    var x = 10;
+    if (x == 11)
+    {
+        ++ x;
+    }
+}        
+{{< /highlight >}}
+
+{{< highlight cpp >}}
+void Fragment::ReplacementTest()
+{
+    int32_t x = 10;
+    if (x == 10)
+    {
+        ++x;
+    }
+}
+{{< /highlight >}}
+
+Replacement doesn't affect code semantics or adds types to use. So if you want to use some undeclared C++ types here, you must add [CppFoceInclude] attribute too.
 
 ### CppGenerateBeginEndMethods ###
 
@@ -766,14 +787,6 @@ class MutableHolder : public System::Object
 
 Disables attributed test or all tests from attributed fixture unless ASPOSE_ENABLE_NIGHT_TESTS define is enabled. Useful to avoid running durable or unstable tests each time.
 
-### CppNoAbstract ###
-
-**Used on**: Class
-
-**Arguments**: None
-
-Omit 'abstract' mark when translating the class.
-
 ### CppNoBeginEndMethods ###
 
 **Used on**: Class or Struct
@@ -793,14 +806,6 @@ This attribute has a higher priority than the CppGenerateBeginEndMethods attribu
 Discards effect of 'CppConstMethod' attribute. Useful, if some methods are marked as const via config, but some overrides mustn't be const in C++.
 
 **This attribute is legacy. It is likely to be removed in future versions of CodePorting.Translator Cs2Cpp.**
-
-### CppOverride ###
-
-**Used on**: Method
-
-**Arguments**: None
-
-Makes translator mark method with 'override' qualifier.
 
 ### CppOverrideAccessModifiers ###
 
@@ -1032,6 +1037,14 @@ System::SharedPtr<System::Collections::Generic::List<System::String>>& Singleton
 
 Translates attributed string field or all string fields in attributed class as const char16_t* instead of System::String. Only possible for const or readonly fields with plain initializers. Resolves initialization race issues, speeds up startup.
 
+### CppPreMaterialize ###
+
+**Used on**: Method
+
+**Arguments**: None
+
+Tells translator to pre-evaluate all yield members and return result as list.
+
 ### CppRenameEntity ###
 
 **Used on**: Method or property
@@ -1204,14 +1217,6 @@ public:
     using UsingTestMiddle::UsingTestBase::Foo;
 };
 {{< /highlight >}}
-
-### CppValueTypeParam ###
-
-**Used on**: Generic type or method
-
-**Argument**: String name of template parameter to treat as value type
-
-Force treating type argument as value type: boxing, etc.
 
 ### CppVirtualInheritance ###
 
@@ -1570,15 +1575,55 @@ Marks method as theory.
 
 This section describes attributes available in CodePorting.Translator.Cs2Cpp.Control project, but obsolete and with no meaning now. Do not use them and remove from your C# code as soon as possible.
 
-### CppUnknownTypeParam ###
+### CppAllowBoxing ###
 
-**Used on**: Generic type or method
+**Used on**: Structures
 
-**Argument**: String name of template parameter to treat as unknown type
+**Arguments**: None
 
-Force treating type argument as unknown type: calling ObjectExt::UnknownToObject() and ObjectExt::ObjectToUnknown() whenever the conversion is required. Fixes some type conversion issues with type parameters.
+**Obsolete since version**: 26.8
 
-**Obsolete since version**: 22.9
+Allows boxing for this type. This requires the type to implement operator == (), ToString() const and GetHashCode() const.
+
+### CppDisableEnumeratorCurrentValueHolder ###
+
+**Used on**: Class or structure
+
+**Arguments**: None
+
+Disables value holding in prticular enumerator class (overrides global behaviour, if [[emit_enumerator_current_value_holder|doc:Codeporting.Dynabic\.csPorter for Cpp.Documentation and Support Materials.Production documentation storage point.Developer Guide.CodePorting\.Translator Cs2Cpp configuration file.Configuration file options.WebHome|anchor="Hemit_enumerator_current_value_holder"]] global option is _on_)
+
+**Obsolete since version**: 26.8
+
+### CppDoNotObfuscate ###
+
+**Used on**: Entity
+
+**Arguments**: None
+
+Disables entity obfuscation if 'obfuscate_cpp_headers' option is enabled.
+
+**Obsolete since version**: 26.8
+
+### CppEmitEnumeratorCurrentValueHolder ###
+
+**Used on**: Class or structure
+
+**Arguments**: None
+
+Emits value holding in prticular enumerator class (overrides global behaviour, if [[emit_enumerator_current_value_holder|doc:Codeporting.Dynabic\.csPorter for Cpp.Documentation and Support Materials.Production documentation storage point.Developer Guide.CodePorting\.Translator Cs2Cpp configuration file.Configuration file options.WebHome|anchor="Hemit_enumerator_current_value_holder"]] global option is _off_)
+
+**Obsolete since version**: 26.8
+
+### CppExactArrayInitializer ###
+
+**Used on**: Array type field
+
+**Arguments**: None
+
+Passes array initializer expression directly from C# to C++ without parsing and code generation. Speeds up long initializers (like thousands of string elements, etc.).
+
+**Obsolete since version**: 26.8
 
 ### CppForceDynamicCastFromTypeParam ###
 
@@ -1597,6 +1642,66 @@ Forces dynamic casts from argument type parameter to Object instead of static ca
 **Argument**: String name of template parameter to affect
 
 Forces dynamic casts from Object to argument type parameter instead of static casts used by default.
+
+**Obsolete since version**: 22.9
+
+### CppForceObfuscate ###
+
+**Used on**: Entities
+
+**Arguments**: None
+
+Forces attributed entity to be obfuscated if 'obfuscate_cpp_headers' option is enabled.
+
+**Obsolete since version**: 26.8
+
+### CppNoAbstract ###
+
+**Used on**: Class
+
+**Arguments**: None
+
+Omit 'abstract' mark when translating the class.
+
+**Obsolete since version**: 26.8
+
+### CppOverride ###
+
+**Used on**: Method
+
+**Arguments**: None
+
+Makes translator mark method with 'override' qualifier.
+
+**Obsolete since version**: 26.8
+
+### CppUnknownTypeParam ###
+
+**Used on**: Generic type or method
+
+**Argument**: String name of template parameter to treat as unknown type
+
+Force treating type argument as unknown type: calling ObjectExt::UnknownToObject() and ObjectExt::ObjectToUnknown() whenever the conversion is required. Fixes some type conversion issues with type parameters.
+
+**Obsolete since version**: 22.9
+
+### CppValueTypeParam ###
+
+**Used on**: Generic type or method
+
+**Argument**: String name of template parameter to treat as value type
+
+Force treating type argument as value type: boxing, etc.
+
+**Obsolete since version**: 26.8
+
+### CppUnknownTypeParam ###
+
+**Used on**: Generic type or method
+
+**Argument**: String name of template parameter to treat as unknown type
+
+Force treating type argument as unknown type: calling ObjectExt::UnknownToObject() and ObjectExt::ObjectToUnknown() whenever the conversion is required. Fixes some type conversion issues with type parameters.
 
 **Obsolete since version**: 22.9
 
