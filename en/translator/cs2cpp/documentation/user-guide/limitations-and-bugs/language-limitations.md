@@ -114,7 +114,7 @@ public:
 };
 ```
 
-It is necessary to use the special attribute [CppWeakPtr] to indicate which object actually owns another object and which one only references it.
+It is necessary to use the special attribute [CppWeakPtr](../cpp-attributes/reference.md#cppweakptr) to indicate which object actually owns another object and which one only references it.
 
 Also, some C# APIs related to memory management and garbage collection are meaningless in C++. Most of them are not implemented, and those that are implemented are stubs that merely simulate their presence and do nothing.
 

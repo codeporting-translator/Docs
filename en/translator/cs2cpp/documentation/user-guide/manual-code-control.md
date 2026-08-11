@@ -33,7 +33,7 @@ There are several features providing this behavior.
 
 ### Definition replacement ###
 
-Placing [CppSkipDefinition] at some method will remove this method's definition (but not declaration) from translated code. After doing this, you can either provide an alternative definition using [\<implementation\>](configuration-file/nodes.md#implementation), or simply include a *.cpp file containing one directly into your project - when translation is done, this file will be copied into output project unchanged.
+Placing [CppSkipDefinition](cpp-attributes/reference.md#cppskipdefinition) at some method will remove this method's definition (but not declaration) from translated code. After doing this, you can either provide an alternative definition using [\<implementation\>](configuration-file/nodes.md#implementation), or simply include a *.cpp file containing one directly into your project - when translation is done, this file will be copied into output project unchanged.
 
 ### Code line injection ###
 
@@ -52,4 +52,4 @@ In translated code, both `++i` and `++j` expressions will be present. However, `
 
 > ⚠️ This is a simple but outdated approach that is highly discouraged from being used in new code. It's unreliable, as the translator generally ignores comments and may simply "forget" to process such a construct if it occurs in an unexpected place. Secondly, line breaks and spaces may be "lost", leading to formatting errors or even uncompiled code. Thirdly, such tricks often break the semantics on the C# side, which creates problems for correct translation.
 
-A modern compiler provides a better alternative - the [CppFragment] attribute, which allows for a safer and more predictable replacement of some of the syntax nodes from the implementation of C# methods to the specified fragments of C++ code.
+A modern compiler provides a better alternative - the [CppFragment](cpp-attributes/reference.md#cppfragment) attribute, which allows for a safer and more predictable replacement of some of the syntax nodes from the implementation of C# methods to the specified fragments of C++ code.

@@ -508,7 +508,7 @@ void Fragment::ReplacementTest()
 }
 ```
 
-Replacement doesn't affect code semantics or add types to use. So if you want to use some undeclared C++ types here, you must add the [CppForceInclude] attribute too.
+Replacement doesn't affect code semantics or add types to use. So if you want to use some undeclared C++ types here, you must add the [CppForceInclude](#cppforceinclude) attribute too.
 
 ### CppGenerateBeginEndMethods ###
 
@@ -745,7 +745,7 @@ This attribute has a higher priority than the CppGenerateBeginEndMethods attribu
 
 **Arguments**: None
 
-Discards effect of [CppConstMethod] attribute. Useful, if some methods are marked as const via config, but some overrides mustn't be const in C++.
+Discards effect of [CppConstMethod](#cppconstmethod) attribute. Useful, if some methods are marked as const via config, but some overrides mustn't be const in C++.
 
 **This attribute is legacy. It is likely to be removed in future versions of CodePorting.Translator Cs2Cpp.**
 
@@ -1016,7 +1016,7 @@ System::String ClassName::NewName()
 
 **Arguments**: None
 
-Same as [CppCTORSelfReference], but works on method. No auto-placement option at the moment exists for this attribute. Useful if method is called when no references to object exist (e. g. during construction or destruction).
+Same as [CppCTORSelfReference](#cppctorselfreference), but works on method. No auto-placement option at the moment exists for this attribute. Useful if method is called when no references to object exist (e. g. during construction or destruction).
 
 ### CppSkipDefinition ###
 
@@ -1066,7 +1066,7 @@ System::String SkipDefinitionTest::Skip2() { throw System::NotImplementedExcepti
 
 **Argument**: Optional comment string. Always ignored.
 
-Skips class, struct, enum, method, field, etc. The output code looks as if the entity was not present in the input at all. Unlike [CppSkipDefinition], skips both declarations and definitions of the affected entities. Note that any references to skipped entity in translated code end up in compilation errors.
+Skips class, struct, enum, method, field, etc. The output code looks as if the entity was not present in the input at all. Unlike [CppSkipDefinition](#cppskipdefinition), skips both declarations and definitions of the affected entities. Note that any references to skipped entity in translated code end up in compilation errors.
 
 ### CppSkipTest ###
 

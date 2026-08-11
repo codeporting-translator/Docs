@@ -20,7 +20,7 @@ There are some exceptions as well.
 1. Exception classes should always be allocated on stack in C++. Never create instance of exception class using `new` or `System::MakeObject`.
 1. Some special C# types such as `System::String` become unconditional value types in C++.
 
-Managing memory via shared pointers introduces loop reference issues. If two or more objects hold shared pointers to each other, reference loop is created which prevents all objects in charge from being destroyed. To break such a reference loop, use weak pointers. If reference loop comes from C#, use [CppWeakPtr] attribute to do so. In C++ you may use `System::WeakPtr` class directly.
+Managing memory via shared pointers introduces loop reference issues. If two or more objects hold shared pointers to each other, reference loop is created which prevents all objects in charge from being destroyed. To break such a reference loop, use weak pointers. If reference loop comes from C#, use [CppWeakPtr](../cpp-attributes/reference.md#cppweakptr) attribute to do so. In C++ you may use `System::WeakPtr` class directly.
 
 Unfortunately, some usecases that look normal in C# can't be reproduced in terms of shared and weak pointers. For example, consider two classes called Actor and Config. Config class represents Actor configuration, while Actor performs some actions based on referenced Config. Both classes have references to each other. If your API allows the user to create any of these two classes in such a manner that the second one is created automatically, you can't tell which reference is weak and which is strong. In such cases, code refactoring is required to fix memory management issues.
 

@@ -52,7 +52,7 @@ It is important to specify what item in the source code the attribute must be ap
 
 There are different ways to specify e.g. an attribute that applies to the class, an attribute that applies to the class method and an attribute that applies to the class method parameter. We refer to these ways as to conditions, each condition defining where to apply its attribute.
 
-Any condition may be used with any C# attribute, as long as it makes sense. For example, it is possible to apply [CppConstMethod] attribute to a method, but not to a class or a field. In other means, the conditions are completely independent from C# attributes: one may use different types of conditions with same attribute or use same condition type with different attributes.
+Any condition may be used with any C# attribute, as long as it makes sense. For example, it is possible to apply [CppConstMethod](../cpp-attributes/reference.md#cppconstmethod) attribute to a method, but not to a class or a field. In other means, the conditions are completely independent from C# attributes: one may use different types of conditions with same attribute or use same condition type with different attributes.
 
 To tell the translator which condition type to use, one must specify the 'condition' attribute of the \<attribute\> XML tag. If this attribute is not specified, 'method_in_class_or_baseclass' condition type is used as default.
 

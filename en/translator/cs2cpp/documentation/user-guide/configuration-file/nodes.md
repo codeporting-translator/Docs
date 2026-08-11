@@ -989,7 +989,7 @@ Allowed sub-items:
 <external_include file="AddFunctionArgument_PassFunctionArgument_Tests.cs" include="function_traits.hpp" include_to="source" include_as="local"/>
 ```
 
-Makes the translator generate additional include directives into the translated version of the specified cs file. Can do the same thing [CppForceInclude] attribute does, but can also include any file the translator doesn't know about.
+Makes the translator generate additional include directives into the translated version of the specified cs file. Can do the same thing [CppForceInclude](../cpp-attributes/reference.md#cppforceinclude) attribute does, but can also include any file the translator doesn't know about.
 
 | Attribute | Meaning | Mandatory |
 | --- | --- | --- |

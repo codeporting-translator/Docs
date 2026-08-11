@@ -636,7 +636,7 @@ class MyClass
 | Allowed value | Meaning
 | --- | ---
 | true | Place guards that allow safe usage pf shared pointers to object being constructed
-| false | Do not place guards automatically. Make sure to use [CppCtroSelfReference] attributes manually, otherwise you will have a 'deletion in constructor' issue.
+| false | Do not place guards automatically. Make sure to use [CppCtorSelfReference](../cpp-attributes/reference.md#cppctorselfreference) attributes manually, otherwise you will have a 'deletion in constructor' issue.
 
 True
 
@@ -1004,7 +1004,7 @@ TEST_F(OriginalTestName, Original_Test1) { s_instance->Test1(); }
 
 ### cpp_enum_enable_metadata ###
 
-Enables metadata globally, same as [CppEnumEnableMetadata] does for individual enums.
+Enables metadata globally, same as [CppEnumEnableMetadata](../cpp-attributes/reference.md#cppenumenablemetadata) does for individual enums.
 
 ```xml
 <opt name="cpp_enum_enable_metadata" value="true"/>
@@ -1185,7 +1185,7 @@ class B : public System::Object
 
 ### force_wrap_iostream ###
 
-Overloads all methods that accept System::IO::Stream arguments, as if [CppIOStreamWrapper] was present.
+Overloads all methods that accept System::IO::Stream arguments, as if [CppIOStreamWrapper](../cpp-attributes/reference.md#cppiostreamwrapper) was present.
 
 ```cs
 public void IStream(Stream istream)
@@ -1392,7 +1392,7 @@ public class Class2 : IEnumerable<int>
 }
 ```
 
-This behavior can be overwritten by using [CppNoBeginEndMethods] or [CppGenerateBeginEndMethods] attributes regardless of the option's value.
+This behavior can be overwritten by using [CppNoBeginEndMethods](../cpp-attributes/reference.md#cppnobeginendmethods) or [CppGenerateBeginEndMethods](../cpp-attributes/reference.md#cppgeneratebeginendmethods) attributes regardless of the option's value.
 
 | Allowed value | Meaning
 | --- | ---
@@ -1542,12 +1542,12 @@ The translator will analyze if `LambdaCaptureHolder` must be used for wrapping. 
 
 Forces translator to generate code with default ValueType methods (operator==, Equals, ToString and GetHashCode) for all structures if these methods not defined by the user.
 
-The option is equivalent to set [CppAddStructDefaultMethods] attribute to all structures in the project.
+The option is equivalent to set [CppAddStructDefaultMethods](../cpp-attributes/reference.md#cppaddstructdefaultmethods) attribute to all structures in the project.
 
 | Allowed value | Meaning
 | --- | ---
 | true | Generate default methods for all structs.
-| false | Generate methods for structs only marked with [CppAddStructDefaultMethods] attribute.
+| false | Generate methods for structs only marked with [CppAddStructDefaultMethods](../cpp-attributes/reference.md#cppaddstructdefaultmethods) attribute.
 
 **Default value:** false
 
@@ -1632,7 +1632,7 @@ class MyClass : public System::Object
 <opt name="ignore_constraints" value="true"/>
 ```
 
-Skip generation of asserts that constrain types in C++ template translated from C# generic. Works same as attribute [CppIgnoreConstraints] but applied to all classes in project.
+Skip generation of asserts that constrain types in C++ template translated from C# generic. Works same as attribute [CppIgnoreConstraints](../cpp-attributes/reference.md#cppignoreconstraints) but applied to all classes in project.
 
 ```cs
 namespace IgnoreConstraintsTestOpt
