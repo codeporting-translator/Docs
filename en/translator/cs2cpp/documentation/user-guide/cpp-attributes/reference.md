@@ -1,14 +1,14 @@
 # C++ Attributes Reference #
 
-This section describes attributes available in CodePorting.Translator.Cs2Cpp.Control project. Use them to resolve translating issues or to improve translation experience.
+This section describes attributes available in the CodePorting.Translator.Cs2Cpp.Control project. Use them to resolve translation issues or improve the translation experience.
 
 [TOC]
 
-There is a number of attributes recognized by CodePorting.Translator Cs2Cpp. These include both widely-known attributes introduced by .NET or third party libraries such as NUnit and special attributes introduced by CodePorting.Translator Cs2Cpp itself. The former attributes can be used in the same way as they are used normally in C# applications. The later can be placed into source code manually to prepare the code for translating; they are defined in CodePorting.Translator.Cs2Cpp namespace. This page summarizes their effects.
+There are a number of attributes recognized by CodePorting.Translator.Cs2Cpp. These include both widely known attributes introduced by .NET or third-party libraries such as NUnit and special attributes introduced by CodePorting.Translator.Cs2Cpp itself. The former attributes can be used in the same way they are normally used in C# applications. The latter can be placed in source code manually to prepare the code for translation; they are defined in the CodePorting.Translator.Cs2Cpp namespace. This page summarizes their effects.
 
-To use an attribute, you must make it visible from your C# code. To do so, you should reference CodePorting.Translator.Cs2Cpp.Control project from the one you are preparing to translate. Please note that the translator itself doesn't analyze attribute definitions as they are recognized by names; therefore, inheriting attributes to simplify constructor arguments or for some other reasons won't work.
+To use an attribute, you must make it visible from your C# code. To do so, you should reference the CodePorting.Translator.Cs2Cpp.Control project from the one you are preparing to translate. Please note that the translator itself doesn't analyze attribute definitions; attributes are recognized by name, so inheriting attributes to simplify constructor arguments or for other reasons won't work.
 
-> Note: code examples used on this page are for illustration purposes only. Efforts were put to keep them as simple as possible. Actual translator output may differ.
+> Note: Code examples used on this page are for illustration purposes only. Efforts were made to keep them as simple as possible. Actual translator output may differ.
 
 ## CodePorting.Translator Cs2Cpp attributes ##
 
@@ -36,9 +36,9 @@ Allows translated classes to be allocated on stack by making their destructors p
 
 **Arguments**: Mandatory single value of `CodePorting.Translator.Cs2Cpp.ArgumentKind` enumeration.
 
-Forces to use a specific way to pass a parameter to function (const reference, pointer, etc.). This option is useful mostly if you're overriding your translated code with manually written one, as it only affects function formal parameters but not the references to them. Calling contexts are not affected as well.
+Forces the use of a specific way to pass a parameter to a function (const reference, pointer, etc.). This option is useful mostly if you're overriding translated code with manually written code, as it only affects function formal parameters and not references to them. Calling contexts are not affected either.
 
-Please note that C# semantics is followed by default which means that pointer types are passed to functions by reference while value types are passed by value. You don't need to use this attribute to impose this behavior.
+Please note that C# semantics are followed by default, which means that pointer types are passed to functions by reference while value types are passed by value. You don't need to use this attribute to impose this behavior.
 
 | Argument | Description | Usage example | Output code
 | --- | --- | --- | ---
@@ -58,7 +58,7 @@ Please note that C# semantics is followed by default which means that pointer ty
 
 **Arguments**: Names of the array variables used by this method
 
-Makes the translator to generate the code that accesses the specified array's elements using `std::vector`'s API rather than such of `System::Array` and `System::ArrayPtr`. This improves the performance, but removes the boundary checking.
+Makes the translator generate code that accesses the specified array's elements using the `std::vector` API rather than `System::Array` and `System::ArrayPtr`. This improves performance but removes boundary checking.
 
 ```cs
 class ClassArrayInnerIndexer
@@ -445,7 +445,7 @@ Foo::Bar(System::String(u"abc")); //If translated as 'Foo::Bar(u"abc")', this wo
 
 Directly translates given C# code fragment as C++ code snippet.
 
-Pattern only applicable to statements, expressions or variable declarations inside of method body. Can be raw C# source code or with single wildcard ('...' sign) inside.
+The pattern is only applicable to statements, expressions, or variable declarations inside a method body. It can be raw C# source code or contain a single wildcard ('...' sign).
 
 Replacement code can be:
 
@@ -466,7 +466,7 @@ void Fragment::LiteralExpressionTest()
 }
 ```
 
-* C++ code with widcard ('...' sign) to prefix or postfix normally translated code.
+* C++ code with wildcard ('...' sign) to prefix or postfix normally translated code.
 
 ```cs
 [CodePorting.Translator.Cs2Cpp.CppFragment("...= 10", "...0")]
@@ -508,7 +508,7 @@ void Fragment::ReplacementTest()
 }
 ```
 
-Replacement doesn't affect code semantics or adds types to use. So if you want to use some undeclared C++ types here, you must add [CppFoceInclude] attribute too.
+Replacement doesn't affect code semantics or add types to use. So if you want to use some undeclared C++ types here, you must add the [CppForceInclude] attribute too.
 
 ### CppGenerateBeginEndMethods ###
 
@@ -518,7 +518,7 @@ Replacement doesn't affect code semantics or adds types to use. So if you want t
 
 Forces translator to generate begin/end methods that will delegate begin/end methods of a field or an auto-property.
 
-The attribute triggering conditions is that for the type of a field or an auto-property to which the attribute is applied, the translator should generate begin/end methods, or this type is one of our system collections that have begin/end methods.
+The attribute triggering condition is that for the type of a field or auto-property to which the attribute is applied, the translator should generate begin/end methods, or this type should be one of the system collections that have begin/end methods.
 
 This attribute has a lower priority than the CppNoBeginEndMethods attribute and a higher priority than the generate_begin_end_methods option.
 
@@ -630,7 +630,7 @@ Moves an implementation of a member or of all members of a specific type to hea
 1. Optional: string name of template argument for the character type used by the stream.
 1. Optional: string name of template argument for the character traits used by the stream.
 
-Overloads attributed entity with a version which accepts STL stream instead of SharedPtr&lt;System::IO::Stream&gt;. Overload differs either by attributed argument or by implicit 'value' argument.
+Overloads the attributed entity with a version that accepts an STL stream instead of `SharedPtr<System::IO::Stream>`. The overload differs either by the attributed argument or by an implicit `value` argument.
 
 ```cs
 public void IStream([CppIOStreamWrapper(IOStreamType.IStream)] Stream istream)
@@ -665,7 +665,7 @@ The specified local variable will be captured by lambda expressions by reference
 
 **Arguments**: Local variable name
 
-Mark method's local variable to pass to lambda-function by value. Used to keep passed value, even in case, when local variable is out of scope (i.e. loop iterators, and so on)
+Marks a method's local variable to be passed to a lambda function by value. Used to keep the passed value even when the local variable goes out of scope (for example, loop iterators).
 
 ### CppLambdaShouldCaptureByReference ###
 
@@ -755,7 +755,7 @@ Discards effect of [CppConstMethod] attribute. Useful, if some methods are marke
 
 **Arguments**: Mandatory value of AccessModifiers enum: Public, Internal, Protected or Private.
 
-Switches element's access modifier to specified one in translated one. Also makes the translator behave as if the attributed entity had the specified access modifier on it, affecting all analysis that is done.
+Switches the element's access modifier to the specified one in translated code. It also makes the translator behave as if the attributed entity had that specified access modifier, affecting all analysis performed.
 
 **Since version:** 20.11
 
@@ -765,7 +765,7 @@ Switches element's access modifier to specified one in translated one. Also make
 
 **Arguments**: None
 
-Forces translate this method as TestFixtureSetUp, overriding existing one (if any). Also, forces method to be static.
+Forces translation of this method as `TestFixtureSetUp`, overriding any existing one. Also forces the method to be static.
 
 ### CppOverrideTestFixtureTearDowm ###
 
@@ -773,7 +773,7 @@ Forces translate this method as TestFixtureSetUp, overriding existing one (if an
 
 **Arguments**: None
 
-Forces translate this method as TestFixtureTearDown, overriding existing one (if any). Also, forces method to be static.
+Forces translation of this method as `TestFixtureTearDown`, overriding any existing one. Also forces the method to be static.
 
 ### CppPlaceAfter ###
 
@@ -1121,7 +1121,7 @@ Forces using do-while form of switch translation inside this method. Similar to 
 
 **Arguments**: None
 
-Used to capture `this` using the `self` variable that stores the `WeakPtr` smart pointer to the current object. This applies to lambdas translation.
+Used to capture `this` using the `self` variable that stores a `WeakPtr` smart pointer to the current object. This applies to lambda translation.
 
 ### CppUsing ###
 
@@ -1278,7 +1278,7 @@ class FooContainer
 
 ## .NET attributes ##
 
-This section enlists .NET attributes recognized by translating applicaton.
+This section lists .NET attributes recognized by the translation application.
 
 ### System.Diagnostics.Conditional ###
 
@@ -1361,7 +1361,7 @@ Translates to `@deprecated` Doxygen annotation.
 
 ## NUnit attributes ##
 
-This section enlists supported attributes from NUnit framework. For more information on how to use these methods, please refer to NUnit manual.
+This section lists supported attributes from the NUnit framework. For more information on how to use these attributes, please refer to the NUnit manual.
 
 The below example shows usage of some NUnit attributes supported by CodePorting.Translator from C# to C++.
 
@@ -1409,13 +1409,13 @@ Ignores test (by adding 'DISABLED_' prefix to C++ test name).
 
 **Used on**: TestFixture class methods
 
-Marks method as a test fixture setupper.
+Marks the method as a test fixture setup method.
 
 ### NUnit.Framework.OneTimeTearDown ###
 
 **Used on**: TestFixture class methods
 
-Marks method as a test fixtuer teardowner.
+Marks the method as a test fixture teardown method.
 
 ### NUnit.Framework.SetCulture ###
 
@@ -1427,7 +1427,7 @@ Forces using specific culture when running test method.
 
 **Used on**: TestFixture class methods
 
-Marks method as a test setupper.
+Marks the method as a test setup method.
 
 ### NUnit.Framework.Sequential ###
 
@@ -1439,7 +1439,7 @@ Marks test as sequential.
 
 **Used on**: TestFixture class methods
 
-Marks method as a test teardowner.
+Marks the method as a test teardown method.
 
 ### NUnit.Framework.Test ###
 
@@ -1471,13 +1471,13 @@ Marks class as test fixture.
 
 **Used on**: TestFixture class methods
 
-Marks method as a test fixture setupper.
+Marks the method as a test fixture setup method.
 
 ### NUnit.Framework.TestFixtureTearDown ###
 
 **Used on**: TestFixture class methods
 
-Marks method as a test fixture teardowner.
+Marks the method as a test fixture teardown method.
 
 ### NUnit.Framework.Timeout ###
 
@@ -1489,7 +1489,7 @@ Sets up timeout for test (e. g. for performance testing).
 
 **Used on**: TestFixture class methods
 
-Runs test method given times. Fault of any interation fails all test.
+Runs the test method a given number of times. Any iteration failure causes the entire test to fail.
 
 ### NUnit.Framewor.Values ###
 
@@ -1499,7 +1499,7 @@ Specifies values to run test with.
 
 ## xUnit framework attributes ##
 
-This section enlists supported xUnit framework attributes. For more information please refer to xUnit site at [https://github.com/xunit/xunit](https://github.com/xunit/xunit).
+This section lists supported xUnit framework attributes. For more information please refer to the xUnit site at [https://github.com/xunit/xunit](https://github.com/xunit/xunit).
 
 ### Xunit.Fact ###
 
@@ -1521,7 +1521,7 @@ Marks method as theory.
 
 ## Obsolete attributes ##
 
-This section describes attributes available in CodePorting.Translator.Cs2Cpp.Control project, but obsolete and with no meaning now. Do not use them and remove from your C# code as soon as possible.
+This section describes attributes available in the CodePorting.Translator.Cs2Cpp.Control project that are obsolete and no longer meaningful. Do not use them and remove them from your C# code as soon as possible.
 
 ### CppAllowBoxing ###
 
@@ -1539,7 +1539,7 @@ Allows boxing for this type. This requires the type to implement operator == (),
 
 **Arguments**: None
 
-Disables value holding in prticular enumerator class.
+Disables value holding in a particular enumerator class.
 
 **Obsolete since version**: 26.8
 
@@ -1559,7 +1559,7 @@ Disables entity obfuscation.
 
 **Arguments**: None
 
-Emits value holding in prticular enumerator class.
+Emits value holding in a particular enumerator class.
 
 **Obsolete since version**: 26.8
 
