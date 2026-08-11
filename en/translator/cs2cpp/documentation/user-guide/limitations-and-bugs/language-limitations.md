@@ -54,11 +54,37 @@ we get a compilation error because `CommonNode` is an incomplete type during `De
 
 ## Circular type dependencies and other declaration order issues ##
 
-In C#, the order in which symbols are defined is generally unimportant, as long as the symbol is defined at all. In C++, references to undefined or undeclared symbols are not allowed. The compiler attempts to resolve such situations automatically, using various attributes and configuration options, but this problem is not 100% solved in general and may require source code refactoring, including manually separating symbols into different files.
+In C#, the order in which symbols are defined is generally unimportant, as long as the symbol is defined at all. In C++, references to undefined or undeclared symbols are not allowed. The compiler attempts to resolve such situations automatically, you can help him using various attributes and configuration options, but this problem is not 100% solved in general and may require source code refactoring, including manually separating symbols into different files.
+
+Here, for example, is a completely correct (albeit synthetic) code for C#.
+
+```cs
+public class A
+{
+    public B.Nested b;
+
+    public struct Nested
+    {
+        public int x;
+    }
+}
+
+public class B
+{
+    public A.Nested a;
+
+    public struct Nested
+    {
+        public int x;
+    }
+}
+```
+
+However, for C++ this is an unsolvable puzzle: to define class A you need to know the definition of class B and vice versa. In reality, of course, there are many more such problems, and they are not as fundamental as shown above, but they can still create problems when translating code and may require manual intervention in the process.
 
 ## Memory management issues ##
 
-Because C# has a garbage collector and C++ has reference counting, we have problems with circular references and with some of the APIs that handle garbage collection.
+Because C# has a garbage collector and C++ has reference counting, we have problems with circular references.
 
 ```cs
 public class A
@@ -90,6 +116,8 @@ public:
 
 It is necessary to use the special attribute [CppWeakPtr] to indicate which object actually owns another object and which one only references it.
 
+Also, some C# APIs related to memory management and garbage collection are meaningless in C++. Most of them are not implemented, and those that are implemented are stubs that merely simulate their presence and do nothing.
+
 ## Reflection issues ##
 
 Although a small portion of reflection is implemented in the compiler's system library, some elements of reflection are fundamentally unimplementable in C++. For example, in C#, you can dynamically parameterize a generic type and then instantiate it. This is obviously impossible in C++, as it would require compiling the template source code at runtime.
@@ -107,24 +135,31 @@ Translator does not support the **new** modifier in method declarations because 
 ```cs
 public class Base
 {
-    public void F()
+    public virtual void F()
     {
     }
 }
 
 public class Derived : Base
 {
-    public new void F()
+    public virtual new void F()
     {
     }
 }
 ```
 
-Translator ignores the **new** modifier in method declarations and translates the method declaration as if it had no **new** modifier. It is recommended to manually rename `new` methods or use appropriate attributes.
+Translator ignores the **new** modifier in method declarations and translates the method declaration as if it had no **new** modifier. Therefore, in the fragment above, translated to C++, the function `F` of class `Derived` will override the function `F` of class `Base` and will be called in the code below (which will not happen in the original C# code).
+
+```cpp
+System::SharedPtr<Base> base = System::MakeObject<Derived>();
+base->F();
+```
+
+It is recommended to manually rename `new` methods or use appropriate attributes.
 
 ## Variant and covariant type parameters are translated as invariant type parameters ##
 
-Variance annotations—keywords **in** and **out** in variant type parameter lists—are ignored by the translator. All covariant and contravariant type parameters of an interface or a delegate encountered in C# code by the translator are interpreted and translated as invariant type parameters.
+Variance annotations — keywords **in** and **out** in variant type parameter lists — are ignored by the translator. All covariant and contravariant type parameters of an interface or a delegate encountered in C# code by the translator are interpreted and translated as invariant type parameters.
 
 ```cs
 public interface IReadOnlyList<out T>
@@ -282,3 +317,15 @@ protected:
 ```
 
 For **internal** classes declared in namespaces, this modifier is ignored entirely.
+
+## Expression trees ##
+
+Proper processing of expression trees requires significant framework support, including robust reflection and just-in-time compilation.
+
+```cs
+Expression<Func<string, int>> expr = s => s.Length;
+var member = (MemberExpression)expr.Body;
+Console.WriteLine(member.Member.Name);
+```
+
+C++ doesn't provide these capabilities and won't in the foreseeable future.
