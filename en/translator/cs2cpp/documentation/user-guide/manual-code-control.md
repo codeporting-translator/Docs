@@ -1,6 +1,11 @@
-# Manual code control #
+---
+order: "11"
+navTitle: "Manual translation"
+---
 
-A modern translator is developed with the approach that correctly written C# code should translate seamlessly into adequate C++ code without any additional configuration or subsequent edits. However, in reality, it's often necessary to resort to [translation settings](./configuration-file/main.md) and attribute assignments. But even these approaches don't always work, as options and attributes can't fully address all the limitations and bugs encountered in the translator. In this case, the "last resort" — manual code control — comes to the rescue.
+# Manual translation control tools #
+
+A modern translator is developed with the approach that correctly written C# code should translate seamlessly into adequate C++ code without any additional configuration or subsequent edits. However, in reality, it's often necessary to resort to [translation settings](configuration-file/main.md) and attribute assignments. But even these approaches don't always work, as options and attributes can't fully address all the limitations and bugs encountered in the translator. In this case, the "last resort" — manual code control — comes to the rescue.
 
 ## C# code control ##
 
@@ -51,5 +56,7 @@ void Increment(ref int i, ref int j, ref int k)
 In translated code, both `++i` and `++j` expressions will be present. However, `++k` is just a comment and it will remain this way after translating.
 
 > ⚠️ This is a simple but outdated approach that is highly discouraged from being used in new code. It's unreliable, as the translator generally ignores comments and may simply "forget" to process such a construct if it occurs in an unexpected place. Secondly, line breaks and spaces may be "lost", leading to formatting errors or even uncompiled code. Thirdly, such tricks often break the semantics on the C# side, which creates problems for correct translation.
+
+### Fragment replacement attribute ###
 
 A modern compiler provides a better alternative - the [CppFragment](cpp-attributes/reference.md#cppfragment) attribute, which allows for a safer and more predictable replacement of some of the syntax nodes from the implementation of C# methods to the specified fragments of C++ code.

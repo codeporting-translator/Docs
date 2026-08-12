@@ -1,4 +1,9 @@
-# Configuration file refrence #
+---
+order: "0"
+navTitle: "Configuration file"
+---
+
+# Configuration file reference #
 
 There is a default *translator.config* file supplied alongside with the translator one can refer to. For simple projects, this is sufficient, but for more complex ones, you'll need your own file (or several files) that extend the default settings. This section describes how to do that.
 
@@ -64,6 +69,6 @@ Also, one can reuse library configuration file when translating several projects
 
 See also:
 
-* [Configuration file nodes](nodes.md)
-* [Configuration file options](options.md)
-* [Attributes in configuration file](attributes.md)
+* [Nodes](configuration-file/nodes.md) - node-specific options and their meaning.
+* [Options](configuration-file/options.md) - all configuration options their and defaults.
+* [Attributes](configuration-file/attributes.md) - attribute settings available in the config file.

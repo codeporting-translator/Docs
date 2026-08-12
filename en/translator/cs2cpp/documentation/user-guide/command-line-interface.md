@@ -1,3 +1,8 @@
+---
+order: "10"
+navTitle: "Command line"
+---
+
 # Command Line Interface Reference #
 
 CodePorting.Translator Cs2Cpp provides a command-line option for converting C# code into equivalent C++ code. The input to the translator is a C# project and a configuration file that contains options governing different aspects of the conversion process. The output is a set of .cpp and .h files, together with CMake configuration files that can be used to generate project files and makefiles and build the sources for one of the supported platforms or compilers.
@@ -8,7 +13,7 @@ The translator comes with a default configuration file that contains default val
 
 The translator executable file, CodeTranslator.Cs2Cpp.Console.exe, is located in the bin/code_translator directory of the translator installation folder.It should be run using format:
 
-```ps
+```cmd
 CodeTranslator.Cs2Cpp.Console.exe [project] [output_dir] [options]
 ```
 

@@ -1,3 +1,8 @@
+---
+order: "12"
+navTitle: "User exceptions"
+---
+
 # User defined exceptions #
 
 Due to the fact that C++ allows to allocate an exception on stack, when in C# language exception is a reference type, it was necessary to design a solution which allows to extend exception instance lifetime and preserve its type without losing an opportunity to use exception in the common for C++ way.

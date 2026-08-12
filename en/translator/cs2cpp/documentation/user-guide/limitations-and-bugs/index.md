@@ -1,3 +1,8 @@
+---
+order: "9"
+navTitle: "Limitations and Bugs"
+---
+
 # Limitations and Bugs #
 
 This section describes known limitations and issues for the C# to C++ translator.
