@@ -1,3 +1,8 @@
+---
+order: "0"
+navTitle: "Licensing"
+---
+
 # CodePorting.Translator Cs2Cpp licensing #
 
 You can always download the latest version of the translator from the CodePorting <https://products.codeporting.com/translator/csharp-to-cpp> website. The evaluation version of CodePorting.Translator Cs2Cpp (without a license specified) provides full product functionality, but it throws evaluation error message and stops the translating process when source C# project does not comply to evaluation limitations.

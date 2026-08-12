@@ -5,6 +5,8 @@ navTitle: "Getting started"
 
 # Quick start #
 
+> Note! If you already have experience working with the old translator and want to learn about the new features and differences of the current Roslyn-based translator, you can immediately follow the link to the [Next Gen](next-gen/index.md) section.
+
 To translate a single C# file, a project, or an entire solution, follow these steps:
 
 1. [Install](installation.md) CodePorting Translator Cs2Cpp on your computer.

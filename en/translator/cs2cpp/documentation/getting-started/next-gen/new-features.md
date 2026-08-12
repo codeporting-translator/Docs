@@ -1,3 +1,8 @@
+---
+order: "1"
+navTitle: "New features"
+---
+
 # New supported language features #
 
 Here is a list of C# language features that the old translator could not translate, but the new one translates in whole or in part.

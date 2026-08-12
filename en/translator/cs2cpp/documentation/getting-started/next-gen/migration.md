@@ -1,3 +1,8 @@
+---
+order: "0"
+navTitle: "Migration"
+---
+
 # Migration from old translator #
 
 The new translator is being developed to ensure the most comfortable and seamless migration from the old translator and the new translator's console application (**"bin\code_translator\CodeTranslator.Cs2Cpp.Console.exe"**), accepts input familiar to the original translator.
@@ -8,7 +13,7 @@ As a rule, the launch of the old translator is often embedded in various build s
 
 After this, each run of the original translator will result in the new translator being started as a child process.
 
-As [mentioned earlier](about.md), the new translator fully understands the configuration files and attributes of the original one, so no code preprocessing is required. However, there are some features that should be taken into account:
+As [mentioned earlier](index.md), the new translator fully understands the configuration files and attributes of the original one, so no code preprocessing is required. However, there are some features that should be taken into account:
 
 1. The new translator works only with semantically correct projects. In other words, the projects to be translated must compile correctly on the given machine. This means, in particular, installing the correct version of the .NET SDK and other components that affect this. Otherwise Roslyn will not be able to obtain the correct semantics, and as a result, we will get a translation error.
 1. Although the new translator supports [features of new versions of the C# language](new-features.md), this does not mean that it supports them all. Roslyn itself may well correctly parse some new construction, but at the same time translator may "quietly" ignore unfamiliar syntax elements, and then, without issuing any errors, produce incorrect C++ code. The language is constantly evolving, new classes and methods are added to Roslyn, and there is no way to determine whether they are all processed or not. Therefore, control over such errors is still entirely up to the user.
