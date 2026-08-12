@@ -1,4 +1,5 @@
 ---
+order: "1"
 navTitle: "Getting started"
 ---
 
