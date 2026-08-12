@@ -1,3 +1,7 @@
+---
+navTitle: "Getting started"
+---
+
 # Quick start #
 
 To translate a single C# file, a project, or an entire solution, follow these steps:
@@ -14,4 +18,4 @@ To translate a single C# file, a project, or an entire solution, follow these st
 
 Conversion is performed on a per-project basis, thus in order to convert a multi-project C# solution each project has to be converted separately. If the C# project to be converted has a dependency on another C# project, the dependent-upon project has to be converted first. Then, when converting the dependent project, the information about its dependencies has to be specified in the configuration file that is passed to the Translator along with the project. The general rule is that projects should be converted in the order from the least dependent to the most dependent.
 
-For more complex scenarios, refer to the user guide.
+For more complex scenarios, refer to the [user guide](../user-guide/index.md).
