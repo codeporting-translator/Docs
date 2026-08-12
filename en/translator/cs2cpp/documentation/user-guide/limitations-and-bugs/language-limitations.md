@@ -130,7 +130,7 @@ object instance = Activator.CreateInstance(listOfInt);
 
 ## 'new' modifier in method declaration is not supported ##
 
-Translator does not support the **new** modifier in method declarations because there is no available equivalent in C++. 
+Translator does not support the **new** modifier in method declarations because there is no available equivalent in C++.
 
 ```cs
 public class Base
@@ -329,3 +329,7 @@ Console.WriteLine(member.Member.Name);
 ```
 
 C++ doesn't provide these capabilities and won't in the foreseeable future.
+
+## Translation of static members' initializers may introduce semantic difference between original C# code and generated C++ code ##
+
+Static members of a C# class are translated into static members of a C++ class. Because in C# language static member initialization order is well defined and in C++ it is not, a difference between how corresponding static members of original C# class and generated C++ class may be introduced during translation if intializers of a one or more static members refer other static members in other classes. In order to preserve static members intialization order, `deferred_init` translator option may be used. Another alternative is translating problematic members as singletons using [CppPortAsSingleton](../cpp-attributes/reference.md#cppportassingleton) attribute.
