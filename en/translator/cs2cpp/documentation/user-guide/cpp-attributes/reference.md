@@ -8,7 +8,7 @@ This section describes attributes available in the CodePorting.Translator.Cs2Cpp
 
 ## CodePorting.Translator Cs2Cpp attributes ##
 
-These attributes are part of the translator itself and affect how the syntax node they're assigned to is translated. As a reminder, they can be assigned either directly in the C# code being translated or through [config files](../configuration-file/attributes.md).
+These attributes are part of the translator itself and affect how the syntax node they're assigned to is translated. As a reminder, they can be assigned either directly in the C# code being translated or through [config files](/user-guide/configuration-file/attributes.md).
 
 ### CppAddStructDefaultMethods ###
 
@@ -335,7 +335,7 @@ Makes translator put type members into C++ code in the same order they are in C#
 
 **Arguments**: None
 
-Forces metadata generation for enum (string representation of values for parsing and serializing). Use if you need conversions between enum values and strings in translated application. [cpp_enum_enable_metadata option](../configuration-file/options.md#cpp_enum_enable_metadata) enables this behavior globally.
+Forces metadata generation for enum (string representation of values for parsing and serializing). Use if you need conversions between enum values and strings in translated application. [cpp_enum_enable_metadata option](/user-guide/configuration-file/options.md#cpp_enum_enable_metadata) enables this behavior globally.
 
 ### CppEnumWithOperators ###
 
@@ -1103,7 +1103,7 @@ private string GetFruitColor(string fruit)
 
 **Arguments**: None
 
-Forces using do-while form of switch translation inside this method. Similar to [alternative_string_switch option](../configuration-file/options.md#alternative_string_switch), but only affects single method.
+Forces using do-while form of switch translation inside this method. Similar to [alternative_string_switch option](/user-guide/configuration-file/options.md#alternative_string_switch), but only affects single method.
 
 ### CppUseReflection ###
 

@@ -428,6 +428,9 @@ case "123":
 | Allowed value | Meaning
 | --- | ---
 | true | Use do-while form.
+| false | Use if-else form.
+
+True
 
 ```cpp
 do {
@@ -444,7 +447,7 @@ do {
 } while (false);
 ```
 
-| false | Use if-else form.
+False
 
 ```cpp
 if (s == u"abc")
