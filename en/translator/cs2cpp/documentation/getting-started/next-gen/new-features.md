@@ -42,7 +42,7 @@ foreach (var number in GetNumbers())
 }
 ```
 
-The yield function is transformed into a state machine, a special enumerator is created that references this machine and yields values ​​one by one, calling the asynchronous function each time we call MoveNext(). If the "honest" implementation seems redundant, and the enumeration result would be better precalculated, you can use the [CppPreMaterialize](/user-guide/cpp-attributes/reference.md#cppprematerialize) attribute. In this case, a list will be created that will collect all the enumeration values ​​and return it via the `IEnumerable` interface.
+The yield function is transformed into a state machine, a special enumerator is created that references this machine and yields values ​​one by one, calling the asynchronous function each time we call MoveNext(). If the "honest" implementation seems redundant, and the enumeration result would be better precalculated, you can use the [CppPreMaterialize](../../user-guide/cpp-attributes/reference.md#cppprematerialize) attribute. In this case, a list will be created that will collect all the enumeration values ​​and return it via the `IEnumerable` interface.
 
 > ⚠️ Asynchronous enumerators are not implemented for now.
 
