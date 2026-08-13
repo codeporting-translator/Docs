@@ -120,7 +120,7 @@ String interpolation is converted to the `System::String::Format` function with 
 public string First { get; set; } = "Jane";
 ```
 
-Related field will be initilized in containing class constructor.
+Related field will be initialized in the containing class constructor.
 
 ### Indexers initialization ###
 
@@ -280,7 +280,7 @@ C++ const refrerence type (const&) is used for such properies.
 Span<int> numbers = stackalloc[] { 1, 2, 3, 4, 5 };
 ```
 
-`System.Span` and `System.ReadOnlySpan` are translated to C++ class templates `System::Span` and `System::ReadOnlySpan` relatively. `stackallock` arrays are translate to internal `System::Details::StackArray` class template.
+`System.Span` and `System.ReadOnlySpan` are translated to C++ class templates `System::Span` and `System::ReadOnlySpan` respectively. `stackalloc` arrays are translated to the internal `System::Details::StackArray` class template.
 
 ### `Memory<T>` and `ReadOnlyMemory<T>`, `MemoryManager<T>` ###
 
@@ -354,7 +354,7 @@ var husband = new Person("John", "Doe");
 var wife = person with {FirstName: "Jane"};
 ```
 
-Translator adds all necessary record methods automaticly.
+Translator adds all necessary record methods automatically.
 
 ### Primary constructors ###
 
@@ -394,7 +394,7 @@ Translator deduces object type from creation semantics and uses explicit type sp
 ### Type, logical and relation patterns ###
 
 ```cs
-if (obj is int and > 10) return "Integer grater than 10";
+if (obj is int and > 10) return "Integer greater than 10";
 ```
 
 Translator generates special pattern objects or simple logical expressions where suitable.
@@ -407,7 +407,7 @@ Translator generates special pattern objects or simple logical expressions where
 namespace UI.Widgets.Button;
 ```
 
-Translator works with such namespaces like with sigle classic namespace declaration. No tabs will be added (like with regular ones too).
+Translator works with such namespaces like with a single classic namespace declaration. No tabs will be added (like with regular ones too).
 
 ### Record structs. ###
 
@@ -451,7 +451,7 @@ public record Employee(string Name, int EmployeeId) : Person(Name) 
 }
 ```
 
-There is no principal difference between records and other types on C++ side, so method, inherintance and fields are fully applicable to them.
+There is no principal difference between records and other types on the C++ side, so methods, inheritance and fields are fully applicable to them.
 
 ### Collection expressions ###
 

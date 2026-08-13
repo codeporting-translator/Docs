@@ -23,7 +23,7 @@ This example assumes that C# SimpleLibrary project should be translated into C+
 
 With the C# project at hand and configuration file ready, we can convert the project.
 
-In order to covert **SimpleLibrary** project we run CMD and navigate to the directory with translator binary:
+In order to convert **SimpleLibrary** project we run CMD and navigate to the directory with translator binary:
 
 ```cmd
 >cd C:\CodePorting.Translator_Cs2Cpp\bin\translator
@@ -35,24 +35,24 @@ And run Translator:
 >CodeTranslator.Cs2Cpp.Console.exe -c C:\SimpleLibrary\SimpleLibrary.translator.config C:\SimpleLibrary\SimpleLibrary.csproj C:\output
 ```
 
-Translator will print some logs of the translating process to the console window and when it finishes translating, directory *C:\output* will contain a directory named *SimpleLibrary.Cpp* containing the generated C++ source files and Cmake configuration files.
+Translator will print some logs of the translating process to the console window and when it finishes translating, directory *C:\output* will contain a directory named *SimpleLibrary.Cpp* containing the generated C++ source files and CMake configuration files.
 
-Now we want to use Cmake to generate makefile/project files. Let it be a Visual Studio 2022 x86 project file. In CMD we navigate to the *C:\output\SimpleLibrary.Cpp* directory
+Now we want to use CMake to generate makefile/project files. Let it be a Visual Studio 2022 x86 project file. In CMD we navigate to the *C:\output\SimpleLibrary.Cpp* directory
 
 ```cmd
 >cd C:\output\SimpleLibrary.Cpp
 ```
 
-And run Cmake in configuration mode:
+And run CMake in configuration mode:
 
 ```cmd
->Cmake --G "Visual Studio 17 2022"  
+>CMake --G "Visual Studio 17 2022"  
 ```
 
-And now we can build the sources using either Cmake or Visual Studio. Let us use Cmake:
+And now we can build the sources using either CMake or Visual Studio. Let us use CMake:
 
 ```cmd
->Cmake --build . --config Release
+>CMake --build . --config Release
 ```
 
 The library is built.

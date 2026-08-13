@@ -308,7 +308,7 @@ Tells the compiler to generate const methods and insert const_cast where necessa
 
 | Allowed value | Meaning
 | --- | ---
-| true | Manage const methods automaticly.
+| true | Manage const methods automatically.
 | false | Manage const methods manually.
 
 **Default value**: false

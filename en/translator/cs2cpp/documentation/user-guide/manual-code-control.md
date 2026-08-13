@@ -5,7 +5,7 @@ navTitle: "Manual translation"
 
 # Manual translation control tools #
 
-A modern translator is developed with the approach that correctly written C# code should translate seamlessly into adequate C++ code without any additional configuration or subsequent edits. However, in reality, it's often necessary to resort to [translation settings](configuration-file/main.md) and attribute assignments. But even these approaches don't always work, as options and attributes can't fully address all the limitations and bugs encountered in the translator. In this case, the "last resort" — manual code control — comes to the rescue.
+A modern translator is developed with the approach that correctly written C# code should translate seamlessly into adequate C++ code without any additional configuration or subsequent edits. However, in reality, it's often necessary to resort to [translation settings](configuration-file/index.md) and attribute assignments. But even these approaches don't always work, as options and attributes can't fully address all the limitations and bugs encountered in the translator. In this case, the "last resort" — manual code control — comes to the rescue.
 
 ## C# code control ##
 
@@ -25,7 +25,7 @@ public static bool IsTranslatedCode()
 This mechanism is a convenient way to remove definitions and code sections from C# code that are fundamentally untranslatable to C++, replacing them with translatable equivalents or inserting stubs. However, this tool should be used with caution to avoid unexpected pitfalls:
 
 1. By inserting such a condition, you create code that will never be tested except when translated to C++. This often leads to situations where the C++ section becomes outdated or even inconsistent with the rest of the code. Errors arise that aren't visible in the IDE, but only in the translator's compilation error log (*translatorSourceErrors.log*), which is rarely noticed.
-1. Quite often, adequate alternatives that would allow replacing non-translatable code with translatable code simply don't exist, or they're not entirely equivalent. This forces developers to resort to various hacks and tricks that result in difficult-to-diagnose failures. For example, attempting to "cut out" the `vritual` keyword from a generic method (virtual methods cannot be templates in C++) will sooner or later result in code that compiles but doesn't run correctly.
+1. Quite often, adequate alternatives that would allow replacing non-translatable code with translatable code simply don't exist, or they're not entirely equivalent. This forces developers to resort to various hacks and tricks that result in difficult-to-diagnose failures. For example, attempting to "cut out" the `virtual` keyword from a generic method (virtual methods cannot be templates in C++) will sooner or later result in code that compiles but doesn't run correctly.
 1. This approach is fundamentally C#-intrusive, and not all team policies allow polluting the source code of the translated project with such directives.
 
 There's also a special symbol, `__roslyn`, which indicates that the project is being translated using the modern, Roslyn-based translator, rather than the older NRefactory-based one. This option will be useful for teams gradually migrating from the old translator to the new one, to avoid breaking backward compatibility.

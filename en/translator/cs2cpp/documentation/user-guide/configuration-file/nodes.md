@@ -10,7 +10,7 @@ This section lists all tags allowed in configuration file.
 <csproj path="Path/ProjectName.csproj" cfg="Configuration" platform="Platform"/>
 ```
 
-Refernce to input project file.
+Reference to input project file.
 
 Attributes:
 
@@ -190,11 +190,11 @@ Tag syntax is useful when implementing library manually. When using translated l
 </cmake_part_template>
 ```
 
-Cmake rules to allow for includes and other neccessary setups like 3rd party libraries lookup.
+CMake rules to allow for includes and other necessary setups like 3rd party libraries lookup.
 
 | Attribute | Meaning | Mandatory |
 | --- | --- | --- |
-| _Element contents_ | Bare cmake code to be used both for libraries and executables | No |
+| _Element contents_ | Bare CMake code to be used both for libraries and executables | No |
 
 #### cmake_link_template ####
 
@@ -204,11 +204,11 @@ Cmake rules to allow for includes and other neccessary setups like 3rd party lib
 </cmake_link_template>
 ```
 
-Cmake rules to allow for linkable units (DLLs, EXEs)
+CMake rules to allow for linkable units (DLLs, EXEs)
 
 | Attribute | Meaning | Mandatory |
 | --- | --- | --- |
-| _Element contents_ | Bare cmake code to be used for linkable items (executables, shared libraries) | |
+| _Element contents_ | Bare CMake code to be used for linkable items (executables, shared libraries) | |
 
 #### defines ####
 
@@ -467,7 +467,7 @@ Single assembly to import symbols from.
 </dont_wrap_params>
 ```
 
-Disables parameters wrapping (matching actual parameters against format ones with neccessary casts) against specific method or all methods of specific class. This is required if the method uses variadic template arguments and actual wrapping would fail.
+Disables parameters wrapping (matching actual parameters against format ones with necessary casts) against specific method or all methods of specific class. This is required if the method uses variadic template arguments and actual wrapping would fail.
 
 Only 'class' and 'method' subnodes are allowed here.
 

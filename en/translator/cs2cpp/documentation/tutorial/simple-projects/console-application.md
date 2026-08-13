@@ -28,19 +28,19 @@ SimpleConsoleApp.translator.config begins with an XML declaration, which specifi
 
 Next, the default Translator configuration file is imported using \<import\> element. The default configuration will assign default values to all configuration options.  
 
-Also we want Translator to add some commands to the output CMakeLists.txt. We do that by adding \<cmake_commands\> element to the configuration file containing raw Cmake commands. The first command sets the output directory for the executable binary by setting the corresponding property on the target ${PROJECT_NAME}.
+Also we want Translator to add some commands to the output CMakeLists.txt. We do that by adding \<cmake_commands\> element to the configuration file containing raw CMake commands. The first command sets the output directory for the executable binary by setting the corresponding property on the target ${PROJECT_NAME}.
 
 ```cmake
 set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../bin")
 ```
 
-Here ${PROJECT_NAME} is the name of the Cmake project which is equal to the name of the main Cmake executable target.
+Here ${PROJECT_NAME} is the name of the CMake project which is equal to the name of the main CMake executable target.
 
 Then the \</cmake_commands\> element is closed. Finally the XML document is finished with closing tag of the root element \</porter\>  
 
 With the C# project at hand and configuration file ready, we can convert the project.
 
-In order to covert **SimpleConsoleApp** project we run **CMD** and navigate to the directory with translator binary:
+In order to convert **SimpleConsoleApp** project we run **CMD** and navigate to the directory with translator binary:
 
 ```cmd
 >cd C:\CodePorting.Translator_Cs2Cpp\bin\code_translator
@@ -52,24 +52,24 @@ And run Translator:
 >CodeTranslator.Cs2Cpp.Console.exe -c C:\SimpleConsoleApp\SimpleConsoleApp.translator.config C:\SimpleConsoleApp\SimpleConsoleApp.csproj C:\output
 ```
 
-Translator will print some logs of the translating process to the console window and when it finishes translating, directory *C:\output* will contain a directory named *SimpleConsoleApp.Cpp* containing the generated C++ source files and Cmake configuration files.
+Translator will print some logs of the translating process to the console window and when it finishes translating, directory *C:\output* will contain a directory named *SimpleConsoleApp.Cpp* containing the generated C++ source files and CMake configuration files.
 
-Now we want to use Cmake to generate makefile/project files. Let it be a Visual Studio 2022 x86 project file. In CMD we navigate to the *C:\output\SimpleConsoleApp.Cpp* directory
+Now we want to use CMake to generate makefile/project files. Let it be a Visual Studio 2022 x86 project file. In CMD we navigate to the *C:\output\SimpleConsoleApp.Cpp* directory
 
 ```cmd
 >cd C:\output\SimpleConsoleApp.Cpp
 ```
 
-And run Cmake in configuration mode:
+And run CMake in configuration mode:
 
 ```cmd
- >Cmake --G "Visual Studio 17 2022"
+>CMake --G "Visual Studio 17 2022"
 ```
 
-And now we can build the sources using either Cmake or Visual Studio. Let us use Cmake:
+And now we can build the sources using either CMake or Visual Studio. Let us use CMake:
 
 ```cmd
->Cmake --build . --config Release
+>CMake --build . --config Release
 ```
 
 When build finishes, directory *C:\output\bin\Release* should contain two files: *SimpleConsoleApp.Cpp.exe*, which has just been built from sources, and *aspose_cpp_vc140.dll*, which was copied from Translator installation directory during a post-build step. When we run *SimpleConsoleApp.Cpp.exe* its output to the Console window should be similar to the output of the original C# application project we translated.
