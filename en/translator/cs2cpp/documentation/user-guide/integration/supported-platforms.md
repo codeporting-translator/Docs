@@ -1,3 +1,8 @@
+---
+order: "0"
+navTitle: "Supported platfoms"
+---
+
 # Supported platfoms #
 
 There are different requirements for running CodePorting.Translator.Cs2Cpp (including the GUI) and for building/running the translated code.
