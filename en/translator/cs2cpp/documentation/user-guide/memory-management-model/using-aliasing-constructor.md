@@ -1,3 +1,8 @@
+---
+order: "0"
+navTitle: "Aliasing constructor"
+---
+
 # Using aliasing constructor to create a smart pointer #
 
 Let's consider the `Document` object which is the root in the object tree. As the result, we can guarantee correctness of work and safety of use for objects from the object tree while the parent `Document` object is alive. So, the following approach will violate our key agreement: creation of the `Document` object in some inner region (e.g., in the some method) and return the some child node (e.g., paragraph) of the `Document` object from this inner region (because, the lifetime of the returning child node will be longer than lifetime of the parent `Document` object). In other word, our memory management model will be similar to [Qt memory management model](http://doc.qt.io/qt-5/objecttrees.html).

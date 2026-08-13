@@ -1,3 +1,8 @@
+---
+order: "2"
+navTitle: "QT support"
+---
+
 # QT support #
 
 [Qt](https://www.qt.io/) is a widely used C++ framework. It provides the libraries for many usecases. There is also an IDE available which is called Qt Creator. This page contains information on how these can be used with CodePorting.Translator Cs2Cpp.

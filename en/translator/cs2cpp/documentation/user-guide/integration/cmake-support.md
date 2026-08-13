@@ -1,3 +1,8 @@
+---
+order: "1"
+navTitle: "CMake support"
+---
+
 # CMake support #
 
 Translated projects are being built by means of Cmake. Specify target platform you want to build your binaries for. Use standard Cmake means to do so. If building for platform different from the one you were using to translate your binaries (e. g. for Linux), copy all files of the translateded project to this new platform and make sure to supply correct references to location of CodePorting.Translator Cs2Cpp distribution package on this new platform.

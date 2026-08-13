@@ -1,3 +1,8 @@
+---
+order: "2"
+navTitle: "Memory management"
+---
+
 # Memory management model #
 
 In C#, memory management rules are simple: all objects allocated on heap exist until references to them exist, and are collected by GC afterwards. In C++, this is not the case.
