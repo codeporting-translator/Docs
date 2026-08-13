@@ -64,7 +64,7 @@ public static IEnumerable<int> GetNumbers()
 The yield function is transformed into a state machine, a special enumerator is created that references this machine and yields values ​​one by one, calling the asynchronous function each time we call MoveNext(). 
 
 ```cpp
-System::SharedPtr<System::Collections::Generic::IEnumerable<int32_t>> DelegateOnMember::GetNumbers()
+System::SharedPtr<System::Collections::Generic::IEnumerable<int32_t>> GetNumbers()
 {
     return System::MakeYieldEnumerable<int32_t>([=](System::Details::YieldContext<int32_t>& __) mutable
     {
@@ -79,7 +79,7 @@ System::SharedPtr<System::Collections::Generic::IEnumerable<int32_t>> DelegateOn
 If the "honest" implementation seems redundant, and the enumeration result would be better precalculated, you can use the [CppPreMaterialize](../../user-guide/cpp-attributes/reference.md#cppprematerialize) attribute. In this case, a list will be created that will collect all the enumeration values ​​and return it via the `IEnumerable` interface.
 
 ```cpp
-System::SharedPtr<System::Collections::Generic::IEnumerable<int32_t>> DelegateOnMember::GetNumbers()
+System::SharedPtr<System::Collections::Generic::IEnumerable<int32_t>> GetNumbers()
 {
     auto __result = System::MakeObject<System::Collections::Generic::List<int32_t>>();
     __result->Add(1);
@@ -143,7 +143,7 @@ public async Task<string> DownloadContentAsync(string url)
 The asynchronous functions are transformed into a state machines wrapped with `System::Threading::Tasks::Task` class (`System::Threading::Tasks::ResultTask` class template is used for non-void tasks). Task implementation isn't full, but covers all main principles: tasks schenuling, cancellation, exceptions processing, asynchronous IO, async tests, async lambdas, async `Main` method and other.
 
 ```cpp
-System::RTaskPtr<System::String> DelegateOnMember::DownloadContentAsync(System::String url)
+System::RTaskPtr<System::String> DownloadContentAsync(System::String url)
 {
     System::String __e1; System::SharedPtr<System::Net::Http::HttpClient> client;
     return System::MakeAsync<System::String>([=](System::Details::ResultAsyncContext<System::String>& __) mutable
@@ -288,6 +288,14 @@ int SomeMethod()
 
 On the C++ side, local functions are converted to local instances of lambda functors.
 
+```cpp
+int32_t SomeMethod()
+{
+    auto SomeLocalMethod = []() -> int32_t { return 10; };
+    return SomeLocalMethod() * SomeLocalMethod();
+}
+```
+
 > ⚠️ Generic recursive local methods require more complex invocation and declaration semantics and not implemented for now.
 
 ### Value tuples ###
@@ -303,16 +311,33 @@ var (name, age) = GetPerson();
 
 Value tuples are translated into the System::ValueTuple template specification. This leads to the loss of field names, and they are accessed through indexes.
 
+```cpp
+System::ValueTuple<System::String, int32_t> GetPerson()
+{
+    return {System::String(u"Alice"), 25};
+}
+
+System::String name; int32_t age;
+System::TieTuple(name, age) = GetPerson();
+```
+
 ### Value tasks ###
 
 ```cs
-public virtual ValueTask<int> GetSomeInt()
+public ValueTask<int> GetSomeInt()
 {
-    return new ValueTask(10);
+    return new ValueTask<int>(10);
 }
 ```
 
-Value tasks are translated into the System::Threading::Tasks::(Result)ValueTask templates specifications.
+Value tasks are translated into the `System::Threading::Tasks::(Result)ValueTask` templates specifications.
+
+```cpp
+System::Threading::Tasks::ResultValueTask<int32_t> GetSomeInt()
+{
+    return System::Threading::Tasks::ResultValueTask<int32_t>(10);
+}
+```
 
 > ⚠️ IValueTaskSource-based constructors are not implemented yet.
 
@@ -327,16 +352,32 @@ if (TryGet(out var result))
 
 The translator adds variable declarations before the statement in which they are designated in C#.
 
-### Type pattern matching ###
-
-```cs
-if (baseObject is Derived derived)
+```cpp
+int32_t result;
+if (TryGet(result))
 {
-    derived.MethodSpecificToDerived();
+    Do(result);
 }
 ```
 
-Internal method `System::ObjectExt::IsDeclaration with` pre-declared variable before 'if' statement is used to translate this.
+### Type pattern matching ###
+
+```cs
+if (enumerable is int[] array)
+{
+    return array.Length;
+}
+```
+
+Overloaded function `System::Is` with pre-declared variable before **if** statement is used to translate this.
+
+```cpp
+System::ArrayPtr<int32_t> array;
+if (System::Is<System::Array<int32_t>>(enumerable, array))
+{
+    return array->get_Length();
+}
+```
 
 ### Constant pattern matching ###
 
@@ -347,17 +388,32 @@ if (data is 1.0f)
 }
 ```
 
-Internal method `System::ObjectExt::IsConstant` is used to translate this.
+Overloaded function `System::Is` is used to translate this.
+
+```cpp
+if (System::Is(data, 1.0f))
+{
+    System::Console::WriteLine(u"Data contains floating one");
+}
+```
 
 ### Discarding operator "_" ###
 
 ```cs
 var (x, _, z) = (1, 2, 3);
 if (int.TryParse("123", out _)) {}
-if (obj is string _) {}
 ```
 
 Special method template `System::Discard` is used to accept discarded vaules.
+
+```cpp
+int32_t x, z;
+System::TieTuple(x, System::Discard<int32_t>(), z) = System::MakeTuple(1, 2, 3);
+
+if (System::Int32::TryParse(u"123", System::Discard<int32_t>()))
+{
+}
+```
 
 ### Ref methods ###
 
@@ -370,21 +426,51 @@ ref int SomeMethod()
 
 C++ reference type (&) is used for such methods.
 
+```cpp
+int32_t& SomeMethod()
+{
+    return m_someIntData;
+}
+```
+
 ### Ref local variables ###
 
 ```cs
-var ref tempRef = ref m_someIntData;
+int a = 1, b = 2;
+
+ref var r = ref a;
+r = 10;
+
+r = ref b;
+r = 20;
 ```
 
 Raw C++ pointer type (*) is used for such variables.
 
+```cpp
+int32_t a = 1, b = 2;
+
+int32_t *r = &a;
+*r = 10;
+
+r = &b;
+*r = 20;
+```
+
 ### Ref properties and readonly ref properties ###
 
 ```cs
-ref int SomeProperty() => return ref m_someIntData;
+ref int SomeProperty => ref m_someIntData;
 ```
 
 C++ reference type (&) and const refrerence type (const&) are used for such properies.
+
+```cpp
+int32_t& get_SomeProperty()
+{
+    return m_someIntData;
+}
+```
 
 ### In parameters ###
 
