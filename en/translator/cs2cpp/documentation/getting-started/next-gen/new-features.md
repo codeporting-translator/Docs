@@ -61,7 +61,7 @@ public static IEnumerable<int> GetNumbers()
 }
 ```
 
-The yield function is transformed into a state machine, a special enumerator is created that references this machine and yields values ​​one by one, calling the asynchronous function each time we call MoveNext(). 
+The yield function is transformed into a state machine, a special enumerator is created that references this machine and yields values ​​one by one, calling the asynchronous function each time we call MoveNext().
 
 ```cpp
 System::SharedPtr<System::Collections::Generic::IEnumerable<int32_t>> GetNumbers()
@@ -480,6 +480,10 @@ public double CalculateDistance(in Point p1, in Point p2)
 
 C++ const refrerence type (const&) is used for such properies.
 
+```cpp
+double CalculateDistance(const Point& p1, const Point& p2)
+```
+
 ### `Span<T>` and `ReadOnlySpan<T>`, stackalloc ###
 
 ```cs
@@ -488,13 +492,22 @@ Span<int> numbers = stackalloc[] { 1, 2, 3, 4, 5 };
 
 `System.Span` and `System.ReadOnlySpan` are translated to C++ class templates `System::Span` and `System::ReadOnlySpan` respectively. `stackalloc` arrays are translated to the internal `System::Details::StackArray` class template.
 
+```cpp
+System::Details::StackArray<int32_t, 5> array_0 = {1, 2, 3, 4, 5};
+System::Span<int32_t> numbers = array_0;
+```
+
 ### `Memory<T>` and `ReadOnlyMemory<T>`, `MemoryManager<T>` ###
 
 ```cs
-Memory<int> data = [] { 1, 2, 3, 4, 5 };
+Memory<int> data = new[] { 1, 2, 3, 4, 5 };
 ```
 
 `System.Memory` and `System.ReadOnlyMemory` are translated to C++ class templates `System::Memory` and `System::ReadOnlyMemory` relatively.
+
+```cpp
+System::Memory<int32_t> data = System::Memory<int32_t>::to_Memory(System::MakeArray<int32_t>({1, 2, 3, 4, 5}));
+```
 
 ### Numeric literals delimeter "_" ###
 
@@ -503,6 +516,10 @@ var bigNumber = 100_000_000;
 ```
 
 Translator ignores _ inside of numeric literals.
+
+```cpp
+int32_t bigNumber = 100000000;
+```
 
 ## C# 8.0 ##
 
@@ -515,6 +532,11 @@ string nonNullableString = nullableString!;
 
 The translator ignores these annotations on C++ side, although in the future, this may become the basis for some optimization (it will be possible to eliminate null checks when dereferencing a smart pointer).
 
+```cpp
+System::String nullableString = GetNullableString();
+System::String nonNullableString = nullableString;
+```
+
 ### Switch expressions ###
 
 ```cs
@@ -522,6 +544,12 @@ string result = input switch {1 => "one", 2 => "two", _ => "many"};
 ```
 
 On the C++ side, the translator builds a "ladder" of ternary operators from this.
+
+```cpp
+System::String result = input == 1 ? System::String(u"one") :
+    input == 2 ? System::String(u"two") :
+    System::String(u"many");
+```
 
 ### Property and positional patterns ###
 
@@ -532,13 +560,39 @@ string other = tuple switch {(0, 0) => "Zero tuple", _ => "Other tuple"};
 
 Translator uses speical pattern objects to repesent such patterns or logical expressions in most simple cases.
 
+```cpp
+System::String result = System::Is(input, (&System::String::get_Length% (_== 0))) ? System::String(u"Empty") :
+    System::String(u"Non-empty");
+System::String other = System::Is(tuple, _(_== 0, _== 0)) ? System::String(u"Zero tuple") :
+    System::String(u"Other tuple");
+```
+
 ### Using declarations ###
 
 ```cs
 using var d = new Disposable();
+d.DoSome();
 ```
 
 It should be translated as ordinary using block with braces to the end of scope.
+
+```cpp
+{
+    auto d = System::MakeObject<RefLocalTests::Disposable>();
+    // Clearing resources under 'using' statement
+    System::Details::DisposeGuard<1> __dispose_guard_0({d});
+    // ------------------------------------------
+    
+    try
+    {
+        d->DoSome();
+    }
+    catch(...)
+    {
+        __dispose_guard_0.SetCurrentException(std::current_exception());
+    }
+}
+```
 
 ### Indexs and ranges ###
 
@@ -549,26 +603,49 @@ var slice = array[1..^2];
 
 It should be translated to free `System::Get` methods with instance of `System::Index` or `System::Range` object relatively as second argument.
 
-## C# 9.0 ##
-
-### Records and 'with' keyword ###
-
-```cs
-public record Person(string FirstName, string LastName);
-
-var husband = new Person("John", "Doe");
-var wife = person with {FirstName: "Jane"};
+```cpp
+int32_t element = System::Get(array, System::Index(1, true));
+auto slice = System::Get(array, System::Range(1, System::Index(2, true)));
 ```
 
-Translator adds all necessary record methods automatically.
+## C# 9.0 ##
 
 ### Primary constructors ###
 
 ```cs
-public class Car(string Manufacturer, string Model);
+class Car(string Manufacturer, string Model)
+{
+    public override string ToString()
+    {
+        return Manufacturer + ":" + Model;
+    }
+}
 ```
 
-Translator generates all necessary constructor and properties needed.
+Translator generates all necessary constructor, fields and properties needed.
+
+```cpp
+class Car : public System::Object
+{
+    typedef Car ThisType;
+    typedef System::Object BaseType;
+    
+    typedef ::System::BaseTypesInfo<BaseType> ThisTypeBaseTypesInfo;
+    RTTI_INFO_DECL();
+    
+public:
+
+    Car(System::String Manufacturer, System::String Model);
+    
+    System::String ToString() const override;
+    
+private:
+
+    System::String Manufacturer;
+    System::String Model;
+    
+};
+```
 
 ### Initialization property accessors ###
 
@@ -581,13 +658,95 @@ public class Person
 
 Init-only accessors are translated like regular setters but with "init_" prefix. They are public, so on C++ side programmer can use them in any code point on his own risk.
 
+```cpp
+class Person : public System::Object
+{
+    typedef Person ThisType;
+    typedef System::Object BaseType;
+    
+    typedef ::System::BaseTypesInfo<BaseType> ThisTypeBaseTypesInfo;
+    RTTI_INFO_DECL();
+    
+public:
+
+    System::String get_FirstName();
+    void init_FirstName(System::String value);
+    
+private:
+
+    System::String pr_FirstName;
+    
+};
+```
+
+### Records and 'with' keyword ###
+
+```cs
+public record Person(string FirstName, string LastName);
+
+var husband = new Person("John", "Doe");
+var wife = husband with { FirstName = "Jane"};
+```
+
+Translator generates C++ class and adds all necessary record methods automatically.
+
+```cpp
+class Person : public System::IEquatable<System::SharedPtr<RefLocalTests::Person>>
+{
+    typedef Person ThisType;
+    typedef System::IEquatable<System::SharedPtr<RefLocalTests::Person>> BaseType;
+    
+    typedef ::System::BaseTypesInfo<BaseType> ThisTypeBaseTypesInfo;
+    RTTI_INFO_DECL();
+    
+public:
+
+    System::String get_FirstName() const { return pr_FirstName; }
+    void init_FirstName(System::String value) { pr_FirstName = value; }
+    System::String get_LastName() const { return pr_LastName; }
+    void init_LastName(System::String value) { pr_LastName = value; }
+    Person(System::String FirstName, System::String LastName);
+    
+    bool operator==(const ThisType& other) const;
+    bool operator!=(const ThisType& other) const;
+    bool Equals(System::SharedPtr<ThisType> other) override;
+    bool Equals(System::SharedPtr<System::Object> obj) override;
+    int32_t GetHashCode() const override;
+    System::String ToString() const override;
+    void Deconstruct(System::String& FirstName_, System::String& LastName_);
+    
+protected:
+
+    virtual void PrintMembers(System::Text::StringBuilder& builder);
+    
+    template<typename T, typename A> friend System::SharedPtr<T> System::With(const System::SharedPtr<T>&, const A&);
+    
+    virtual RefLocalTests::Person* _Clone_() const;
+    
+private:
+
+    System::String pr_FirstName;
+    System::String pr_LastName;
+    
+};
+
+auto husband = System::MakeObject<RefLocalTests::Person>(u"John", u"Doe");
+auto wife = System::With(husband, [&](auto& copy){ copy.init_FirstName(u"Jane"); });
+```
+
 ### Function pointers ###
 
 ```cs
-delegate*<int, int, int> pointer = &Sum;
+delegate*<int, int, int> pointer = &Add;
+var summ = pointer(1, 2);
 ```
 
 Function pointers are translated to C++ function pointer alias `System::FunctionPtr` or to `std::function` in some cases.
+
+```cpp
+System::FunctionPtr<int32_t, int32_t, int32_t> pointer = &Add;
+int32_t summ = pointer(1, 2);
+```
 
 ### Implicit 'new' expressions ###
 
@@ -597,17 +756,31 @@ Unit unit = new(10);
 
 Translator deduces object type from creation semantics and uses explicit type specification on C++ side.
 
+```cpp
+Unit unit = Unit(10);
+```
+
 ### Type, logical and relation patterns ###
 
 ```cs
-if (obj is int and > 10) return "Integer greater than 10";
+if (obj is int and > 10)
+{
+    Console.WriteLine("Integer greater than 10");
+}
 ```
 
 Translator generates special pattern objects or simple logical expressions where suitable.
 
+```cpp
+if (System::ObjectExt::Is<int32_t>(obj) && System::Greater(obj, 10))
+{
+    System::Console::WriteLine(u"Integer greater than 10");
+}
+```
+
 ## C# 10.0 ##
 
-### File-scoped namespaces. ###
+### File-scoped namespaces ###
 
 ```cs
 namespace UI.Widgets.Button;
@@ -615,23 +788,76 @@ namespace UI.Widgets.Button;
 
 Translator works with such namespaces like with a single classic namespace declaration. No tabs will be added (like with regular ones too).
 
-### Record structs. ###
+### Record structs ###
 
 ```cs
-public record struct Point(int X, int Y);
+record struct Vector(int X, int Y);
 ```
 
 Should be translated like ordinary struct but with auto methods like with reference record.
+
+```cpp
+class Vector : public System::IEquatable<RefLocalTests::Vector>, public System::Details::BoxableObjectBase
+{
+    typedef Vector ThisType;
+    typedef System::IEquatable<RefLocalTests::Vector> BaseType;
+    
+    typedef ::System::BaseTypesInfo<BaseType> ThisTypeBaseTypesInfo;
+    RTTI_INFO_DECL();
+    
+public:
+
+    ASPOSECPP_VALUE_TYPE_IMPLEMENTS_INTERFACES();
+    
+public:
+
+    int32_t get_X() const { return pr_X; }
+    void set_X(int32_t value) { pr_X = value; }
+    int32_t get_Y() const { return pr_Y; }
+    void set_Y(int32_t value) { pr_Y = value; }
+    Vector(int32_t X, int32_t Y);
+    Vector();
+    
+    bool operator==(const ThisType& other) const;
+    bool operator!=(const ThisType& other) const;
+    bool Equals(ThisType other) override;
+    bool Equals(System::SharedPtr<System::Object> obj) override;
+    int32_t GetHashCode() const override;
+    System::String ToString() const override;
+    void Deconstruct(int32_t& X_, int32_t& Y_);
+    
+protected:
+
+    virtual void PrintMembers(System::Text::StringBuilder& builder);
+    
+private:
+
+    int32_t pr_X;
+    int32_t pr_Y;
+    
+};
+```
 
 ## C# 11.0 ##
 
 ### List patterns ###
 
 ```cs
-if (array is [0, .. mid, 10]) return mid;
+if (array is [0, .. var mid, 10])
+{
+    return mid;
+}
 ```
 
 Translator generates special pattern objects only. No simple logical expressions suitable here.
+
+```cpp
+System::ArrayPtr<int32_t> mid;
+if (System::Is(array, _._(_== 0, _._[_[mid]], _== 10)))
+{
+    return mid;
+}
+```
 
 ### UTF8 string literals ###
 
@@ -640,6 +866,10 @@ ReadOnlySpan<byte> utf8_str = "Привет!"u8;
 ```
 
 Translator uses native C++11 UTF8 string literals and uses special constructor to initialize `ReadOnlySpan` with it.
+
+```cpp
+System::ReadOnlySpan<uint8_t> utf8_str = u8"Привет!";
+```
 
 ## C# 12.0 ##
 
@@ -659,6 +889,85 @@ public record Employee(string Name, int EmployeeId) : Person(Name) 
 
 There is no principal difference between records and other types on the C++ side, so methods, inheritance and fields are fully applicable to them.
 
+```cpp
+class Person : public virtual System::IEquatable<System::SharedPtr<RefLocalTests::Person>>
+{
+    typedef Person ThisType;
+    typedef System::IEquatable<System::SharedPtr<RefLocalTests::Person>> BaseType;
+    
+    typedef ::System::BaseTypesInfo<BaseType> ThisTypeBaseTypesInfo;
+    RTTI_INFO_DECL();
+    
+public:
+
+    System::String get_Name() const { return pr_Name; }
+    void init_Name(System::String value) { pr_Name = value; }
+    virtual System::String GetName();
+    
+    Person(System::String Name);
+    
+    bool operator==(const ThisType& other) const;
+    bool operator!=(const ThisType& other) const;
+    bool Equals(System::SharedPtr<ThisType> other) override;
+    bool Equals(System::SharedPtr<System::Object> obj) override;
+    int32_t GetHashCode() const override;
+    System::String ToString() const override;
+    void Deconstruct(System::String& Name_);
+    
+protected:
+
+    virtual void PrintMembers(System::Text::StringBuilder& builder);
+    
+    template<typename T, typename A> friend System::SharedPtr<T> System::With(const System::SharedPtr<T>&, const A&);
+    
+    virtual RefLocalTests::Person* _Clone_() const;
+    
+private:
+
+    System::String pr_Name;
+    
+};
+
+class Employee : public RefLocalTests::Person, public System::IEquatable<System::SharedPtr<RefLocalTests::Employee>>
+{
+    typedef Employee ThisType;
+    typedef RefLocalTests::Person BaseType;
+    typedef System::IEquatable<System::SharedPtr<RefLocalTests::Employee>> BaseType1;
+    
+    typedef ::System::BaseTypesInfo<BaseType, BaseType1> ThisTypeBaseTypesInfo;
+    RTTI_INFO_DECL();
+    
+public:
+
+    int32_t get_EmployeeId() const { return pr_EmployeeId; }
+    void init_EmployeeId(int32_t value) { pr_EmployeeId = value; }
+    System::String GetName() override;
+    
+    Employee(System::String Name, int32_t EmployeeId);
+    
+    bool operator==(const ThisType& other) const;
+    bool operator!=(const ThisType& other) const;
+    bool Equals(System::SharedPtr<ThisType> other) override;
+    bool Equals(System::SharedPtr<System::Object> obj) override;
+    int32_t GetHashCode() const override;
+    System::String ToString() const override;
+    void Deconstruct(System::String& Name_, int32_t& EmployeeId_);
+    
+protected:
+
+    void PrintMembers(System::Text::StringBuilder& builder) override;
+    
+    template<typename T, typename A> friend System::SharedPtr<T> System::With(const System::SharedPtr<T>&, const A&);
+    
+    RefLocalTests::Person* _Clone_() const override;
+    
+private:
+
+    int32_t pr_EmployeeId;
+    
+};
+```
+
 ### Collection expressions ###
 
 ```cs
@@ -666,3 +975,7 @@ int[] x = [1, 2, 3, .. otherCollection];
 ```
 
 Translator uses object builder to construct such collections.
+
+```cpp
+System::ArrayPtr<int32_t> x = System::BuildArray<int32_t>().Add({1, 2, 3}).AddSpread(otherCollection).Get();
+```
