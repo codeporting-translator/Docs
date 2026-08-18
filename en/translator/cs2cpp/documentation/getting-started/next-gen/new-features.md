@@ -578,7 +578,7 @@ It should be translated as ordinary using block with braces to the end of scope.
 
 ```cpp
 {
-    auto d = System::MakeObject<RefLocalTests::Disposable>();
+    auto d = System::MakeObject<Disposable>();
     // Clearing resources under 'using' statement
     System::Details::DisposeGuard<1> __dispose_guard_0({d});
     // ------------------------------------------
@@ -691,10 +691,10 @@ var wife = husband with { FirstName = "Jane"};
 Translator generates C++ class and adds all necessary record methods automatically.
 
 ```cpp
-class Person : public System::IEquatable<System::SharedPtr<RefLocalTests::Person>>
+class Person : public System::IEquatable<System::SharedPtr<Person>>
 {
     typedef Person ThisType;
-    typedef System::IEquatable<System::SharedPtr<RefLocalTests::Person>> BaseType;
+    typedef System::IEquatable<System::SharedPtr<Person>> BaseType;
     
     typedef ::System::BaseTypesInfo<BaseType> ThisTypeBaseTypesInfo;
     RTTI_INFO_DECL();
@@ -721,7 +721,7 @@ protected:
     
     template<typename T, typename A> friend System::SharedPtr<T> System::With(const System::SharedPtr<T>&, const A&);
     
-    virtual RefLocalTests::Person* _Clone_() const;
+    virtual Person* _Clone_() const;
     
 private:
 
@@ -730,7 +730,7 @@ private:
     
 };
 
-auto husband = System::MakeObject<RefLocalTests::Person>(u"John", u"Doe");
+auto husband = System::MakeObject<Person>(u"John", u"Doe");
 auto wife = System::With(husband, [&](auto& copy){ copy.init_FirstName(u"Jane"); });
 ```
 
@@ -797,10 +797,10 @@ record struct Vector(int X, int Y);
 Should be translated like ordinary struct but with auto methods like with reference record.
 
 ```cpp
-class Vector : public System::IEquatable<RefLocalTests::Vector>, public System::Details::BoxableObjectBase
+class Vector : public System::IEquatable<Vector>, public System::Details::BoxableObjectBase
 {
     typedef Vector ThisType;
-    typedef System::IEquatable<RefLocalTests::Vector> BaseType;
+    typedef System::IEquatable<Vector> BaseType;
     
     typedef ::System::BaseTypesInfo<BaseType> ThisTypeBaseTypesInfo;
     RTTI_INFO_DECL();
@@ -890,10 +890,10 @@ public record Employee(string Name, int EmployeeId) : Person(Name) 
 There is no principal difference between records and other types on the C++ side, so methods, inheritance and fields are fully applicable to them.
 
 ```cpp
-class Person : public virtual System::IEquatable<System::SharedPtr<RefLocalTests::Person>>
+class Person : public virtual System::IEquatable<System::SharedPtr<Person>>
 {
     typedef Person ThisType;
-    typedef System::IEquatable<System::SharedPtr<RefLocalTests::Person>> BaseType;
+    typedef System::IEquatable<System::SharedPtr<Person>> BaseType;
     
     typedef ::System::BaseTypesInfo<BaseType> ThisTypeBaseTypesInfo;
     RTTI_INFO_DECL();
@@ -920,7 +920,7 @@ protected:
     
     template<typename T, typename A> friend System::SharedPtr<T> System::With(const System::SharedPtr<T>&, const A&);
     
-    virtual RefLocalTests::Person* _Clone_() const;
+    virtual Person* _Clone_() const;
     
 private:
 
@@ -928,11 +928,11 @@ private:
     
 };
 
-class Employee : public RefLocalTests::Person, public System::IEquatable<System::SharedPtr<RefLocalTests::Employee>>
+class Employee : public Person, public System::IEquatable<System::SharedPtr<Employee>>
 {
     typedef Employee ThisType;
-    typedef RefLocalTests::Person BaseType;
-    typedef System::IEquatable<System::SharedPtr<RefLocalTests::Employee>> BaseType1;
+    typedef Person BaseType;
+    typedef System::IEquatable<System::SharedPtr<Employee>> BaseType1;
     
     typedef ::System::BaseTypesInfo<BaseType, BaseType1> ThisTypeBaseTypesInfo;
     RTTI_INFO_DECL();
@@ -959,7 +959,7 @@ protected:
     
     template<typename T, typename A> friend System::SharedPtr<T> System::With(const System::SharedPtr<T>&, const A&);
     
-    RefLocalTests::Person* _Clone_() const override;
+    Person* _Clone_() const override;
     
 private:
 
