@@ -1,16 +1,19 @@
-# C++ Attributes Reference #
+---
+order: "0"
+navTitle: "Translator control"
+---
+
+# CodePorting.Translator Cs2Cpp control attributes #
 
 This section describes attributes available in the CodePorting.Translator.Cs2Cpp.Control project. Use them to resolve translation issues or improve the translation experience.
 
 [TOC]
 
-> Note: Code examples used on this page are for illustration purposes only. Efforts were made to keep them as simple as possible. Actual translator output may differ.
-
-## CodePorting.Translator Cs2Cpp attributes ##
-
 These attributes are part of the translator itself and affect how the syntax node they're assigned to is translated. As a reminder, they can be assigned either directly in the C# code being translated or through [config files](/user-guide/configuration-file/attributes.md).
 
-### CppAddStructDefaultMethods ###
+> Note: Code examples used on this page are for illustration purposes only. Efforts were made to keep them as simple as possible. Actual translator output may differ.
+
+## CppAddStructDefaultMethods ##
 
 **Used on**: Structures
 
@@ -18,7 +21,7 @@ These attributes are part of the translator itself and affect how the syntax nod
 
 Forces generating default ValueType methods: `operator==`, `Equals`, `ToString` and `GetHashCode`.
 
-### CppAllowStackAllocation ###
+## CppAllowStackAllocation ##
 
 **Used on**: Classes
 
@@ -26,7 +29,7 @@ Forces generating default ValueType methods: `operator==`, `Equals`, `ToStrin
 
 Allows translated classes to be allocated on stack by making their destructors public.
 
-### CppArgumentKind ###
+## CppArgumentKind ##
 
 **Used on**: Function parameter
 
@@ -48,7 +51,7 @@ Please note that C# semantics are followed by default, which means that pointer 
 | ArrayRawPointer | Make argument a pointer to collection data. | `unsafe void Foo([CppArgumentKind(ArgumentKind.ArrayRawPointer)]Object pointer)` | `void Foo(Object *constPointer)`
 | ConstArrayRawPointer | Make argument a const pointer to collection data. | `unsafe void Foo([CppArgumentKind(ArgumentKind.ConstArrayRawPointer)]Object pointer)` | `void Foo(const Object *constPointer)`
 
-### CppArrayInnerIndexer ###
+## CppArrayInnerIndexer ##
 
 **Used on**: Methods
 
@@ -84,7 +87,7 @@ void ClassArrayInnerIndexer::test_0()
 
 **Since version**: 21.9
 
-### CppArrayOnStack ###
+## CppArrayOnStack ##
 
 **Used on**: Methods
 
@@ -130,7 +133,7 @@ void ClassArrayOnStack::ArrayOnStackMethod()
 
 **Since version**: 21.9
 
-### CppConstexpr ###
+## CppConstexpr ##
 
 **Used on**: Field or class
 
@@ -154,7 +157,7 @@ class CppConstexprTest : public System::Object, public ::testing::Test
 };
 ```
 
-### CppConstMethod ###
+## CppConstMethod ##
 
 **Used on**: Method
 
@@ -178,7 +181,7 @@ class Foo
 }
 ```
 
-### CppConstRefParam ###
+## CppConstRefParam ##
 
 **Used on**: Method
 
@@ -203,7 +206,7 @@ class Foo
 };
 ```
 
-### CppConstRefReturnType ###
+## CppConstRefReturnType ##
 
 **Used on**: Property, indexer, method
 
@@ -236,7 +239,7 @@ class Foo
 
 **Since version**: 21.7
 
-### CppConstWrapper ###
+## CppConstWrapper ##
 
 **Used on**: Method
 
@@ -244,7 +247,7 @@ class Foo
 
 Applies to non-const methods without parameters which override base class'es one. Creates a const overload of it which calls into non-const one using const_cast. Useful with e. g. non-const ToString() implementations, when there's a need to override a const method with a non-const implementation.
 
-### CppCTORSelfReference ###
+## CppCTORSelfReference ##
 
 **Used on**: Constructor
 
@@ -252,7 +255,7 @@ Applies to non-const methods without parameters which override base class'es one
 
 Generate guard which allows it to create temporary shared pointers during constructor execution without deleting the object. Not required if auto_ctor_self_reference option is enabled. Otherwise, creating shared pointers in constructor could lead to calling 'delete' on object being constructed.
 
-### CppDeclareFriendClass ###
+## CppDeclareFriendClass ##
 
 **Used on**: Class or interface
 
@@ -277,7 +280,7 @@ class Foo
 };
 ```
 
-### CppDeclareFriendFunction ###
+## CppDeclareFriendFunction ##
 
 **Used on**: Class
 
@@ -313,7 +316,7 @@ public:
 
 **Since version**: 21.3
 
-### CppDeferredInit ###
+## CppDeferredInit ##
 
 **Used on**: Class
 
@@ -321,7 +324,7 @@ public:
 
 Forces all static variables in attributed class as singletons and static constructor to be called from static functions (including singleton accessors) and instance constructors rather than from C++ static variable initializer. Overrides effect of deferred_init option.
 
-### CppDisableAutoReordering ###
+## CppDisableAutoReordering ##
 
 **Used on**: Class or structure
 
@@ -329,7 +332,7 @@ Forces all static variables in attributed class as singletons and static constru
 
 Makes translator put type members into C++ code in the same order they are in C# code, istead of grouping them by access modifier.
 
-### CppEnumEnableMetadata ###
+## CppEnumEnableMetadata ##
 
 **Used on**: Enum types
 
@@ -337,7 +340,7 @@ Makes translator put type members into C++ code in the same order they are in C#
 
 Forces metadata generation for enum (string representation of values for parsing and serializing). Use if you need conversions between enum values and strings in translated application. [cpp_enum_enable_metadata option](/user-guide/configuration-file/options.md#cpp_enum_enable_metadata) enables this behavior globally.
 
-### CppEnumWithOperators ###
+## CppEnumWithOperators ##
 
 **Used on**: Enum types
 
@@ -345,7 +348,7 @@ Forces metadata generation for enum (string representation of values for parsing
 
 Enables bitwise operators for enum. Use if you are using them.
 
-### CppForceArrayInitializerCast ###
+## CppForceArrayInitializerCast ##
 
 **Used on**: Methods
 
@@ -374,7 +377,7 @@ void ArrayTests::InitializeArrayFromDifferentType()
 }
 ```
 
-### CppForceForwardDeclaration ###
+## CppForceForwardDeclaration ##
 
 **Used on**: Classes
 
@@ -382,7 +385,7 @@ void ArrayTests::InitializeArrayFromDifferentType()
 
 Inside attributed type, always use forward declaration of argument type instead of include. Useful for loop type references management, etc.
 
-### CppForceInclude ###
+## CppForceInclude ##
 
 **Used on**: Classes
 
@@ -394,7 +397,7 @@ Inside attributed type, always use forward declaration of argument type instead 
 
 Inside attributed type, always include header with argument type definition instead of forward declaration.
 
-### CppForceSharedApi ###
+## CppForceSharedApi ##
 
 **Used on**: Entity
 
@@ -402,7 +405,7 @@ Inside attributed type, always include header with argument type definition inst
 
 Adds SHARED_API macro to entity declaration.
 
-### CppForceStringParam ###
+## CppForceStringParam ##
 
 **Used on**: Function parameter
 
@@ -433,7 +436,7 @@ class Foo
 Foo::Bar(System::String(u"abc")); //If translated as 'Foo::Bar(u"abc")', this would call Foo::Bar(bool), not Foo::Bar(System::String&)
 ```
 
-### CppFragment ###
+## CppFragment ##
 
 **Used on**: Method
 
@@ -506,7 +509,7 @@ void Fragment::ReplacementTest()
 
 Replacement doesn't affect code semantics or add types to use. So if you want to use some undeclared C++ types here, you must add the [CppForceInclude](#cppforceinclude) attribute too.
 
-### CppGenerateBeginEndMethods ###
+## CppGenerateBeginEndMethods ##
 
 **Used on**: Field or Auto-property
 
@@ -561,7 +564,7 @@ public:
 };
 ```
 
-### CppIgnoreBaseType ###
+## CppIgnoreBaseType ##
 
 **Used on**: Type
 
@@ -598,7 +601,7 @@ class Class2 : public System::Object
 };
 ```
 
-### CppIgnoreConstraints ###
+## CppIgnoreConstraints ##
 
 **Used on**: Member or type
 
@@ -606,7 +609,7 @@ class Class2 : public System::Object
 
 Disables translating 'where' clauses to C++.
 
-### CppInline ###
+## CppInline ##
 
 **Used on**: Method, property accessor or type
 
@@ -616,7 +619,7 @@ Moves an implementation of a member or of all members of a specific type to hea
 
 **Since version:** 20.11
 
-### CppIOStreamWrapper ###
+## CppIOStreamWrapper ##
 
 **Used on**: Method or constructor argument; property or indexer.
 
@@ -645,7 +648,7 @@ void IStream(std::basic_istream<CharType, Traits>& istream)
 }
 ```
 
-### CppLambdaPassByReference ###
+## CppLambdaPassByReference ##
 
 **Used on**: Constructor, Method, or Property
 
@@ -655,7 +658,7 @@ The specified local variable will be captured by lambda expressions by reference
 
 **Since version**: 21.2
 
-### CppLambdaPassByValue ###
+## CppLambdaPassByValue ##
 
 **Used on**: Constructor, Method, or Property
 
@@ -663,7 +666,7 @@ The specified local variable will be captured by lambda expressions by reference
 
 Marks a method's local variable to be passed to a lambda function by value. Used to keep the passed value even when the local variable goes out of scope (for example, loop iterators).
 
-### CppLambdaShouldCaptureByReference ###
+## CppLambdaShouldCaptureByReference ##
 
 **Used on**: Parameter
 
@@ -673,7 +676,7 @@ The specified parameter will be captured by lambda expressions by reference when
 
 **Since version**: 21.2
 
-### CppLambdaUseHolder ###
+## CppLambdaUseHolder ##
 
 **Used on**: Constructor, Method, or Property
 
@@ -683,7 +686,7 @@ The specified local variable will be wrapped into the `LambdaCaptureHolder` clas
 
 **Since version**: 21.2
 
-### CppMakeMembersPublic ###
+## CppMakeMembersPublic ##
 
 **Used on**: Class or structure
 
@@ -691,7 +694,7 @@ The specified local variable will be wrapped into the `LambdaCaptureHolder` clas
 
 Makes all entities of the attributed type public in the translated code, regardless of their original scope.
 
-### CppMutable ###
+## CppMutable ##
 
 **Used on**: Field
 
@@ -717,7 +720,7 @@ class MutableHolder : public System::Object
 };
 ```
 
-### CppNightTest ###
+## CppNightTest ##
 
 **Used on**: Test fixture or test method
 
@@ -725,7 +728,7 @@ class MutableHolder : public System::Object
 
 Disables attributed test or all tests from attributed fixture unless `ASPOSE_ENABLE_NIGHT_TESTS` define is enabled. Useful to avoid running durable or unstable tests each time.
 
-### CppNoBeginEndMethods ###
+## CppNoBeginEndMethods ##
 
 **Used on**: Class or Struct
 
@@ -735,7 +738,7 @@ Prevents translator from generating begin/end methods.
 
 This attribute has a higher priority than the CppGenerateBeginEndMethods attribute and generate_begin_end_methods option.
 
-### CppNoConstMethod ###
+## CppNoConstMethod ##
 
 **Used on**: Method
 
@@ -745,7 +748,7 @@ Discards effect of [CppConstMethod](#cppconstmethod) attribute. Useful, if some 
 
 **This attribute is legacy. It is likely to be removed in future versions of CodePorting.Translator Cs2Cpp.**
 
-### CppOverrideAccessModifiers ###
+## CppOverrideAccessModifiers ##
 
 **Used on**: Type or entity
 
@@ -755,7 +758,7 @@ Switches the element's access modifier to the specified one in translated code. 
 
 **Since version:** 20.11
 
-### CppOverrideTestFixtureSetUp ###
+## CppOverrideTestFixtureSetUp ##
 
 **Used on**: Method
 
@@ -763,7 +766,7 @@ Switches the element's access modifier to the specified one in translated code. 
 
 Forces translation of this method as `TestFixtureSetUp`, overriding any existing one. Also forces the method to be static.
 
-### CppOverrideTestFixtureTearDowm ###
+## CppOverrideTestFixtureTearDowm ##
 
 **Used on**: Method
 
@@ -771,7 +774,7 @@ Forces translation of this method as `TestFixtureSetUp`, overriding any existing
 
 Forces translation of this method as `TestFixtureTearDown`, overriding any existing one. Also forces the method to be static.
 
-### CppPlaceAfter ###
+## CppPlaceAfter ##
 
 **Used on**: Type or member
 
@@ -842,7 +845,7 @@ public:
 
 **Since version:** 20.11
 
-### CppPlaceBefore ###
+## CppPlaceBefore ##
 
 **Used on**: Type or member
 
@@ -897,7 +900,7 @@ public:
 
 **Since version:** 20.11
 
-### CppPortAsEnum ###
+## CppPortAsEnum ##
 
 **Used on**: Integer const fields
 
@@ -924,7 +927,7 @@ class PortAsEnumTest
 const int32_t PortAsEnumTest::NonEnumValue = 1;
 ```
 
-### CppPortAsSingleton ###
+## CppPortAsSingleton ##
 
 **Used on**: Field
 
@@ -967,7 +970,7 @@ System::SharedPtr<System::Collections::Generic::List<System::String>>& Singleton
 }
 ```
 
-### CppPortConstStringAsWChar ###
+## CppPortConstStringAsWChar ##
 
 **Used on**: Field or class
 
@@ -975,7 +978,7 @@ System::SharedPtr<System::Collections::Generic::List<System::String>>& Singleton
 
 Translates attributed string field or all string fields in attributed class as `const char16_t*` instead of `System::String`. Only possible for const or readonly fields with plain initializers. Resolves initialization race issues, speeds up startup.
 
-### CppPreMaterialize ###
+## CppPreMaterialize ##
 
 **Used on**: Method
 
@@ -983,7 +986,7 @@ Translates attributed string field or all string fields in attributed class as `
 
 Tells translator to pre-evaluate all yield members and return result as list.
 
-### CppRenameEntity ###
+## CppRenameEntity ##
 
 **Used on**: Method or property
 
@@ -1006,7 +1009,7 @@ System::String ClassName::NewName()
 }
 ```
 
-### CppSelfReference ###
+## CppSelfReference ##
 
 **Used on**: Method
 
@@ -1014,7 +1017,7 @@ System::String ClassName::NewName()
 
 Same as [CppCTORSelfReference](#cppctorselfreference), but works on method. No auto-placement option at the moment exists for this attribute. Useful if method is called when no references to object exist (e. g. during construction or destruction).
 
-### CppSkipDefinition ###
+## CppSkipDefinition ##
 
 **Used on**: Class, struct, method
 
@@ -1056,7 +1059,7 @@ System::String SkipDefinitionTest::Skip2() { throw System::NotImplementedExcepti
 //No body generated for Skip3
 ```
 
-### CppSkipEntity ###
+## CppSkipEntity ##
 
 **Used on**: Entity
 
@@ -1064,7 +1067,7 @@ System::String SkipDefinitionTest::Skip2() { throw System::NotImplementedExcepti
 
 Skips class, struct, enum, method, field, etc. The output code looks as if the entity was not present in the input at all. Unlike [CppSkipDefinition](#cppskipdefinition), skips both declarations and definitions of the affected entities. Note that any references to skipped entity in translated code end up in compilation errors.
 
-### CppSkipTest ###
+## CppSkipTest ##
 
 **Used on**: Method.
 
@@ -1072,15 +1075,7 @@ Skips class, struct, enum, method, field, etc. The output code looks as if the e
 
 Adds a `GTEST_SKIP` call at the beginning of the method. Does not apply to non-test methods.
 
-### CppStaticMethod ###
-
-**Used on**: Method
-
-**Argument**: None
-
-Forces method which is otherwise non-static to be translated as static.
-
-### CppStaticVariable ###
+## CppStaticVariable ##
 
 **Used on**: Method
 
@@ -1097,7 +1092,7 @@ private string GetFruitColor(string fruit)
 }
 ```
 
-### CppUseAlternativeSwitch ###
+## CppUseAlternativeSwitch ##
 
 **Used on**: Method
 
@@ -1105,13 +1100,13 @@ private string GetFruitColor(string fruit)
 
 Forces using do-while form of switch translation inside this method. Similar to [alternative_string_switch option](/user-guide/configuration-file/options.md#alternative_string_switch), but only affects single method.
 
-### CppUseReflection ###
+## CppUseReflection ##
 
 **Used on**: Class
 
 **Arguments**: None
 
-### CppUseWeakPtrToCaptureThis ###
+## CppUseWeakPtrToCaptureThis ##
 
 **Used on**: Class, Constructor, Method, or Property
 
@@ -1119,7 +1114,7 @@ Forces using do-while form of switch translation inside this method. Similar to 
 
 Used to capture `this` using the `self` variable that stores a `WeakPtr` smart pointer to the current object. This applies to lambda translation.
 
-### CppUsing ###
+## CppUsing ##
 
 **Used on**: Class, interface
 
@@ -1156,7 +1151,7 @@ public:
 };
 ```
 
-### CppVirtualInheritance ###
+## CppVirtualInheritance ##
 
 **Used on**: Class, interface
 
@@ -1164,7 +1159,7 @@ public:
 
 Forces virtual inheritance instead of direct.
 
-### CppWeakPtr ###
+## CppWeakPtr ##
 
 **Used on**: Field
 
@@ -1245,7 +1240,7 @@ public:
 };
 ```
 
-### CppWrapInMacro ###
+## CppWrapInMacro ##
 
 **Used on**: Method
 
@@ -1271,370 +1266,3 @@ class FooContainer
     #endif
 }
 ```
-
-## .NET attributes ##
-
-This section lists .NET attributes recognized by the translation application.
-
-### System.Diagnostics.Conditional ###
-
-**Used on**: Methods
-
-**Argument**: Mandatory string name of preprocessor definition
-
-Wraps method body with `#if defined` directives with attribute argument as definition name. Multiple attributes join using 'logical or' coupling.
-
-```cs
-[System.Diagnostics.Conditional("TEST_DEF")]
-public void func1(int val)
-{
-    func3(val);
-}
-[Conditional("NONEXISTENT"), ConditionalAttribute("TEST_DEF"), System.Diagnostics.Conditional("BOO")]
-public void func2(int val)
-{
-    func3(val);
-}
-```
-
-```cpp
-void ClassName::func1(int32_t val)
-{
-#if defined(TEST_DEF)
-    func3(val);
-#endif
-}
-void ClassName::func2(int32_t val)
-{
-#if defined(NONEXISTENT) || defined(TEST_DEF) || defined(BOO)
-    func3(val);
-#endif
-}
-```
-
-### System.ThreadStatic ###
-
-**Used on**: static fields
-
-**Arguments**: None
-
-Puts static variable into thread scope. In C++, translates into 'thread_local' scope specifier.
-
-```cs
-class MyThread
-{
-    public int value0;
-    [ThreadStatic]
-    public static int value1 = 0;
-    [ThreadStatic]
-    public int value2 = 0;
-    public static int value3 = 0;
-}
-```
-
-```cpp
-class MyThread
-{
-    ...
-    int32_t value0;
-    static thread_local int32_t value1;
-    int32_t value2;
-    static int32_t value3;
-};
-thread_local int32_t MyThread::value1 = 0;
-int32_t MyThread::value3 = 0;
-```
-
-### System.Obsolete ###
-
-**Used on**: classes and members
-
-**Arguments**: None
-
-**Supported since version**: 19.11
-
-Translates to `@deprecated` Doxygen annotation.
-
-## NUnit attributes ##
-
-This section lists supported attributes from the NUnit framework. For more information on how to use these attributes, please refer to the NUnit manual.
-
-The below example shows usage of some NUnit attributes supported by CodePorting.Translator from C# to C++.
-
-```cs
-using System;
-using NUnit.Framework;
-[TestFixture]
-class TestWithArguments
-{
-    [Test]
-    public void TestWithMultipleArguments([Values("a", "b", "c")] string str1, [Values("a", "d", "e")] string str2)
-    {
-        Assert.IsTrue(str1 == str2 || str1 != str2);
-    }
-}
-```
-
-For more information, please refer to NUnit site at [https://nunit.org/](https://nunit.org/).
-
-### NUnit.Framework.Category ###
-
-**Used on**: TestFixture class methods
-
-Maps test methods into categories allowing translator excluding them based on category name.
-
-### NUnit.Framework.ExpectedException ###
-
-**Used on**: TestFixture class methods
-
-Marks test method with expected exception information.
-
-### NUnit.Framework.Explicit ###
-
-**Used on**: TestFixture class methods
-
-Marks method as explicit test.
-
-### NUnit.Framework.Ignore ###
-
-**Used on**: TestFixture class methods
-
-Ignores test (by adding 'DISABLED_' prefix to C++ test name).
-
-### NUnit.Framework.OneTimeSetUp ###
-
-**Used on**: TestFixture class methods
-
-Marks the method as a test fixture setup method.
-
-### NUnit.Framework.OneTimeTearDown ###
-
-**Used on**: TestFixture class methods
-
-Marks the method as a test fixture teardown method.
-
-### NUnit.Framework.SetCulture ###
-
-**Used on**: TestFixture class methods
-
-Forces using specific culture when running test method.
-
-### NUnit.Framework.SetUp ###
-
-**Used on**: TestFixture class methods
-
-Marks the method as a test setup method.
-
-### NUnit.Framework.Sequential ###
-
-**Used on**: TestFixture class methods
-
-Marks test as sequential.
-
-### NUnit.Framework.TearDown ###
-
-**Used on**: TestFixture class methods
-
-Marks the method as a test teardown method.
-
-### NUnit.Framework.Test ###
-
-**Used on**: TestFixture class methods
-
-Marks method as a test,
-
-### NUnit.Framework.TestCase ###
-
-**Used on**: TestFixture class methods
-
-Adds test case based on attributed method.
-
-### NUnit.Framework.TestCaseSource ###
-
-**Used on**: TestFixture class methods
-
-Specifies test case.
-
-### NUnit.Framework.TestFixture ###
-
-**Used on**: Classes
-
-**Arguments**: None
-
-Marks class as test fixture.
-
-### NUnit.Framework.TestFixtureSetUp ###
-
-**Used on**: TestFixture class methods
-
-Marks the method as a test fixture setup method.
-
-### NUnit.Framework.TestFixtureTearDown ###
-
-**Used on**: TestFixture class methods
-
-Marks the method as a test fixture teardown method.
-
-### NUnit.Framework.Timeout ###
-
-**Used on**: TestFixture class methods
-
-Sets up timeout for test (e. g. for performance testing).
-
-### NUnit.Framework.Repeat ###
-
-**Used on**: TestFixture class methods
-
-Runs the test method a given number of times. Any iteration failure causes the entire test to fail.
-
-### NUnit.Framewor.Values ###
-
-**Used on**: Test method arguments
-
-Specifies values to run test with.
-
-## xUnit framework attributes ##
-
-This section lists supported xUnit framework attributes. For more information please refer to the xUnit site at [https://github.com/xunit/xunit](https://github.com/xunit/xunit).
-
-### Xunit.Fact ###
-
-**Used on**: Methods
-
-Marks method as fact.
-
-### Xunit.InlineData ###
-
-**Used on**: Methods
-
-Specifies theory inline data.
-
-### Xunit.Theory ###
-
-**Used on**: Methods
-
-Marks method as theory.
-
-## Obsolete attributes ##
-
-This section describes attributes available in the CodePorting.Translator.Cs2Cpp.Control project that are obsolete and no longer meaningful. Do not use them and remove them from your C# code as soon as possible.
-
-### CppAllowBoxing ###
-
-**Used on**: Structures
-
-**Arguments**: None
-
-**Obsolete since version**: 26.8
-
-Allows boxing for this type. This requires the type to implement operator == (), ToString() const and GetHashCode() const.
-
-### CppDisableEnumeratorCurrentValueHolder ###
-
-**Used on**: Class or structure
-
-**Arguments**: None
-
-Disables value holding in a particular enumerator class.
-
-**Obsolete since version**: 26.8
-
-### CppDoNotObfuscate ###
-
-**Used on**: Entity
-
-**Arguments**: None
-
-Disables entity obfuscation.
-
-**Obsolete since version**: 26.8
-
-### CppEmitEnumeratorCurrentValueHolder ###
-
-**Used on**: Class or structure
-
-**Arguments**: None
-
-Emits value holding in a particular enumerator class.
-
-**Obsolete since version**: 26.8
-
-### CppExactArrayInitializer ###
-
-**Used on**: Array type field
-
-**Arguments**: None
-
-Passes array initializer expression directly from C# to C++ without parsing and code generation. Speeds up long initializers (like thousands of string elements, etc.).
-
-**Obsolete since version**: 26.8
-
-### CppForceDynamicCastFromTypeParam ###
-
-**Used on**: Generic type or method
-
-**Argument**: String name of template parameter to affect
-
-Forces dynamic casts from argument type parameter to Object instead of static casts used by default.
-
-**Obsolete since version**: 22.9
-
-### CppForceDynamicCastToTypeParam ###
-
-**Used on**: Generic type or method
-
-**Argument**: String name of template parameter to affect
-
-Forces dynamic casts from Object to argument type parameter instead of static casts used by default.
-
-**Obsolete since version**: 22.9
-
-### CppForceObfuscate ###
-
-**Used on**: Entities
-
-**Arguments**: None
-
-Forces attributed entity to be obfuscated if 'obfuscate_cpp_headers' option is enabled.
-
-**Obsolete since version**: 26.8
-
-### CppNoAbstract ###
-
-**Used on**: Class
-
-**Arguments**: None
-
-Omit 'abstract' mark when translating the class.
-
-**Obsolete since version**: 26.8
-
-### CppOverride ###
-
-**Used on**: Method
-
-**Arguments**: None
-
-Makes translator mark method with 'override' qualifier.
-
-**Obsolete since version**: 26.8
-
-### CppUnknownTypeParam ###
-
-**Used on**: Generic type or method
-
-**Argument**: String name of template parameter to treat as unknown type
-
-Force treating type argument as unknown type: calling ObjectExt::UnknownToObject() and ObjectExt::ObjectToUnknown() whenever the conversion is required. Fixes some type conversion issues with type parameters.
-
-**Obsolete since version**: 22.9
-
-### CppValueTypeParam ###
-
-**Used on**: Generic type or method
-
-**Argument**: String name of template parameter to treat as value type
-
-Force treating type argument as value type: boxing, etc.
-
-**Obsolete since version**: 26.8
