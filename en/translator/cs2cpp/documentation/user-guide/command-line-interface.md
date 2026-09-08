@@ -65,6 +65,8 @@ CodeTranslator.Cs2Cpp.Console.exe [project] [output_dir] [options]
 
 **-ltf \<time_format\>** Logger time format. Supports Nlog time format i.e. yyyy-MM-dd_HH\:mm\:ss. Please note that special characters must be escaped with slash.
 
+Using options not in this list results in a [CLI01](issues/cli.md#cli01) issue.
+
 ## Obsolete Options ##
 
-The options **-q**, **-a**, **-st**, and **-lf** are obsolete and will be ignored by the translator.
+The options **-q**, **-a**, **-st**, and **-lf** are obsolete and will be ignored by the translator. Using options from this list results in a [CLI02](issues/cli.md#cli02) issue.
