@@ -553,7 +553,7 @@ Forces the names in the referenced assembly to be replaced as per all restricted
 <skip_definitions stub="false" only_public_api="true"/>
 ```
 
-Global version of 'CppSkipDefinition' attribute. If enabled, no class member definitions are processed (but declarations are still generated for them).
+Global version of [CppSkipDefinition](../cpp-attributes/reference.md#cppskipdefinition) attribute. If enabled, no class member definitions are processed (but declarations are still generated for them).
 
 | Attribute | Meaning | Mandatory |
 | --- | --- | --- |
@@ -585,7 +585,7 @@ Substitutes some C++ implementation instead of translated one. First form allows
 
 Alternatively, you can simply include .cpp file into your C# project. It will be copied to output project during translating.
 
-Please note that all methods you want to replace implementations for must be marked with CppSkipDefinition attribute.
+Please note that all methods you want to replace implementations for must be marked with [CppSkipDefinition](../cpp-attributes/reference.md#cppskipdefinition) attribute.
 
 ## nunit_categories ##
 

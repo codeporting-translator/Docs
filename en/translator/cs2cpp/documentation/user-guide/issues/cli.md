@@ -64,7 +64,7 @@ Occurs when overriding a configuration option via the `-o` switch has invalid sy
 
 **Default severity**: ERROR
 
-**Example**: forgotten '=' sign
+**Example**: missing '=' sign
 
 ```txt
 CodeTranslator.Cs2Cpp.Console.exe source.csproj -o force_const_ref_parameters true

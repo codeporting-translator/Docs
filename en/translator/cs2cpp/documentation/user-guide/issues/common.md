@@ -70,7 +70,7 @@ Reports an internal compiler error due to an unexpected situation that will almo
 
 **Solution**: rewrite the source code or contact the developers to have the issue resolved.
 
-## C20: 'ASPOSE_ROOT' environment variable is not set, please set it to 'asposecpplib' folder full path {#c20} ##
+## C20: 'ASPOSE_ROOT' environment variable is not set {#c20} ##
 
 The `ASPOSE_ROOT` environment variable must be set for the translator to function correctly and for the translated code to build successfully.
 
@@ -128,13 +128,13 @@ The translator loads projects in the same way Visual Studio does. If errors occu
 
 ## C41: Detected error(s) during project(s) compilation {#c41} ##
 
-The translator compiles the translated project just as Visual Studio does during a build. This message indicates that compilation errors occurred during the build process (warnings are not included). Typically, such errors prevent the derivation of correct semantics, leading to incorrect translation (or a failure to translate) parts of the source code. However, this may also indicate an incorrect project configuration, errors in conditional compilation branches, and so on. You are free to ignore these errors; however, should specific semantic errors (such as [T0150](translation.md#t0150)) arise during translation, their root cause will most likely lie here.
+The translator compiles the translated project just as Visual Studio does during a build. This message indicates that compilation errors occurred during the build process (warnings are not included). Typically, such errors prevent the derivation of correct semantics, leading to incorrect translation (or a failure to translate) parts of the source code. However, this may also indicate an incorrect project configuration, errors in conditional compilation branches, and so on. You are free to ignore these errors; however, should specific semantic errors (such as [T15](translation.md#015)) arise during translation, their root cause will most likely lie here.
 
 **Default severity**: WARNING
 
 **Solution**: Check the specified log file (*translatorSourceErrors.log* located in the folder where the translation output will be written) and resolve the indicated errors.
 
-## C45: Detected unsued and/or obsolete attribute(s) {#c45} ##
+## C45: Detected unused and/or obsolete attribute(s) {#c45} ##
 
 This message indicates that, during the translation of the project, attributes were detected that have absolutely no effect on the translation result. Such attributes are divided into two groups: unused and obsolete.
 
