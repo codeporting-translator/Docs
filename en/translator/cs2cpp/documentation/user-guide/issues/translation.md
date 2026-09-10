@@ -339,9 +339,216 @@ async Task DoAsync()
 }
 ```
 
-**Solution**. There is no universal and sufficiently inexpensive algorithm for bypassing such problems. Different approaches must be used in each specific case, depending on exactly how the unsupported language feature is employed. Here are a few of the most obvious options.
+**Solutions**. There is no universal and sufficiently inexpensive algorithm for bypassing such problems. Different approaches must be used in each specific case, depending on exactly how the unsupported language feature is employed. Here are a few of the most obvious options.
 
 1. Rewrite the original C# code to eliminate such constructs. It is often better to replace the `dynamic` type with generics; an `await` inside a `catch` block can be handled by using `goto` to exit the block; and in some cases, generic virtual methods can be replaced with non-virtual methods or dispatching based on type identifiers.
 1. Use custom C++ implementations for methods that fundamentally cannot be rewritten to translate correctly. Refer to the [documentation section](../configuration-file/nodes.md#implementation) on the configuration file.
 1. Use the [CppFragment](../cpp-attributes/reference.md#cppfragment) attribute to selectively translate individual statements and expressions. This approach is preferable to completely replacing the method body, as it responds more effectively to changes in the original C# code.
 1. Some specific issues can well be fixed within the translator itself. To do this, you can contact the developers and submit a bug report.
+
+## T80: Type declaration inherits enclosing type, which is prohibited in C++ {#t80} ##
+
+In C++, a class cannot inherit from the class in which it is nested, because inheritance requires complete types, and the enclosing type is not yet complete at the time the nested type is compiled.
+
+**Default severity**: ERROR
+
+**Example**:
+
+```cs
+class A
+{
+    class B : A
+    {
+    }
+}
+```
+
+**Solution**: rewrite C# source code and move derived class oustide of base one
+
+```cs
+class A
+{
+}
+
+class B : A
+{
+}
+```
+
+## T81: Method does not override in C#, however, it will override it in C++ {#t81} ##
+
+In C++, it is impossible to declare a method in a derived class without it overriding the corresponding method in the base class. The `new` modifier is not supported in C++ either. This leads to situations where code translated into C++ may behave differently than code written in C#.
+
+**Default severity**: ERROR (or WARNING if [unexpected_override_as_warning](../configuration-file/options.md#unexpected_override_as_warning) option is turned on)
+
+**Example**:
+
+```cs
+class A
+{
+    public virtual void Foo()
+    {
+    }
+}
+
+class B : A
+{
+    public new void Foo()
+    {
+    }
+}
+```
+
+**Solution**: rename derived method to avoid overriding on C++ side
+
+```cs
+class A
+{
+    public virtual void Foo()
+    {
+    }
+}
+
+class B : A
+{
+    [CodePorting.Translator.Cs2Cpp.CppRenameEntity("NewFoo")]
+    public new void Foo()
+    {
+    }
+}
+```
+
+## T90: Attributes cannot be applied to same node {#t90} ##
+
+Some attributes cannot be added to the same node because it makes no sense to do so. This message informs you of such a situation.
+
+**Default severity**: ERROR
+
+**Example**: mutual placement attributes usage
+
+```cs
+class A
+{
+    void Foo() {}
+    void Bar() {}
+    [CodePorting.Translator.Cs2Cpp.CppPlaceAfter("Foo")]
+    [CodePorting.Translator.Cs2Cpp.CppPlaceBefore("Bar")]
+    void Gaz() {}
+}
+```
+
+**Solution**: remove the unnecessary attribute
+
+```cs
+class A
+{
+    void Foo() {}
+    void Bar() {}
+    [CodePorting.Translator.Cs2Cpp.CppPlaceBefore("Bar")]
+    void Gaz() {}
+}
+```
+
+## T91: Attribute parameter has invalid value {#t91} ##
+
+The message indicates that one of the parameters of the specified attribute has a value that makes no sense in the context of its application.
+
+**Default severity**: ERROR
+
+**Example**: bad placement anchor name
+
+```cs
+class A
+{
+    void Bar() {}
+    [CodePorting.Translator.Cs2Cpp.CppPlaceBefore("Baz")]
+    void Gaz() {}
+}
+```
+
+**Solution**: fix parameter value
+
+```cs
+class A
+{
+    void Bar() {}
+    [CodePorting.Translator.Cs2Cpp.CppPlaceBefore("Bar")]
+    void Gaz() {}
+}
+```
+
+## T92: Fragment doesn't match any suitable node in definition {#t92} ##
+
+The first argument of the [CppFragment](../cpp-attributes/reference.md#cppfragment) attribute does not correspond to any node of a suitable type within the method to which the attribute is applied. The attribute will be ignored.
+
+The permissible types of nodes to which the fragments can be applied are:
+
+* **Statements** (with nested statements and semicolons).
+* **Expressions** (almost all kinds).
+* **Variable declarations** (including ones inside of `for` loops and some other cases).
+
+If the fragment corresponds to a node of a different type (for example, substituting different patterns is not currently supported), we will also see this issue.
+
+**Default severity**: WARNING
+
+**Example**: missing ';' in fragment pattern string
+
+```cs
+[CodePorting.Translator.Cs2Cpp.CppFragment("Bar()", "Gaz()")]
+void Foo()
+{
+    Bar();
+}
+```
+
+**Solution**: fix parameter values
+
+```cs
+[CodePorting.Translator.Cs2Cpp.CppFragment("Bar();", "Gaz();")]
+void Foo()
+{
+    Bar();
+}
+```
+
+## T93: Replacement code fragment not found in translated code {#t93} ##
+
+The [CppFragment](../cpp-attributes/reference.md#cppfragment) attribute may replace not the entire node, but only a portion of its translated code. In this case, if a replacement template is not found, a message to that effect will be displayed, and the attribute will be ignored.
+
+**Default severity**: WARNING
+
+**Example**: typo in replacement pattern
+
+```cs
+[CodePorting.Translator.Cs2Cpp.CppFragment("B...();", "Baz-->Gaz")]
+void Foo()
+{
+    Bar();
+}
+```
+
+**Solution**: fix replacement pattern
+
+```cs
+[CodePorting.Translator.Cs2Cpp.CppFragment("B...();", "Bar-->Gaz")]
+void Foo()
+{
+    Bar();
+}
+```
+
+## T94: Ambigous friend name for type {#t94} ##
+
+A friend type added via the [CppDeclareFriendClass](../cpp-attributes/reference.md#cppdeclarefriendclass) attribute using a simple name is ambiguous and may resolve to different actual types. This can result in the wrong type being declared as a friend, leading to a C++ compilation error.
+
+**Default severity**: WARNING
+
+**Solution**: classify the type more unambiguously.
+
+## T95: Unsupported test attribute {#t95} ##
+
+The translator and the C++ framework do not fully support all .NET test frameworks. Some attributes are unsupported and simply ignored. This can cause the translated test to behave quite differently than it does in C#. This message warns of the risk of such a situation.
+
+**Default severity**: WARNING
+
+**Solution**: remove this attribute, redesign or skip test or just ignore warning.
