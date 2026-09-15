@@ -1,3 +1,8 @@
+---
+order: "1"
+navTitle: "Options"
+---
+
 # Configuration file options #
 
 There is a number of options that can be used with translator config. The general syntax to add an option is as follows:

@@ -28,7 +28,7 @@ CodePorting.Translator Cs2Cpp supports both 32-bit and 64-bit operating systems:
 
 CodePorting.Translator Cs2Cpp supports C# Projects:
 
-* C# 5.0 and lower versions
+* Up to C# 13.0 versions (not all features supported)
 * .Net Framework 2.0 and higher
 
 ### Output(C++) Projects ###

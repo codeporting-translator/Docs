@@ -1,3 +1,8 @@
+---
+order: "9"
+navTitle: "Defining the attributes"
+---
+
 # Attributes in configuration file #
 
 It is possible to define some code attributes to translator configuration file. There are two benefits from doing so:

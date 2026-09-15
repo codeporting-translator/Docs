@@ -28,13 +28,13 @@ Reports an error while reading the .config file (whether explicitly provided or 
 
 **Default severity**: FATAL ERROR
 
-**Example**: invalid configuration file format (typo in opening tag)
+**Example**: invalid configuration file format (typo in the opening tag)
 
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <proter>
     <import config="translator.config"/>
-</proter>
+</porter>
 ```
 
 **Solution**: correct the document format in accordance with the established [standard](../configuration-file/index.md)
@@ -45,14 +45,6 @@ Reports an error while reading the .config file (whether explicitly provided or 
     <import config="translator.config"/>
 </porter>
 ```
-
-## C11: Project generation error {#c11} ##
-
-Reports an error in generating Makefiles for C++ projects upon completion of the source code translation process.
-
-**Default severity**: FATAL ERROR
-
-**Solution**: check the specific details of the problem at the end of the error message and fix it.
 
 ## C15: Internal warning {#c15} ##
 

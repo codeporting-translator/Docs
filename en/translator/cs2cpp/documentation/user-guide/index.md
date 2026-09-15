@@ -10,7 +10,8 @@ This section collects the primary user-facing documentation for the C# to C++ tr
 - [Configuration File](configuration-file/index.md) - usage of translator configuration file.
 - [C++ Attributes](cpp-attributes/index.md) - how to control C++ code output using private, .Net common and test system attributes.
 - [Integration](integration/index.md) - how to use produced code with third-party frameworks, different platform and build tools.
-- [Limitations and Bugs](limitations-and-bugs/index.md) - known limitations, issues, and workarounds.
+- [Issues](issues/index.md) - a complete description of all errors and warnings that the translator may generate during its operation.
+- [Limitations and Bugs](limitations-and-bugs/index.md) - known translator limitations and bugs, as well as workarounds.
 - [Command-line Interface](command-line-interface.md) - how to run and configure the translator from the CLI.
 - [Manual Code Control](manual-code-control.md) - guidance on manual edits, annotations, and controlling generated code.
 - [User-defined Exceptions](user-defined-exceptions.md) - handling and mapping exceptions between C# and C++.

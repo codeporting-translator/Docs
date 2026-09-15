@@ -51,3 +51,11 @@ Structs are value types; defining a class that contains one requires including t
 ## G12: Can't include as the former contains classes inherited from the ones {#g12} ##
 
 An error virtually identical to the previous one, with similar solutions.
+
+## G20: Project generation error {#g20} ##
+
+Reports an error in generating Makefiles for C++ projects upon completion of the source code translation process.
+
+**Default severity**: ERROR
+
+**Solution**: check the specific details of the problem at the end of the error message and fix it.

@@ -65,6 +65,8 @@ CodeTranslator.Cs2Cpp.Console.exe [project] [output_dir] [options]
 
 **-ltf \<time_format\>** Logger time format. Supports Nlog time format i.e. yyyy-MM-dd_HH\:mm\:ss. Please note that special characters must be escaped with slash.
 
+**-sr \<issue\> \<severity\>** Alternate [severity](issues/index.md) for given issue(s) (can contain wilcards). Available values: Silent, Info, Warning, Error, FatalError.
+
 Using options not in this list results in a [CLI01](issues/cli.md#cli01) issue.
 
 ## Obsolete Options ##

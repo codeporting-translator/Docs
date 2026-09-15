@@ -1,3 +1,8 @@
+---
+order: "0"
+navTitle: "Nodes"
+---
+
 # Configuration file nodes #
 
 This section lists all tags allowed in configuration file.
@@ -1035,3 +1040,18 @@ Adds some snippet of C++ code into beginning of each Google.Test Recommended to 
 | include | Name of header file that will be included in every C++ source file contains tests affected by \<insert_code_to_tests\> | No |
 
 Multiple usage of tag is allowed and will add all code snippets and all includes consequentially.
+
+## severity_rule ##
+
+```xml
+<severity_rule issue="G10" severity="Error"/>
+```
+
+Overrides the severity of the issue (or group of issues). Similar to the `-sr` command-line flag, but has lower priority.
+
+| Attribute | Meaning | Mandatory |
+| --- | --- | --- |
+| issue | Issue id. Supports wildcards. | Yes |
+| severity | New severity level of specified issue(s) | Yes |
+
+Available values for severity are: Silent, Info, Warning, Error, FatalError. Read [issues reference](../issues/index.md) for more info.
