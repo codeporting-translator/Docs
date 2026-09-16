@@ -1,4 +1,9 @@
-# Translating simple console application #
+---
+order: "0"
+navTitle: "1. Console Application"
+---
+
+# Lesson 1. Translating simple console application #
 
 Note that this example is built upon several assumptions, namely:
 
@@ -54,7 +59,7 @@ And run Translator:
 
 Translator will print some logs of the translating process to the console window and when it finishes translating, directory *C:\output* will contain a directory named *SimpleConsoleApp.Cpp* containing the generated C++ source files and CMake configuration files.
 
-Now we want to use CMake to generate makefile/project files. Let it be a Visual Studio 2022 x86 project file. In CMD we navigate to the *C:\output\SimpleConsoleApp.Cpp* directory
+Now we want to use CMake to generate makefile/project files. Let it be a Visual Studio 2022 project file. In CMD we navigate to the *C:\output\SimpleConsoleApp.Cpp* directory
 
 ```cmd
 >cd C:\output\SimpleConsoleApp.Cpp
@@ -63,7 +68,7 @@ Now we want to use CMake to generate makefile/project files. Let it be a Visual 
 And run CMake in configuration mode:
 
 ```cmd
->CMake --G "Visual Studio 17 2022"
+>CMake -G "Visual Studio 17 2022" .
 ```
 
 And now we can build the sources using either CMake or Visual Studio. Let us use CMake:

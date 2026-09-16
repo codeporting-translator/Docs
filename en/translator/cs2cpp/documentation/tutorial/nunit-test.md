@@ -1,4 +1,9 @@
-# Translating nUnit test #
+---
+order: "2"
+navTitle: "3. nUnit Test"
+---
+
+# Lesson 3. Translating nUnit test #
 
 Note that this example is built upon several assumptions, namely:
 
@@ -53,7 +58,7 @@ And run Translator:
 
 Translator will print some logs of the translating process to the console window and when it finishes translating, directory *C:\output* will contain a directory named *SimpleNUnitTest.Cpp* containing the generated C++ source files and CMake configuration files.
 
-Now we want to use Cmake to generate makefile/project files. Let it be a Visual Studio 2022 x86 project file. In CMD we navigate to the *C:\output\SimpleNUnitTest.Cpp* directory
+Now we want to use Cmake to generate makefile/project files. Let it be a Visual Studio 2022 project file. In CMD we navigate to the *C:\output\SimpleNUnitTest.Cpp* directory
 
 ```cmd
 >cd C:\output\SimpleNUnitTest.Cpp
@@ -62,7 +67,7 @@ Now we want to use Cmake to generate makefile/project files. Let it be a Visual 
 And run CMake in configuration mode:
 
 ```cmd
->CMake --G "Visual Studio 17 2022"
+>CMake -G "Visual Studio 17 2022" .
 ```
 
 And now we can build the sources using either CMake or Visual Studio. Let us use CMake:
