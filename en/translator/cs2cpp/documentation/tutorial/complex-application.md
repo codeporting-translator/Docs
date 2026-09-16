@@ -116,7 +116,7 @@ The following commands set the output directory for the library’s binary by se
       set_target_properties(${PROJECT_NAME} PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../bin")
 ```
 
-Here, \${PROJECT_NAME} is the name of the CMake project, which is equal to the name of the main CMake executable target.
+Here, \${PROJECT_NAME} is the name of the CMake project, which is equal to the name of the main CMake target.
 
 Because on DLL platforms (i.e., Windows), CMake considers a DLL shared library to be an executable entity, while on non-DLL platforms (i.e., Linux), CMake considers a shared object to be a library, we set both the RUNTIME_OUTPUT_DIRECTORY and LIBRARY_OUTPUT_DIRECTORY properties.
 
@@ -130,7 +130,7 @@ Then the <cmake_commands> element is closed:
 Last but not least, we need to tell Translator that the CommonLibrary project depends on the BaseLibrary library. We do this using the \<lib\> element:
 
 ```xml
-    <lib csname="BaseLibrary">
+    <lib name="BaseLibrary.Cpp" csname="BaseLibrary">
       <cmake_link_template>
         <![CDATA[
           find_package(BaseLibrary.Cpp REQUIRED CONFIG PATHS "${CMAKE_CURRENT_SOURCE_DIR}/../BaseLibrary.Cpp" NO_DEFAULT_PATH)
@@ -140,7 +140,7 @@ Last but not least, we need to tell Translator that the CommonLibrary project de
     </lib>
 ```
 
-Here, \${PROJECT_NAME}_dependencies is the name of the CMake interface library target defined in the output CMakeLists.txt file and linked to the main executable target, \${PROJECT_NAME}. Thus, libraries linked to \${PROJECT_NAME}_dependencies are automatically linked to the \${PROJECT_NAME} target.
+Here, \${PROJECT_NAME}_dependencies is the name of the CMake interface library target defined in the output CMakeLists.txt file and linked to the main target, \${PROJECT_NAME}. Thus, libraries linked to \${PROJECT_NAME}_dependencies are automatically linked to the \${PROJECT_NAME} target.
 
 With the C# project and configuration file ready, we can convert the project. In order to convert the CommonLibrary project, we open CMD and navigate to the directory containing the translator binary:
 
@@ -227,7 +227,7 @@ Again, we need to tell Translator that the LibraryA project depends on the BaseL
          ]]>
       </cmake_link_template>
     </lib>
-    <lib csname="BaseLibrary">
+    <lib name="BaseLibrary.Cpp" csname="BaseLibrary">
        <cmake_link_template>
          <![CDATA[
            find_package(BaseLibrary.Cpp REQUIRED CONFIG PATHS "${CMAKE_CURRENT_SOURCE_DIR}/../BaseLibrary.Cpp" NO_DEFAULT_PATH)
@@ -359,7 +359,7 @@ We can now build the sources using either CMake or Visual Studio. Let us use CMa
 
 When the build finishes, the *C:\output\bin\Release* directory should contain the newly built *LibraryB.Cpp.dll* file, along with the previously built *CommonLibrary.Cpp.dll* file.
 
-### Translating ComplexConsoleApp ###
+## Translating ComplexConsoleApp ##
 
 The last project in this example is located in *ComplexConsoleApp* directory. ComplexConsoleApp is an executable project that consists of a single .cs source file *Program.cs* and a project file *ComplexConsoleApp.csproj*. This project has a dependency on all four previously translated projects – BaseLibrary, CommonLibrary, LibraryA and LibraryB. These dependencies have to be reflected in the ComplexConsoleApp project's configuration file. In our example this configuration file is pre-created, its name is *ComplexConsoleApp.translator.config* and it is located in the project’s directory *ComplexConsoleApp*. Let us have a closer look at the configuration file.
 
