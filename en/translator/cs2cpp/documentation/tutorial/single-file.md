@@ -28,7 +28,7 @@ Translator will print translation logs to the console window. When translation f
 
 > Note that, by default, Translator converts even a single C# source file into an entire C++ project containing sources, headers, and makefiles, rather than just an `.h`/`.cpp` pair.
 
-## Making, building and running of resulting C++ code ##
+## Making and building of resulting C++ code ##
 
 Now we use CMake to generate makefiles or project files. In this example, we generate a Visual Studio 2022 project file. In CMD, we navigate to the *C:\output\SingleFile.Cpp* directory.
 
@@ -47,6 +47,8 @@ We can now build the sources using either CMake or Visual Studio. Let us use CMa
 ```cmd
 >CMake --build . --config Release
 ```
+
+## Expected output ##
 
 When the build finishes, the *C:\output\bin\Release* directory should contain two files: *SingleFile.Cpp.exe*, which has just been built from the C++ sources, and *codeporting.translator.cs2cpp.framework_vc14x64.dll*, which was copied from the Translator installation directory during a post-build step. When we run *SingleFile.Cpp.exe*, its output in the console window should be similar to the output of the original C# application we translated:
 

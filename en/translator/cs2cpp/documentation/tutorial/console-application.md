@@ -49,12 +49,14 @@ With the C# project and configuration file ready, we can convert the project. To
 >CodeTranslator.Cs2Cpp.Console.exe -c C:\SimpleConsoleApp\SimpleConsoleApp.porter.config C:\SimpleConsoleApp\SimpleConsoleApp.csproj C:\output
 ```
 
-The *C:\output* directory will contain a directory named *SimpleConsoleApp.Cpp*, containing the generated C++ source files and CMake configuration files. Next, as in the [previous example](single-file.md#making-building-and-running-of-resulting-c-code), we build the resulting C++ project.
+The *C:\output* directory will contain a directory named *SimpleConsoleApp.Cpp*, containing the generated C++ source files and CMake configuration files. Next, as in the [previous example](single-file.md#making-and-building-of-resulting-c-code), we build the resulting C++ project.
 
 ```cmd
 >cd C:\output\SimpleConsoleApp.Cpp
 >CMake -G "Visual Studio 17 2022" .
 >CMake --build . --config Release
 ```
+
+## Expected output ##
 
 When the build finishes, the *C:\output\bin\Release* directory should contain two files: *SimpleConsoleApp.Cpp.exe*, which has just been built from the C++ sources, and *codeporting.translator.cs2cpp.framework_vc14x64.dll*, which was copied from the Translator installation directory during a post-build step. When we run *SimpleConsoleApp.Cpp.exe*, its output in the console window should be similar to the output of the original C# application we translated.
