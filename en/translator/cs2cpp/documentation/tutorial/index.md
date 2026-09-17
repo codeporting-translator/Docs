@@ -17,7 +17,7 @@ All the examples below are based on the following assumptions:
 
 ## Examples List ##
 
-A list of training examples in order of increasing complexity.
+A list of training examples in order of increasing complexity. To avoid repeating the same information in every lesson, it is assumed that before moving on to the next one, you will have familiarized yourself with the content of the previous ones.
 
 1. [Single file](single-file.md) translation.
 1. [Simple console application](console-application.md) translation.

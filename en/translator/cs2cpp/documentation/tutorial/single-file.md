@@ -10,6 +10,8 @@ This example demonstrates how to translate a single C# file into a C++ project. 
 
 **SingleFile** is a simple "Hello, world!" application that consists of a single source file, *SingleFile.cs*.
 
+## Running the translator ##
+
 To translate the **SingleFile** source file, we open **CMD** and navigate to the directory containing the translator binary:
 
 ```cmd
@@ -25,6 +27,8 @@ Then we run Translator:
 Translator will print translation logs to the console window. When translation finishes, the *C:\output* directory will contain a directory named *SingleFile.Cpp*, containing the generated C++ source files and CMake configuration files.
 
 > Note that, by default, Translator converts even a single C# source file into an entire C++ project containing sources, headers, and makefiles, rather than just an `.h`/`.cpp` pair.
+
+## Making, building and running of resulting C++ code ##
 
 Now we use CMake to generate makefiles or project files. In this example, we generate a Visual Studio 2022 project file. In CMD, we navigate to the *C:\output\SingleFile.Cpp* directory.
 
