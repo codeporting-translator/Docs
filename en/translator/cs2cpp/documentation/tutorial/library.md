@@ -1,13 +1,12 @@
 ---
-order: "1"
-navTitle: "2. Simple Library"
+navTitle: "Simple Library"
 ---
 
-# Lesson 2. Translating simple library #
+# Translating simple library #
 
 Note that this example is built upon several assumptions, namely:
 
-* Translator is installed to *C:\CodePorting.Translator_Cs2Cpp*.4 directory
+* Translator is installed to *C:\CodePorting.Translator_Cs2Cpp* directory
 * All C# projects are located in *C:\SimpleLibrary* directory
 * The output directory is *C:\output*
 

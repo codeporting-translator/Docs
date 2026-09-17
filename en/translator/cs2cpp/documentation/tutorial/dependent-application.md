@@ -1,9 +1,8 @@
 ---
-order: "3"
-navTitle: "4. Dependent Console Application"
+navTitle: "Dependent Console Application"
 ---
 
-# Lesson 4. Translating dependent console application #
+# Translating dependent console application #
 
 Note that this example is built upon several assumptions, namely:
 

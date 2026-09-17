@@ -1,9 +1,8 @@
 ---
-order: "2"
-navTitle: "3. nUnit Test"
+navTitle: "nUnit Test"
 ---
 
-# Lesson 3. Translating nUnit test #
+# Translating nUnit test #
 
 Note that this example is built upon several assumptions, namely:
 

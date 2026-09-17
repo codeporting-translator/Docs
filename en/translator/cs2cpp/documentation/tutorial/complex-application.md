@@ -1,9 +1,8 @@
 ---
-order: "4"
-navTitle: "5. Complex Console Application"
+navTitle: "Complex Console Application"
 ---
 
-# Lesson 5. Translating Complex Console Application #
+# Translating Complex Console Application #
 
 Note that this example is built upon several assumptions, namely:
 

@@ -1,9 +1,8 @@
 ---
-order: "0"
-navTitle: "1. Console Application"
+navTitle: "Console Application"
 ---
 
-# Lesson 1. Translating simple console application #
+# Translating simple console application #
 
 Note that this example is built upon several assumptions, namely:
 
