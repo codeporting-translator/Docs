@@ -21,14 +21,14 @@ CodePorting.Translator Cs2Cpp translator configuration files are of plain XML fo
 
 All paths in the configuration file are written related to current .config file. However, there are some exceptions.
 
-1. Pathes of project files are related to .csproj project dir:
+1. Paths of project files are related to .csproj project dir:
 
 ```xml
 <exclude file="src\foo*.cs"/>
 <only file="src\bar?.cs"/>
 ```
 
-1. Include pathes are related to nothing, they are just put to translated code as they are and then get resolved by compiler itself.
+1. Include paths are related to nothing, they are just put to translated code as they are and then get resolved by compiler itself.
 
 ```xml
 <class name="ClassA" file="path/to/include.h"/>
