@@ -6,7 +6,7 @@ navTitle: "Single File"
 
 This example demonstrates how to translate a single C# file into a C++ project. We’ll use a pre-existing file from the [SingleFile example](https://github.com/codeporting-translator/codeporting-translator-cs2cpp/tree/master/ExampleProjects/SingleFile).
 
-> Note that this and all other examples are based on several [assumptions](index.md/#base-assumptions).
+> Note that this and all other examples are based on several [assumptions](index.md#base-assumptions).
 
 **SingleFile** is a simple "Hello, world!" application that consists of a single source file, *SingleFile.cs*.
 
