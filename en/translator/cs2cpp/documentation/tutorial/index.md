@@ -25,3 +25,4 @@ A list of training examples in order of increasing complexity. To avoid repeatin
 1. [Simple nUnit test](nunit-test.md) translation.
 1. [Dependent console application](dependent-application.md) translation.
 1. [Complex console application](complex-application.md) translation.
+1. [Sample solution](sample-solution.md) translation.
