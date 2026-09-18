@@ -2,13 +2,7 @@
 navTitle: "Complex Console Application"
 ---
 
-# Translating Complex Console Application #
-
-Note that this example is built upon several assumptions, namely:
-
-* Translator is installed to *C:\CodePorting.Translator_Cs2Cpp* directory
-* The sample C# project is located in *C:\ComplexConsoleApp* directory
-* The output directory is *C:\output*
+# Translating a Complex Console Application #
 
 This example demonstrates how to translate five C# projects: one console application and four interdependent library projects on which the console application depends. We’ll use a pre-existing project from the [ComplexConsoleApp example](https://github.com/codeporting-translator/codeporting-translator-cs2cpp/tree/master/ExampleProjects/ComplexConsoleApp).
 
@@ -18,44 +12,15 @@ This example consists of five C# projects: BaseLibrary, CommonLibrary, LibraryA,
 
 BaseLibrary is a library project consisting of a single .cs source file, *IBaseInterface.cs*, and a project file, *BaseLibrary.csproj*. This project does not have any special dependencies on other projects or third-party assemblies. The BaseLibrary project directory also contains a pre-created configuration file, *BaseLibrary.translator.config*, which is quite simple.
 
-```xml
-<?xml version="1.0" encoding="utf-8" ?>
-<porter>
-  <import config="translator.config" />
-</porter>
-```
-
-This example assumes that the C# BaseLibrary project should be translated into a C++ static library, which is the default setting. With the C# project and configuration file ready, we can start translating the project. In order to convert the BaseLibrary project, we open CMD and navigate to the directory containing the translator binary:
+This example assumes that the C# BaseLibrary project should be translated into a C++ static library, which is the default setting.
 
 ```cmd
 >cd C:\CodePorting.Translator_Cs2Cpp\bin\code_translator
-```
-
-And run Translator:
-
-```cmd
 >CodeTranslator.Cs2Cpp.Console.exe -c C:\ComplexConsoleApp\BaseLibrary\BaseLibrary.translator.config C:\ComplexConsoleApp\BaseLibrary\BaseLibrary.csproj C:\output
-```
-
-Translator will print translation logs to the console window. When translation finishes, the *C:\output* directory will contain a directory named *BaseLibrary.Cpp*, containing the generated C++ source files and CMake configuration files. Now we want to use CMake to generate makefiles or project files. In this case, we will generate a Visual Studio 2022 project file. In CMD, we navigate to the *C:\output\BaseLibrary.Cpp* directory.
-
-```cmd
 >cd C:\output\BaseLibrary.Cpp
-```
-
-And run CMake in configuration mode:
-
-```cmd
 >CMake -G "Visual Studio 17 2022" .
-```
-
-We can now build the sources using either CMake or Visual Studio. Let us use CMake:
-
-```cmd
 >CMake --build . --config Release
 ```
-
-The library is built.
 
 ## Translating CommonLibrary ##
 
@@ -86,14 +51,6 @@ The second project in this example is located in *CommonLibrary* directory. Comm
   </lib>
 </porter>
 ```
-
-We also need to import the include_map.config file from the translated BaseLibrary project. This file maps public types exported by the CommonLibrary library to the generated C++ header files in which these types are declared. Translator generates an include_map.config file for each project it translates. Thus, before translating the CommonLibrary project, we must translate the BaseLibrary project so that Translator generates the include_map.config file. Include_map.config is included in CommonLibrary.translator.config as follows:
-
-```xml
-    <import config="../../output/BaseLibrary.Cpp/include_map.config" />
-```
-
-Here, *../../output* is the output directory passed to Translator when the BaseLibrary project was translated.
 
 This example assumes that the C# CommonLibrary project should be translated into a C++ shared or dynamic library. Therefore, we assign the value `true` to the `make_shared_lib` option:
 
@@ -141,35 +98,13 @@ Last but not least, we need to tell Translator that the CommonLibrary project de
 
 Here, \${PROJECT_NAME}_dependencies is the name of the CMake interface library target defined in the output CMakeLists.txt file and linked to the main target, \${PROJECT_NAME}. Thus, libraries linked to \${PROJECT_NAME}_dependencies are automatically linked to the \${PROJECT_NAME} target.
 
-With the C# project and configuration file ready, we can convert the project. In order to convert the CommonLibrary project, we open CMD and navigate to the directory containing the translator binary:
+With the C# project and configuration file ready, we can convert the project.
 
 ```cmd
 >cd C:\CodePorting.Translator_Cs2Cpp\bin\code_translator
-```
-
-And run Translator:
-
-```cmd
 >CodeTranslator.Cs2Cpp.Console.exe -c C:\ComplexConsoleApp\CommonLibrary\CommonLibrary.translator.config C:\ComplexConsoleApp\CommonLibrary\CommonLibrary.csproj C:\output
-```
-
-Translator will print translation logs to the console window. When translation finishes, the *C:\output* directory will contain a directory named *CommonLibrary.Cpp*, containing the generated C++ source files and CMake configuration files.
-
-Now we want to use CMake to generate makefiles or project files. In CMD, we navigate to the *C:\output\CommonLibrary.Cpp* directory.
-
-```cmd
 >cd C:\output\CommonLibrary.Cpp
-```
-
-And run CMake in configuration mode:
-
-```cmd
 >CMake -G "Visual Studio 17 2022" .
-```
-
-We can now build the sources using either CMake or Visual Studio. Let us use CMake:
-
-```cmd
 >CMake --build . --config Release
 ```
 
@@ -236,37 +171,15 @@ Again, we need to tell Translator that the LibraryA project depends on the BaseL
     </lib>
 ```
 
-With the C# project and configuration file ready, we can convert the project. In order to convert the LibraryA project, we open CMD and navigate to the directory containing the translator binary:
+With the C# project and configuration file ready, we can convert the project.
 
 ```cmd
 >cd C:\CodePorting.Translator_Cs2Cpp\bin\code_translator
-```
-
-And run Translator:
-
-```cmd
 >CodeTranslator.Cs2Cpp.Console.exe -c C:\ComplexConsoleApp\LibraryA\LibraryA.translator.config C:\ComplexConsoleApp\LibraryA\LibraryA.csproj C:\output
-```
-
-Translator will print translation logs to the console window. When translation finishes, the *C:\output* directory will contain a directory named *LibraryA.Cpp*, containing the generated C++ source files and CMake configuration files. Now we want to use CMake to generate makefiles or project files. In CMD, we navigate to the *C:\output\LibraryA.Cpp* directory.
-
-```cmd
 >cd C:\output\LibraryA.Cpp
-```
-
-And run CMake in configuration mode:
-
-```cmd
 >CMake -G "Visual Studio 17 2022" .
-```
-
-We can now build the sources using either CMake or Visual Studio. Let us use CMake:
-
-```cmd
 >CMake --build . --config Release
 ```
-
-The library is built.
 
 ## Translating LibraryB ##
 
@@ -324,35 +237,13 @@ Another difference is that we want to set the output directory for the library b
     </cmake_commands>
 ```
 
-With the C# project and configuration file ready, we can convert the project. In order to convert the LibraryB project, we open CMD and navigate to the directory containing the translator binary:
+With the C# project and configuration file ready, we can convert the project.
 
 ```cmd
 >cd C:\CodePorting.Translator_Cs2Cpp\bin\code_translator
-```
-
-And run Translator:
-
-```cmd
 >CodeTranslator.Cs2Cpp.Console.exe -c C:\ComplexConsoleApp\LibraryB\LibraryB.translator.config C:\ComplexConsoleApp\LibraryB\LibraryB.csproj C:\output
-```
-
-Translator will print translation logs to the console window. When translation finishes, the *C:\output* directory will contain a directory named *LibraryB.Cpp*, containing the generated C++ source files and CMake configuration files.
-
-Now we want to use CMake to generate makefiles or project files. In CMD, we navigate to the *C:\output\LibraryB.Cpp* directory.
-
-```cmd
 >cd C:\output\LibraryB.Cpp
-```
-
-And run CMake in configuration mode:
-
-```cmd
 >CMake -G "Visual Studio 17 2022" .
-```
-
-We can now build the sources using either CMake or Visual Studio. Let us use CMake:
-
-```cmd
 >CMake --build . --config Release
 ```
 
@@ -490,32 +381,12 @@ With the C# project and configuration file ready, we can convert the project. In
 
 ```cmd
 >cd C:\CodePorting.Translator_Cs2Cpp\bin\code_translator
-```
-
-And run Translator:
-
-```cmd
 >CodeTranslator.Cs2Cpp.Console.exe -c C:\ComplexConsoleApp\ComplexConsoleApp\ComplexConsoleApp.translator.config C:\ComplexConsoleApp\ComplexConsoleApp\ComplexConsoleApp.csproj C:\output
-```
-
-Translator will print translation logs to the console window. When translation finishes, the *C:\output* directory will contain a directory named *ComplexConsoleApp.Cpp*, containing the generated C++ source files and CMake configuration files.
-
-Now we want to use CMake to generate makefiles or project files. In CMD, we navigate to the *C:\output\ComplexConsoleApp.Cpp* directory.
-
-```cmd
 >cd C:\output\ComplexConsoleApp.Cpp
-```
-
-And run CMake in configuration mode:
-
-```cmd
 >CMake -G "Visual Studio 17 2022" .
-```
-
-We can now build the sources using either CMake or Visual Studio. Let us use CMake:
-
-```cmd
 >CMake --build . --config Release
 ```
 
-When the build finishes, the *C:\output\bin\Release* directory should contain four files: *CommonLibrary.Cpp.dll*, *LibraryB.Cpp.dll*, *ComplexConsoleApp.Cpp.exe*, which has just been built from the C++ sources, and *aspose_cpp_vc140.dll*, which was copied from the Translator installation directory during a post-build step. When we run *ComplexConsoleApp.Cpp.exe*, its output in the console window should be similar to the output of the original C# application project we translated.
+## Expected output ##
+
+When the build finishes, the *C:\output\bin\Release* directory should contain four files: *CommonLibrary.Cpp.dll*, *LibraryB.Cpp.dll*, *ComplexConsoleApp.Cpp.exe*, which has just been built from the C++ sources, and *codeporting.translator.cs2cpp.framework_vc14x64.dll*, which was copied from the Translator installation directory during a post-build step. When we run *ComplexConsoleApp.Cpp.exe*, its output in the console window should be similar to the output of the original C# application project we translated.
