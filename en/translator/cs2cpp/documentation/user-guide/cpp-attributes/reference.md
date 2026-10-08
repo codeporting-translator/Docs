@@ -183,11 +183,11 @@ class Foo
 
 ## CppConstRefParam ##
 
-**Used on**: Method
+**Used on**: Method or property
 
 **Argument**: Array of strings representing parameter names
 
-Forces const reference form of function parameters in translated code. Same effect can be achieved using CppArgumentKind(ArgumentKind.ConstReference) attribute, but CppConstRefParam form is more compact. This parameter can be used e. g. to reduce shared pointer copying performance penalties.
+Forces const reference form of function parameters in translated code. Same effect can be achieved using [CppArgumentKind](#cppargumentkind)(ArgumentKind.ConstReference) attribute, but CppConstRefParam form is more compact. This parameter can be used e. g. to reduce shared pointer copying performance penalties.
 
 ```cs
 class Foo
@@ -201,10 +201,34 @@ class Foo
 ```cpp
 class Foo
 {
-    ...
-    void Bar(System::SharedPtr<System::Object> const &o);
+public:
+    void Bar(const System::SharedPtr<System::Object>& o)
+    { ... }
 };
 ```
+
+When applied to a property, it can affect the setter parameter (parameter name "value") or the indexer parameters (affecting both the getter and the setter).
+
+```cs
+class Foo
+{
+    [CodePorting.Translator.Cs2Cpp.CppConstRefParam("value")]
+    public double Weight {get; set;}
+}
+```
+
+```cpp
+class Foo
+{
+public:
+    double get_Weight();
+    void set_Weight(const double& value);
+};
+```
+
+If no parameter names are specified, the constant reference applies to all method's parameters.
+
+> Note that the [force_const_ref_parameters](../configuration-file/options.md#force_const_ref_parameters) configuration option affects all methods including setters, but only those that the compiler deems appropriate to pass as const references. This attribute, however, forces the parameter to be a const reference unconditionally.
 
 ## CppConstRefReturnType ##
 
