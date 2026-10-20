@@ -315,14 +315,11 @@ Forces the types in current project that are covered by any of the library tags 
 
 Adds file include and exclude masks. Masks should be prefixed with '/'. When these filters apply, priorities are as follows:
 
-| Directive | Priority | Effect | Overrides directives | Is overriden by directives
-| --- | --- | --- | ---|
-| include | High | Adds masked files to translating even if they are excluded by 'exclude' or 'only' rules | All | None
-| exclude | Medium | Excludes masked files from translating even if they are included by 'only' rules but unless they are included by 'include' rule | only | include
-| only | Low | If present, excludes all files but those masked, unless they are excluded by 'exclude' rule, plus those added by 'include' rule | None | All
-
-| Attribute | Meaning | Mandatory |
-| --- | --- | --- |
+| Directive | Priority | Effect | Overrides directives | Is overriden by directives |
+| --- | --- | --- | --- | --- |
+| include | High | Adds masked files to translating even if they are excluded by 'exclude' or 'only' rules | All | None |
+| exclude | Medium | Excludes masked files from translating even if they are included by 'only' rules but unless they are included by 'include' rule | only | include |
+| only | Low | If present, excludes all files but those masked, unless they are excluded by 'exclude' rule, plus those added by 'include' rule | None | All |
 
 Allowed subnodes are listed below.
 
